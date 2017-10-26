@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>dashboard</title>
+<div th:replace="fragments/header :: header-css" />
+</head>
+<body>
+	<div th:replace="fragments/header :: header" />
+	<div class="container">
+		<div class="starter-template">
+			Dashboard Under Resources<br/>
+			<h1 th:text="${host}">Hello World</h1>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

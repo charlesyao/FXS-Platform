@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Invalid Session</title>
+</head>
+<body>
+	<h2>Default Invalid Session page</h2>
+	<h3>Please config fxs.security.browser.session.sessionInvalidUrl to setup yourown page</h3>
+	<h3>System will redirect to login page in 3 seconds</h3>
+	<script type="text/javascript">
+		setInterval(function(){window.location.href = "/fxs-signIn.html"}, 3000);
+	</script>
+</body>
+</html>
