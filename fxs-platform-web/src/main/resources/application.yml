@@ -55,8 +55,4 @@ fxs:
         #height: 30
         #expire-in: 60
         #url: /user/*
-      #sms:
-        #length: 6
-        #expire-in: 60
-        #url: /user/*
     

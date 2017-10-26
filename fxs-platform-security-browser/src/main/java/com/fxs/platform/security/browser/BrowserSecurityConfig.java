@@ -17,7 +17,6 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import com.fxs.platform.security.core.authentication.FormAuthenticationConfig;
-import com.fxs.platform.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.fxs.platform.security.core.authorize.AuthorizeConfigManager;
 import com.fxs.platform.security.core.properties.SecurityConstants;
 import com.fxs.platform.security.core.properties.SecurityProperties;
@@ -39,9 +38,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-
-	@Autowired
-	private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
 	@Autowired
 	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
@@ -76,8 +72,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 		formAuthenticationConfig.configure(http);
 
 		http.apply(validateCodeSecurityConfig)
-				.and()
-				.apply(smsCodeAuthenticationSecurityConfig)
 				.and()
 				.rememberMe()
 					.tokenRepository(persistentTokenRepository())

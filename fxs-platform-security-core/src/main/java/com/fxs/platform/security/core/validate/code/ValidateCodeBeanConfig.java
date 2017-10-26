@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fxs.platform.security.core.properties.SecurityProperties;
 import com.fxs.platform.security.core.validate.code.image.ImageCodeGenerator;
-import com.fxs.platform.security.core.validate.code.sms.DefaultSmsCodeSender;
-import com.fxs.platform.security.core.validate.code.sms.SmsCodeSender;
 
 
 /**
@@ -34,16 +32,6 @@ public class ValidateCodeBeanConfig {
 		ImageCodeGenerator codeGenerator = new ImageCodeGenerator(); 
 		codeGenerator.setSecurityProperties(securityProperties);
 		return codeGenerator;
-	}
-	
-	/**
-	 * SMS code sender
-	 * @return
-	 */
-	@Bean
-	@ConditionalOnMissingBean(SmsCodeSender.class)
-	public SmsCodeSender smsCodeSender() {
-		return new DefaultSmsCodeSender();
 	}
 
 }
