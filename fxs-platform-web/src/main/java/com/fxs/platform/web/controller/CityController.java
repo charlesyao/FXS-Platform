@@ -29,7 +29,7 @@ public class CityController {
 
 	@GetMapping("/{id}")
 	public SimpleResponse<List<City>> getProvinces(@PathVariable String id) {
-		List<City> list = cityService.findProvinceByParentCityId("10105");
+		List<City> list = cityService.findProvinceByParentCityId(id);
 
 		return new SimpleResponse<List<City>>(ResponseCodeType.ZERO.getValue(), 
 				localeMessageSourceService.getMessage("fxs.platform.application.province")
