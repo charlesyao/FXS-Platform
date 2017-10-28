@@ -22,9 +22,9 @@ public class City implements Serializable {
 	// 城市级别
 	public String level;
 	// 城市ID
-	public String city_id;
+	public String cityId;
 	// 上一级城市ID
-	public String p_c_id;
+	public String parentCityId;
 
 	public Long getId() {
 		return id;
@@ -50,20 +50,20 @@ public class City implements Serializable {
 		this.level = level;
 	}
 
-	public String getCity_id() {
-		return city_id;
+	public String getCityId() {
+		return cityId;
 	}
 
-	public void setCity_id(String city_id) {
-		this.city_id = city_id;
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
 	}
 
-	public String getP_c_id() {
-		return p_c_id;
+	public String getParentCityId() {
+		return parentCityId;
 	}
 
-	public void setP_c_id(String p_c_id) {
-		this.p_c_id = p_c_id;
+	public void setParentCityId(String parentCityId) {
+		this.parentCityId = parentCityId;
 	}
 
 }

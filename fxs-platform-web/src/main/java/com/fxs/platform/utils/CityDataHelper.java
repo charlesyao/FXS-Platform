@@ -54,9 +54,9 @@ public class CityDataHelper {
 						// 插入数据库
 						City city = new City();
 						city.setName(cityName);
-						city.setCity_id(cityID);
+						city.setCityId(cityID);
 						city.setLevel(Integer.toString(level));
-						city.setP_c_id(pid);
+						city.setParentCityId(pid);
 
 						cityService.save(city);
 

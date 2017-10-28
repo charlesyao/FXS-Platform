@@ -1,5 +1,7 @@
 package com.fxs.platform.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,10 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public long count() {
 		return cityRepository.count();
+	}
+
+	@Override
+	public List<City> findProvinceByParentCityId(String parentCityId) {
+		return cityRepository.findProvinceByParentCityId(parentCityId);
 	}
 }
