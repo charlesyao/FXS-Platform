@@ -1,5 +1,7 @@
 package com.fxs.platform.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.fxs.platform.domain.Lawsuit;
@@ -10,5 +12,5 @@ import com.fxs.platform.domain.Lawsuit;
  */
 @Repository
 public interface LawsuitRepository extends FxsRepository<Lawsuit> {
-
+	List<Lawsuit> findByType(String advisoryType);
 }

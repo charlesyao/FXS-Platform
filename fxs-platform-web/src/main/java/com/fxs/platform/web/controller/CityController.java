@@ -22,17 +22,25 @@ import com.fxs.platform.service.CityService;
 @RestController
 @RequestMapping("/city")
 public class CityController {
-	
+
+	@Autowired
 	LocaleMessageSourceService localeMessageSourceService;
+	
 	@Autowired
 	CityService cityService;
+
+	@GetMapping
+	public SimpleResponse<List<City>> getFirstLevelCities() {
+		List<City> list = cityService.findFirstLevelCities();
+		return new SimpleResponse<List<City>>(ResponseCodeType.ZERO.getValue(),
+				localeMessageSourceService.getMessage("fxs.platform.application.city"), list);
+	}
 
 	@GetMapping("/{id}")
 	public SimpleResponse<List<City>> getProvinces(@PathVariable String id) {
 		List<City> list = cityService.findProvinceByParentCityId(id);
 
-		return new SimpleResponse<List<City>>(ResponseCodeType.ZERO.getValue(), 
-				localeMessageSourceService.getMessage("fxs.platform.application.province")
-				, list);
+		return new SimpleResponse<List<City>>(ResponseCodeType.ZERO.getValue(),
+				localeMessageSourceService.getMessage("fxs.platform.application.province"), list);
 	}
 }

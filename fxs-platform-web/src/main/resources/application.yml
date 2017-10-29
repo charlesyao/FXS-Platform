@@ -25,25 +25,27 @@ spring:
     hibernate:
       naming:
         implicit-strategy: com.fxs.platform.repository.support.FxsImplicitNamingStrategy
+      ddl-auto: update
     generate-ddl: true
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-  #redis:
-    #host: 127.0.0.1
-    #port: 6379
+  cache:
+    type: guava
+    guava:
+      spec: maximumSize=500,expireAfterWrite=365d
 fxs:
   security:
     message:
       base-name: classpath:i18n/messages-application
     browser:
-      sign-in-page: /api/signIn
+      sign-in-page: /user/signIn
       sign-in-response-type: REDIRECT
-      sing-in-successUrl: /api/dashboard
+      sing-in-successUrl: /user/dashboard
       remember-me-seconds: 29400
-      sign-out-url: /api/signIn
-      ignoring-url: /
+      sign-out-url: /user/signIn
+      ignoring-url: /,/city/**
     #session:
       #maximum-sessions: 1
       #max-sessions-prevents-login: true

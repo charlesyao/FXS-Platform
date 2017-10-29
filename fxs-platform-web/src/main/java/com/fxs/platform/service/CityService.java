@@ -11,8 +11,10 @@ import com.fxs.platform.domain.City;
  */
 public interface CityService {
 	City save(City city);
-	
+
 	long count();
-	
+
+	List<City> findFirstLevelCities();
+
 	List<City> findProvinceByParentCityId(String parentCityId);
 }

@@ -1,6 +1,5 @@
 package com.fxs.platform.web.controller;
 
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fxs.platform.domain.City;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.UserDto;
 import com.fxs.platform.repository.condition.UserCondition;
@@ -78,8 +76,6 @@ public class UserController {
 	 */
 	@GetMapping
 	public Page<UserDto> query(UserCondition condition, Pageable pageable) {
-		condition.setUsername("admi");
-		condition.setMobile("13");
 		return userService.query(condition, pageable);
 	}
 }
