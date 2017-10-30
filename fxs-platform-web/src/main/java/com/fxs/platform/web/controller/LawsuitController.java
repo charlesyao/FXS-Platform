@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fxs.platform.domain.Lawsuit;
 import com.fxs.platform.dto.LawsuitDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
 import com.fxs.platform.service.LawsuitService;
+import com.fxs.platform.web.controller.support.ResponseMessage;
+import com.fxs.platform.web.controller.support.Result;
 
 /**
  * 打官司接口
@@ -41,23 +41,21 @@ public class LawsuitController {
 	 * @return
 	 */
 	@PostMapping
-	public SimpleResponse<Lawsuit> create(@Valid @RequestBody Lawsuit lawsuit) {
-		return new SimpleResponse<Lawsuit>(ResponseCodeType.ZERO.getValue(),
+	public ResponseMessage<Lawsuit> create(@Valid @RequestBody Lawsuit lawsuit) {
+		return Result.success(
 				localeMessageSourceService.getMessage("fxs.platform.application.lawsuit.save"),
 				lawsuitService.create(lawsuit));
 	}
 
 	/**
-	 * 根据类型获取打官司信息
-	 * 类型: 自助/委托律师
+	 * 根据类型获取打官司信息 类型: 自助/委托律师
 	 * 
 	 * @param type
 	 * @return
 	 */
 	@GetMapping("/{type}")
-	public SimpleResponse<List<LawsuitDto>> query(@PathVariable String type) {
-
-		return new SimpleResponse<List<LawsuitDto>>(ResponseCodeType.ZERO.getValue(),
+	public ResponseMessage<List<LawsuitDto>> query(@PathVariable String type) {
+		return Result.success(
 				localeMessageSourceService.getMessage("fxs.platform.application.lawsuit.get", new Object[] { type }),
 				lawsuitService.query(type));
 	}

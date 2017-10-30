@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fxs.platform.domain.Advisory;
 import com.fxs.platform.dto.AdvisoryDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
 import com.fxs.platform.service.AdvisoryService;
+import com.fxs.platform.web.controller.support.ResponseMessage;
+import com.fxs.platform.web.controller.support.Result;
 
 /**
  * 法律咨询接口
@@ -42,8 +42,8 @@ public class AdvisoryController {
 	 * @return
 	 */
 	@PostMapping
-	public SimpleResponse<Advisory> create(@Valid @RequestBody Advisory advisory) {
-		return new SimpleResponse<Advisory>(ResponseCodeType.ZERO.getValue(),
+	public ResponseMessage<Advisory> create(@Valid @RequestBody Advisory advisory) {
+		return Result.success(
 				localeMessageSourceService.getMessage("fxs.platform.application.advisory.save"),
 				advisoryService.create(advisory));
 	}
@@ -55,9 +55,8 @@ public class AdvisoryController {
 	 * @return
 	 */
 	@GetMapping("/{type}")
-	public SimpleResponse<List<AdvisoryDto>> query(@PathVariable String type) {
-
-		return new SimpleResponse<List<AdvisoryDto>>(ResponseCodeType.ZERO.getValue(),
+	public ResponseMessage<List<AdvisoryDto>> query(@PathVariable String type) {
+		return Result.success(
 				localeMessageSourceService.getMessage("fxs.platform.application.advisory.get", new Object[] { type }),
 				advisoryService.query(type));
 	}
