@@ -13,5 +13,13 @@ import com.fxs.platform.dto.CasesDto;
 public interface CasesService {
 	Cases create(Cases cases);
 
-	List<CasesDto> query(String caseType, String subType);
+	List<CasesDto> findByTypeAndSubType(String caseType, String subType);
+	
+	List<CasesDto> findAll();
+	
+	List<CasesDto> findByStatus(String status);
+	
+	Cases findByCaseId(String caseId);
+	
+	Cases update(String caseId, Cases cases);
 }

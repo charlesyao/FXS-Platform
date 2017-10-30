@@ -17,4 +17,5 @@ public interface CityService {
 	List<City> findFirstLevelCities();
 
 	List<City> findProvinceByParentCityId(String parentCityId);
+	
 }

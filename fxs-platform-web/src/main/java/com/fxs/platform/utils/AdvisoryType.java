@@ -6,15 +6,15 @@ package com.fxs.platform.utils;
  *
  */
 public enum AdvisoryType {
-	FREE(0), PHONE(1);
+	FREE("0"), PHONE("1");
 
-	private int type;
+	private String type;
 
-	private AdvisoryType(int type) {
+	private AdvisoryType(String type) {
 		this.type = type;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 }

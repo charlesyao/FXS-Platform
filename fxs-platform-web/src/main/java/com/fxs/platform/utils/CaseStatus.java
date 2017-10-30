@@ -8,15 +8,15 @@ package com.fxs.platform.utils;
  *
  */
 public enum CaseStatus {
-	NEW(0), FEEDBACK(1), APPROVED(2), DISAVOWED(3), BID(4), END(5);
+	NEW("0"), FEEDBACK("1"), APPROVED("2"), DISAVOWED("3"), BID("4"), END("5");
 
-	private int status;
+	private String status;
 
-	private CaseStatus(int status) {
+	private CaseStatus(String status) {
 		this.status = status;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 }

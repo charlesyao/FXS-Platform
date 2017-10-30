@@ -8,15 +8,15 @@ package com.fxs.platform.utils;
  *
  */
 public enum UserRole {
-	LITIGANT(0), LAWER(1), ADMIN(2);
+	LITIGANT("0"), LAWER("1"), ADMIN("2");
 
-	private int type;
+	private String type;
 
-	private UserRole(int type) {
+	private UserRole(String type) {
 		this.type = type;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 }
