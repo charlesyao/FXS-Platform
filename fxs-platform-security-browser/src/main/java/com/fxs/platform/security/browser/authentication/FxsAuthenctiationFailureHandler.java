@@ -20,8 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.properties.LoginResponseType;
 import com.fxs.platform.security.core.properties.SecurityProperties;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
+import com.fxs.platform.security.core.support.Result;
 
 /**
  * Failure login processor
@@ -56,8 +55,7 @@ public class FxsAuthenctiationFailureHandler extends SimpleUrlAuthenticationFail
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(
-					new SimpleResponse<Object[]>(ResponseCodeType.MINUS_ONE.getValue(), exception.getMessage(), 
-							new Object[] {})));
+					Result.error(exception.getMessage())));
 		} else {
 			requestCache.removeRequest(request, response);
 			setDefaultFailureUrl(securityProperties.getBrowser().getSignInPage() + "?error");

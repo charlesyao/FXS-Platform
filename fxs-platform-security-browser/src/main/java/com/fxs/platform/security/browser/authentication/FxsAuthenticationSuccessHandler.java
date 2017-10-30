@@ -20,8 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.properties.LoginResponseType;
 import com.fxs.platform.security.core.properties.SecurityProperties;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
+import com.fxs.platform.security.core.support.Result;
 
 /**
  * Success login processor
@@ -38,7 +37,7 @@ public class FxsAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 
 	@Autowired
 	private SecurityProperties securityProperties;
-	
+
 	@Autowired
 	LocaleMessageSourceService localeMessageSourceService;
 
@@ -48,15 +47,12 @@ public class FxsAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
-		logger.info(
-				localeMessageSourceService.getMessage("fxs.platform.browser.login.success-login"));
+		logger.info(localeMessageSourceService.getMessage("fxs.platform.browser.login.success-login"));
 
 		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
 			response.setContentType("application/json;charset=UTF-8");
 			String type = authentication.getClass().getSimpleName();
-			response.getWriter().write(
-					objectMapper.writeValueAsString(
-							new SimpleResponse<Authentication>(ResponseCodeType.ZERO.getValue(), type, authentication)));
+			response.getWriter().write(objectMapper.writeValueAsString(Result.success(authentication)));
 		} else {
 			if (StringUtils.isNotBlank(securityProperties.getBrowser().getSingInSuccessUrl())) {
 				requestCache.removeRequest(request, response);

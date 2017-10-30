@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fxs.platform.domain.City;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
+import com.fxs.platform.security.core.support.ResponseMessage;
+import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CityService;
-import com.fxs.platform.web.controller.support.ResponseMessage;
-import com.fxs.platform.web.controller.support.Result;
 
 /**
  * 

@@ -15,13 +15,12 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
+import com.fxs.platform.security.core.support.Result;
 
 /**
- * Default logout processor
- * If the property fxs.security.browser.signOutUrl has been set, system will redirect to the URL,
- * otherwise, system will return a json object
+ * Default logout processor If the property fxs.security.browser.signOutUrl has
+ * been set, system will redirect to the URL, otherwise, system will return a
+ * json object
  * 
  * @author Charles
  *
@@ -29,7 +28,7 @@ import com.fxs.platform.security.core.support.SimpleResponse;
 public class FxsLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	LocaleMessageSourceService localeMessageSourceService;
 
@@ -45,14 +44,12 @@ public class FxsLogoutSuccessHandler implements LogoutSuccessHandler {
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 
-		logger.info(
-				localeMessageSourceService.getMessage("fxs.platform.browser.logout.success-logout"));
+		logger.info(localeMessageSourceService.getMessage("fxs.platform.browser.logout.success-logout"));
 
 		if (StringUtils.isBlank(signOutUrl)) {
 			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter()
-					.write(objectMapper.writeValueAsString(new SimpleResponse<Object[]>(ResponseCodeType.ZERO.getValue(),
-							localeMessageSourceService.getMessage("fxs.platform.browser.logout.success-logout"), new Object[] {})));
+			response.getWriter().write(objectMapper.writeValueAsString(
+					Result.success(localeMessageSourceService.getMessage("fxs.platform.browser.logout.success-logout"))));
 		} else {
 			response.sendRedirect(signOutUrl + "?logout");
 		}

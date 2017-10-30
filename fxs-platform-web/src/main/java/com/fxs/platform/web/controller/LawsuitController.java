@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fxs.platform.domain.Lawsuit;
 import com.fxs.platform.dto.LawsuitDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
+import com.fxs.platform.security.core.support.ResponseMessage;
+import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.LawsuitService;
-import com.fxs.platform.web.controller.support.ResponseMessage;
-import com.fxs.platform.web.controller.support.Result;
 
 /**
  * 打官司接口

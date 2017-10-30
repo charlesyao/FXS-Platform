@@ -16,8 +16,7 @@ import org.springframework.security.web.RedirectStrategy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.properties.SecurityProperties;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
+import com.fxs.platform.security.core.support.Result;
 
 /**
  * Invalid session processor
@@ -83,7 +82,8 @@ public class AbstractSessionStrategy {
 		if (isConcurrency()) {
 			message = localeMessageSourceService.getMessage("fxs.platform.browser.session.is-invalid-cause");
 		}
-		return new SimpleResponse<Object[]>(ResponseCodeType.MINUS_ONE.getValue(), message, new Object[] {});
+		
+		return Result.error(message);
 	}
 
 	/**

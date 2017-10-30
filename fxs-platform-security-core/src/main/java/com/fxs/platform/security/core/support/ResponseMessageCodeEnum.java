@@ -1,4 +1,4 @@
-package com.fxs.platform.web.controller.support;
+package com.fxs.platform.security.core.support;
 
 /**
  * 

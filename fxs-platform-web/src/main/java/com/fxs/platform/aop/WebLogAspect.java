@@ -32,7 +32,7 @@ public class WebLogAspect {
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		HttpServletRequest request = attributes.getRequest();
 
-		logger.info("URL : " + request.getRequestURL().toString());
+		logger.info("REQUEST : " + request.getRequestURL().toString());
 		logger.info("HTTP_METHOD : " + request.getMethod());
 		logger.info("IP : " + request.getRemoteAddr());
 		logger.info("CLASS_METHOD : " + pjp.getSignature().getDeclaringTypeName() + "." + pjp.getSignature().getName());

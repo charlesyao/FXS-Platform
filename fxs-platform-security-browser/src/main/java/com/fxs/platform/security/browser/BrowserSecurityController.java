@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fxs.platform.security.core.properties.SecurityProperties;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.properties.SecurityConstants;
-import com.fxs.platform.security.core.support.ResponseCodeType;
-import com.fxs.platform.security.core.support.SimpleResponse;
+import com.fxs.platform.security.core.support.ResponseMessage;
+import com.fxs.platform.security.core.support.Result;
 
 /**
  * 
@@ -53,9 +53,10 @@ public class BrowserSecurityController {
 	 * @return
 	 * @throws IOException
 	 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-	public SimpleResponse<Object[]> requireAuthentication(HttpServletRequest request, HttpServletResponse response)
+	public ResponseMessage requireAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -68,10 +69,7 @@ public class BrowserSecurityController {
 				redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getSignInPage());
 			}
 		}
-
-		return new SimpleResponse<Object[]>(ResponseCodeType.MINUS_ONE.getValue(), 
-				localeMessageSourceService.getMessage("fxs.platform.browser.session.need-authentication"),
-				new Object[] {}
-				);
+		
+		return Result.error(localeMessageSourceService.getMessage("fxs.platform.browser.session.need-authentication"));
 	}
 }
