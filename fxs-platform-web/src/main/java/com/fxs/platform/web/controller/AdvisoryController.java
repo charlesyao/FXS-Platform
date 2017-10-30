@@ -42,7 +42,7 @@ public class AdvisoryController {
 	 * @return
 	 */
 	@PostMapping
-	public SimpleResponse<Advisory> advisory(@Valid @RequestBody Advisory advisory) {
+	public SimpleResponse<Advisory> create(@Valid @RequestBody Advisory advisory) {
 		return new SimpleResponse<Advisory>(ResponseCodeType.ZERO.getValue(),
 				localeMessageSourceService.getMessage("fxs.platform.application.advisory.save"),
 				advisoryService.create(advisory));

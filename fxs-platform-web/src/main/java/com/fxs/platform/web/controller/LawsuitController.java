@@ -41,7 +41,7 @@ public class LawsuitController {
 	 * @return
 	 */
 	@PostMapping
-	public SimpleResponse<Lawsuit> advisory(@Valid @RequestBody Lawsuit lawsuit) {
+	public SimpleResponse<Lawsuit> create(@Valid @RequestBody Lawsuit lawsuit) {
 		return new SimpleResponse<Lawsuit>(ResponseCodeType.ZERO.getValue(),
 				localeMessageSourceService.getMessage("fxs.platform.application.lawsuit.save"),
 				lawsuitService.create(lawsuit));
