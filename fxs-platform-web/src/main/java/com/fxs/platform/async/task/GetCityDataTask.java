@@ -28,10 +28,11 @@ public class GetCityDataTask implements ApplicationListener<ApplicationReadyEven
 	@Async
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 		try {
-			logger.info("========================== Start Loading City Data into local DB ==========================");
 			if(cityService.count() == 0) {
+				logger.info("========================== Start Loading City Data into local DB ==========================");
 				CityDataHelper helper = new CityDataHelper();
 				helper.getCitys(cityService, 1, "", CityDataType.CITY.getUrl());
+				logger.info("========================== End Loading City Data into local DB ==========================");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

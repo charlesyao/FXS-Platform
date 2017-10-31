@@ -12,6 +12,8 @@ public class LawsuitDto {
 
 	private String status;
 
+	private String falltypus;
+
 	public String getId() {
 		return id;
 	}
@@ -34,6 +36,14 @@ public class LawsuitDto {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getFalltypus() {
+		return falltypus;
+	}
+
+	public void setFalltypus(String falltypus) {
+		this.falltypus = falltypus;
 	}
 
 }

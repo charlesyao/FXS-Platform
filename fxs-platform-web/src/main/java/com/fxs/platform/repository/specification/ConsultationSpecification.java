@@ -21,5 +21,6 @@ public class ConsultationSpecification extends FxsSpecification<Consultation, Co
 		addEqualsCondition(queryWraper, "id");
 		addEqualsCondition(queryWraper, "type");
 		addEqualsCondition(queryWraper, "status");
+		addInCondition(queryWraper, "falltypus");
 	}
 }

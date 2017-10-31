@@ -51,9 +51,11 @@ public class ConsultationController {
 	}
 
 	/**
-	 * 分页查找官司信息
+	 * 分页查找咨询信息
 	 * 
 	 * @see com.fxs.platform.utils.ConsultationType
+	 * @see com.fxs.platform.utils.CaseStatus
+	 * 
 	 * @param type
 	 * @return
 	 */

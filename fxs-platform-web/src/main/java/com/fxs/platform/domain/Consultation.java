@@ -18,9 +18,24 @@ public class Consultation {
 	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
+	/**
+	 * 法律咨询类型： 免费咨询/电话咨询
+	 * 
+	 * @see com.fxs.platform.utils.LawsuitType
+	 */
 	private String type;
 
+	/**
+	 * 案件状态
+	 * 
+	 * @see com.fxs.platform.utils.CaseStatus
+	 */
 	private String status;
+
+	/**
+	 * 案件类型: 劳动纠纷, 刑事案件...
+	 */
+	private String falltypus;
 
 	public String getId() {
 		return id;
@@ -46,4 +61,11 @@ public class Consultation {
 		this.status = status;
 	}
 
+	public String getFalltypus() {
+		return falltypus;
+	}
+
+	public void setFalltypus(String falltypus) {
+		this.falltypus = falltypus;
+	}
 }

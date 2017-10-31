@@ -54,6 +54,8 @@ public class LawsuitController {
 	 * 分页查找官司信息
 	 * 
 	 * @see com.fxs.platform.utils.LawsuitType
+	 * @see com.fxs.platform.utils.CaseStatus
+	 * 
 	 * @param type
 	 * @return
 	 */
@@ -62,7 +64,7 @@ public class LawsuitController {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success"),
 				lawsuitService.query(condition, pageable));
 	}
-	
+
 	/**
 	 * 更新官司信息
 	 * 
@@ -72,8 +74,7 @@ public class LawsuitController {
 	 */
 	@PutMapping("/{lawsuitId}")
 	public ResponseMessage<Lawsuit> update(@PathVariable String lawsuitId, @Valid @RequestBody Lawsuit lawsuit) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get.success", new Object[] { lawsuitId }),
-				lawsuitService.update(lawsuitId, lawsuit));
+		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success",
+				new Object[] { lawsuitId }), lawsuitService.update(lawsuitId, lawsuit));
 	}
 }

@@ -21,5 +21,6 @@ public class LawsuitSpecification extends FxsSpecification<Lawsuit, LawsuitCondi
 		addEqualsCondition(queryWraper, "id");
 		addEqualsCondition(queryWraper, "type");
 		addEqualsCondition(queryWraper, "status");
+		addInCondition(queryWraper, "falltypus");
 	}
 }

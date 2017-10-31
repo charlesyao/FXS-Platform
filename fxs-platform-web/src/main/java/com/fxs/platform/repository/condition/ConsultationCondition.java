@@ -8,10 +8,12 @@ package com.fxs.platform.repository.condition;
 public class ConsultationCondition {
 
 	private String id;
-	
+
 	private String type;
-	
+
 	private String status;
+
+	private String[] falltypus;
 
 	public String getId() {
 		return id;
@@ -35,5 +37,13 @@ public class ConsultationCondition {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String[] getFalltypus() {
+		return falltypus;
+	}
+
+	public void setFalltypus(String[] falltypus) {
+		this.falltypus = falltypus;
 	}
 }

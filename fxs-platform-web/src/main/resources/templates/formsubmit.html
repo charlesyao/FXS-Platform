@@ -23,6 +23,9 @@
 		<div class="form-group">
 			<button type="button" id="submit" class="btn btn-primary">Submit</button>
 		</div>
+		<p th:each="falltypus : ${falltypusdata}"
+       		th:text="${falltypus.desc}">
+        </p>
 	</div>
 	<div th:replace="fragments/footer :: footer" />
 	<script type="text/javascript" th:src="@{js/demo.js}"></script>

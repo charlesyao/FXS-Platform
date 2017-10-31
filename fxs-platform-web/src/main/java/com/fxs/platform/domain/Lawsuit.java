@@ -18,9 +18,24 @@ public class Lawsuit {
 	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
+	/**
+	 * 打官司类型： 找律师打官司/自助打官司
+	 * 
+	 * @see com.fxs.platform.utils.LawsuitType
+	 */
 	private String type;
 
+	/**
+	 * 案件状态
+	 * 
+	 * @see com.fxs.platform.utils.CaseStatus
+	 */
 	private String status;
+	
+	/**
+	 * 案件类型: 劳动纠纷, 刑事案件...
+	 */
+	private String falltypus;
 
 	public String getId() {
 		return id;
@@ -44,6 +59,14 @@ public class Lawsuit {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getFalltypus() {
+		return falltypus;
+	}
+
+	public void setFalltypus(String falltypus) {
+		this.falltypus = falltypus;
 	}
 
 }

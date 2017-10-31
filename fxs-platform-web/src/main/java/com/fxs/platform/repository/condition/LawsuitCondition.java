@@ -6,12 +6,14 @@ package com.fxs.platform.repository.condition;
  *
  */
 public class LawsuitCondition {
-	
+
 	private String id;
-	
+
 	private String type;
-	
+
 	private String status;
+
+	private String[] falltypus;
 
 	public String getId() {
 		return id;
@@ -37,4 +39,11 @@ public class LawsuitCondition {
 		this.status = status;
 	}
 
+	public String[] getFalltypus() {
+		return falltypus;
+	}
+
+	public void setFalltypus(String[] falltypus) {
+		this.falltypus = falltypus;
+	}
 }
