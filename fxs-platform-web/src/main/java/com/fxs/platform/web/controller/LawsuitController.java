@@ -1,10 +1,10 @@
 package com.fxs.platform.web.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fxs.platform.domain.Lawsuit;
+import com.fxs.platform.dto.LawsuitDto;
+import com.fxs.platform.repository.condition.LawsuitCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
@@ -44,62 +46,23 @@ public class LawsuitController {
 	 */
 	@PostMapping
 	public ResponseMessage<Lawsuit> create(@Valid @RequestBody Lawsuit lawsuit) {
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save"),
+		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save.success"),
 				lawsuitService.create(lawsuit));
 	}
 
 	/**
-	 * 根据类型查找官司信息
+	 * 分页查找官司信息
 	 * 
 	 * @see com.fxs.platform.utils.LawsuitType
 	 * @param type
 	 * @return
 	 */
-	@GetMapping("/{type}")
-	public ResponseMessage<List<Lawsuit>> findByType(@PathVariable String type) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { type }),
-				lawsuitService.findByType(type));
-	}
-
-	/**
-	 * 根据状态查找官司信息
-	 * 
-	 * @see com.fxs.platform.utils.CaseStatus
-	 * @param lawsuitStatus
-	 * @return
-	 */
-	@GetMapping("/{lawsuitStatus}")
-	public ResponseMessage<List<Lawsuit>> findByStatus(@PathVariable String lawsuitStatus) {
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get",
-				new Object[] { lawsuitStatus }), lawsuitService.findByStatus(lawsuitStatus));
-	}
-
-	/**
-	 * 查看官司详细信息
-	 * 
-	 * @param lawsuitId
-	 * @return
-	 */
-	@GetMapping("/{lawsuitId}")
-	public ResponseMessage<Lawsuit> findByCaseId(@PathVariable String lawsuitId) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { lawsuitId }),
-				lawsuitService.findByLawsuitId(lawsuitId));
-	}
-
-	/**
-	 * 查找所有官司
-	 * 
-	 * @return
-	 */
 	@GetMapping
-	public ResponseMessage<List<Lawsuit>> query() {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] {}),
-				lawsuitService.findAll());
+	public ResponseMessage<Page<LawsuitDto>> query(LawsuitCondition condition, Pageable pageable) {
+		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success"),
+				lawsuitService.query(condition, pageable));
 	}
-
+	
 	/**
 	 * 更新官司信息
 	 * 
@@ -110,7 +73,7 @@ public class LawsuitController {
 	@PutMapping("/{lawsuitId}")
 	public ResponseMessage<Lawsuit> update(@PathVariable String lawsuitId, @Valid @RequestBody Lawsuit lawsuit) {
 		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { lawsuitId }),
+				localeMessageSourceService.getMessage("fxs.platform.application.case.get.success", new Object[] { lawsuitId }),
 				lawsuitService.update(lawsuitId, lawsuit));
 	}
 }

@@ -11,6 +11,13 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
+/**
+ * 
+ * @author Charles
+ *
+ * @param <T>
+ * @param <C>
+ */
 public abstract class FxsSpecification<T, C> extends AbstractEventConditionBuilder<T, C> implements Specification<T> {
 
 	public FxsSpecification(C condition) {

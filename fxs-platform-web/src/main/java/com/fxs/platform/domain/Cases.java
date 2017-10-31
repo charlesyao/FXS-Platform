@@ -6,6 +6,11 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Charles
+ *
+ */
 @Entity
 public class Cases {
 	@Id

@@ -1,14 +1,18 @@
 package com.fxs.platform.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Consultation;
+import com.fxs.platform.dto.ConsultationDto;
 import com.fxs.platform.repository.ConsultationRepository;
+import com.fxs.platform.repository.condition.ConsultationCondition;
+import com.fxs.platform.repository.specification.ConsultationSpecification;
+import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.ConsultationService;
 
 /**
@@ -29,24 +33,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 
 	@Override
-	public List<Consultation> findByType(String consultationType) {
-		return consultationRepository.findByType(consultationType);
-	}
-
-	@Override
-	public List<Consultation> findByStatus(String consultaionStatus) {
-		return consultationRepository.findByStatus(consultaionStatus);
-	}
-
-	@Override
-	public Consultation findByConsultationId(String consultationId) {
-
-		return consultationRepository.findOne(consultationId);
-	}
-
-	@Override
-	public List<Consultation> findAll() {
-		return consultationRepository.findAll();
+	public Page<ConsultationDto> query(ConsultationCondition condition, Pageable pageable) {
+		Page<Consultation> lawsuit = consultationRepository.findAll(new ConsultationSpecification(condition), pageable);
+		return QueryResultConverter.convert(lawsuit, ConsultationDto.class, pageable);
 	}
 
 	@Override
@@ -58,4 +47,5 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 		return create(c);
 	}
+
 }

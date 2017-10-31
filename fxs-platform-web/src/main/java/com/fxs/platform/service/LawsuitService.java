@@ -1,8 +1,11 @@
 package com.fxs.platform.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.fxs.platform.domain.Lawsuit;
+import com.fxs.platform.dto.LawsuitDto;
+import com.fxs.platform.repository.condition.LawsuitCondition;
 
 /**
  * 
@@ -12,13 +15,8 @@ import com.fxs.platform.domain.Lawsuit;
 public interface LawsuitService {
 	Lawsuit create(Lawsuit lawsuit);
 
-	List<Lawsuit> findByType(String lawsuitType);
-	
-	List<Lawsuit> findByStatus(String lawsuitStatus);
-
-	Lawsuit findByLawsuitId(String lawsuitId);
-
-	List<Lawsuit> findAll();
+	Page<LawsuitDto> query(LawsuitCondition condition, Pageable pageable);
 
 	Lawsuit update(String lawsuitId, Lawsuit lawsuit);
+
 }
