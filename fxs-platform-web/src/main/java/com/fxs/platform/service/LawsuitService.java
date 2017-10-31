@@ -3,7 +3,6 @@ package com.fxs.platform.service;
 import java.util.List;
 
 import com.fxs.platform.domain.Lawsuit;
-import com.fxs.platform.dto.LawsuitDto;
 
 /**
  * 
@@ -13,5 +12,13 @@ import com.fxs.platform.dto.LawsuitDto;
 public interface LawsuitService {
 	Lawsuit create(Lawsuit lawsuit);
 
-	List<LawsuitDto> query(String type);
+	List<Lawsuit> findByType(String lawsuitType);
+	
+	List<Lawsuit> findByStatus(String lawsuitStatus);
+
+	Lawsuit findByLawsuitId(String lawsuitId);
+
+	List<Lawsuit> findAll();
+
+	Lawsuit update(String lawsuitId, Lawsuit lawsuit);
 }

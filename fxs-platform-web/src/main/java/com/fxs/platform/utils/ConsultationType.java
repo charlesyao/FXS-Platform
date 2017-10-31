@@ -5,12 +5,20 @@ package com.fxs.platform.utils;
  * @author Charles
  *
  */
-public enum AdvisoryType {
-	FREE("0"), PHONE("1");
+public enum ConsultationType {
+	/**
+	 * 免费法律咨询
+	 */
+	FREE("0"), 
+	
+	/**
+	 * 电话咨询
+	 */
+	PHONE("1");
 
 	private String type;
 
-	private AdvisoryType(String type) {
+	private ConsultationType(String type) {
 		this.type = type;
 	}
 
