@@ -23,6 +23,7 @@ import com.fxs.platform.service.CityService;
 public class CityDataHelper {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
+	@SuppressWarnings("deprecation")
 	public void getCitys(CityService cityService, int level, String pid, String url) throws Exception {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpGet request = new HttpGet(url);

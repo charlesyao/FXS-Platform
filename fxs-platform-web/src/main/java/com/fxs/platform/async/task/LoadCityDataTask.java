@@ -18,7 +18,7 @@ import com.fxs.platform.utils.CityDataType;
  *
  */
 @Component
-public class GetCityDataTask implements ApplicationListener<ApplicationReadyEvent> {
+public class LoadCityDataTask implements ApplicationListener<ApplicationReadyEvent> {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired

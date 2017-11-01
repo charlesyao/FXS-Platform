@@ -36,6 +36,8 @@ spring:
     guava:
       spec: maximumSize=500,expireAfterWrite=365d
 fxs:
+  constant:
+    city-id: 10101,10102,10122
   security:
     message:
       base-name: classpath:i18n/messages-application
