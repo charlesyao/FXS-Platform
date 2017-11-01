@@ -1,16 +1,19 @@
 package com.fxs.platform.async.task;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import com.fxs.platform.dto.CityDto;
 import com.fxs.platform.repository.FalltypusRepository;
-import com.fxs.platform.repository.condition.CityCondition;
 import com.fxs.platform.service.CityService;
 import com.fxs.platform.support.EnabledCitySettings;
 
@@ -20,6 +23,7 @@ import com.fxs.platform.support.EnabledCitySettings;
  *
  */
 @Component
+@Order(2)
 public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyEvent> {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -36,28 +40,31 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 	@Async
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 		try {
-			// Load all falltypus data
-			loadFalltypus();
-			loadEnabledCities();
-
+			loadFalltypusData();
+			loadCityData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void loadFalltypus() {
+	private void loadFalltypusData() {
 		falltypusRepository.findAll();
 	}
 
-	private void loadEnabledCities() {
-		CityCondition condition = new CityCondition();
+	private void loadCityData() {
+		String idStr = enabledCitySettings.getCityId();
+		List<CityDto> level1Cities = cityService.findFirstLevelCities();
 
-		if (StringUtils.isNotBlank(enabledCitySettings.getCityId())) {
+		if (StringUtils.isNotBlank(idStr)) {
+			String[] enabledCityIds = StringUtils.splitByWholeSeparatorPreserveAllTokens(idStr, ",");
 
-			String[] enabledCities = StringUtils.splitByWholeSeparatorPreserveAllTokens(enabledCitySettings.getCityId(), ",");
-			condition.setCityId(enabledCities);
+			for (String id : enabledCityIds) {
+				cityService.findProvinceByParentCityId(id);
+			}
+		} else {
+			for (CityDto cityDto : level1Cities) {
+				cityService.findProvinceByParentCityId(cityDto.getCityId());
+			}
 		}
-
-		cityService.query(condition);
 	}
 }

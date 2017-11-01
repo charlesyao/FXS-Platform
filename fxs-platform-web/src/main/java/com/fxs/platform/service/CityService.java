@@ -1,5 +1,6 @@
 package com.fxs.platform.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.fxs.platform.domain.City;
@@ -16,9 +17,11 @@ public interface CityService {
 
 	long count();
 
-	List<City> findFirstLevelCities();
+	HashMap<String, List<CityDto>> loadEnabledCities();
 
-	List<City> findProvinceByParentCityId(String parentCityId);
+	List<CityDto> findFirstLevelCities();
+
+	List<CityDto> findProvinceByParentCityId(String parentCityId);
 
 	List<CityDto> query(CityCondition condition);
 }

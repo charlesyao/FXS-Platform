@@ -1,5 +1,7 @@
 package com.fxs.platform.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,6 +48,11 @@ public class ConsultationServiceImpl implements ConsultationService {
 		}
 
 		return create(c);
+	}
+
+	@Override
+	public List<ConsultationDto> findAll() {
+		return QueryResultConverter.convert(consultationRepository.findAll(), ConsultationDto.class);
 	}
 
 }

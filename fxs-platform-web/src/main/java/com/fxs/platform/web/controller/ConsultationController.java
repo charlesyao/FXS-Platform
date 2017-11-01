@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,16 @@ public class ConsultationController {
 	public ResponseMessage<Page<ConsultationDto>> query(ConsultationCondition condition, Pageable pageable) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success"),
 				consultationService.query(condition, pageable));
+	}
+	
+	/**
+	 * 加载所有的案件类型
+	 * 
+	 * @param map
+	 */
+	@GetMapping("/submit")
+	public void query(ModelMap map) {
+		map.put("falltypusdata", consultationService.findAll());
 	}
 
 	/**

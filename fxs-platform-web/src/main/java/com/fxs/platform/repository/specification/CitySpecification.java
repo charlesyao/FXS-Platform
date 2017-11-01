@@ -20,5 +20,6 @@ public class CitySpecification extends FxsSpecification<City, CityCondition> {
 	protected void addCondition(QueryWraper<City> queryWraper) {
 		addInCondition(queryWraper, "cityId");
 		addEqualsCondition(queryWraper, "parentCityId");
+		addEqualsCondition(queryWraper, "level");
 	}
 }

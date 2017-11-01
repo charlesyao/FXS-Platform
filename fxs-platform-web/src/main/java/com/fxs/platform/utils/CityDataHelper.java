@@ -46,7 +46,7 @@ public class CityDataHelper {
 						index = citys1Array[i].indexOf(":");
 						// 当前城市的ID需要用上一级城市的ID拼接出来，但是有个别的三级城市直接是最终的ID了
 						cityID = citys1Array[i].substring(1, index - 1);
-						if (level != 2 || cityID.length() < 9) {
+						if (level != 3 || cityID.length() < 9) {
 							cityID = pid + cityID;
 						}
 
@@ -65,11 +65,10 @@ public class CityDataHelper {
 						if (level == 1) {
 							// 获取二级列表
 							getCitys(cityService, 2, cityID, CityDataType.PROVINCE.getUrl() + cityID + ".html");
-						} /*
-							 * else if (level == 2) { // 获取三级列表 getCitys(3, cityID,
-							 * CityDataType.STATION.getUrl() + cityID + ".html"); }
-							 */
-						else if (level == 2) {
+						} else if (level == 2) { 
+							// 获取三级列表 
+							getCitys(cityService, 3, cityID, CityDataType.STATION.getUrl() + cityID + ".html"); 
+						} else if (level == 3) {
 							continue;
 						}
 					}
