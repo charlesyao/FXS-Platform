@@ -1,23 +1,13 @@
 /**
  * 
  */
-package com.fxs.platform.domain;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
+package com.fxs.platform.dto;
 
 /**
  * @author Charles
  *
  */
-@Entity
-public class Falltypus {
-	@Id
-	@GenericGenerator(name = "idGenerator", strategy = "uuid")
-	@GeneratedValue(generator = "idGenerator")
+public class FalltypusDto {
 	private String id;
 
 	private String name;

@@ -13,8 +13,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.fxs.platform.dto.CityDto;
-import com.fxs.platform.repository.FalltypusRepository;
+import com.fxs.platform.dto.FalltypusDto;
+import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CityService;
+import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.support.EnabledCitySettings;
 
 /**
@@ -28,7 +30,7 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	FalltypusRepository falltypusRepository;
+	FalltypusService falltypusService;
 
 	@Autowired
 	CityService cityService;
@@ -48,7 +50,12 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 	}
 
 	private void loadFalltypusData() {
-		falltypusRepository.findAll();
+		List<FalltypusDto> falltypusList = QueryResultConverter.convert(
+				falltypusService.findFirstLevelFalltypus(), FalltypusDto.class);
+
+		for (FalltypusDto falltypusDto : falltypusList) {
+			falltypusService.findSubFalltypusByParentId(falltypusDto.getTypeId());
+		}
 	}
 
 	private void loadCityData() {
