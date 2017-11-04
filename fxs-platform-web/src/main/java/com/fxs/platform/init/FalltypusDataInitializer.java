@@ -80,7 +80,7 @@ public class FalltypusDataInitializer extends AbstractDataInitializer {
 
 					falltypus.setName(subFalltypus);
 
-					falltypus.setTypeId(StringUtils.toString(Integer.parseInt(typeId + "100") + subStep));
+					falltypus.setTypeId(StringUtils.toString(Integer.parseInt(typeId + "000") + subStep));
 					falltypus.setParentTypeId(f.getTypeId());
 
 					list.add(falltypus);
