@@ -19,11 +19,6 @@ import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CityService;
 import com.fxs.platform.support.EnabledCitySettings;
 
-/**
- * 
- * @author Charles
- *
- */
 @Service
 public class CityServiceImpl implements CityService {
 

@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.fxs.platform.security.core.authorize.AuthorizeConfigProvider;
 
-/**
- * @author Charles
- */
 @Component
 public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvider {
 

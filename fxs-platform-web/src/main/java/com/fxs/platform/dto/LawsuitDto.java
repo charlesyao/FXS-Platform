@@ -1,10 +1,5 @@
 package com.fxs.platform.dto;
 
-/**
- * 
- * @author Charles
- *
- */
 public class LawsuitDto {
 	private String id;
 

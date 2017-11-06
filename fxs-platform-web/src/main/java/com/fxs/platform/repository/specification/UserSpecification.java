@@ -5,11 +5,6 @@ import com.fxs.platform.repository.condition.UserCondition;
 import com.fxs.platform.repository.support.FxsSpecification;
 import com.fxs.platform.repository.support.QueryWraper;
 
-/**
- * 
- * @author Charles
- *
- */
 public class UserSpecification extends FxsSpecification<User, UserCondition> {
 
 	public UserSpecification(UserCondition condition) {

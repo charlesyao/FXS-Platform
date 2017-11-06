@@ -19,11 +19,6 @@ import com.fxs.platform.service.CityService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.support.EnabledCitySettings;
 
-/**
- * 
- * @author Charles
- *
- */
 @Component
 @Order(2)
 public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyEvent> {

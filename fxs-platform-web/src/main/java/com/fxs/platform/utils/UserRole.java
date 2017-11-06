@@ -1,12 +1,5 @@
-/**
- * 
- */
 package com.fxs.platform.utils;
 
-/**
- * @author Charles
- *
- */
 public enum UserRole {
 	LITIGANT("0"), LAWER("1"), ADMIN("2");
 

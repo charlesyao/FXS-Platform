@@ -1,11 +1,5 @@
 package com.fxs.platform.dto;
 
-
-/**
- * 
- * @author Charles
- *
- */
 public class CasesDto {
 	private Long id;
 

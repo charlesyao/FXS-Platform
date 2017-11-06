@@ -16,10 +16,6 @@ import com.fxs.platform.repository.specification.UserSpecification;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.UserService;
 
-/**
- * @author Charles
- *
- */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {

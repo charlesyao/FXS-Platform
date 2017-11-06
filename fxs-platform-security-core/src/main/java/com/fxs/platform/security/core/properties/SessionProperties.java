@@ -1,10 +1,5 @@
 package com.fxs.platform.security.core.properties;
 
-/**
- * 
- * @author Charles
- *
- */
 public class SessionProperties {
 
 	/**

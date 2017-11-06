@@ -17,8 +17,6 @@ import com.fxs.platform.security.core.properties.SecurityProperties;
  * Extension configuration. Business system can override the default Bean
  * definition
  * 
- * @author Charles
- *
  */
 @Configuration
 public class BrowserSecurityBeanConfig {

@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  * Authorize Config Provider
  * Business system can implement the interface AuthorizeConfigProvider to extend its authorize config
  * 
- * @author Charles
  *
  */
 public interface AuthorizeConfigProvider {

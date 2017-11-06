@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.fxs.platform.domain;
 
 import java.util.Collection;
@@ -19,11 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fxs.platform.view.View;
 
-/**
- * 
- * @author Charles
- *
- */
 @Entity
 public class User implements UserDetails {
 	/**

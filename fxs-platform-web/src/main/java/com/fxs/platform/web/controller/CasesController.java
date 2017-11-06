@@ -20,11 +20,6 @@ import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
 
-/**
- * 
- * @author Charles
- *
- */
 @RestController
 @RequestMapping("/case")
 public class CasesController {

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.fxs.platform.authentication;
 
 import org.slf4j.Logger;
@@ -15,10 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.repository.UserRepository;
 
-/**
- * @author Charles
- *
- */
 @Component("customizedUserDetailsService")
 @Transactional
 public class CustomizedUserDetailsService implements UserDetailsService {

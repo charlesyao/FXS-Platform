@@ -1,10 +1,5 @@
 package com.fxs.platform.utils;
 
-/**
- * 
- * @author Charles
- *
- */
 public enum ConsultationType {
 	/**
 	 * 免费法律咨询

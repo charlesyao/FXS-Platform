@@ -10,8 +10,6 @@ import javax.persistence.criteria.Root;
 /**
  * 包装用于构建JPA动态查询时所需的对象
  * 
- * @author Charles
- *
  * @param <T>
  */
 public class QueryWraper<T> {

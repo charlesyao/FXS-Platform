@@ -1,9 +1,5 @@
 package com.fxs.platform.repository.condition;
 
-/**
- * @author Charles
- *
- */
 public class UserCondition {
 
 	private String username;

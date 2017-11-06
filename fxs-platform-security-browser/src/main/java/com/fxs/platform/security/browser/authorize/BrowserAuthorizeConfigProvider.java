@@ -11,9 +11,6 @@ import com.fxs.platform.security.core.authorize.AuthorizeConfigProvider;
 /**
  * Default authorize configuration for static resources, js, css, image, etc
  * 
- * 
- * @author Charles
- *
  */
 @Component
 @Order(Integer.MIN_VALUE)

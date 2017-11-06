@@ -1,10 +1,5 @@
 package com.fxs.platform.security.core.support;
 
-/**
- * 
- * @author Charles
- *
- */
 public enum ResponseMessageCodeEnum {
 
     SUCCESS("0"),

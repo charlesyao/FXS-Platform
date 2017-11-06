@@ -25,7 +25,6 @@ import com.fxs.platform.security.core.support.Result;
 /**
  * Success login processor
  * 
- * @author Charles
  */
 @Component("fxsAuthenticationSuccessHandler")
 public class FxsAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -51,7 +50,7 @@ public class FxsAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 
 		if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getSignInResponseType())) {
 			response.setContentType("application/json;charset=UTF-8");
-			String type = authentication.getClass().getSimpleName();
+			// String type = authentication.getClass().getSimpleName();
 			response.getWriter().write(objectMapper.writeValueAsString(Result.success(authentication)));
 		} else {
 			if (StringUtils.isNotBlank(securityProperties.getBrowser().getSingInSuccessUrl())) {

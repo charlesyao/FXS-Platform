@@ -19,8 +19,6 @@ import com.fxs.platform.security.core.validate.code.ValidateCodeType;
 /**
  * Abstract validate code process
  * 
- * @author Charles
- *
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 

@@ -1,12 +1,5 @@
-/**
- * 
- */
 package com.fxs.platform.dto;
 
-/**
- * @author Charles
- *
- */
 public class FalltypusDto {
 	private String id;
 

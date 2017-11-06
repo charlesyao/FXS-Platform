@@ -6,8 +6,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * 
- * @author Charles
- *
  * @param <T>
  * @param <C>
  */

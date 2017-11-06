@@ -10,8 +10,6 @@ import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 /**
  * 校验码处理器管理器
  * 
- * @author Charles
- *
  */
 @Component
 public class ValidateCodeProcessorHolder {

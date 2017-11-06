@@ -16,11 +16,6 @@ import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseStatus;
 
-/**
- * 
- * @author Charles
- *
- */
 @Service
 @Transactional
 public class CasesServiceImpl implements CasesService {

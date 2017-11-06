@@ -2,10 +2,6 @@ package com.fxs.platform.dto;
 
 import java.util.Date;
 
-/**
- * @author Charles
- *
- */
 public class UserDto {
 
 	private Long id;

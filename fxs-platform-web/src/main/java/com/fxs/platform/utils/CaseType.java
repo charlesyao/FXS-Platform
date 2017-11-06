@@ -1,10 +1,5 @@
 package com.fxs.platform.utils;
 
-/**
- * 
- * @author Charles
- *
- */
 public enum CaseType {
 	/**
 	 * 打官司

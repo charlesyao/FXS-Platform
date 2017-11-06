@@ -14,12 +14,6 @@ import org.thymeleaf.util.StringUtils;
 import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.repository.FalltypusRepository;
 
-/**
- * Default data initializer
- * 
- * @author Charles
- *
- */
 @Component
 @Order(1)
 public class FalltypusDataInitializer extends AbstractDataInitializer {

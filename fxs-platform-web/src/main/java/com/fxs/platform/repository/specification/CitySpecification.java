@@ -5,11 +5,6 @@ import com.fxs.platform.repository.condition.CityCondition;
 import com.fxs.platform.repository.support.FxsSpecification;
 import com.fxs.platform.repository.support.QueryWraper;
 
-/**
- * 
- * @author Charles
- *
- */
 public class CitySpecification extends FxsSpecification<City, CityCondition> {
 
 	public CitySpecification(CityCondition condition) {

@@ -2,10 +2,6 @@ package com.fxs.platform.security.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * @author Charles
- *
- */
 @ConfigurationProperties(prefix = "fxs.security")
 public class SecurityProperties {
 

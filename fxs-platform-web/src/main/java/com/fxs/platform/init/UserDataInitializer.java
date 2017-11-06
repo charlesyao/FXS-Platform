@@ -7,12 +7,6 @@ import org.springframework.stereotype.Component;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.repository.UserRepository;
 
-/**
- * Default data initializer
- * 
- * @author Charles
- *
- */
 @Component
 public class UserDataInitializer extends AbstractDataInitializer {
 

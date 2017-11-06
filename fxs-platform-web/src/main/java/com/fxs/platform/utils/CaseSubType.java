@@ -1,10 +1,5 @@
 package com.fxs.platform.utils;
 
-/**
- * 
- * @author Charles
- *
- */
 public enum CaseSubType {
 	PHONE("0"), SEL_SERVICE("1");
 

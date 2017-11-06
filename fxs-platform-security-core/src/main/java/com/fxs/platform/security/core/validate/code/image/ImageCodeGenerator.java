@@ -16,8 +16,6 @@ import com.fxs.platform.security.core.validate.code.ValidateCodeGenerator;
 /**
  * Default image code generator
  * 
- * @author Charles
- *
  */
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 

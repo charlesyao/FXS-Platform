@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  * 
  * Collect all AuthorizeConfigProvider and load the related configuration
  * 
- * @author Charles
  *
  */
 public interface AuthorizeConfigManager {

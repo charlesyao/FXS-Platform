@@ -25,8 +25,6 @@ import com.fxs.platform.security.core.support.Result;
 /**
  * Failure login processor
  * 
- * @author Charles
- *
  */
 @Component("fxsAuthenctiationFailureHandler")
 public class FxsAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {

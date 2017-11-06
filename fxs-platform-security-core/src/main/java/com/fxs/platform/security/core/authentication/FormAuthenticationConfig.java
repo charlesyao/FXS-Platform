@@ -8,10 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.fxs.platform.security.core.properties.SecurityConstants;
 
-/**
- * 
- * @author Charles
- */
 @Component
 public class FormAuthenticationConfig {
 

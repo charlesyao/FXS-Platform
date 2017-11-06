@@ -10,11 +10,6 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 
 import com.fxs.platform.security.core.properties.SecurityProperties;
 
-/**
- * 
- * @author Charles
- *
- */
 public class FxsInvalidSessionStrategy extends AbstractSessionStrategy implements InvalidSessionStrategy {
 
 	public FxsInvalidSessionStrategy(SecurityProperties securityProperties) {

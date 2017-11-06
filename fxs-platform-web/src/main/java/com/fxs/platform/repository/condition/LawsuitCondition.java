@@ -1,10 +1,5 @@
 package com.fxs.platform.repository.condition;
 
-/**
- * 
- * @author Charles
- *
- */
 public class LawsuitCondition {
 
 	private String id;

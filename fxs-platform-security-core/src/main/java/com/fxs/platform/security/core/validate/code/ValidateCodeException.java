@@ -2,10 +2,6 @@ package com.fxs.platform.security.core.validate.code;
 
 import org.springframework.security.core.AuthenticationException;
 
-/**
- * @author Charles
- *
- */
 public class ValidateCodeException extends AuthenticationException {
 
 	/**

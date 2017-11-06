@@ -42,7 +42,7 @@ fxs:
     message:
       base-name: classpath:i18n/messages-application
     browser:
-      sign-in-page: /user/signIn
+      #sign-in-page: /user/signIn
       sign-in-response-type: REDIRECT
       sing-in-successUrl: /user/dashboard
       remember-me-seconds: 29400
@@ -59,4 +59,9 @@ fxs:
         #height: 30
         #expire-in: 60
         #url: /user/*
-    
+      #sms:
+        #length: 4
+        #width: 100
+        #height: 30
+        #expire-in: 60
+        #url: /user/*

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.fxs.platform.service.impl;
 
 import java.util.List;
@@ -14,10 +11,6 @@ import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.FalltypusService;
 
-/**
- * @author Charles
- *
- */
 @Service
 public class FalltypusServiceImpl implements FalltypusService {
 
