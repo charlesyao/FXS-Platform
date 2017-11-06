@@ -11,12 +11,15 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 
 	@Override
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-		/*config
-			.antMatchers(HttpMethod.GET, "/fxsIndex").permitAll()
-			.antMatchers(HttpMethod.POST, "/user/collectformdata").permitAll()
-			.anyRequest().authenticated();
-		return true;*/
-		return false;
+		/*
+		 * config .antMatchers(HttpMethod.GET, "/fxsIndex").permitAll()
+		 * .antMatchers(HttpMethod.POST, "/user/collectformdata").permitAll()
+		 * .anyRequest().authenticated(); return true; return false;
+		 */
+
+		config.antMatchers("/autosave/**").permitAll().anyRequest().authenticated();
+		
+		return true;
 
 	}
 

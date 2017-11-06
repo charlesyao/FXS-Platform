@@ -10,12 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.ServletWebRequest;
 
 @Controller
 @RequestMapping("/user")
 public class DashboardController {
 	@GetMapping("/dashboard")
-	public String dashboard(Authentication authentication, ModelMap map) throws Exception {
+	public String dashboard(Authentication authentication, ModelMap map, ServletWebRequest request) throws Exception {
+		
+		System.out.println(request.getRequest().getSession().getAttribute("SESSION_KEY_FOR_QUESTIONNAIRE"));
+		
 		String target = "";
 
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
