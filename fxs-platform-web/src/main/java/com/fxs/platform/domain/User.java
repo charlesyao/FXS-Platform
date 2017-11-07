@@ -11,13 +11,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * 系统用户: 当事人，律师，系统管理员
+ * 
+ */
 @Entity
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String username;
 
 	private String password;
@@ -25,14 +29,19 @@ public class User {
 	private String email;
 
 	private String mobile;
-	
+
+	private String sex;
+
+	private String location = "";
+
+	private String businessDomain = "";
+
 	private Date createdTime;
 
 	private String state = State.ACTIVE.getState();
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private Set<UserRole> roles = new HashSet<>();
-	
 
 	public int getId() {
 		return id;
@@ -98,6 +107,30 @@ public class User {
 		this.createdTime = createdTime;
 	}
 
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getBusinessDomain() {
+		return businessDomain;
+	}
+
+	public void setBusinessDomain(String businessDomain) {
+		this.businessDomain = businessDomain;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,8 +161,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", password=" + password + ", username=" + username + ", email=" + email + ", state="
-				+ state+"]";
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", state=" + state + "]";
 	}
 
 }

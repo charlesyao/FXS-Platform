@@ -21,7 +21,7 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String index(ModelMap map) throws Exception {
-		return "formsubmit";
+		return "index";
 	}
 	
 	@ModelAttribute("roles")
