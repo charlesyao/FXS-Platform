@@ -14,12 +14,63 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<button type="button" id="questionnaire_11" class="btn btn-primary" bindData="11">Submit</button>
+		<button type="button" id="questionnaire_11" class="btn btn-primary" bindData="20">Submit</button>
+		<button type="button" id="questionnaire_12" class="btn btn-primary" bindData="21">Submit</button>
+		<button type="button" id="questionnaire_13" class="btn btn-primary" bindData="22">Submit</button>
+		<button type="button" id="questionnaire_30" class="btn btn-primary" bindData="30">Submit</button>
 	</div>
 	<div th:replace="fragments/footer :: footer" ></div>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#questionnaire_11").on("click", function() {
+			console.log($(this).attr("bindData"))
+			$.ajax({
+				type : 'GET',
+				url : '/autosave/' + $(this).attr("bindData"),
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log(data)
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			});
+		})
+		
+		$("#questionnaire_12").on("click", function() {
+			console.log($(this).attr("bindData"))
+			$.ajax({
+				type : 'GET',
+				url : '/autosave/' + $(this).attr("bindData"),
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log(data)
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			});
+		})
+		
+		$("#questionnaire_13").on("click", function() {
+			console.log($(this).attr("bindData"))
+			$.ajax({
+				type : 'GET',
+				url : '/autosave/' + $(this).attr("bindData"),
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log(data)
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			});
+		})
+		
+		$("#questionnaire_30").on("click", function() {
 			console.log($(this).attr("bindData"))
 			$.ajax({
 				type : 'GET',
