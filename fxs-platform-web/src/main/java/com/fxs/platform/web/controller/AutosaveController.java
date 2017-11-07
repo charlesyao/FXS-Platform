@@ -2,6 +2,7 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
@@ -35,26 +36,34 @@ public class AutosaveController {
 	public ResponseMessage<List<Questionnaire>> save(@PathVariable String id, ServletWebRequest request) {
 		String qId = this.get(request);
 		
+		if (id.startsWith(STEP1_PREFIX)) {
+			qId = "";
+		}
+		
 		if(StringUtils.isNotBlank(qId)) {
 			String[] ids = splitStringEvery(qId, 2);
 			String qIds = "";
-
-			if (id.startsWith(STEP1_PREFIX)) {
-				ids[0] = id;
-				qIds = String.join("", ids);
-			} else if(id.startsWith(STEP2_PREFIX) && ids.length == 2) {
+			
+			if(id.startsWith(STEP2_PREFIX) && (ids.length != 1)) {
 				ids[1] = id;
 				qIds = String.join("", ids);
-			} else if (id.startsWith(STEP3_PREFIX) && ids.length == 3) {
-				ids[2] = id;
-				qIds = String.join("", ids);
+			} else if (id.startsWith(STEP3_PREFIX)) {
+				if (ids.length == 3) {
+					ids[2] = id;
+					qIds = String.join("", ids);
+				} else if (ids.length == 2) {
+					qIds = qId.concat(id);
+				} else if (ids.length == 1) {
+					String[] newId = (String[])ArrayUtils.add(ids, "00");
+					qIds = String.join("", newId).concat(id);
+				}
 			} else {
 				qIds = qId.concat(id);
 			}
 			
 			sessionStrategy.setAttribute(request, SESSION_KEY_PREFIX, qIds);
 			
-			if (qIds.length() == 6) {
+			if (id.startsWith(STEP3_PREFIX)) {
 				return Result.success(questionnaireService.findByQId(qIds));
 			}
 		} else {
