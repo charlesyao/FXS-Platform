@@ -1,0 +1,214 @@
+.fl{float: left;}
+.fr{float: right;}
+.clearboth{clear: both;}
+ul li{list-style:none;}
+.ft12{font-size:12px}
+
+.img-responsive{background: url(../img/mainBg.png) no-repeat top center;background-size:100% auto;}
+.topBar{
+	background-image: -moz-linear-gradient(left, #333F5F , #9D7961); 
+	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #333F5F ), color-stop(1,#9D7961)); 
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333F5F ', endColorstr='#9D7961', GradientType='0');	
+	
+}
+.topBar .line{border-bottom: 1px solid rgba(255,255,255,0.1);}
+/* ------------------------------------------------------------------------------------
+
+NAV			 */
+.loginBox,.mainNav{float: right; margin: 10px 0 0 0;}
+.loginBox a{color:white;font-size: 12px;}
+.mainNav a{color:white;font-size: 14px;}
+.loginBox a:hover,.mainNav a:hover{text-decoration:none;color: #CFB87E;}
+.loginBox li span{color: #3C395D; margin: 0 10px;}
+.mainNav li{margin: 8px 10px 0;}
+.mainNav li.lastItem{margin-right:0px;}
+.line{border-bottom: 1px solid rgba(255,255,255,0.1); display: block;}
+.mainNav{ float:right;}
+.mainNav li{ float: left;}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid\9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+  
+}
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.nav>li {
+    position: relative;
+}
+.open>.dropdown-menu {
+    display: block;
+}
+.dropdown-menu{margin:9px 0 0 -40px; min-width: auto; padding: 0px; border:1px solid #E8E6E6;border-top: 5px solid #DFD0AD;
+    -webkit-box-shadow: 1px 3px 6px #14152D;
+    box-shadow: 1px 3px 6px #14152D;
+
+ }
+ .topBar .dropdown-menu{box-shadow: 1px 3px 6px 0 #8E97AC;}
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 4px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.dropdown-menu li {margin: 5px 0; display: block; float:none; text-align: center;}
+.dropdown-menu li a{color: #9B9B9B}
+.dropdown-menu li a:hover{color: #CFB87E}
+.open a{color: #CFB87E}
+.mapId{background: url(../img/map.png) no-repeat; color: #fff; font-size: 12px; padding-left: 18px;margin-top: 20px;}
+
+
+/* ------------------------------------------------------------------------------------
+SEARCH		 */
+
+.mainBannerTitle{text-align: center;}
+.mainBannerTitle .cur{color: #CFB87E}
+.mainBannerTitle a,.mainBannerTitle span{ color:#fff; margin: 0 25px;font-weight:200  }
+.mainBannerTitle a:hover{text-decoration:none;color: #CFB87E}
+.container-fluid{ margin: 6rem 0;}
+.form-inline .form-group{width:500px}
+.form-inline .form-control input.searchBox{width:300px；padding: .5rem 1rem;border:2px solid #CFB87E;}
+.tab-content{max-width: 700px;}
+.form-control{border-radius: 5rem;}
+.container-fluid .row{margin: 3em 0;}
+
+.searchBox .btn-default{
+    color: #fff;
+    background-color: #CFB87E;
+    border-color: #CFB87E; cursor: pointer;border-radius: 5rem;
+}
+.empty{ margin: 15em 0 0; display: block;}
+/* ------------------------------------------------------------------------------------
+footer		 */
+
+footer{background-color: #14152D; text-align: center; color: #7C93AD; font-size: 12px;padding: 2em 0;}
+footer .list-group li{ line-height:20px;}
+
+/* ------------------------------------------------------------------------------------
+neiyene		 */
+.mainPart{background: url(../img/waves.png) no-repeat center bottom #F0F4FD;}
+.mainPart .container{ padding:3em 0;}
+.mainPart .container h1{ text-align:center;color:#CFB87E; font-weight:300; margin: 1em 0 0.5em;}
+.mainPart .container p{text-align:center; font-size:14px;color:#9B9B9B;font-weight:200;margin-bottom:0px;}
+.introcouPhone .introcoupCell,.writeInfo .row .ulCell{ background-color: #fff;padding:20px;margin:3em 0.2em; border-radius: 0.8rem;    
+	box-shadow: 0px 1px 3px rgba(191,188,188,0.50);min-height: 220px;}
+.introcoupCell{ text-align:center; color:#58627C}	
+.introcoupCell span{margin:0.3em 0;display:block;}
+.topBar ul li span{color: #3C395D;}
+.btnSquare{}
+.introcouPhone .btnSquare{ text-align: center;background: #FFFFFF;border: 1px solid #CFB87E;box-shadow: 0 1px 3px 0 rgba(191,188,188,0.50);
+border-radius: 0.4rem;margin:0.2em;padding:0px; min-height:auto}
+.introcouPhone .btnSquare a{display: block;font-size: 20px;color: #CFB87E; padding: 10px 0}
+.introcouPhone .btnSquare:hover{border-radius: 0.4rem;}
+.introcouPhone .btnSquare a:hover,.introcouPhone .cur{ text-decoration: none;background: rgba(207,184,126,0.80); color: #fff;}
+.space20{ margin: 3em 0}
+.breadcrumb{background: none;}
+.breadcrumb li{ font-size: 12px; color: #ccc}
+.breadcrumb li a{color:#CFB87E;background: url(../img/icon_next.png) no-repeat 94% 50%; padding-right: 20px;}
+.mainPart .container h1.blue{color: #58627C;}
+.sBtn h3{font-size: 16px;color: #58627C; font-weight: 400;}
+.sBtn .btnSquare a{font-size: 16px;}
+.space10{margin-top: 2em}
+h4.gray{font-size: 12px;color: #9B9B9B;}
+.introcouPhone  .cur a{ color: #fff}
+.btnNext{text-align: center; }
+.btnNext button{background: rgba(74,144,226,0.80);
+border: 1px solid #4A90E2;
+box-shadow: 0 1px 3px 0 rgba(191,188,188,0.50);
+border-radius: 10px; cursor: pointer; width: 200px; height: 60px}
+.introcouPhone .form-control{border: 1px solid #CFB87E; color: #CFB87E;box-shadow: 0 1px 3px 0 rgba(191,188,188,0.50); margin: 0.5em 0 0;}
+
+.writeInfo .row .writeInfoText{ margin:0px 0 2.5em; padding:20px 40px}
+.writeInfoText{ font-size: 14px;color: #9B9B9B}
+.orange{color: #F5A623}
+.writeInfoText .orange{margin-bottom: 10px}
+.writeInfoText span{ color: #58627C }
+.writeInfo .row .writeInfoRight{ margin: 0em 0.2em; padding: 0px;position: relative;z-index:5}
+.exp{padding:10px 0px;border-bottom: 1px solid #EDEDED;}
+.exp li{ display: block;}
+.exp .fl{ width: 15%;border: 1px solid #6EA6E8;border-radius: 18px; text-align: center;font-size: 14px;
+    color: #6EA6E8; padding: 5px 10px}
+.exp .fr{width: 80%}
+.writeInfoText .clr-blue{cursor: help; color: #689CE5}
+.expLast{border-bottom: none;}
+.ulCell .form-control{border-radius:0em; border:none;}
+.submit_counter{text-align: right;border-top: 1px solid #EDEDED; color: #ccc; padding: 10px 0}
+.submit_counter span{color: #689CE5;font-size: 12px;}
+.btnNext a{margin-left: 20px;font-size: 12px}
+.writeInfoRightTitle{background-color: #689CE5;border-radius: 0.8rem 0.8rem 0 0; padding-left:0px;    margin-bottom: 0px;}
+.writeInfoRightTitle li{font-size: 28px;color: #FFFFFF; text-align: center; margin-left: 0px; font-weight:200; padding:30px 0;}
+.phoneIcon{background: url(../img/phone.png) no-repeat; z-index:59999; display:block; height:60px; width:60px; 
+	position: absolute; top: 25%;left: 42%;}
+.writeInfoRightItem{padding:2em ;}
+.writeInfoRightItem li{background: url(../img/icon_ok.png) no-repeat center left; padding-left:30px;color:#58627C;margin:0.5em 0 }	
+.sLabel{ padding: 15px 0}
+/* ------------------------------------------------------------------------------------
+lawsuit		 */
+.img-lawsuit{background: url(../img/lawsuit.png) no-repeat top center;background-size:100% auto;}
+.lawsuit-content{text-align: center; padding: 2em 0 12em}
+.lawsuit-content .heading{font-size: 40px;color: #CFB87E;padding: 1em 0 0.5em;font-weight: 200;}
+.lawsuit-content p{font-size: 30px;color: #FFFFFF;padding: 0em 0 0.5em;font-weight: 200;}
+.lawsuit-content a{color: #fff;
+    background-color: #CFB87E;
+    border-color: #CFB87E;
+    border-radius: 5rem;font-size:16px;color: #FFFFFF; padding: 10px 20px;}
+.lawsuit-content a:hover{ text-decoration: none;}
+
+/* ------------------------------------------------------------------------------------
+login      */
+.bgBlack{background:rgba(0,0,0,0.50);;position: absolute;z-index:666; width: 100%;height:500%;overflow: hidden;}
+.signupBox{z-index: 5999999;position: absolute; background-color: #fff;
+    padding: 20px;
+    margin: 3em 0.2em;
+    border-radius: 0.8rem;
+    box-shadow: 0px 1px 3px rgba(191,188,188,0.50); width:400px; top: 20%;left: 35%}
+.signupBox .form-group input{border:none;border-bottom: 1px solid #ccc; border-radius: 0em}
+.signupBox h3{ font-weight: 200; ; color: #CFB87E;}
+.signupTitle{text-align: center;display: block; margin: 0.5em 0 1em;}
+.signupBox .control-label{    border: 1px solid #CFB87E;
+    border-radius: 18px;
+    text-align: center;color: #CFB87E; font-size: 12px; padding:8px 10px;}
+.signupBox .control-label:hover{ text-decoration: none;}
+.signupBox button{background-color: #CFB87E;
+    border-color: #CFB87E;
+    border-radius: 5rem;
+    font-size: 16px;
+    color: #FFFFFF; padding:.5rem 3rem; cursor: pointer;}
+ .signupBox .btn_cancel{ margin-right: 40px; background: #ccc; border:1px solid #ccc;}   
+.signupBox .fpw{ font-size: 12px;color: #999}
+.signupBox .fpw a{text-align: right;    display: block;}
+.chooseAds{width: 60%}
+.chooseAds ul li{ float: left; display: block;margin-right:10px; padding: 5px 10px}
+.chooseAds ul li a,.chooseAdsItem ul li label{ color: #999}
+.chooseAds ul .cur{background-color: #CFB87E;
+    border-radius: 5rem; }
+    .chooseAds ul .cur a:hover{ text-decoration: none}
+ .chooseAds ul .cur a{color: #fff}
+.chooseAdsItem h4{ font-size: 14px}
+.chooseAdsItem ul { padding-left: 0px  }
+.chooseAdsItem h4{color: #58627C;}
+.chooseAdsItem{ margin-bottom: 40px}
+
+
+.video{text-align: center; margin: 2em 0}
+
+/* ------------------------------------------------------------------------------------
+laywer login      */
+.img-lawywerSign{background: url(../img/laywer_bg.png) no-repeat top center;background-size:100% auto;}
+.img-lawywerSign  .lawsuit-content a{ margin: 10px 30px;}
+
+
+
+
