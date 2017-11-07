@@ -16,12 +16,12 @@ public class Cases {
 	/**
 	 * 主类型：法律咨询或者打官司
 	 */
-	private String type;
+	private CaseType caseTypeLevelOne;
 
 	/**
 	 * 子类型： 免费咨询/找律师打官司/电话咨询
 	 */
-	private String subType;
+	private CaseType caseTypeLevelTwo;
 
 	/**
 	 * 案件当前状态
@@ -38,27 +38,28 @@ public class Cases {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public CaseType getCaseTypeLevelOne() {
+		return caseTypeLevelOne;
 	}
 
-	public String getSubType() {
-		return subType;
+	public void setCaseTypeLevelOne(CaseType caseTypeLevelOne) {
+		this.caseTypeLevelOne = caseTypeLevelOne;
 	}
 
-	public void setSubType(String subType) {
-		this.subType = subType;
+	public CaseType getCaseTypeLevelTwo() {
+		return caseTypeLevelTwo;
+	}
+
+	public void setCaseTypeLevelTwo(CaseType caseTypeLevelTwo) {
+		this.caseTypeLevelTwo = caseTypeLevelTwo;
 	}
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }
