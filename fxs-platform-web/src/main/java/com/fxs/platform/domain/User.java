@@ -1,77 +1,45 @@
-/**
- * 
- */
 package com.fxs.platform.domain;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fxs.platform.view.View;
-
-/**
- * 
- * @author Charles
- *
- */
 @Entity
-public class User implements UserDetails {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3521673552808391992L;
+public class User {
 
 	@Id
-	@GeneratedValue
-	@JsonView(View.SimpleView.class)
-	private Long id;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
-	@JsonView(View.SimpleView.class)
-	private Date createdTime;
-
-	@JsonView(View.SimpleView.class)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
 	private String username;
 
-	@JsonView(View.DetailView.class)
 	private String password;
 
-	@JsonView(View.SimpleView.class)
-	private String mobile;
+	private String email;
 
-	public Long getId() {
+	private String mobile;
+	
+	private Date createdTime;
+
+	private String state = State.ACTIVE.getState();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	private Set<UserRole> roles = new HashSet<>();
+	
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -82,6 +50,14 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getMobile() {
 		return mobile;
 	}
@@ -90,33 +66,70 @@ public class User implements UserDetails {
 		this.mobile = mobile;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
+	}
+
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
 	}
 
 	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof User))
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		return true;
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
+	public String toString() {
+		return "User [id=" + id + ", password=" + password + ", username=" + username + ", email=" + email + ", state="
+				+ state+"]";
 	}
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 }

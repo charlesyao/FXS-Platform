@@ -4,10 +4,6 @@ import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
 import org.hibernate.boot.spi.MetadataBuildingContext;
 
-/**
- * @author Charles
- *
- */
 public class FxsImplicitNamingStrategy extends ImplicitNamingStrategyJpaCompliantImpl {
 
 	/**

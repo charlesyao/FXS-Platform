@@ -7,10 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.fxs.platform.domain.Consultation;
 
-/**
- * @author Charles
- *
- */
 @Repository
 public interface ConsultationRepository extends FxsRepository<Consultation> {
 	

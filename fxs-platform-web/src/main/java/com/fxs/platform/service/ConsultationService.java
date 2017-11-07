@@ -9,11 +9,6 @@ import com.fxs.platform.domain.Consultation;
 import com.fxs.platform.dto.ConsultationDto;
 import com.fxs.platform.repository.condition.ConsultationCondition;
 
-/**
- * 
- * @author Charles
- *
- */
 public interface ConsultationService {
 
 	Consultation create(Consultation consultation);

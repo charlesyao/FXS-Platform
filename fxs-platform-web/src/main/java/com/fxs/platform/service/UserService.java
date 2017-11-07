@@ -7,11 +7,6 @@ import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.UserDto;
 import com.fxs.platform.repository.condition.UserCondition;
 
-/**
- * 
- * @author Charles
- *
- */
 public interface UserService {
 
 	User create(User userInfo);

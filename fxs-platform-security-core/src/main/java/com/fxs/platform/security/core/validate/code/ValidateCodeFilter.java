@@ -25,8 +25,6 @@ import com.fxs.platform.security.core.properties.SecurityProperties;
 /**
  * validate code filter, it will be added into Spring Security filter chain
  * 
- * @author Charles
- *
  */
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
@@ -59,6 +57,9 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
 		urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
 		addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
+		
+		urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
+		addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
 	}
 
 	/**

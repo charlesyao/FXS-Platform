@@ -13,11 +13,6 @@ import com.fxs.platform.service.CityService;
 import com.fxs.platform.utils.CityDataHelper;
 import com.fxs.platform.utils.CityDataType;
 
-/**
- * 
- * @author Charles
- *
- */
 @Component
 @Order(1)
 public class LoadCityDataTask implements ApplicationListener<ApplicationReadyEvent> {

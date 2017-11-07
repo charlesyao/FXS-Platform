@@ -25,11 +25,6 @@ import com.fxs.platform.security.core.properties.SecurityConstants;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 
-/**
- * 
- * @author Charles
- *
- */
 @RestController
 public class BrowserSecurityController {
 

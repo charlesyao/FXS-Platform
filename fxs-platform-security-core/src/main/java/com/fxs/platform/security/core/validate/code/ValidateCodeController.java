@@ -11,11 +11,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fxs.platform.security.core.properties.SecurityConstants;
 
-/**
- * 
- * @author Charles
- *
- */
 @RestController
 public class ValidateCodeController {
 

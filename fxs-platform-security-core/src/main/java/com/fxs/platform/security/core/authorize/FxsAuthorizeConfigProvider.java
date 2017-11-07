@@ -15,8 +15,6 @@ import com.fxs.platform.security.core.properties.SecurityProperties;
  * Default Authorize Config Provider
  * Config system default URLs here
  * 
- * @author Charles
- *
  */
 @Component
 @Order(Integer.MIN_VALUE)

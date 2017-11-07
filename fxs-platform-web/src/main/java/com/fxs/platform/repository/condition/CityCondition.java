@@ -1,10 +1,5 @@
 package com.fxs.platform.repository.condition;
 
-/**
- * 
- * @author Charles
- *
- */
 public class CityCondition {
 	// 城市ID
 	public String[] cityId;

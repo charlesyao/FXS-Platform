@@ -13,8 +13,6 @@ import org.springframework.data.jpa.domain.Specification;
 
 /**
  * 
- * @author Charles
- *
  * @param <T>
  * @param <C>
  */

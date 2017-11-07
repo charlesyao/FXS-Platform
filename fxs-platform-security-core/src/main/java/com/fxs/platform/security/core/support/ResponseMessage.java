@@ -2,8 +2,6 @@ package com.fxs.platform.security.core.support;
 
 /**
  * 
- * @author Charles
- *
  * @param <T>
  */
 public class ResponseMessage<T> {

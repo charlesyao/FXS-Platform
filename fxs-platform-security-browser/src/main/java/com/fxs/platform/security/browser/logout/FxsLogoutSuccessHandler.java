@@ -22,8 +22,6 @@ import com.fxs.platform.security.core.support.Result;
  * been set, system will redirect to the URL, otherwise, system will return a
  * json object
  * 
- * @author Charles
- *
  */
 public class FxsLogoutSuccessHandler implements LogoutSuccessHandler {
 

@@ -12,8 +12,6 @@ import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 /**
  * Default Authorize Config Manager
  * 
- * @author Charles
- *
  */
 @Component
 public class FxsAuthorizeConfigManager implements AuthorizeConfigManager {

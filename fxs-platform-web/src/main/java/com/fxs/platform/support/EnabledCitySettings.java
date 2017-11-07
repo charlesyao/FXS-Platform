@@ -1,15 +1,8 @@
-/**
- * 
- */
 package com.fxs.platform.support;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-/**
- * @author Charles
- *
- */
 @Component
 @ConfigurationProperties(prefix = "fxs.constant")
 public class EnabledCitySettings {

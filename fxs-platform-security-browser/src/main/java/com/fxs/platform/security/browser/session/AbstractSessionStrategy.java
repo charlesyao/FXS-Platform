@@ -21,8 +21,6 @@ import com.fxs.platform.security.core.support.Result;
 /**
  * Invalid session processor
  * 
- * @author Charles
- *
  */
 public class AbstractSessionStrategy {
 

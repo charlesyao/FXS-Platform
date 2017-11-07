@@ -5,11 +5,6 @@ import com.fxs.platform.repository.condition.LawsuitCondition;
 import com.fxs.platform.repository.support.FxsSpecification;
 import com.fxs.platform.repository.support.QueryWraper;
 
-/**
- * 
- * @author Charles
- *
- */
 public class LawsuitSpecification extends FxsSpecification<Lawsuit, LawsuitCondition> {
 
 	public LawsuitSpecification(LawsuitCondition condition) {

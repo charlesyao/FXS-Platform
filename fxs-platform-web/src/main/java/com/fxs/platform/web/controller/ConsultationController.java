@@ -25,8 +25,6 @@ import com.fxs.platform.service.ConsultationService;
 /**
  * 法律咨询接口
  * 
- * @author Charles
- *
  */
 @RestController
 @RequestMapping("/consultation")

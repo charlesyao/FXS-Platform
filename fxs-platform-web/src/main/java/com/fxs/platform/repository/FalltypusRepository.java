@@ -8,10 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.fxs.platform.domain.Falltypus;
 
-/**
- * @author Charles
- *
- */
 @Repository
 public interface FalltypusRepository extends FxsRepository<Falltypus> {
 	

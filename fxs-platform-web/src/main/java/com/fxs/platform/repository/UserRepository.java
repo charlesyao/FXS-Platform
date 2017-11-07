@@ -4,10 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import com.fxs.platform.domain.User;
 
-/**
- * @author Charles
- *
- */
 @Repository
 public interface UserRepository extends FxsRepository<User> {
 

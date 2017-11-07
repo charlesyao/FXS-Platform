@@ -3,10 +3,6 @@ package com.fxs.platform.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-/**
- * @author Charles
- *
- */
 public class CustomizedConstraintValidator implements ConstraintValidator<CustomizedConstraint, Object> {
 
 	@Override

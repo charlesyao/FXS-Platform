@@ -11,8 +11,6 @@ import com.fxs.platform.security.core.validate.code.ValidateCodeType;
 /**
  * Session based validate code repository
  * 
- * @author Charles
- *
  */
 @Component
 public class SessionValidateCodeRepository implements ValidateCodeRepository {

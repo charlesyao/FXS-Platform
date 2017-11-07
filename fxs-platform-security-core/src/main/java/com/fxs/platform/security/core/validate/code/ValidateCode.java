@@ -3,12 +3,6 @@ package com.fxs.platform.security.core.validate.code;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
-/**
- * 
- * @author Charles
- *
- */
 public class ValidateCode implements Serializable {
 	
 	/**

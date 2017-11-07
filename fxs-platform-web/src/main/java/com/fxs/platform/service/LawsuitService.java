@@ -7,11 +7,6 @@ import com.fxs.platform.domain.Lawsuit;
 import com.fxs.platform.dto.LawsuitDto;
 import com.fxs.platform.repository.condition.LawsuitCondition;
 
-/**
- * 
- * @author Charles
- *
- */
 public interface LawsuitService {
 	Lawsuit create(Lawsuit lawsuit);
 

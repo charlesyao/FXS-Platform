@@ -8,8 +8,6 @@ import com.fxs.platform.security.core.validate.code.ValidateCode;
 /**
  * Image validate code
  * 
- * @author Charles
- *
  */
 public class ImageCode extends ValidateCode {
 

@@ -14,11 +14,6 @@ import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CityService;
 
-/**
- * 
- * @author Charles
- *
- */
 @RestController
 @RequestMapping("/city")
 public class CityController {

@@ -23,6 +23,11 @@
 		<div class="form-group">
 			<button type="button" id="submit" class="btn btn-primary">Submit</button>
 		</div>
+		
+		<div class="form-group">
+			<button type="button" id="questionnaire_01" class="btn btn-primary" bindData="01">Submit</button>
+		</div>
+		
 		<p th:each="falltypus : ${falltypusdata}"
        		th:text="${falltypus.desc}">
         </p>

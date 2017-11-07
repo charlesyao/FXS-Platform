@@ -24,8 +24,6 @@ import com.fxs.platform.service.LawsuitService;
 /**
  * 打官司接口
  * 
- * @author Charles
- *
  */
 @RestController
 @RequestMapping("/lawsuit")

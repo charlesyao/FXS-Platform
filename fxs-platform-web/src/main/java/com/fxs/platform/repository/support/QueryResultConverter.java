@@ -10,11 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-/**
- * 
- * @author Charles
- *
- */
 public class QueryResultConverter {
 
 	private static Logger logger = LoggerFactory.getLogger(QueryResultConverter.class);

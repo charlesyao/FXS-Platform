@@ -5,10 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fxs.platform.security.core.properties.SecurityProperties;
 
-/**
- * @author Charles
- *
- */
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityCoreConfig {

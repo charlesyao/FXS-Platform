@@ -17,11 +17,6 @@ import com.fxs.platform.repository.specification.ConsultationSpecification;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.ConsultationService;
 
-/**
- * 
- * @author Charles
- *
- */
 @Service
 public class ConsultationServiceImpl implements ConsultationService {
 

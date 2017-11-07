@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fxs.platform.security.core.properties.SecurityProperties;
 import com.fxs.platform.security.core.validate.code.image.ImageCodeGenerator;
+import com.fxs.platform.security.core.validate.code.sms.DefaultSmsCodeSender;
+import com.fxs.platform.security.core.validate.code.sms.SmsCodeSender;
 
 
 /**
  * Extension configuration. 
  * Business system can override the default Bean definition
  * 
- * @author Charles
- *
  */
 @Configuration
 public class ValidateCodeBeanConfig {
@@ -34,4 +34,13 @@ public class ValidateCodeBeanConfig {
 		return codeGenerator;
 	}
 
+	/**
+	 * 短信验证码发送器
+	 * @return
+	 */
+	@Bean
+	@ConditionalOnMissingBean(SmsCodeSender.class)
+	public SmsCodeSender smsCodeSender() {
+		return new DefaultSmsCodeSender();
+	}
 }

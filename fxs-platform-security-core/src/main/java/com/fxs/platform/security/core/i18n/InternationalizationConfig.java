@@ -13,11 +13,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import com.fxs.platform.security.core.properties.SecurityProperties;
 import com.google.common.base.Charsets;
 
-/**
- * 
- * @author Charles
- *
- */
 @Configuration
 public class InternationalizationConfig {
 	

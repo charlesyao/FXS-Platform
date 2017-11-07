@@ -3,6 +3,22 @@ $(document).ready(function() {
 		event.preventDefault();
 		fire_ajax_submit();
 	})
+	
+	$("#questionnaire_01").on("click", function() {
+		console.log($(this).attr("bindData"))
+		$.ajax({
+			type : 'GET',
+			url : '/autosave/' + $(this).attr("bindData"),
+			cache : false,
+			timeout : 600000,
+			success : function(data) {
+				console.log(data)
+			},
+			error : function(error) {
+				console.log(error)
+			}
+		});
+	})
 });
 
 function fire_ajax_submit() {

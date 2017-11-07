@@ -1,11 +1,5 @@
 package com.fxs.platform.exception;
 
-/**
- * 
- * @author Charles
- *
- * @param <T>
- */
 public class ErrorInfo<T> {
 	public static final Integer OK = 0;
 	public static final Integer ERROR = 100;

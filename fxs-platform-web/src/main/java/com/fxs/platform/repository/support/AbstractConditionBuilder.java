@@ -14,8 +14,6 @@ import org.joda.time.DateTime;
 
 /**
  * 
- * @author Charles
- *
  * @param <T>
  */
 public abstract class AbstractConditionBuilder<T> {

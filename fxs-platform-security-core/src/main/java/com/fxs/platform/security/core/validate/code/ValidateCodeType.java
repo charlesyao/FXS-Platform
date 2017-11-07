@@ -6,8 +6,6 @@ import com.fxs.platform.security.core.properties.SecurityConstants;
  * 
  * ValidateCodeType
  * 
- * @author Charles
- *
  */
 public enum ValidateCodeType {
 

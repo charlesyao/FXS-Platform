@@ -1,10 +1,5 @@
 package com.fxs.platform.security.core.support;
 
-/**
- * 
- * @author Charles
- *
- */
 public class Result {
 
     @SuppressWarnings("rawtypes")

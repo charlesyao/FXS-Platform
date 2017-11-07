@@ -9,11 +9,6 @@ import org.springframework.security.web.session.SessionInformationExpiredStrateg
 
 import com.fxs.platform.security.core.properties.SecurityProperties;
 
-/**
- * 
- * @author Charles
- *
- */
 public class FxsExpiredSessionStrategy extends AbstractSessionStrategy implements SessionInformationExpiredStrategy {
 
 	public FxsExpiredSessionStrategy(SecurityProperties securityPropertie) {

@@ -10,8 +10,6 @@ import com.fxs.platform.security.core.validate.code.impl.AbstractValidateCodePro
 /**
  * Default image code processor
  * 
- * @author Charles
- *
  */
 @Component("imageValidateCodeProcessor")
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {

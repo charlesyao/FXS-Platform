@@ -15,11 +15,6 @@ import com.fxs.platform.repository.specification.LawsuitSpecification;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.LawsuitService;
 
-/**
- * 
- * @author Charles
- *
- */
 @Service
 public class LawsuitServiceImpl implements LawsuitService {
 

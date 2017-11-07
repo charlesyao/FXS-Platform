@@ -1,12 +1,5 @@
-/**
- * 
- */
 package com.fxs.platform.utils;
 
-/**
- * @author Charles
- *
- */
 public enum CaseStatus {
 	/**
 	 * 新案件

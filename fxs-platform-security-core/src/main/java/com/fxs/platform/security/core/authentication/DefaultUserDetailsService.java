@@ -9,11 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 
-/**
- * 
- * @author Charles
- *
- */
 public class DefaultUserDetailsService implements UserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());

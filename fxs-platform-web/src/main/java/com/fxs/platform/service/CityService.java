@@ -7,11 +7,6 @@ import com.fxs.platform.domain.City;
 import com.fxs.platform.dto.CityDto;
 import com.fxs.platform.repository.condition.CityCondition;
 
-/**
- * 
- * @author Charles
- *
- */
 public interface CityService {
 	City save(City city);
 

@@ -28,10 +28,6 @@ import com.fxs.platform.service.CityService;
 import com.fxs.platform.service.UserService;
 import com.fxs.platform.view.View;
 
-/**
- * @author Charles
- *
- */
 @RestController
 @RequestMapping("/user")
 public class UserController {

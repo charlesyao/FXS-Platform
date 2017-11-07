@@ -5,8 +5,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * ValidateCodeRepository
  * 
- * @author Charles
- *
  */
 public interface ValidateCodeRepository {
 

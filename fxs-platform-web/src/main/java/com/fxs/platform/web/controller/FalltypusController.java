@@ -14,11 +14,6 @@ import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.FalltypusService;
 
-/**
- * 
- * @author Charles
- *
- */
 @RestController
 @RequestMapping("/falltypus")
 public class FalltypusController {

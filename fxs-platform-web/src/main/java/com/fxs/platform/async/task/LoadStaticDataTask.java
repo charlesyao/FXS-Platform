@@ -17,13 +17,9 @@ import com.fxs.platform.dto.FalltypusDto;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CityService;
 import com.fxs.platform.service.FalltypusService;
+import com.fxs.platform.service.RoleService;
 import com.fxs.platform.support.EnabledCitySettings;
 
-/**
- * 
- * @author Charles
- *
- */
 @Component
 @Order(2)
 public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyEvent> {
@@ -34,7 +30,10 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 
 	@Autowired
 	CityService cityService;
-
+	
+	@Autowired
+	RoleService roleService;
+	
 	@Autowired
 	EnabledCitySettings enabledCitySettings;
 
@@ -44,6 +43,7 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 		try {
 			loadFalltypusData();
 			loadCityData();
+			loadRoleData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,5 +73,9 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 				cityService.findProvinceByParentCityId(cityDto.getCityId());
 			}
 		}
+	}
+	
+	private void loadRoleData() {
+		roleService.findAll();
 	}
 }

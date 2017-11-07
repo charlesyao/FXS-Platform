@@ -3,16 +3,38 @@
 <head>
 <meta charset="UTF-8" />
 <title>dashboard</title>
-<div th:replace="fragments/header :: header-css" />
 </head>
 <body>
-	<div th:replace="fragments/header :: header" />
+	<div th:replace="fragments/header :: header-css" ></div>
+	<div th:replace="fragments/header :: header" ></div>
 	<div class="container">
 		<div class="starter-template">
 			admin_dashboard<br/>
 			<h1 th:text="${host}">Hello World</h1>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer" />
+	<div class="form-group">
+		<button type="button" id="questionnaire_11" class="btn btn-primary" bindData="11">Submit</button>
+	</div>
+	<div th:replace="fragments/footer :: footer" ></div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#questionnaire_11").on("click", function() {
+			console.log($(this).attr("bindData"))
+			$.ajax({
+				type : 'GET',
+				url : '/autosave/' + $(this).attr("bindData"),
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log(data)
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			});
+		})
+	});
+	</script>
 </body>
 </html>

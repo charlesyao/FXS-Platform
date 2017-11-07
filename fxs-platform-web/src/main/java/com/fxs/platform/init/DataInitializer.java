@@ -1,10 +1,5 @@
 package com.fxs.platform.init;
 
-/**
- * 
- * @author Charles
- *
- */
 public interface DataInitializer {
 
 	/**

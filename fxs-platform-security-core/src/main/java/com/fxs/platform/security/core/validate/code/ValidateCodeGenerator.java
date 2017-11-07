@@ -5,8 +5,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * ValidateCodeGenerator
  * 
- * @author Charles
- *
  */
 public interface ValidateCodeGenerator {
 

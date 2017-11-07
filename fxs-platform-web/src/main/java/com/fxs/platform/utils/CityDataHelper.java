@@ -15,11 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.fxs.platform.domain.City;
 import com.fxs.platform.service.CityService;
 
-/**
- * 
- * @author Charles
- *
- */
 public class CityDataHelper {
 	Logger logger = LoggerFactory.getLogger(getClass());
 

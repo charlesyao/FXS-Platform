@@ -12,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Extension configuration. Business system can override the default Bean
  * definition
  * 
- * @author Charles
- *
  */
 @Configuration
 public class AuthenticationBeanConfig {
