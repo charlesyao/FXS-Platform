@@ -2,16 +2,14 @@ package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Consultation {
 	@Id
-	@GenericGenerator(name = "idGenerator", strategy = "uuid")
-	@GeneratedValue(generator = "idGenerator")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	/**
 	 * 法律咨询类型： 免费咨询/电话咨询
@@ -32,11 +30,11 @@ public class Consultation {
 	 */
 	private String falltypus;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

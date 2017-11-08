@@ -9,7 +9,7 @@ import com.fxs.platform.domain.Cases;
 
 @Repository
 public interface CasesRepository extends FxsRepository<Cases> {
-	List<Cases> findByTypeAndSubType(String caseType, String subType);
+	//List<Cases> findByTypeAndSubType(String caseType, String subType);
 
 	List<Cases> findByStatus(String status);
 	

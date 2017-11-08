@@ -8,7 +8,7 @@ import com.fxs.platform.dto.CasesDto;
 public interface CasesService {
 	Cases create(Cases cases);
 
-	List<CasesDto> findByTypeAndSubType(String caseType, String subType);
+	//List<CasesDto> findByTypeAndSubType(String caseType, String subType);
 	
 	List<CasesDto> findAll();
 	

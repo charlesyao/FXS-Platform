@@ -62,12 +62,12 @@ public class CasesController {
 	 * @param type
 	 * @return
 	 */
-	@GetMapping("/{type}/{subType}")
+	/*@GetMapping("/{type}/{subType}")
 	public ResponseMessage<List<CasesDto>> query(@PathVariable String type, @PathVariable String subType) {
 		return Result.success(
 				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { type }),
 				casesService.findByTypeAndSubType(type, subType));
-	}
+	}*/
 
 	/**
 	 * 根据状态获取case

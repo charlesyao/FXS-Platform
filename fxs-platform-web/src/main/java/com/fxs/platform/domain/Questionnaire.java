@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class Questionnaire {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	/**
 	 * 问卷标题
@@ -33,13 +33,15 @@ public class Questionnaire {
 	/**
 	 * 父问题，整个问卷是树形结构,引导式
 	 */
-	private String parentQId;
+	private String parentId;
+	
+	private String condition;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -83,12 +85,19 @@ public class Questionnaire {
 		this.answer4 = answer4;
 	}
 
-	public String getParentQId() {
-		return parentQId;
+	public String getParentId() {
+		return parentId;
 	}
 
-	public void setParentQId(String parentQId) {
-		this.parentQId = parentQId;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>上海小帅信息科技有限公司</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- 引入 Bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap4/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap/scss/_nav.scss}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap/scss/_navbar.scss}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap/scss/_forms.scss}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap/scss/_dropdown.scss}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}" />
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4" style="border: 1px solid black; margin: 0 5px">
+				<form role="form">
+					<div class="row signupTitle">
+						<h3>添加子案件类型</h3>
+					</div>
+					<div class="form-group">
+						<label>选择父类型</label>
+						<select class="form-control" id="selectParent">
+							<option th:each="falltypus : ${falltypusList}" th:id="${falltypus.id}" th:value="${falltypus.name}" th:text="${falltypus.name}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>输入子案件类型</label>
+						<input type="text" class="form-control" id="subType" />
+					</div>
+					<button type="button" id="addSubLevel" class="btn btn-primary">保存子案件类型</button>
+				</form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#addSubLevel").on("click", function() {
+				console.log($("#selectParent").val())
+				var data = {
+					"name" : $("#subType").val(),
+					"parentTypeId": $("#selectParent").find("option:selected").attr("id")
+				}
+				$.ajax({
+					type : 'POST',
+					url : '/falltypus',
+					data : JSON.stringify(data),
+					contentType : "application/json; charset=utf-8",
+					success : function(data) {
+						console.log(data)
+					},
+					error : function(error) {
+						console.log(error)
+					}
+				});
+			})
+		});
+	</script>
+</body>
+</html>

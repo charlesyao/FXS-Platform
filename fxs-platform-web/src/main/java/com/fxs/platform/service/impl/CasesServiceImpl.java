@@ -29,11 +29,11 @@ public class CasesServiceImpl implements CasesService {
 		return caseRepository.save(cases);
 	}
 
-	@Override
+	/*@Override
 	public List<CasesDto> findByTypeAndSubType(String caseType, String subType) {
 		List<Cases> cases = caseRepository.findByTypeAndSubType(caseType, subType);
 		return QueryResultConverter.convert(cases, CasesDto.class);
-	}
+	}*/
 
 	@Override
 	public List<CasesDto> findAll() {
