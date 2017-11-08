@@ -38,10 +38,6 @@ public class FalltypusController {
 		return Result.success(falltypusService.create(falltypus));
 	}
 	
-	/**
-	 *
-	 * @return
-	 */
 	@GetMapping("/create/parent")
 	public String createParentFalltypus() {
 		return "addFalltypus";
