@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>上海小帅信息科技有限公司</title>
+<link href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}" />
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6" style="border: 1px solid black;">
+				<form role="form">
+					<div class="row signupTitle">
+						<h3>添加问卷</h3>
+					</div>
+					<div class="form-group">
+						<label>Step2: 选择子案件类型</label>
+						<select class="form-control" id="selectSub">
+							<option>选择案件类型</option>
+							<option th:each="subfalltypus : ${subFalltypusList}" th:id="${subfalltypus.id}" th:value="${subfalltypus.name}" th:text="${subfalltypus.name}"></option>
+						</select>
+					</div>
+					<button type="button" id="previousStep" class="btn btn-primary">上一步</button>
+					<button type="button" id="nextStep" class="btn btn-primary">下一步</button>
+				</form>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">提示信息</h4>
+	            </div>
+	            <div class="modal-body" id="modalContent"></div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<script type="text/javascript" src="/webjars/jquery/3.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#nextStep").on("click", function() {
+			$.ajax({
+				type : 'GET',
+				url : '/falltypus/' + $("#selectSub").find("option:selected").attr("id"),
+				success : function(data) {
+					console.log(data)
+				},
+				error : function(error) {
+					
+				}
+			});
+		})
+	});
+	</script>
+</body>
+</html>
