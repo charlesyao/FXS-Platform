@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import com.fxs.platform.domain.Consultation;
+import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.ConsultationDto;
 import com.fxs.platform.repository.ConsultationRepository;
 import com.fxs.platform.repository.condition.ConsultationCondition;
@@ -24,20 +24,20 @@ public class ConsultationServiceImpl implements ConsultationService {
 	ConsultationRepository consultationRepository;
 
 	@Override
-	public Consultation create(Consultation consultation) {
+	public Reservation create(Reservation consultation) {
 
 		return consultationRepository.save(consultation);
 	}
 
 	@Override
 	public Page<ConsultationDto> query(ConsultationCondition condition, Pageable pageable) {
-		Page<Consultation> lawsuit = consultationRepository.findAll(new ConsultationSpecification(condition), pageable);
+		Page<Reservation> lawsuit = consultationRepository.findAll(new ConsultationSpecification(condition), pageable);
 		return QueryResultConverter.convert(lawsuit, ConsultationDto.class, pageable);
 	}
 
 	@Override
-	public Consultation update(String consultationId, Consultation consultation) {
-		Consultation c = consultationRepository.findOne(consultationId);
+	public Reservation update(String consultationId, Reservation consultation) {
+		Reservation c = consultationRepository.findOne(consultationId);
 		if (!ObjectUtils.isEmpty(c)) {
 			BeanUtils.copyProperties(consultation, c);
 		}
