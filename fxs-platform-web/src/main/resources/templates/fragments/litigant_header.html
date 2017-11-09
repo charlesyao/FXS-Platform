@@ -6,7 +6,6 @@
 	<title>上海小帅信息科技有限公司</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<!-- 引入 Bootstrap -->
 	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
@@ -18,10 +17,21 @@
 		<div class="topBar col-md-12">
 			<div class="container">
 				<ul class="nav loginBox">
-					<li>欢迎<span sec:authentication="name"></span><span>|</span></li>
-					<li><a th:href="@{/user/dashboard}">个人中心</a><span>|</span></li>
-					<li><a href="#" target="_self">关于我们</a><span>|</span></li>
-					<li><a th:href="@{/signOut}" sec:authorize="isAuthenticated()">登出</a></li>
+					<li>
+						欢迎<span sec:authentication="name"></span>
+						<span>|</span>
+					</li>
+					<li>
+						<a th:href="@{/user/dashboard}">个人中心</a>
+						<span>|</span>
+					</li>
+					<li>
+						<a href="#" target="_self">关于我们</a>
+						<span>|</span>
+					</li>
+					<li>
+						<a th:href="@{/signOut}" sec:authorize="isAuthenticated()">登出</a>
+					</li>
 				</ul>
 				<ul class="clearboth"></ul>
 			</div>
@@ -34,7 +44,9 @@
 					<div class="col-md-1 mapId">上海</div>
 					<nav class="col-md-8 navbar-default" role="navigation">
 						<ul class="nav mainNav">
-							<li class="active"><a th:href="@{/}">首页</a></li>
+							<li class="active">
+								<a th:href="@{/}">首页</a>
+							</li>
 							<li class="dropdown">
 								<a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown"> 法律咨询 </a>
 								<ul class="dropdown-menu">
@@ -59,8 +71,12 @@
 									</li>
 								</ul>
 							</li>
-							<li><a href="#">其他法律业务</a></li>
-							<li class="lastItem"><a href="#">投诉</a></li>
+							<li>
+								<a href="#">其他法律业务</a>
+							</li>
+							<li class="lastItem">
+								<a href="#">投诉</a>
+							</li>
 						</ul>
 					</nav>
 				</div>

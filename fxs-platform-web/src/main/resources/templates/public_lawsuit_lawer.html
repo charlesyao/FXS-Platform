@@ -1,65 +1,12 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>上海小帅信息科技有限公司</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<!-- 引入 Bootstrap -->
-	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}" />
-	<script th:src="@{/bootstrap/js/jquery.min.js}"></script>
-	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<div th:replace="fragments/public_header :: public-header-css" ></div>
 </head>
 <body>
-	<div class="img-responsive img-lawsuit">
+	<div class="img-responsive">
+		<div th:replace="fragments/public_header :: public-header" ></div>
 		<div class="container">
-			<ul class="nav loginBox">
-				<li><a href="my.html" target="_self">个人中心</a><span>|</span></li>
-				<li><a href="#" target="_self">关于我们</a><span>|</span></li>
-				<li><a href="laywer_sign.html" target="_self">律师入口</a></li>
-			</ul>
-			<ul class="clearboth"></ul>
-		</div>
-		<div class="line"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<img th:src="@{/img/logo.png}" />
-				</div>
-				<div class="col-md-1 mapId">上海</div>
-				<nav class="col-md-8 navbar-default" role="navigation">
-					<ul class="nav mainNav">
-						<li class="active"><a href="index.html">首页</a></li>
-						<li class="dropdown"><a href="counseling_free.html"
-							class="dropdown-toggle" data-toggle="dropdown"> 法律咨询 </a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="counseling_free.html">免费法律咨询</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="counseling.html">电话咨询</a>
-								</li>
-							</ul></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 打官司 </a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="lawsuit.html">找律师打官司</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="selfhelplawsuit.html">自助打官司</a>
-								</li>
-							</ul></li>
-						<li><a href="#">其他法律业务</a></li>
-						<li class="lastItem"><a href="#">投诉</a></li>
-					</ul>
-				</nav>
-			</div>
 			<div class="col-md-12 lawsuit-content">
 				<h3 class="heading">竞标找律师</h3>
 				<p>律师好不好，比一比就知道</p>
@@ -67,13 +14,11 @@
 			</div>
 		</div>
 	</div>
-	<footer>
-		<ul class="list-group">
-			<li>© 2013-2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2</li>
-			<li>地址：上海市静安区XXXXXXXXX</li>
-			<li></li>
-			<li>沪公网安备 31011002000396号</li>
-		</ul>
-	</footer>
+	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".img-responsive").addClass("img-lawsuit");
+		})
+	</script>
 </body>
 </html>
