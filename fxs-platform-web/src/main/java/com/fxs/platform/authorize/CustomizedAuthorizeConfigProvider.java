@@ -18,7 +18,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 		 */
 
 		config
-			.antMatchers("/autosave/**", "/consultation/public/*")
+			.antMatchers("/autosave/**", "/consultation/public/*", "/lawsuit/public/*")
 			.permitAll().anyRequest().authenticated();
 		
 		return true;

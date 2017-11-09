@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.fxs.platform.domain.Lawsuit;
 import com.fxs.platform.dto.LawsuitDto;
@@ -34,10 +34,27 @@ public class LawsuitController {
 
 	@Autowired
 	LawsuitService lawsuitService;
-
+	
 	@GetMapping("/litigant")
-	public String pay() {
+	public String litigantLawsuit(ModelMap map) {
 		return "litigant_lawsuit";
+	}
+	
+	@GetMapping("/{caseType}/{subType}")
+	public String publicLawsuit(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
+		String target = "";
+		
+		if (caseType.equals("public")) {
+			if (subType.equals("lawer")) {
+				
+				target = "public_lawsuit_lawer";
+			} else if (subType.equals("self_service")) {
+				
+				target = "public_lawsuit_self_service";
+			}
+		}
+		
+		return target;
 	}
 	
 	/**

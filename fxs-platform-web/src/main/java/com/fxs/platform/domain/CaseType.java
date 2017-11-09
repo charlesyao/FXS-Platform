@@ -13,7 +13,7 @@ public class CaseType {
 	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
-	private CaseType praentCaseType;
+	//private CaseType praentCaseType;
 	
 	private int level;
 	
@@ -28,13 +28,13 @@ public class CaseType {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public CaseType getPraentCaseType() {
+	/*public CaseType getPraentCaseType() {
 		return praentCaseType;
 	}
 
 	public void setPraentCaseType(CaseType praentCaseType) {
 		this.praentCaseType = praentCaseType;
-	}
+	}*/
 
 	public int getLevel() {
 		return level;

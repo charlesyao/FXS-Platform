@@ -16,12 +16,12 @@ public class Cases {
 	/**
 	 * 主类型：法律咨询或者打官司
 	 */
-	private CaseType caseTypeLevelOne;
+	//private CaseType caseTypeLevelOne;
 
 	/**
 	 * 子类型： 免费咨询/找律师打官司/电话咨询
 	 */
-	private CaseType caseTypeLevelTwo;
+	//private CaseType caseTypeLevelTwo;
 
 	/**
 	 * 案件当前状态
@@ -42,7 +42,7 @@ public class Cases {
 		this.status = status;
 	}
 
-	public CaseType getCaseTypeLevelOne() {
+	/*public CaseType getCaseTypeLevelOne() {
 		return caseTypeLevelOne;
 	}
 
@@ -56,7 +56,7 @@ public class Cases {
 
 	public void setCaseTypeLevelTwo(CaseType caseTypeLevelTwo) {
 		this.caseTypeLevelTwo = caseTypeLevelTwo;
-	}
+	}*/
 
 	public String getStatus() {
 		return status;

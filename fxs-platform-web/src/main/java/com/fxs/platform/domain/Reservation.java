@@ -30,7 +30,7 @@ public class Reservation {
     /**
      * 电话预约的用户
      */
-    private User reservationUser;
+    //private User reservationUser;
 
     public int getId() {
         return id;
@@ -64,12 +64,12 @@ public class Reservation {
         this.contactPhone = contactPhone;
     }
 
-    public User getReservationUser() {
+   /* public User getReservationUser() {
         return reservationUser;
     }
 
     public void setReservationUser(User reservationUser) {
         this.reservationUser = reservationUser;
-    }
+    }*/
 }
 

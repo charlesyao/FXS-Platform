@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/litigant_header :: litigant-header-css"></div>
+</head>
+<body>
+	<div th:replace="fragments/litigant_header :: litigant-header"></div>
+	<div class="mainPart">
+	  	<div class="container">
+		    <h1>自助打官司</h1>
+		    <p>律师帮您扫除专业障碍，让您自己就能轻松打官司。</p>
+			  <div class="video">
+			  	<!-- 
+	       		<embed height="415" 
+	       		       width="544" 
+	       		       quality="high" 
+	       		       allowfullscreen="true" 
+	       			   type="application/x-shockwave-flash" src="//static.hdslb.com/miniloader.swf" 
+	       			   flashvars="aid=15866376&page=1" 
+	       			   pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
+	       		</embed>
+	       		 -->
+	       		 <video controls="controls">
+				  <source src="http://www.w3school.com.cn/i/movie.ogg" type="video/ogg" />
+				  <source src="http://www.w3school.com.cn/i/movie.mp4" type="video/mp4" />
+				</video>
+		    </div>
+	  	</div>
+	  </div>
+	<div th:replace="fragments/litigant_footer :: litigant-footer"></div>
+</body>
+</html>

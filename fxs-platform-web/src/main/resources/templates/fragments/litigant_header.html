@@ -50,9 +50,13 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 打官司 </a>
 								<ul class="dropdown-menu">
-									<li><a href="lawsuit.html">找律师打官司</a></li>
+									<li>
+										<a th:href="@{/lawsuit/public/lawer}">找律师打官司</a>
+									</li>
 									<li class="divider"></li>
-									<li><a href="selfhelplawsuit.html">自助打官司</a></li>
+									<li>
+										<a th:href="@{/lawsuit/public/self_service}">自助打官司</a>
+									</li>
 								</ul>
 							</li>
 							<li><a href="#">其他法律业务</a></li>
