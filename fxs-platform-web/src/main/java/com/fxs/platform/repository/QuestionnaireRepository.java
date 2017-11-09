@@ -8,5 +8,5 @@ import com.fxs.platform.domain.Questionnaire;
 
 @Repository
 public interface QuestionnaireRepository extends FxsRepository<Questionnaire> {
-	List<Questionnaire> findByQId(String qId);
+	List<Questionnaire> findByParentId(String qId);
 }

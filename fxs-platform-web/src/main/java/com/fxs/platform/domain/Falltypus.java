@@ -2,28 +2,27 @@ package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Falltypus {
 	@Id
-	@GenericGenerator(name = "idGenerator", strategy = "uuid")
-	@GeneratedValue(generator = "idGenerator")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
+	@NotBlank(message="案件类型不能为空")
 	private String name;
 
-	private String typeId;
+	private String parentTypeId = "";
 
-	private String parentTypeId;
-
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -33,14 +32,6 @@ public class Falltypus {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
 	}
 
 	public String getParentTypeId() {

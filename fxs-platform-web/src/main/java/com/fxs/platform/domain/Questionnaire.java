@@ -1,8 +1,6 @@
 package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -10,8 +8,10 @@ import javax.persistence.Id;
  */
 @Entity
 public class Questionnaire {
+	/**
+	 * 主键,根据案件类型以及子类型生成
+	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	/**
@@ -33,7 +33,12 @@ public class Questionnaire {
 	/**
 	 * 父问题，整个问卷是树形结构,引导式
 	 */
-	private String parentQId;
+	private String parentId;
+	
+	/**
+	 * 显示条件
+	 */
+	private String condition;
 
 	public String getId() {
 		return id;
@@ -83,12 +88,19 @@ public class Questionnaire {
 		this.answer4 = answer4;
 	}
 
-	public String getParentQId() {
-		return parentQId;
+	public String getParentId() {
+		return parentId;
 	}
 
-	public void setParentQId(String parentQId) {
-		this.parentQId = parentQId;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 }

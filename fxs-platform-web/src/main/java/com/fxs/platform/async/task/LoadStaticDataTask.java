@@ -17,6 +17,7 @@ import com.fxs.platform.dto.FalltypusDto;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CityService;
 import com.fxs.platform.service.FalltypusService;
+import com.fxs.platform.service.RepresentativeService;
 import com.fxs.platform.service.RoleService;
 import com.fxs.platform.support.EnabledCitySettings;
 
@@ -35,15 +36,19 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 	RoleService roleService;
 	
 	@Autowired
+	RepresentativeService representativeService;
+	
+	@Autowired
 	EnabledCitySettings enabledCitySettings;
 
 	@Override
 	@Async
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 		try {
-			loadFalltypusData();
+			//loadFalltypusData();
 			loadCityData();
 			loadRoleData();
+			loadRepresentativeData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,7 +59,7 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 				falltypusService.findFirstLevelFalltypus(), FalltypusDto.class);
 
 		for (FalltypusDto falltypusDto : falltypusList) {
-			falltypusService.findSubFalltypusByParentId(falltypusDto.getTypeId());
+			falltypusService.findSubFalltypusByParentId(String.valueOf(falltypusDto.getId()));
 		}
 	}
 
@@ -77,5 +82,9 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 	
 	private void loadRoleData() {
 		roleService.findAll();
+	}
+	
+	private void loadRepresentativeData() {
+		representativeService.findAll();
 	}
 }

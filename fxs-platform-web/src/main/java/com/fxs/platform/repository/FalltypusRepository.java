@@ -15,7 +15,7 @@ public interface FalltypusRepository extends FxsRepository<Falltypus> {
 	@Cacheable(value="__falltypus-data__") 
 	List<Falltypus> findAll();
 
-	@Query("SELECT o FROM Falltypus o WHERE o.parentTypeId IS NULL")
+	@Query("SELECT o FROM Falltypus o WHERE o.parentTypeId=''")
 	List<Falltypus> findFirstLevelFalltypus();
 
 	@Query("SELECT o FROM Falltypus o WHERE o.parentTypeId=?1")

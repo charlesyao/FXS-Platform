@@ -1,19 +1,17 @@
 package com.fxs.platform.dto;
 
 public class FalltypusDto {
-	private String id;
+	private int id;
 
 	private String name;
 
-	private String typeId;
-
 	private String parentTypeId;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -23,14 +21,6 @@ public class FalltypusDto {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
 	}
 
 	public String getParentTypeId() {

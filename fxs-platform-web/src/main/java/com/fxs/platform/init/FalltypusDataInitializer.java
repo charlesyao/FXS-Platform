@@ -61,7 +61,7 @@ public class FalltypusDataInitializer extends AbstractDataInitializer {
 			falltypus.setName(key);
 
 			String typeId = StringUtils.toString(Integer.parseInt("1000000") + parentStep);
-			falltypus.setTypeId(typeId);
+			//falltypus.setTypeId(typeId);
 
 			Falltypus f = falltypusRepository.save(falltypus);
 
@@ -74,8 +74,8 @@ public class FalltypusDataInitializer extends AbstractDataInitializer {
 
 					falltypus.setName(subFalltypus);
 
-					falltypus.setTypeId(StringUtils.toString(Integer.parseInt(typeId + "000") + subStep));
-					falltypus.setParentTypeId(f.getTypeId());
+					//falltypus.setTypeId(StringUtils.toString(Integer.parseInt(typeId + "000") + subStep));
+					//falltypus.setParentTypeId(f.getTypeId());
 
 					list.add(falltypus);
 				}
@@ -88,6 +88,7 @@ public class FalltypusDataInitializer extends AbstractDataInitializer {
 
 	@Override
 	protected boolean isNeedInit() {
-		return falltypusRepository.count() == 0;
+		//return falltypusRepository.count() == 0;
+		return false;
 	}
 }

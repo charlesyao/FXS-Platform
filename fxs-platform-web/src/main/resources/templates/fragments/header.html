@@ -3,24 +3,78 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <div th:fragment="header-css">
+	<!--
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
 	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../css/main.css" />
+	-->
+	<title>上海小帅信息科技有限公司</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- 引入 Bootstrap -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap4/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/scss/_nav.scss}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/scss/_navbar.scss}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/scss/_forms.scss}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/scss/_dropdown.scss}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}" />
 </div>
 </head>
 <body>
 	<div th:fragment="header">
-		<!-- this is header -->
+		<!-- 
 		<nav class="navbar navbar-inverse">
 			<div class="container">
-				<span sec:authorize="isAuthenticated()">
-					Logged user: <span sec:authentication="name"></span> 
-					Roles: <span sec:authentication="principal.authorities"></span> 
-					<span>
-						<a th:href="@{/signOut}">Sign Out</a>
-					</span>
+				<span sec:authorize="isAuthenticated()"> Logged user: <span
+					sec:authentication="name"></span> Roles: <span
+					sec:authentication="principal.authorities"></span> <span> <a
+						th:href="@{/signOut}">Sign Out</a>
+				</span>
 				</span>
 			</div>
 		</nav>
+		 -->
+		<div class="img-responsive">
+			<div class="container">
+				<ul class="nav loginBox">
+					<li><a href="#" sec:authentication="name" /><span>|</span></li>
+					<li><a href="#" target="_self">您的消息</a><span>|</span></li>
+					<li><a href="#" target="_self">关于我们</a><span>|</span></li>
+					<li><a href="#" target="_self">律师入口</a></li>
+					<li><a href="/signOut" sec:authorize="isAuthenticated()">登出</a></li>
+				</ul>
+				<ul class="clearboth"></ul>
+			</div>
+			<div class="line"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<img th:src="@{/img/logo.png}" />
+					</div>
+					<div class="col-md-1 mapId">上海</div>
+					<nav class="col-md-8 navbar-default" role="navigation">
+						<ul class="nav mainNav">
+							<li class="active"><a href="#">首页</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> 法律咨询</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">免费法律咨询</a></li>
+									<li class="divider"></li>
+									<li><a href="#">电话咨询</a></li>
+								</ul></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown"> 打官司 </a>
+								<ul class="dropdown-menu">
+									<li><a href="#">找律师打官司</a></li>
+									<li class="divider"></li>
+									<li><a href="#">自助打官司</a></li>
+								</ul></li>
+							<li><a href="#">其他法律业务</a></li>
+							<li class="lastItem"><a href="#">投诉</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
