@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<title>上海小帅信息科技有限公司</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,11 +19,12 @@
 	<div class="img-responsive">
 		<div class="container">
 			<ul class="nav loginBox">
-				<li><a href="#" target="_self">登录</a><span>|</span></li>
+				<li><a href="/user/signIn" target="_self">登录</a><span>|</span></li>
 				<li><a href="#" target="_self">注册</a><span>|</span></li>
 				<li><a href="#" target="_self">您的消息</a><span>|</span></li>
 				<li><a href="#" target="_self">关于我们</a><span>|</span></li>
 				<li><a href="#" target="_self">律师入口</a></li>
+				<li sec:authorize="isAuthenticated()"><a href="/signOut">登出</a></li>
 			</ul>
 			<ul class="clearboth"></ul>
 		</div>
