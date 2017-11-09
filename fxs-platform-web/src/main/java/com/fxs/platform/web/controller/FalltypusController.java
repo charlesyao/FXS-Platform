@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,17 +34,6 @@ public class FalltypusController {
 	@ResponseBody
 	public ResponseMessage<Falltypus> create(@Valid @RequestBody Falltypus falltypus) {
 		return Result.success(falltypusService.create(falltypus));
-	}
-	
-	@GetMapping("/create/parent")
-	public String createParentFalltypus() {
-		return "addFalltypus";
-	}
-	
-	@GetMapping("/create/sub")
-	public String createSubFalltypus(ModelMap map) {
-		map.addAttribute("falltypusList", falltypusService.findFirstLevelFalltypus());
-		return "addSubFalltypus";
 	}
 	
 	/**

@@ -37,31 +37,6 @@ public class ConsultationController {
 	@Autowired
 	ConsultationService consultationService;
 
-	@GetMapping("/{caseType}/{subType}")
-	public String free(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
-		String target = "";
-		
-		if (caseType.equals("litigant")) {
-			if (subType.equals("free")) {
-				
-				target = "litigant_consulting_free";
-			} else if (subType.equals("phone")) {
-				
-				target = "litigant_consulting_phone";
-			}
-		} else if (caseType.equals("public")) {
-			if (subType.equals("free")) {
-				
-				target = "public_consulting_free";
-			} else if (subType.equals("phone")) {
-				
-				target = "public_consulting_phone";
-			}
-		}
-		
-		return target;
-	}
-	
 	/**
 	 * 提交法律咨询信息
 	 * 

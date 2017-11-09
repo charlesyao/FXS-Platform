@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<div th:fragment="lawer-header-css">
+	<title>上海小帅信息科技有限公司</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}" />
+</div>
+</head>
+<body>
+	<div th:fragment="lawer-header">
+		<div class="topBar col-md-12">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<img th:src="@{/img/logo.png}" />
+					</div>
+					<nav class="col-md-9 navbar-default" role="navigation">
+						<ul class="nav mainNav">
+							<li class="active">
+								<a th:href="@{/user/dashboard}">诉讼业务</a>
+							</li>
+							<li>
+								<a th:href="@{/lawer/case_pool}">咨询池</a>
+							</li>
+							<li>
+								<a th:href="@{/signOut}" sec:authorize="isAuthenticated()">登出</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

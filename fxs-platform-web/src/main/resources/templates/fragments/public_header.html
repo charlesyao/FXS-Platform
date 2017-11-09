@@ -17,7 +17,7 @@
 		<div class="container">
 			<ul class="nav loginBox">
 				<li>
-					<a href="/user/signIn">登录</a>
+					<a th:href="@{/user/signIn}">登录</a>
 					<span>|</span>
 				</li>
 				<li>
@@ -29,7 +29,7 @@
 					<span>|</span>
 				</li>
 				<li>
-					<a href="laywer_sign.html" target="_self">律师入口</a>
+					<a th:href="@{/lawer/signIn}">律师入口</a>
 				</li>
 			</ul>
 			<ul class="clearboth"></ul>
@@ -44,17 +44,17 @@
 				<nav class="col-md-8 navbar-default" role="navigation">
 					<ul class="nav mainNav">
 						<li class="active">
-							<a href="index.html">首页</a>
+							<a th:href="@{/}">首页</a>
 						</li>
 						<li class="dropdown">
 							<a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown"> 法律咨询 </a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="counseling_free.html">免费法律咨询</a>
+									<a th:href="@{/consultation/public/free}">免费法律咨询</a>
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="counseling.html">电话咨询</a>
+									<a th:href="@{/consultation/public/phone}">电话咨询</a>
 								</li>
 							</ul>
 						</li>
@@ -62,11 +62,11 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 打官司 </a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="lawsuit.html">找律师打官司</a>
+									<a th:href="@{/lawsuit/public/lawer}">找律师打官司</a>
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="selfhelplawsuit.html">自助打官司</a>
+									<a th:href="@{/lawsuit/public/self_service}">自助打官司</a>
 								</li>
 							</ul>
 						</li>
