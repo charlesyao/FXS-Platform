@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.FalltypusService;
 
-@RestController
+@Controller
 @RequestMapping("/falltypus")
 public class FalltypusController {
 
@@ -53,6 +54,7 @@ public class FalltypusController {
 	 * @return
 	 */
 	@GetMapping
+	@ResponseBody
 	public ResponseMessage<List<FalltypusDto>> getFirstLevelFalltypus() {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.falltypus"),
 				falltypusService.findFirstLevelFalltypus());
@@ -64,6 +66,7 @@ public class FalltypusController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
+	@ResponseBody
 	public ResponseMessage<List<FalltypusDto>> getSubFalltypus(@PathVariable String id) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.falltypus"),
 				falltypusService.findSubFalltypusByParentId(id));
