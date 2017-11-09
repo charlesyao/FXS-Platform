@@ -4,22 +4,17 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <!-- 引入 Bootstrap -->
-      <link href="bootstrap4/css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="bootstrap/scss/_nav.scss">
-      <link rel="stylesheet" type="text/css" href="bootstrap/scss/_navbar.scss">
-      <link rel="stylesheet" type="text/css" href="bootstrap/scss/_forms.scss">
-      <link rel="stylesheet" type="text/css" href="bootstrap/scss/_dropdown.scss">
-      <link rel="stylesheet" type="text/css" href="css/customer.css">
-     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     
-  
-      
- 
+      <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="css/header.css">
+      <link rel="stylesheet" type="text/css" href="css/footer.css">
+     <link rel="stylesheet" type="text/css" href="css/customer.css">
+     <script src="bootstrap/js/jquery.min.js"></script>
+     <script src="bootstrap/js/bootstrap.min.js"></script>
  </head>
  <body>
 
   <form class="form-horizontal signupBox" role="form">
+    <div class="pop_close"><a href="#"></a></div>
   <div class="row signupTitle"><h3>律师注册</h3></div>
   <div class="form-group row">
     <div class="col-sm-12">
@@ -104,6 +99,7 @@
 </form>
 
 <form class="form-horizontal signupBox" role="form" style="top:1150px">
+  <div class="pop_close"><a href="#"></a></div>
   <div class="row signupTitle"><h3>律师登录</h3></div>
   
   <div class="form-group row">
@@ -140,6 +136,7 @@
 </form>
 
 <form class="form-horizontal signupBox chooseAds" role="form" style="top:800px">
+  <div class="pop_close" style="left:730px"><a href="#"></a></div>
   <div class="row signupTitle"><h3>选择业务领域</h3></div>
   <div class="chooseAdsItem">
    <h4>最多可选择5个业务领域</h4>
@@ -168,14 +165,13 @@
   </div>
 </form>
 <div class="bgBlack"></div>
-  <div class="topBar">
+  <div class="topBar col-md-12">
     <div class="container">
      <ul class="nav loginBox">
-       <li><a href="#" target="_self">登录</a><span>|</span></li>
-       <li><a href="#" target="_self">注册</a><span>|</span></li>
-       <li><a href="#" target="_self">您的消息</a><span>|</span></li>
+       <li><a href="login_sign_ads_pop.html" target="_self">登录</a><span>|</span></li>
+       <li><a href="login_sign_ads_pop.html" target="_self">注册</a><span>|</span></li>
        <li><a href="#" target="_self">关于我们</a><span>|</span></li>
-       <li><a href="#" target="_self">律师入口</a></li>                             
+       <li><a href="laywer_sign.html" target="_self">律师入口</a></li>                              
 
      </ul>
     <ul class="clearboth"></ul>
@@ -192,16 +188,16 @@
         <div class="col-md-1 mapId">上海</div>
         <nav class="col-md-8 navbar-default" role="navigation">
           <ul class="nav mainNav" >
-            <li class="active"><a href="#">首页</a></li>
+            <li class="active"><a href="index.html">首页</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown">
                 法律咨询
                 
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">免费法律咨询</a></li>
+                <li><a href="counseling_free.html">免费法律咨询</a></li>
                 <li class="divider"></li>
-                <li><a href="#">电话咨询</a></li>
+                <li><a href="counseling.html">电话咨询</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -210,9 +206,9 @@
                 
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">找律师打官司</a></li>
+                <li><a href="lawsuit.html">找律师打官司</a></li>
                 <li class="divider"></li>
-                <li><a href="#">自助打官司</a></li>
+                <li><a href="selfhelplawsuit.html">自助打官司</a></li>
               </ul>
             </li>
             <li><a href="#">其他法律业务</a></li>
