@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 8089
   session:
     timeout: 1800
 spring:
@@ -47,7 +47,7 @@ fxs:
       sing-in-successUrl: /user/dashboard
       remember-me-seconds: 29400
       sign-out-url: /user/signIn
-      ignoring-url: /,/city/**,/case/**,/lawsuit/**,/consultation/**,/falltypus/**,/questionnaire/**
+      ignoring-url: /,/city/**,/case/**,/falltypus/**,/questionnaire/**
     #session:
       #maximum-sessions: 1
       #max-sessions-prevents-login: true

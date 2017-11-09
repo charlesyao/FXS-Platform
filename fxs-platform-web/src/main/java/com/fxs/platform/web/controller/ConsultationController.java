@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fxs.platform.domain.Consultation;
@@ -26,7 +28,7 @@ import com.fxs.platform.service.ConsultationService;
  * 法律咨询接口
  * 
  */
-@RestController
+@Controller
 @RequestMapping("/consultation")
 public class ConsultationController {
 
@@ -36,6 +38,31 @@ public class ConsultationController {
 	@Autowired
 	ConsultationService consultationService;
 
+	@GetMapping("/{caseType}/{subType}")
+	public String free(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
+		String target = "";
+		
+		if (caseType.equals("litigant")) {
+			if (subType.equals("free")) {
+				
+				target = "litigant_consulting_free";
+			} else if (subType.equals("phone")) {
+				
+				target = "litigant_consulting_phone";
+			}
+		} else if (caseType.equals("public")) {
+			if (subType.equals("free")) {
+				
+				target = "public_consulting_free";
+			} else if (subType.equals("phone")) {
+				
+				target = "public_consulting_phone";
+			}
+		}
+		
+		return target;
+	}
+	
 	/**
 	 * 提交法律咨询信息
 	 * 
@@ -44,6 +71,7 @@ public class ConsultationController {
 	 * @return
 	 */
 	@PostMapping
+	@ResponseBody
 	public ResponseMessage<Consultation> create(@Valid @RequestBody Consultation consultation) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save.success"),
 				consultationService.create(consultation));
@@ -59,6 +87,7 @@ public class ConsultationController {
 	 * @return
 	 */
 	@GetMapping
+	@ResponseBody
 	public ResponseMessage<Page<ConsultationDto>> query(ConsultationCondition condition, Pageable pageable) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success"),
 				consultationService.query(condition, pageable));
@@ -82,6 +111,7 @@ public class ConsultationController {
 	 * @return
 	 */
 	@PutMapping("/{consultationId}")
+	@ResponseBody
 	public ResponseMessage<Consultation> update(@PathVariable String consultationId,
 			@Valid @RequestBody Consultation consultation) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success",

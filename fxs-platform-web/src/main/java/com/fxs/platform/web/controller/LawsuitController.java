@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ import com.fxs.platform.service.LawsuitService;
  * 打官司接口
  * 
  */
-@RestController
+@Controller
 @RequestMapping("/lawsuit")
 public class LawsuitController {
 	@Autowired
@@ -34,6 +35,11 @@ public class LawsuitController {
 	@Autowired
 	LawsuitService lawsuitService;
 
+	@GetMapping("/litigant")
+	public String pay() {
+		return "litigant_lawsuit";
+	}
+	
 	/**
 	 * 提交打官司信息
 	 * 

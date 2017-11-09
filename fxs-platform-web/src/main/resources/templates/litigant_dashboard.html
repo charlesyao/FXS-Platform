@@ -1,18 +1,55 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>dashboard</title>
-<div th:replace="fragments/header :: header-css" />
+<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
 </head>
 <body>
-	<div th:replace="fragments/header :: header" />
-	<div class="container">
-		<div class="starter-template">
-			litigant_dashboard<br/>
-			<h1 th:text="${host}">Hello World</h1>
+	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="mainPart">
+		<div class="container">
+			<h1>个人中心</h1>
+			<section class="col-md-12 col-sm-12 introcouPhone">
+				<div class="row">
+					<div class="col-md-4 col-sm-4">
+						<ul class="introcoupCell mycenterCell">
+							<li>
+								<a th:href="@{/consultation/litigant/free}">
+									<img th:src="@{/img/mycenter_free.png}" />
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/consultation/litigant/free}"><span>我的免费咨询</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<ul class="introcoupCell mycenterCell">
+							<li>
+								<a th:href="@{/consultation/litigant/phone}">
+									<img th:src="@{/img/mycenter_phone.png}" />
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/consultation/litigant/phone}"><span>我的电话咨询</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<ul class="introcoupCell mycenterCell">
+							<li>
+								<a th:href="@{/lawsuit/litigant}">
+									<img th:src="@{/img/mycenter_aj.png}" />
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/lawsuit/litigant}"><span>我的竞标案件</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer" />
+	<div th:replace="fragments/litigant_footer :: litigant-footer" ></div>
 </body>
 </html>
