@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fxs.platform.domain.Consultation;
+import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.ConsultationDto;
 import com.fxs.platform.repository.condition.ConsultationCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
@@ -44,7 +44,7 @@ public class ConsultationController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseMessage<Consultation> create(@Valid @RequestBody Consultation consultation) {
+	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation consultation) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save.success"),
 				consultationService.create(consultation));
 	}
@@ -82,8 +82,8 @@ public class ConsultationController {
 	 * @return
 	 */
 	@PutMapping("/{consultationId}")
-	public ResponseMessage<Consultation> update(@PathVariable String consultationId,
-			@Valid @RequestBody Consultation consultation) {
+	public ResponseMessage<Reservation> update(@PathVariable String consultationId,
+                                               @Valid @RequestBody Reservation consultation) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success",
 				new Object[] { consultationId }), consultationService.update(consultationId, consultation));
 	}

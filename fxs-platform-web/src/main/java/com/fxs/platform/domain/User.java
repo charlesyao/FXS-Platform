@@ -30,12 +30,6 @@ public class User {
 
 	private String mobile;
 
-	private String sex;
-
-	private String location = "";
-
-	private String businessDomain = "";
-
 	private Date createdTime;
 
 	private String state = State.ACTIVE.getState();
@@ -105,30 +99,6 @@ public class User {
 
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getBusinessDomain() {
-		return businessDomain;
-	}
-
-	public void setBusinessDomain(String businessDomain) {
-		this.businessDomain = businessDomain;
 	}
 
 	@Override
