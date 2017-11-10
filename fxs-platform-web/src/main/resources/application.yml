@@ -48,10 +48,10 @@ fxs:
       remember-me-seconds: 29400
       sign-out-url: /user/signIn
       ignoring-url: /,/city/**,/case/**,/falltypus/**,/questionnaire/**
-    #session:
+    session:
       #maximum-sessions: 1
       #max-sessions-prevents-login: true
-      #session-invalid-url: /fxs-session-invalid.html
+      session-invalid-url: /fxs-session-invalid.html
     #code:
       #image:
         #length: 4

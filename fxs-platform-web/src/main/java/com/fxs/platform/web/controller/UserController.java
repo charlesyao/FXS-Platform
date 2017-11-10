@@ -46,7 +46,7 @@ public class UserController {
 		return info;
 	}
 
-	@PostMapping("/collectformdata")
+	@PostMapping
 	@JsonView(View.DetailView.class)
 	public User create(@RequestBody User userInfo) {
 		return userService.create(userInfo);

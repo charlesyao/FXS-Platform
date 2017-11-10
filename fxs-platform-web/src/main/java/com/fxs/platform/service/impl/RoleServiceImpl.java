@@ -1,5 +1,6 @@
 package com.fxs.platform.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,32 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	@Cacheable(value = "roles")
 	public List<Role> findAll() {
-		return roleRepository.findAll();
+		List<Role> rList = roleRepository.findAll();
+		List<Role> nrList = new ArrayList<Role>();
+
+		for (Role role : rList) {
+			Role r = new Role();
+			switch (role.getType()) {
+				case "USER":
+					r.setId(role.getId());
+					r.setType("当事人");
+					break;
+				case "LAWER":
+					r.setId(role.getId());
+					r.setType("律师");
+					break;
+				case "ADMIN":
+					r.setId(role.getId());
+					r.setType("管理员");
+					break;
+				default:
+					break;
+			}
+
+			nrList.add(r);
+		}
+
+		return nrList;
 	}
 
 }

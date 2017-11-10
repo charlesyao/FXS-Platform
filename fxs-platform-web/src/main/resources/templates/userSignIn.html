@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <div th:replace="fragments/user_center_header :: user-center-header-css" ></div>
+    </head>
+    <body>
+    	<div class="img-responsive">
+    		<div th:replace="fragments/user_center_header :: user-center-header" ></div>
+			<section class="hero">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+	                        <div class="card border-none">
+	                            <div class="card-block">
+	                               <div class="mt-2 text-center">
+	                                    <h2>用户登录</h2>
+	                                </div>
+	                                <div class="mt-4">
+	                                	<div th:if="${param.error}">
+								            <div class="alert alert-danger">
+								                          登录失败：<div th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></div>
+								            </div>
+								        </div>
+								        <div th:if="${param.logout}">
+								            <div class="alert alert-info"> 登出成功</div>
+								        </div>
+	                                    <form th:action="@{/authentication/form}" method="post">
+	                                        <div class="form-group">
+	                                            <input th:name="username" type="text" class="form-control" th:id="username"  placeholder="输入用户名" />
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <input th:name="password" type="password" class="form-control" th:id="password" placeholder="输入密码" />
+	                                        </div>
+	                                        <div class="form-group" style="position: relative;">
+	                                            <input th:name="imageCode" type="text" class="form-control" th:id="imageCode" placeholder="输入验证码" />
+	                                            <span id="image_code">
+													<img th:src="@{/code/image}" style="height: 44px;" />
+													<a href="#" onclick="javascript:window.location.reload(); event.preventDefault();">点击刷新</a>
+												</span>
+	                                        </div>
+	                                        <label class="custom-control custom-checkbox mt-2">
+	                                            <input th:name="remember-me" type="checkbox" class="custom-control-input" />
+	                                            <span class="custom-control-indicator"></span>
+	                                            <span class="custom-control-description text-white">记住我</span>
+	                                        </label>
+	                                        <button type="submit" class="btn btn-primary float-right">登录</button>
+	                                    </form>
+	                                    <div class="clearfix"></div>
+	                                    <p class="content-divider center mt-4"><span>OR</span></p>
+	                                </div>
+	                                <p class="text-center">
+	                                    	还没有账号? <a th:href="@{/user/register}">点击注册</a>
+	                                </p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="clearfix"></div>
+	                    <div class="col-sm-12 mt-5 footer">
+	                        <p class="text-white small text-center">
+	                            &copy; 2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2
+	                        </p>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+		</div>
+		<div th:replace="fragments/public_footer :: public-footer" ></div>
+    </body>
+</html>

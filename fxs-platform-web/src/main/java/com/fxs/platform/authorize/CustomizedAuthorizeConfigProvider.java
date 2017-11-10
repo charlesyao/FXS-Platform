@@ -22,7 +22,10 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/autosave/**", 
 					"/consultation/public/*", 
 					"/lawsuit/public/*", 
-					"/lawer/signIn")
+					"/lawer/signIn",
+					"/user/signUp",
+					"/user/register",
+					"/user")
 			.permitAll().anyRequest().authenticated();
 		
 		return true;

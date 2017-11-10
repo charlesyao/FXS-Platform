@@ -1,21 +1,47 @@
 package com.fxs.platform.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fxs.platform.domain.Role;
 import com.fxs.platform.service.FalltypusService;
+import com.fxs.platform.service.RoleService;
 
 @Controller
+@SessionAttributes("roles")
 public class RouterController {
 	@Autowired
 	FalltypusService falltypusService;
 	
+
+	@Autowired
+	RoleService roleService;
+	
+	@ModelAttribute("roles")
+	public List<Role> initializeProfiles() {
+		return roleService.findAll();
+	}
+	
+	@GetMapping("/")
+	public String index(ModelMap map) throws Exception {
+		return "index";
+	}
+	
 	@GetMapping("/user/signIn")
-	public String litigantSignIn() {
-		return "signIn";
+	public String userSignIn() {
+		return "userSignIn";
+	}
+	
+	@GetMapping("/user/register")
+	public String userRegister() {
+		return "userRegister";
 	}
 	
 	@GetMapping("/lawer/signIn")
