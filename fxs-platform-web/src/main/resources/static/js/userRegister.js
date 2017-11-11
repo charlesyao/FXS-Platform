@@ -4,7 +4,12 @@ $(document).ready(function() {
 			type : 'POST',
 			contentType : 'application/json',
 			url : '/user',
-			data : JSON.stringify(formdata),
+			data : JSON.stringify({
+				"username": $("#username").val(),
+				"email": $("#email").val(),
+				"mobile": $("#mobile").val(),
+				"password": $("#password").val()
+			}),
 			dataType : 'json',
 			cache : false,
 			timeout : 600000,

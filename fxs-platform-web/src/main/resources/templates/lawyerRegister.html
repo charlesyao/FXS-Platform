@@ -16,31 +16,29 @@
 	                                    <h2>用户注册</h2>
 	                                </div>
 	                                <div class="mt-4">
-	                                    <form>
+	                                    <form th:action="@{/user}" method="post">
 	                                        <div class="form-group">
-	                                            <input type="text" class="form-control" th:name="username" th:id="username" placeholder="输入用户名" />
+	                                            <input type="text" class="form-control" th:name="username" placeholder="输入用户名" />
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <input type="text" class="form-control" th:name="email" th:id="email" placeholder="输入邮箱" />
+	                                            <input type="text" class="form-control" th:name="email" placeholder="输入邮箱" />
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <input type="text" class="form-control" th:name="mobile" th:id="mobile" placeholder="输入电话号码" />
+	                                            <input type="text" class="form-control" th:ame="mobile" placeholder="输入电话号码" />
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <input type="password" class="form-control" th:name="password" th:id="password" value="" placeholder="输入密码" />
+	                                            <input type="password" class="form-control" th:name="password" value="" placeholder="输入密码" />
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <input type="password" class="form-control" th:name="confirm-password" th:id="confirm-password" value="" placeholder="确认密码" />
+	                                            <input type="password" class="form-control" th:name="confirm-password" value="" placeholder="确认密码" />
 	                                        </div>
-	                                        <!-- 
 	                                        <div class="form-group">
 												<select class="form-control" id="selectRole" style="background-color: black;">
 													<option th:selected="true" th:disabled="true" th:value="NOT_SELECTED">选择角色</option>
 													<option th:each="role : ${roles}" th:id="${role.id}" th:value="${role.type}" th:text="${role.type}"></option>
 												</select>
 											</div>
-											 -->
-	                                        <button type="button" id="userRegister" class="btn btn-primary btn-block">创建账户</button>
+	                                        <button type="submit" class="btn btn-primary btn-block">创建账户</button>
 	                                    </form>
 	                                    <div class="clearfix"></div>
 	                                    <p class="content-divider center mt-4"><span>OR</span></p>
@@ -61,9 +59,6 @@
 	            </div>
 	        </section>
         </div>
-        <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
-		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/bootstrap/dist/js/bootstrap.min.js}"></script>
-        <script type="text/javascript" th:src="@{/js/userRegister.js}"></script>
+        <div th:replace="fragments/public_footer :: public-footer" ></div>
     </body>
 </html>
