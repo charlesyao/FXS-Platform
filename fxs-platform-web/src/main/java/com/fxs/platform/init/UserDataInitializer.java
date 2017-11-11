@@ -36,8 +36,8 @@ public class UserDataInitializer extends AbstractDataInitializer {
 
 	@Override
 	protected void doInit() {
-		List<String> roles = Arrays.asList("USER", "ADMIN", "LAWER");
-		List<String> users = Arrays.asList("user", "admin", "lawer");
+		List<String> roles = Arrays.asList("USER", "ADMIN", "LAWYER");
+		List<String> users = Arrays.asList("user", "admin", "lawyer");
 		
 		for (int i = 0; i < 3; i ++) {
 			Role role = initRole(roles.get(i));

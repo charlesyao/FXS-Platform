@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
 					r.setId(role.getId());
 					r.setType("当事人");
 					break;
-				case "LAWER":
+				case "LAWYER":
 					r.setId(role.getId());
 					r.setType("律师");
 					break;

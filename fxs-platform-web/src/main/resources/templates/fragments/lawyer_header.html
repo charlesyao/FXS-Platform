@@ -2,7 +2,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<div th:fragment="lawer-header-css">
+<div th:fragment="lawyer-header-css">
 	<title>上海小帅信息科技有限公司</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,7 +13,7 @@
 </div>
 </head>
 <body>
-	<div th:fragment="lawer-header">
+	<div th:fragment="lawyer-header">
 		<div class="topBar col-md-12">
 			<div class="container">
 				<div class="row">
@@ -26,7 +26,7 @@
 								<a th:href="@{/user/dashboard}">诉讼业务</a>
 							</li>
 							<li>
-								<a th:href="@{/lawer/case_pool}">咨询池</a>
+								<a th:href="@{/lawyer/case_pool}">咨询池</a>
 							</li>
 							<li>
 								<a th:href="@{/signOut}" sec:authorize="isAuthenticated()">登出</a>

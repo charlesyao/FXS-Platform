@@ -44,9 +44,9 @@ public class RouterController {
 		return "userRegister";
 	}
 	
-	@GetMapping("/lawer/signIn")
-	public String lawerSignIn() {
-		return "lawerSignIn";
+	@GetMapping("/lawyer/signIn")
+	public String lawyerSignIn() {
+		return "lawyerSignIn";
 	}
 	
 	@GetMapping("/lawsuit/litigant")
@@ -59,9 +59,9 @@ public class RouterController {
 		String target = "";
 		
 		if (caseType.equals("public")) {
-			if (subType.equals("lawer")) {
+			if (subType.equals("lawyer")) {
 				
-				target = "public_lawsuit_lawer";
+				target = "public_lawsuit_lawyer";
 			} else if (subType.equals("self_service")) {
 				
 				target = "public_lawsuit_self_service";
@@ -97,9 +97,9 @@ public class RouterController {
 		return target;
 	}
 	
-	@GetMapping("/lawer/case_pool")
+	@GetMapping("/lawyer/case_pool")
 	public String casePool() {
-		return "lawer_case_pool";
+		return "lawyer_case_pool";
 	}
 	
 	@GetMapping("/falltypus/create/parent")

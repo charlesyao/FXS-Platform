@@ -22,7 +22,7 @@ public class FalltypusServiceImpl implements FalltypusService {
 	 * @see com.fxs.platform.service.FalltypusService#findFirstLevelFalltypus()
 	 */
 	@Override
-	// @Cacheable(value="__parentFalltypus__")
+	@Cacheable(value="_firstLevelFalltypus_")
 	public List<FalltypusDto> findFirstLevelFalltypus() {
 		// TODO Auto-generated method stub
 		return QueryResultConverter.convert(falltypusRepository.findFirstLevelFalltypus(), FalltypusDto.class);

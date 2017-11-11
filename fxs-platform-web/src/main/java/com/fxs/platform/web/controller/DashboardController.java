@@ -30,8 +30,8 @@ public class DashboardController {
 			roles.add(a.getAuthority());
 		}
 
-		if (isLawer(roles)) {
-			target = "/lawer_dashboard";
+		if (isLawyer(roles)) {
+			target = "/lawyer_dashboard";
 		} else if (isAdmin(roles)) {
 			target = "/admin_dashboard";
 		} else if (isUser(roles)) {
@@ -57,8 +57,8 @@ public class DashboardController {
 		return false;
 	}
 
-	private boolean isLawer(List<String> roles) {
-		if (roles.contains("ROLE_LAWER")) {
+	private boolean isLawyer(List<String> roles) {
+		if (roles.contains("ROLE_LAWYER")) {
 			return true;
 		}
 		return false;

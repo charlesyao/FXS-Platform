@@ -4,7 +4,7 @@ public enum LawsuitType {
 	/**
 	 * 找律师打官司
 	 */
-	LAWER("0"), 
+	LAWYER("0"), 
 	
 	/**
 	 * 自助打官司

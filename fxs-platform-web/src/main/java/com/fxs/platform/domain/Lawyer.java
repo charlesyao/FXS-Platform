@@ -3,7 +3,7 @@ package com.fxs.platform.domain;
 /**
  * 律师领域类
  */
-public class Lawer extends User {
+public class Lawyer extends User {
     private String gender;
 
     private String location = "";

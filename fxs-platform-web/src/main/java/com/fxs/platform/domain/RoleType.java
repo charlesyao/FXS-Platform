@@ -1,7 +1,7 @@
 package com.fxs.platform.domain;
 
 public enum RoleType {
-	USER("USER"), LAWER("LAWER"), ADMIN("ADMIN");
+	USER("USER"), LAWYER("LAWYER"), ADMIN("ADMIN");
 
 	String userProfileType;
 

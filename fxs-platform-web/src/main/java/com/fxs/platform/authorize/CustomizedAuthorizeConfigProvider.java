@@ -22,7 +22,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/autosave/**", 
 					"/consultation/public/*", 
 					"/lawsuit/public/*", 
-					"/lawer/signIn",
+					"/lawyer/signIn",
 					"/user/signUp",
 					"/user/register",
 					"/user")
