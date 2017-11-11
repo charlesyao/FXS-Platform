@@ -85,11 +85,12 @@ public class RouterController {
 			}
 		} else if (caseType.equals("public")) {
 			if (subType.equals("free")) {
-				
+				map.addAttribute("firstLevelFalltypus" ,falltypusService.findFirstLevelFalltypus());
 				target = "public_consulting_free";
 			} else if (subType.equals("phone")) {
-				
 				target = "public_consulting_phone";
+			} else if (subType.equals("next")) {
+				return "public_consulting_free_step3";
 			}
 		}
 		

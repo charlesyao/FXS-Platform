@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.FalltypusService;
+import com.fxs.platform.service.RepresentativeService;
 
 @Controller
 @RequestMapping("/falltypus")
@@ -29,6 +31,9 @@ public class FalltypusController {
 
 	@Autowired
 	FalltypusService falltypusService;
+	
+	@Autowired
+	RepresentativeService representativeService;
 	
 	@PostMapping
 	@ResponseBody
@@ -53,9 +58,18 @@ public class FalltypusController {
 	 * @return
 	 */
 	@GetMapping("/{id}")
-	@ResponseBody
-	public ResponseMessage<List<FalltypusDto>> getSubFalltypus(@PathVariable String id) {
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.falltypus"),
-				falltypusService.findSubFalltypusByParentId(id));
+	public String getSubFalltypus(@PathVariable String id, ModelMap map) {
+		
+		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
+		
+		if (subFalltypusList.size() == 0) {
+			map.addAttribute("representativeList", representativeService.findAll());
+			
+			return "public_consulting_free_step2";
+		} else {
+			map.addAttribute("subFalltypusList", subFalltypusList);
+			
+			return "public_consulting_free_step1";
+		}
 	}
 }

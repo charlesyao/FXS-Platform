@@ -10,19 +10,18 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Falltypus {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private String id;
 
 	@NotBlank(message="案件类型不能为空")
 	private String name;
-
+	
 	private String parentTypeId = "";
-
-	public int getId() {
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

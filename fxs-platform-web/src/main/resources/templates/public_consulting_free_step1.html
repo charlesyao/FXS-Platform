@@ -7,13 +7,16 @@
 	<div th:replace="fragments/litigant_header :: litigant-header"></div>
 	<div class="mainPart">
 		<div class="container">
-			<h1>免费法律咨询</h1>
-			<p>请先选择咨询类型，以便为您精准解答</p>
+			<ol class="breadcrumb">
+				<li><a href="#">免费法律咨询</a></li>
+				<li class="active">选择类型</li>
+			</ol>
+			<h1 class="blue">请选择下一级咨询类型</h1>
 			<section class="col-md-12 col-sm-12 introcouPhone space20">
 				<div class="row">
-					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${firstLevelFalltypus}">
+					<ul class="col-md-4 col-sm-12" th:each="subFalltypus : ${subFalltypusList}">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/falltypus/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
+							<a th:href="@{/falltypus/{id}(id=${subFalltypus.id})}" th:id="${subFalltypus.id}" th:text="${subFalltypus.name}"></a>
 						</li>
 					</ul>
 				</div>
