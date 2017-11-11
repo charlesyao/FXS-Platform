@@ -16,7 +16,7 @@
 				<div class="row">
 					<ul class="col-md-4 col-sm-12" th:each="subFalltypus : ${subFalltypusList}">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/falltypus/{id}(id=${subFalltypus.id})}" th:id="${subFalltypus.id}" th:text="${subFalltypus.name}"></a>
+							<a th:href="@{/falltypus/consultation/{id}(id=${subFalltypus.id})}" th:id="${subFalltypus.id}" th:text="${subFalltypus.name}"></a>
 						</li>
 					</ul>
 				</div>

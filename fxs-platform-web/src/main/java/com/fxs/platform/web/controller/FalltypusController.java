@@ -57,19 +57,39 @@ public class FalltypusController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/{id}")
-	public String getSubFalltypus(@PathVariable String id, ModelMap map) {
-		
+	@GetMapping("/consultation/{id}")
+	public String getSubFalltypusForConsultation(@PathVariable String id, ModelMap map) {
+		String target = "";
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
 		
 		if (subFalltypusList.size() == 0) {
 			map.addAttribute("representativeList", representativeService.findAll());
 			
-			return "public_consulting_free_step2";
+			target = "public_consulting_free_step2";
 		} else {
 			map.addAttribute("subFalltypusList", subFalltypusList);
 			
-			return "public_consulting_free_step1";
+			target = "public_consulting_free_step1";
 		}
+		
+		return target;
+	}
+	
+	@GetMapping("/lawsuit/{id}")
+	public String getSubFalltypusForLawsuit(@PathVariable String id, ModelMap map) {
+		String target = "";
+		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
+		
+		if (subFalltypusList.size() == 0) {
+			map.addAttribute("representativeList", representativeService.findAll());
+			
+			target = "public_lawsuit_lawyer_step3";
+		} else {
+			map.addAttribute("subFalltypusList", subFalltypusList);
+			
+			target = "public_lawsuit_lawyer_step2";
+		}
+		
+		return target;
 	}
 }

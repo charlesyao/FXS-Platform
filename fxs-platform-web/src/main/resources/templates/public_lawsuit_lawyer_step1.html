@@ -13,42 +13,10 @@
 			</p>
 			<section class="col-md-12 col-sm-12 introcouPhone space20">
 				<div class="row">
-					<ul class="col-md-4 col-sm-6">
+					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${firstLevelFalltypus}">
 						<li class="introcoupCell btnSquare">
-						<a href="lawsuit_step2.html">劳动纠纷</a>
-					</li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">婚姻家庭、继承、同居</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">借贷纠纷、投资理财</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">交通事故、医疗纠纷</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">房屋买卖、房屋租赁、动拆迁</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">商品、货物买卖纠纷</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">知识产权、加盟纠纷</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">刑事案件</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-6">
-						<li class="introcoupCell btnSquare"><a
-							href="lawsuit_step2.html">其他纠纷</a></li>
+							<a th:href="@{/falltypus/lawsuit/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
+						</li>
 					</ul>
 				</div>
 			</section>

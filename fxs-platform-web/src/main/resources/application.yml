@@ -47,7 +47,7 @@ fxs:
       sing-in-successUrl: /user/dashboard
       remember-me-seconds: 29400
       sign-out-url: /user/signIn
-      ignoring-url: /,/city/**,/case/**,/falltypus/**,/questionnaire/**
+      ignoring-url: /,/city/**,/case/**,/questionnaire/**
     session:
       #maximum-sessions: 1
       #max-sessions-prevents-login: true

@@ -54,14 +54,21 @@ public class RouterController {
 		return "litigant_lawsuit";
 	}
 	
-	@GetMapping("/{caseType}/lawsuit/{subType}")
-	public String publicLawsuit(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
+	@GetMapping("/{userRole}/lawsuit/{subType}")
+	public String publicLawsuit(@PathVariable String userRole, @PathVariable String subType, ModelMap map) {
 		String target = "";
 		
-		if (caseType.equals("public")) {
+		if (userRole.equals("public")) {
 			if (subType.equals("lawyer")) {
 				
 				target = "public_lawsuit_lawyer";
+			} else if (subType.equals("start")) {
+				
+				map.addAttribute("firstLevelFalltypus" ,falltypusService.findFirstLevelFalltypus());
+				target = "public_lawsuit_lawyer_step1";
+			} else if (subType.equals("next")) {
+				
+				target = "public_lawsuit_lawyer_step4";
 			} else if (subType.equals("self_service")) {
 				
 				target = "public_lawsuit_self_service";
@@ -71,11 +78,11 @@ public class RouterController {
 		return target;
 	}
 	
-	@GetMapping("/{caseType}/consultation/{subType}")
-	public String free(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
+	@GetMapping("/{userRole}/consultation/{subType}")//consultation
+	public String free(@PathVariable String userRole, @PathVariable String subType, ModelMap map) {
 		String target = "";
 		
-		if (caseType.equals("litigant")) {
+		if (userRole.equals("litigant")) {
 			if (subType.equals("free")) {
 				
 				target = "litigant_consulting_free";
@@ -83,14 +90,17 @@ public class RouterController {
 				
 				target = "litigant_consulting_phone";
 			}
-		} else if (caseType.equals("public")) {
+		} else if (userRole.equals("public")) {
 			if (subType.equals("free")) {
+				
 				map.addAttribute("firstLevelFalltypus" ,falltypusService.findFirstLevelFalltypus());
 				target = "public_consulting_free";
 			} else if (subType.equals("phone")) {
+				
 				target = "public_consulting_phone";
 			} else if (subType.equals("next")) {
-				return "public_consulting_free_step3";
+				
+				target = "public_consulting_free_step3";
 			}
 		}
 		
