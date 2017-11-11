@@ -7,17 +7,48 @@
 	<div th:replace="fragments/litigant_header :: litigant-header"></div>
 	<div class="mainPart">
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a href="#">免费法律咨询</a></li>
-				<li class="active">选择类型</li>
-			</ol>
-			<h1 class="blue">请选择下一级咨询类型</h1>
+			<h1>提交您的案情 - 选择类型</h1>
+			<p>
+				不知道如何填写？拨打客服热线 <span class="orange">400-850-8650</span> 获得帮助
+			</p>
 			<section class="col-md-12 col-sm-12 introcouPhone space20">
 				<div class="row">
-					<ul class="col-md-4 col-sm-12" th:each="subFalltypus : ${subFalltypusList}">
+					<ul class="col-md-4 col-sm-6">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/falltypus/{id}(id=${subFalltypus.id})}" th:id="${subFalltypus.id}" th:text="${subFalltypus.name}"></a>
-						</li>
+						<a href="lawsuit_step2.html">劳动纠纷</a>
+					</li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">婚姻家庭、继承、同居</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">借贷纠纷、投资理财</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">交通事故、医疗纠纷</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">房屋买卖、房屋租赁、动拆迁</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">商品、货物买卖纠纷</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">知识产权、加盟纠纷</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">刑事案件</a></li>
+					</ul>
+					<ul class="col-md-4 col-sm-6">
+						<li class="introcoupCell btnSquare"><a
+							href="lawsuit_step2.html">其他纠纷</a></li>
 					</ul>
 				</div>
 			</section>

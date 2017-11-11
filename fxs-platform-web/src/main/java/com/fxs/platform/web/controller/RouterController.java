@@ -49,12 +49,12 @@ public class RouterController {
 		return "lawyerSignIn";
 	}
 	
-	@GetMapping("/lawsuit/litigant")
+	@GetMapping("/litigant/lawsuit")
 	public String litigantLawsuit(ModelMap map) {
 		return "litigant_lawsuit";
 	}
 	
-	@GetMapping("/lawsuit/{caseType}/{subType}")
+	@GetMapping("/{caseType}/lawsuit/{subType}")
 	public String publicLawsuit(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
 		String target = "";
 		
@@ -71,7 +71,7 @@ public class RouterController {
 		return target;
 	}
 	
-	@GetMapping("/consultation/{caseType}/{subType}")
+	@GetMapping("/{caseType}/consultation/{subType}")
 	public String free(@PathVariable String caseType, @PathVariable String subType, ModelMap map) {
 		String target = "";
 		
