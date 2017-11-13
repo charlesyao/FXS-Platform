@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface FxsRepository<T> extends JpaRepository<T, Long>, JpaSpecificationExecutor<T> {
+public interface FxsRepository<T> extends JpaRepository<T, Integer>, JpaSpecificationExecutor<T> {
 
 }

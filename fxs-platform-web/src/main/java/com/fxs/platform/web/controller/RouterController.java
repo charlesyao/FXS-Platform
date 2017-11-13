@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.fxs.platform.domain.Role;
+import com.fxs.platform.domain.User;
+import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
 
@@ -23,9 +25,9 @@ public class RouterController {
 
 	@Autowired
 	RoleService roleService;
-	
+
 	@ModelAttribute("roles")
-	public List<Role> initializeProfiles() {
+	public List<UserProfile> initializeProfiles() {
 		return roleService.findAll();
 	}
 	
@@ -40,7 +42,7 @@ public class RouterController {
 	}
 	
 	@GetMapping("/user/register")
-	public String userRegister() {
+	public String userRegister(@ModelAttribute(value="user") User user, BindingResult bindingResult) {
 		return "userRegister";
 	}
 	
@@ -54,7 +56,7 @@ public class RouterController {
 		return "litigant_lawsuit";
 	}
 	
-	@GetMapping("/{userRole}/lawsuit/{subType}")
+	@GetMapping("/{userRole}/lawsuit/{subType}")//打官司案件
 	public String publicLawsuit(@PathVariable String userRole, @PathVariable String subType, ModelMap map) {
 		String target = "";
 		
@@ -78,7 +80,7 @@ public class RouterController {
 		return target;
 	}
 	
-	@GetMapping("/{userRole}/consultation/{subType}")//consultation
+	@GetMapping("/{userRole}/consultation/{subType}")//法律咨询
 	public String free(@PathVariable String userRole, @PathVariable String subType, ModelMap map) {
 		String target = "";
 		

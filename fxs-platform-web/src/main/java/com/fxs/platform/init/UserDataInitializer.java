@@ -1,18 +1,18 @@
 package com.fxs.platform.init;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.fxs.platform.domain.Role;
 import com.fxs.platform.domain.User;
-import com.fxs.platform.domain.UserRole;
+import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.RoleRepository;
 import com.fxs.platform.repository.UserRepository;
-import com.fxs.platform.repository.UserRoleRepository;
 
 @Component
 public class UserDataInitializer extends AbstractDataInitializer {
@@ -26,8 +26,6 @@ public class UserDataInitializer extends AbstractDataInitializer {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	@Autowired
-	private UserRoleRepository userRoleRepository;
 
 	@Override
 	public Integer getIndex() {
@@ -40,29 +38,29 @@ public class UserDataInitializer extends AbstractDataInitializer {
 		List<String> users = Arrays.asList("user", "admin", "lawyer");
 		
 		for (int i = 0; i < 3; i ++) {
-			Role role = initRole(roles.get(i));
-			initUser(role, users.get(i));
+			UserProfile userProfile = initUserProfile(roles.get(i));
+			initUser(userProfile, users.get(i));
 		}
 	}
 
 	
-	private Role initRole(String type) {
-		Role role = new Role();
-		role.setType(type);
+	private UserProfile initUserProfile(String type) {
+		UserProfile userProfile = new UserProfile();
+		userProfile.setType(type);
 
-		return roleRepository.save(role);
+		return roleRepository.save(userProfile);
 	}
 
-	private void initUser(Role role, String type) {
+	private void initUser(UserProfile userProfiles, String type) {
 		User user = new User();
 		user.setUsername(type);
 		user.setPassword(passwordEncoder.encode("123456"));
-		userRepository.save(user);
 		
-		UserRole userRole = new UserRole();
-		userRole.setRole(role);
-		userRole.setUser(user);
-		userRoleRepository.save(userRole);
+		Set<UserProfile> set = new HashSet<UserProfile>();
+		set.add(userProfiles);
+		
+		user.setUserProfiles(set);
+		userRepository.save(user);
 	}
 	
 	@Override

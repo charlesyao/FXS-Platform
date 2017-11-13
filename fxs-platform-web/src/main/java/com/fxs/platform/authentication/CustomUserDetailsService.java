@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fxs.platform.domain.User;
-import com.fxs.platform.domain.UserRole;
+import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.UserRepository;
 
 @Component
@@ -40,9 +40,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-		for (UserRole userProfile : user.getRoles()) {
+		for (UserProfile userProfile : user.getUserProfiles()) {
 			logger.info("UserProfile : " + userProfile);
-			authorities.add(new SimpleGrantedAuthority("ROLE_" + userProfile.getRole().getType()));
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + userProfile.getType()));
 		}
 		logger.info("authorities :" + authorities);
 		return authorities;

@@ -1,35 +1,33 @@
 package com.fxs.platform.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Role {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
-	private String type = RoleType.USER.getUserProfileType();
+@Table(name="USER_PROFILE")
+public class UserProfile implements Serializable{
 
 	/**
-	 * 角色的用户集合
+	 * 
 	 */
-	@OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE)
-	private Set<UserRole> users = new HashSet<>();
+	private static final long serialVersionUID = 1L;
 
-	public int getId() {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;	
+
+	private String type = UserProfileType.USER.getUserProfileType();
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -41,19 +39,11 @@ public class Role {
 		this.type = type;
 	}
 
-	public Set<UserRole> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<UserRole> users) {
-		this.users = users;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -64,10 +54,13 @@ public class Role {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Role))
+		if (!(obj instanceof UserProfile))
 			return false;
-		Role other = (Role) obj;
-		if (id != other.id)
+		UserProfile other = (UserProfile) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -79,7 +72,6 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "UserProfile [id=" + id + ",  type=" + type + "]";
+		return "UserProfile [id=" + id + ", type=" + type + "]";
 	}
-
 }

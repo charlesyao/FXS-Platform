@@ -45,7 +45,7 @@ public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyE
 	@Async
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 		try {
-			//loadFalltypusData();
+			loadFalltypusData();
 			loadCityData();
 			loadRoleData();
 			loadRepresentativeData();

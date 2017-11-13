@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.fxs.platform.domain.Role;
+import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.RoleRepository;
 import com.fxs.platform.service.RoleService;
 
@@ -19,12 +19,12 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	@Cacheable(value = "roles")
-	public List<Role> findAll() {
-		List<Role> rList = roleRepository.findAll();
-		List<Role> nrList = new ArrayList<Role>();
+	public List<UserProfile> findAll() {
+		List<UserProfile> rList = roleRepository.findAll();
+		List<UserProfile> nrList = new ArrayList<UserProfile>();
 
-		for (Role role : rList) {
-			Role r = new Role();
+		for (UserProfile role : rList) {
+			UserProfile r = new UserProfile();
 			switch (role.getType()) {
 				case "USER":
 					r.setId(role.getId());
@@ -46,6 +46,12 @@ public class RoleServiceImpl implements RoleService {
 		}
 
 		return nrList;
+	}
+
+	@Override
+	public UserProfile findById(int id) {
+		// TODO Auto-generated method stub
+		return roleRepository.findById(id);
 	}
 
 }
