@@ -57,7 +57,7 @@ public class FalltypusController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/consultation/{id}")
+	@GetMapping("/public/consultation/{id}")
 	public String getSubFalltypusForConsultation(@PathVariable String id, ModelMap map) {
 		String target = "";
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
@@ -75,7 +75,7 @@ public class FalltypusController {
 		return target;
 	}
 	
-	@GetMapping("/lawsuit/{id}")
+	@GetMapping("/public/lawsuit/{id}")
 	public String getSubFalltypusForLawsuit(@PathVariable String id, ModelMap map) {
 		String target = "";
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);

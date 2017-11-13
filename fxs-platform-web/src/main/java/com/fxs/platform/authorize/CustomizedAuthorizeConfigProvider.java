@@ -19,9 +19,10 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 
 		config
 			.antMatchers(
+					"/",
 					"/autosave/**", 
 					"/public/**",
-					"/falltypus/**",
+					"/falltypus/public/**",
 					"/lawyer/signIn",
 					"/user/signUp",
 					"/user/register",

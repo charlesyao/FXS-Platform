@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:replace="fragments/litigant_header :: litigant-header-css"></div>
+<div th:replace="fragments/public_header_style_2 :: public-header-2-css"></div>
 </head>
 <body>
-	<div th:replace="fragments/litigant_header :: litigant-header"></div>
+	<div th:replace="fragments/public_header_style_2 :: public-header-2"></div>
 	<div class="mainPart">
 		<div class="container">
 			<h1>提交您的案情 - 选择类型</h1>
@@ -15,7 +15,7 @@
 				<div class="row">
 					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${firstLevelFalltypus}">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/falltypus/lawsuit/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
+							<a th:href="@{/falltypus/public/lawsuit/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
 						</li>
 					</ul>
 				</div>

@@ -66,6 +66,8 @@ public class AbstractSessionStrategy {
 			logger.info(
 					localeMessageSourceService.getMessage("fxs.platform.browser.session.request-redirect-to", new Object[] {targetUrl}));
 			redirectStrategy.sendRedirect(request, response, targetUrl);
+		} else if (sourceUrl.equals("/")) {//application home page
+			redirectStrategy.sendRedirect(request, response, "/");
 		} else {
 			Object result = buildResponseContent(request);
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());

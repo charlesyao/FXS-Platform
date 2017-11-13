@@ -16,19 +16,23 @@
 	<div th:fragment="public-header">
 		<div class="container">
 			<ul class="nav loginBox">
-				<li>
+				<li sec:authorize="isAnonymous()">
 					<a th:href="@{/user/signIn}">登录</a>
 					<span>|</span>
 				</li>
-				<li>
+				<li sec:authorize="isAnonymous()">
 					<a th:href="@{/user/register}">注册</a>
+					<span>|</span>
+				</li>
+				<li sec:authorize="isAuthenticated()">
+					<a th:href="@{/user/dashboard}">个人中心</a>
 					<span>|</span>
 				</li>
 				<li>
 					<a href="#">关于我们</a>
 					<span>|</span>
 				</li>
-				<li>
+				<li sec:authorize="isAnonymous()">
 					<a th:href="@{/lawyer/signIn}">律师入口</a>
 				</li>
 			</ul>
