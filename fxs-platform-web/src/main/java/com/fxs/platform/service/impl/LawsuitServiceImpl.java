@@ -1,5 +1,7 @@
 package com.fxs.platform.service.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.LawsuitService;
 
 @Service
+@Transactional
 public class LawsuitServiceImpl implements LawsuitService {
 
 	@Autowired

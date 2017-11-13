@@ -23,6 +23,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/autosave/**", 
 					"/public/**",
 					"/falltypus/public/**",
+					"/consultation/**",
 					"/lawyer/signIn",
 					"/user/signUp",
 					"/user/register",

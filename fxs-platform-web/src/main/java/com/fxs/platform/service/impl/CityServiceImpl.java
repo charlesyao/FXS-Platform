@@ -3,6 +3,8 @@ package com.fxs.platform.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
@@ -20,6 +22,7 @@ import com.fxs.platform.service.CityService;
 import com.fxs.platform.support.EnabledCitySettings;
 
 @Service
+@Transactional
 public class CityServiceImpl implements CityService {
 
 	@Autowired

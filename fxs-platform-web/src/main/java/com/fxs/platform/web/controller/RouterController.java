@@ -3,6 +3,7 @@ package com.fxs.platform.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.service.FalltypusService;
@@ -53,6 +55,7 @@ public class RouterController {
 	
 	@GetMapping("/litigant/lawsuit")
 	public String litigantLawsuit(ModelMap map) {
+		
 		return "litigant_lawsuit";
 	}
 	
@@ -71,6 +74,14 @@ public class RouterController {
 			} else if (subType.equals("next")) {
 				
 				target = "public_lawsuit_lawyer_step4";
+			} else if (subType.equals("submit")) {
+				if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+					
+					target = "redirect:/user/signIn";
+				} else {
+					
+					target = "redirect:/user/dashboard";
+				}
 			} else if (subType.equals("self_service")) {
 				
 				target = "public_lawsuit_self_service";
@@ -103,6 +114,12 @@ public class RouterController {
 			} else if (subType.equals("next")) {
 				
 				target = "public_consulting_free_step3";
+			} else if (subType.equals("submit")) {
+				if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+					target = "redirect:/user/signIn";
+				} else {
+					target = "redirect:/user/dashboard";
+				}
 			}
 		}
 		

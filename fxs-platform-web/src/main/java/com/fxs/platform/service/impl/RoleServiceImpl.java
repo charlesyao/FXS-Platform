@@ -3,6 +3,8 @@ package com.fxs.platform.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import com.fxs.platform.repository.RoleRepository;
 import com.fxs.platform.service.RoleService;
 
 @Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
 
 	@Autowired
