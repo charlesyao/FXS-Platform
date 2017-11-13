@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 
-import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.service.FalltypusService;
@@ -60,7 +60,7 @@ public class RouterController {
 	}
 	
 	@GetMapping("/{userRole}/lawsuit/{subType}")//打官司案件
-	public String publicLawsuit(@PathVariable String userRole, @PathVariable String subType, ModelMap map) {
+	public String publicLawsuit(@PathVariable String userRole, @PathVariable String subType, ModelMap map, ServletWebRequest request) {
 		String target = "";
 		
 		if (userRole.equals("public")) {
@@ -76,10 +76,9 @@ public class RouterController {
 				target = "public_lawsuit_lawyer_step4";
 			} else if (subType.equals("submit")) {
 				if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-					
 					target = "redirect:/user/signIn";
 				} else {
-					
+					User user = (User)request.getRequest().getSession().getAttribute("userInfo");
 					target = "redirect:/user/dashboard";
 				}
 			} else if (subType.equals("self_service")) {

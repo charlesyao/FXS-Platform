@@ -3,6 +3,8 @@ package com.fxs.platform.authentication;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +26,21 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+    HttpSession session;
 
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
+		
 		logger.info("User : " + user);
 		if (user == null) {
 			logger.info("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
+		
+		session.setAttribute("userInfo", user);
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				user.getState().equals("Active"), true, true, true, getGrantedAuthorities(user));
 	}
