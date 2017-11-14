@@ -24,10 +24,6 @@ public class Question {
 
     private boolean isFirstQuestion;
 
-    private Set<Answer> answers;
-
-    private Answer selectedAnswer;
-
     public String getId() {
         return id;
     }
@@ -50,22 +46,6 @@ public class Question {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
-    }
-
-    public Answer getSelectedAnswer() {
-        return selectedAnswer;
-    }
-
-    public void setSelectedAnswer(Answer selectedAnswer) {
-        this.selectedAnswer = selectedAnswer;
     }
 
     public boolean isFirstQuestion() {

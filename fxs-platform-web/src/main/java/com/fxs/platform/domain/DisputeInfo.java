@@ -24,12 +24,12 @@ public class DisputeInfo {
     /**
      * 纷争提问的回答
      */
-    private Answer answer;
+    private Set<Answer> answers;
 
     /**
-     * 下一个纷争的问题和回答
+     * 当事人针对问题选择的回答
      */
-    private Set<DisputeInfo> nextDisputes;
+    private Answer selectedAnswer;
 
     public String getId() {
         return id;
@@ -47,19 +47,19 @@ public class DisputeInfo {
         this.question = question;
     }
 
-    public Answer getAnswer() {
-        return answer;
+    public Set<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
     }
 
-    public Set<DisputeInfo> getNextDisputes() {
-        return nextDisputes;
+    public Answer getSelectedAnswer() {
+        return selectedAnswer;
     }
 
-    public void setNextDisputes(Set<DisputeInfo> nextDisputes) {
-        this.nextDisputes = nextDisputes;
+    public void setSelectedAnswer(Answer selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
     }
 }

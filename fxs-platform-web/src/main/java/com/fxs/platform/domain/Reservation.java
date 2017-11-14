@@ -32,7 +32,7 @@ public class Reservation {
     /**
      * 预约律师
      */
-    private Lawer reservedLaywer;
+    private Lawyer reservedLaywer;
 
     public int getId() {
         return id;
