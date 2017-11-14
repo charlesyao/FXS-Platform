@@ -1,8 +1,11 @@
 package com.fxs.platform.domain;
 
+import javax.persistence.Entity;
+
 /**
  * 当事人领域类
  */
+@Entity
 public class Party extends User {
     /**
      * 当事人微信，等后期集成微信平台，类型会参照微信平台的API规范

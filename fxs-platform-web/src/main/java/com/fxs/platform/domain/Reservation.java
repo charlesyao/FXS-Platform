@@ -1,9 +1,6 @@
 package com.fxs.platform.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -31,6 +28,11 @@ public class Reservation {
      * 电话预约的用户
      */
     private User reservationUser;
+
+    /**
+     * 预约律师
+     */
+    private Lawer reservedLaywer;
 
     public int getId() {
         return id;

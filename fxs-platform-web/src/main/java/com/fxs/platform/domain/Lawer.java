@@ -1,8 +1,11 @@
 package com.fxs.platform.domain;
 
+import javax.persistence.Entity;
+
 /**
  * 律师领域类
  */
+@Entity
 public class Lawer extends User {
     private String gender;
 
