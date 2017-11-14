@@ -2,6 +2,8 @@ package com.fxs.platform.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import com.fxs.platform.repository.QuestionnaireRepository;
 import com.fxs.platform.service.QuestionnaireService;
 
 @Service
+@Transactional
 public class QuestionnaireServiceImpl implements QuestionnaireService {
 
 	@Autowired

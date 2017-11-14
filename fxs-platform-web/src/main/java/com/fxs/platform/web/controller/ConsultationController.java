@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.ConsultationDto;
@@ -26,7 +27,7 @@ import com.fxs.platform.service.ConsultationService;
  * 法律咨询接口
  * 
  */
-@RestController
+@Controller
 @RequestMapping("/consultation")
 public class ConsultationController {
 
@@ -44,6 +45,7 @@ public class ConsultationController {
 	 * @return
 	 */
 	@PostMapping
+	@ResponseBody
 	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation consultation) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save.success"),
 				consultationService.create(consultation));
@@ -59,6 +61,7 @@ public class ConsultationController {
 	 * @return
 	 */
 	@GetMapping
+	@ResponseBody
 	public ResponseMessage<Page<ConsultationDto>> query(ConsultationCondition condition, Pageable pageable) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success"),
 				consultationService.query(condition, pageable));
@@ -82,8 +85,8 @@ public class ConsultationController {
 	 * @return
 	 */
 	@PutMapping("/{consultationId}")
-	public ResponseMessage<Reservation> update(@PathVariable String consultationId,
-                                               @Valid @RequestBody Reservation consultation) {
+	@ResponseBody
+	public ResponseMessage<Reservation> update(@PathVariable String consultationId, @Valid @RequestBody Reservation consultation) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.get.success",
 				new Object[] { consultationId }), consultationService.update(consultationId, consultation));
 	}

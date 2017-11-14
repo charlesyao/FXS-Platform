@@ -4,18 +4,24 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 系统用户: 当事人，律师，系统管理员
  * 
  */
 @Entity
+@Table(name="APP_USER")
 public class User {
 
 	@Id
@@ -34,8 +40,12 @@ public class User {
 
 	private String state = State.ACTIVE.getState();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	private Set<UserRole> roles = new HashSet<>();
+	@NotEmpty
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "APP_USER_USER_PROFILE", 
+             joinColumns = { @JoinColumn(name = "USER_ID") }, 
+             inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
+	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 	public int getId() {
 		return id;
@@ -85,12 +95,12 @@ public class User {
 		this.state = state;
 	}
 
-	public Set<UserRole> getRoles() {
-		return roles;
+	public Set<UserProfile> getUserProfiles() {
+		return userProfiles;
 	}
 
-	public void setRoles(Set<UserRole> roles) {
-		this.roles = roles;
+	public void setUserProfiles(Set<UserProfile> userProfiles) {
+		this.userProfiles = userProfiles;
 	}
 
 	public Date getCreatedTime() {

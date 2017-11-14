@@ -1,91 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>dashboard</title>
+<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
 </head>
 <body>
-	<div th:replace="fragments/header :: header-css" ></div>
-	<div th:replace="fragments/header :: header" ></div>
-	<div class="container">
-		<div class="starter-template">
-			admin_dashboard<br/>
-			<h1 th:text="${host}">Hello World</h1>
+	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="mainPart">
+		<div class="container">
+			<a th:href="@{/falltypus/create/parent}" type="button" class="btn btn-primary btn-lg btn-block">创建案件类型</a>
+			<a th:href="@{/falltypus/create/sub}" type="button" class="btn btn-primary btn-lg btn-block">创建案件子类型</a>
+			<a th:href="@{/questionnaire/create}" type="button" class="btn btn-primary btn-lg btn-block">创建问卷</a>
 		</div>
 	</div>
-	<div class="form-group">
-		<button type="button" id="questionnaire_11" class="btn btn-primary" bindData="20">Submit</button>
-		<button type="button" id="questionnaire_12" class="btn btn-primary" bindData="21">Submit</button>
-		<button type="button" id="questionnaire_13" class="btn btn-primary" bindData="22">Submit</button>
-		<button type="button" id="questionnaire_30" class="btn btn-primary" bindData="30">Submit</button>
-	</div>
-	<div th:replace="fragments/footer :: footer" ></div>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#questionnaire_11").on("click", function() {
-			console.log($(this).attr("bindData"))
-			$.ajax({
-				type : 'GET',
-				url : '/autosave/' + $(this).attr("bindData"),
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log(data)
-				},
-				error : function(error) {
-					console.log(error)
-				}
-			});
-		})
-		
-		$("#questionnaire_12").on("click", function() {
-			console.log($(this).attr("bindData"))
-			$.ajax({
-				type : 'GET',
-				url : '/autosave/' + $(this).attr("bindData"),
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log(data)
-				},
-				error : function(error) {
-					console.log(error)
-				}
-			});
-		})
-		
-		$("#questionnaire_13").on("click", function() {
-			console.log($(this).attr("bindData"))
-			$.ajax({
-				type : 'GET',
-				url : '/autosave/' + $(this).attr("bindData"),
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log(data)
-				},
-				error : function(error) {
-					console.log(error)
-				}
-			});
-		})
-		
-		$("#questionnaire_30").on("click", function() {
-			console.log($(this).attr("bindData"))
-			$.ajax({
-				type : 'GET',
-				url : '/autosave/' + $(this).attr("bindData"),
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log(data)
-				},
-				error : function(error) {
-					console.log(error)
-				}
-			});
-		})
-	});
-	</script>
+	<div th:replace="fragments/public_footer :: public-footer" ></div>
 </body>
 </html>

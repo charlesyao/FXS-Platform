@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/public_header :: public-header-css" ></div>
+</head>
+<body>
+	<div class="img-responsive">
+		<div th:replace="fragments/public_header :: public-header" ></div>
+		<div class="container">
+			<div class="col-md-12 lawsuit-content">
+				<h3 class="heading">竞标找律师</h3>
+				<p>律师好不好，比一比就知道</p>
+				<a th:href="@{/public/lawsuit/start}" class="create-an-account">开始找律师打官司</a>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".img-responsive").addClass("img-lawsuit");
+		})
+	</script>
+</body>
+</html>

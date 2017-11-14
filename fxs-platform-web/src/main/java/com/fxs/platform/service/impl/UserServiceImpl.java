@@ -30,8 +30,7 @@ public class UserServiceImpl implements UserService {
 	public User create(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setCreatedTime(LocalDate.now().toDate());
-		userRepository.save(user);
-		return user;
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void delete(String id) {
-		userRepository.delete(Long.parseLong(id));
+		userRepository.delete(Integer.parseInt(id));
 	}
 
 	@Override

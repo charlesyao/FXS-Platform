@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <div th:replace="fragments/user_center_header :: user-center-header-css" ></div>
+    </head>
+    <body>
+       <div class="img-responsive">
+    		<div th:replace="fragments/user_center_header :: user-center-header" ></div>
+	        <section class="hero">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+	                        <div class="card border-none">
+	                            <div class="card-block">
+	                                <div class="mt-2 text-center">
+	                                    <h2>用户注册</h2>
+	                                </div>
+	                                <div class="mt-4">
+	                                    <form th:action="@{/user}" th:method="POST" th:object="${user}">
+	                                        <div class="form-group">
+	                                            <input type="text" class="form-control" th:field="*{username}" th:id="username" placeholder="输入用户名" />
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <input type="text" class="form-control" th:field="*{email}" th:id="email" placeholder="输入邮箱" />
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <input type="text" class="form-control" th:field="*{mobile}" th:id="mobile" placeholder="输入电话号码" />
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <input type="password" class="form-control" th:field="*{password}" th:id="password" value="" placeholder="输入密码" />
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <input type="password" class="form-control" th:name="confirm-password" th:id="confirm-password" value="" placeholder="确认密码" />
+	                                        </div>
+	                                        <div class="form-group">
+												<select class="form-control" th:id="userProfiles" th:field="*{userProfiles}" style="background-color: black;">
+													<option th:selected="true" th:value="-1">请选择角色</option>
+													<option th:each="role : ${roles}" th:id="${role.id}" th:value="${role.id}" th:text="${role.type}"></option>
+												</select>
+											</div>
+	                                        <button type="submit" id="userRegister" class="btn btn-primary btn-block">创建账户</button>
+	                                    </form>
+	                                    <div class="clearfix"></div>
+	                                    <p class="content-divider center mt-4"><span>OR</span></p>
+	                                </div>
+	                                <p class="text-center">
+	                                                                              已经有账号? <a th:href="@{/user/signIn}">点击登录</a>
+	                                </p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="clearfix"></div>
+	                    <div class="col-sm-12 mt-5 footer">
+	                        <p class="text-white small text-center">
+	                            &copy; 2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2
+	                        </p>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+        </div>
+        <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/userRegister.js}"></script>
+    </body>
+</html>

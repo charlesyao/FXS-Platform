@@ -18,12 +18,12 @@ public class Cases {
 	/**
 	 * 一级类型
 	 */
-	private CaseType caseTypeLevelOne;
+	//private CaseType caseTypeLevelOne;
 
 	/**
 	 * 二级类型
 	 */
-	private CaseType caseTypeLevelTwo;
+	//private CaseType caseTypeLevelTwo;
 
 	private Set<DisputeInfo> disputeInfo;
 
@@ -46,7 +46,7 @@ public class Cases {
 		this.status = status;
 	}
 
-	public CaseType getCaseTypeLevelOne() {
+	/*public CaseType getCaseTypeLevelOne() {
 		return caseTypeLevelOne;
 	}
 
@@ -60,7 +60,7 @@ public class Cases {
 
 	public void setCaseTypeLevelTwo(CaseType caseTypeLevelTwo) {
 		this.caseTypeLevelTwo = caseTypeLevelTwo;
-	}
+	}*/
 
 	public String getStatus() {
 		return status;

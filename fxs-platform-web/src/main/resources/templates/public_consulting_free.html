@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/public_header_style_2 :: public-header-2-css"></div>
+</head>
+<body>
+	<div th:replace="fragments/public_header_style_2 :: public-header-2"></div>
+	<div class="mainPart">
+		<div class="container">
+			<h1>免费法律咨询</h1>
+			<p>请先选择咨询类型，以便为您精准解答</p>
+			<section class="col-md-12 col-sm-12 introcouPhone space20">
+				<div class="row">
+					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${firstLevelFalltypus}">
+						<li class="introcoupCell btnSquare">
+							<a th:href="@{/falltypus/public/consultation/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer"></div>
+</body>
+</html>

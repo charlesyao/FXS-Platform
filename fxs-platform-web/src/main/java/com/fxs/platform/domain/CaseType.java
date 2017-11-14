@@ -6,8 +6,6 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Set;
-
 @Entity
 public class CaseType {
 	@Id
@@ -15,7 +13,7 @@ public class CaseType {
 	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
-	private Set<CaseType> childCaseTypes;
+	//private CaseType praentCaseType;
 	
 	private int level;
 	
@@ -30,6 +28,13 @@ public class CaseType {
 	public void setId(String id) {
 		this.id = id;
 	}
+	/*public CaseType getPraentCaseType() {
+		return praentCaseType;
+	}
+
+	public void setPraentCaseType(CaseType praentCaseType) {
+		this.praentCaseType = praentCaseType;
+	}*/
 
 	public int getLevel() {
 		return level;
@@ -54,12 +59,4 @@ public class CaseType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-    public Set<CaseType> getChildCaseTypes() {
-        return childCaseTypes;
-    }
-
-    public void setChildCaseTypes(Set<CaseType> childCaseTypes) {
-        this.childCaseTypes = childCaseTypes;
-    }
 }

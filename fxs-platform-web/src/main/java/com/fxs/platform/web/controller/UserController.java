@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.UserDto;
 import com.fxs.platform.repository.condition.UserCondition;
 import com.fxs.platform.service.CityService;
 import com.fxs.platform.service.UserService;
-import com.fxs.platform.view.View;
 
 @RestController
 @RequestMapping("/user")
@@ -46,10 +45,9 @@ public class UserController {
 		return info;
 	}
 
-	@PostMapping("/collectformdata")
-	@JsonView(View.DetailView.class)
-	public User create(@RequestBody User userInfo) {
-		return userService.create(userInfo);
+	@PostMapping
+	public User create(@Valid User user, BindingResult result, ModelMap model) {
+		return userService.create(user);
 	}
 
 	@DeleteMapping("/{id:\\d+}")

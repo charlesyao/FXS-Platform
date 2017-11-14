@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/lawyer_header :: lawyer-header-css"></div>
+</head>
+<body>
+	<div th:replace="fragments/lawyer_header :: lawyer-header"></div>
+	<div class="mainPart">
+		<div class="container">
+			<h1 class="blue">咨询池</h1>
+			<p class="orange">这里呈现的是您的法律意见已通过评审、但客户尚未委托的案件。</p>
+			<section class="col-md-12 col-sm-12 writeInfo space20">
+				<div class="row">
+					<div class="col-md-4 col-sm-4">
+						<div class="ulCell laywer_right">
+							<ul>
+								<li class="lastItem">咨询池</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-8 col-sm-8 mybox">
+						<ul class="writeInfoText ulCell myCell">
+							<div class="row col-md-6 col-sm-6">
+								<input type="text" class="form-control" placeholder="输入案件编号" />
+							</div>
+							<div class="row">
+								<div class="form-group col-md-2 col-sm-3 sLabel">
+									<label>咨询方式：</label>
+								</div>
+								<div class="form-group col-md-4 col-sm-5">
+									<select class="form-control">
+										<option value="">---全部---</option>
+										<option value="">见面咨询</option>
+										<option value="">电话咨询</option>
+										<option value="">在线咨询</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-md-2 col-sm-2 sLabel">
+									<label>最近：</label>
+								</div>
+								<div class="form-group col-md-4 col-sm-4">
+									<select class="form-control">
+										<option value="">1</option>
+										<option value="">2</option>
+										<option value="">3</option>
+										<option value="">6</option>
+									</select>
+								</div>
+								<div class="form-group col-md-2 col-sm-2 sLabel">
+									<label>月有最新反馈</label>
+								</div>
+							</div>
+							<div class="row">
+								<label><input type="checkbox" /> 只看未读的竞标</label>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-sm-12 btnNext btnSearch">
+									<button type="button" class="btn btn-primary btn-lg">查询</button>
+								</div>
+							</div>
+						</ul>
+						<ul class="writeInfoText ulCell myCell">未找到相关记录</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer"></div>
+</body>
+</html>

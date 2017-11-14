@@ -2,10 +2,10 @@ package com.fxs.platform.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import com.fxs.platform.domain.Role;
+import com.fxs.platform.domain.UserProfile;
 
 public interface RoleService {
-	public List<Role> findAll();
+	public List<UserProfile> findAll();
+	
+	UserProfile findById(int id);
 }

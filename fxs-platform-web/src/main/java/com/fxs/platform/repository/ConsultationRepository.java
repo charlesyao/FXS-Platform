@@ -10,9 +10,9 @@ import com.fxs.platform.domain.Reservation;
 @Repository
 public interface ConsultationRepository extends FxsRepository<Reservation> {
 	
-	List<Reservation> findByType(String consultationType);
+	//List<Reservation> findByType(String consultationType);
 
-	List<Reservation> findByStatus(String status);
+	List<Reservation> findByStatus(int status);
 
 	@Query("SELECT o FROM Reservation o where o.id=?1")
     Reservation findOne(String consultationId);
