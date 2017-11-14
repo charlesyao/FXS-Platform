@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
+import com.fxs.platform.dto.FalltypusDto;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
 
@@ -142,7 +143,7 @@ public class RouterController {
 	}
 	
 	@GetMapping("/questionnaire/create")
-	public String createQuestionnaire(ModelMap map) {
+	public String createQuestionnaire(@ModelAttribute(value="falltypus") FalltypusDto falltypus, BindingResult bindingResult, ModelMap map) {
 		map.addAttribute("falltypusList", falltypusService.findFirstLevelFalltypus());
 		return "addQuestionnaireStep1";
 	}

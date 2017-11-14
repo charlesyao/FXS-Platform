@@ -7,11 +7,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Falltypus;
@@ -52,6 +55,26 @@ public class FalltypusController {
 				falltypusService.findFirstLevelFalltypus());
 	}
 
+	@PostMapping("/sub")
+	public String getSubFalltypus(/*
+			@RequestParam(value="id") String id, */
+			@ModelAttribute(value="falltypus") FalltypusDto falltypus, 
+			BindingResult bindingResult, ModelMap map) {
+		String target = "";
+		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(String.valueOf(falltypus.getId()));
+		
+		if (subFalltypusList.size() == 0) {
+			map.addAttribute("representativeList", representativeService.findAll());
+			target = "addQuestionnaireStep3";
+		} else {
+			map.addAttribute("subFalltypusList", subFalltypusList);
+			
+			target = "addQuestionnaireStep2";
+		}
+		
+		return target;
+	}
+	
 	/**
 	 *
 	 * @param id
