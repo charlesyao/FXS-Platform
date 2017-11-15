@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
+</head>
+<body>
+	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="mainPart">
+		<div class="container-fluid">
+			<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="500">
+				<tr bgcolor="lightblue">
+					<th>纷争编号</th>
+					<th>纷争名称</th>
+					<th>创建日期</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+				<tr th:each="disputeInfo : ${disputeInfoList}">
+					<td th:text="${disputeInfo.id}"></td>
+					<td th:text="${disputeInfo.name}"></td>
+					<td th:text="${disputeInfo.createAt}"></td>
+					<td th:text="${disputeInfo.status}"></td>
+					<td>
+						<a th:href="@{/disputeInfo/viewDisputeInfo/{id}(id=${disputeInfo.id})}">查看</a>
+				 	</td>
+				</tr>
+			</table>
+		</div>
+		<a th:href="@{/disputeInfo/createDisputeInfo}" type="button" class="btn btn-primary btn-lg btn-block">新建</a>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer" ></div>
+</body>
+</html>

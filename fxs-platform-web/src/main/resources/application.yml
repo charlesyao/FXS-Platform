@@ -23,8 +23,8 @@ spring:
       validation-query: SELECT 1
   jpa:
     hibernate:
-      naming:
-        implicit-strategy: com.fxs.platform.repository.support.FxsImplicitNamingStrategy
+      #naming:
+        #implicit-strategy: com.fxs.platform.repository.support.FxsImplicitNamingStrategy
       ddl-auto: update
     generate-ddl: true
     show-sql: true

@@ -1,58 +1,81 @@
 package com.fxs.platform.domain;
 
-import org.hibernate.annotations.GenericGenerator;
+import java.util.List;
 
-import javax.persistence.FetchType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
-/**
- * 问题领域类
- */
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+@Entity
 public class Question {
 
-    @Id
-    @GenericGenerator(name = "idGenerator", strategy = "uuid")
-    @GeneratedValue(generator = "idGenerator")
-    private String id;
+	@Id
+	@SequenceGenerator(name = "seq_contacts", sequenceName = "seq_contacts")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_contacts")
 
-    private String key;
+	private int id;
 
-    private String description;
+	private String name;
 
-    private boolean isFirstQuestion;
+	@Transient
+	private List<String> answers;
 
-    public String getId() {
-        return id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "disputeInfo_id")
+	private DisputeInfo disputeInfo;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public Question() {
+	}
 
-    public String getKey() {
-        return key;
-    }
+	public Question(int id, String name, DisputeInfo disputeInfo) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.disputeInfo = disputeInfo;
+	}
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public boolean isFirstQuestion() {
-        return isFirstQuestion;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setFirstQuestion(boolean firstQuestion) {
-        isFirstQuestion = firstQuestion;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<String> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<String> answers) {
+		this.answers = answers;
+	}
+
+	public DisputeInfo getDisputeInfo() {
+		return disputeInfo;
+	}
+
+	public void setDisputeInfo(DisputeInfo disputeInfo) {
+		this.disputeInfo = disputeInfo;
+	}
+
 }

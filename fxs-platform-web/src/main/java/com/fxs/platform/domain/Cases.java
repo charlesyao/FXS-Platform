@@ -6,8 +6,6 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Set;
-
 @Entity
 public class Cases {
 	@Id
@@ -25,7 +23,7 @@ public class Cases {
 	 */
 	//private CaseType caseTypeLevelTwo;
 
-	private Set<DisputeInfo> disputeInfo;
+	//private Set<DisputeInfo> disputeInfo;
 
 	/**
 	 * 案件当前状态
@@ -66,11 +64,11 @@ public class Cases {
 		return status;
 	}
 
-    public Set<DisputeInfo> getDisputeInfo() {
+    /*public Set<DisputeInfo> getDisputeInfo() {
         return disputeInfo;
     }
 
     public void setDisputeInfo(Set<DisputeInfo> disputeInfo) {
         this.disputeInfo = disputeInfo;
-    }
+    }*/
 }

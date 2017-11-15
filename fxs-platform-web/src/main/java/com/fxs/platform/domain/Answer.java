@@ -1,57 +1,72 @@
 package com.fxs.platform.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
-/**
- * 回答领域类
- */
 @Entity
 public class Answer {
 
-    @Id
-    @GenericGenerator(name = "idGenerator", strategy = "uuid")
-    @GeneratedValue(generator = "idGenerator")
-    private String id;
+	@Id
+	@SequenceGenerator(name = "seq_contacts", sequenceName = "seq_contacts")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_contacts")
+	private int id;
 
-    private String key;
+	@Column
+	private String answer;
 
-    private String description;
+	@ManyToOne
+	@JoinColumn(name = "question_id")
+	private Question question;
+	
+	private int nextQuestionId;
 
-    private DisputeInfo nextDisputeInfo;
+	public Answer() {
 
-    public String getId() {
-        return id;
-    }
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public Answer(int id, String answer, Question question, int nextQuestionId) {
+		super();
+		this.id = id;
+		this.answer = answer;
+		this.question = question;
+		this.nextQuestionId = nextQuestionId;
+	}
 
-    public String getKey() {
-        return key;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getAnswer() {
+		return answer;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 
-    public DisputeInfo getNextDisputeInfo() {
-        return nextDisputeInfo;
-    }
+	public Question getQuestion() {
+		return question;
+	}
 
-    public void setNextDisputeInfo(DisputeInfo nextDisputeInfo) {
-        this.nextDisputeInfo = nextDisputeInfo;
-    }
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public int getNextQuestionId() {
+		return nextQuestionId;
+	}
+
+	public void setNextQuestionId(int nextQuestionId) {
+		this.nextQuestionId = nextQuestionId;
+	}
 }

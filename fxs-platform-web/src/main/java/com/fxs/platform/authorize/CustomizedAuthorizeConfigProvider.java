@@ -28,7 +28,8 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/lawyer/signIn",
 					"/user/signUp",
 					"/user/register",
-					"/user")
+					"/user",
+					"/disputeInfo/**")
 			.permitAll().anyRequest().authenticated();
 		
 		return true;

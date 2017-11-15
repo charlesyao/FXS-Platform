@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import com.fxs.platform.domain.Question;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.dto.FalltypusDto;
@@ -146,5 +147,10 @@ public class RouterController {
 	public String createQuestionnaire(@ModelAttribute(value="falltypus") FalltypusDto falltypus, BindingResult bindingResult, ModelMap map) {
 		map.addAttribute("falltypusList", falltypusService.findFirstLevelFalltypus());
 		return "addQuestionnaireStep1";
+	}
+	
+	@GetMapping("/question/create")
+	public String createQuestionnaire(@ModelAttribute(value="question") Question question, BindingResult bindingResult) {
+		return "addQuestion";
 	}
 }

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
+</head>
+<body>
+	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="mainPart">
+		<div class="container-fluid">
+			<table  bgcolor="#F1D4B8" width="1000" height="600" align="center" 
+					style="border-collapse: collapse;" border="1" bordercolor="#006699" >
+				<tr>
+					<td align="center"><h3>创建基本纷争信息</h3></td>
+				</tr>
+				<tr valign="top" align="center">
+    				<td align="center">
+ 						<form th:action="@{/disputeInfo/createDisputeInfo}" th:method="post" th:object="${disputeInfo}">
+							<table width="700" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">	
+								<tr>
+									<td width="50" align="right">纷争名称</td>
+									<td width="50">
+										<input th:field="*{name}"/>
+									</td>
+								</tr>
+								<tr>
+									<td width="50" align="right">状态</td>
+									<td>						
+										<select th:field="*{status}">
+								            <option th:value="Completed" label="Completed"/>
+								            <option th:value="Incomplete" label="Incomplete"/>
+								        </select>						
+									</td>					
+								</tr>
+							</table>
+							<table width="700" style="border-collapse: collapse;" border="0" bordercolor="#006699" 
+								cellspacing="2" cellpadding="2">						
+								<tr id='TextBoxesGroups'>			
+									<td id='TextBoxesGroup'>				
+										<div >
+											<div id="TextBoxDiv1">问题 #1 :
+												<input type="text" cols="29" rows="3" th:field="*{question}" />
+												<br /><br />
+												答案 #1 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer1' size="50"/>
+												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
+													<option th:value="-1">选择下级问题</option>
+													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
+												</select>
+												<br /><br />
+												答案 #2 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer2' size="50"/>
+												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
+													<option th:value="-1">选择下级问题</option>
+													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
+												</select>
+												<br /><br />
+												答案 #3 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer3' size="50"/>
+												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
+													<option th:value="-1">选择下级问题</option>
+													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
+												</select>
+												<br /><br />
+												答案 #4 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer4' size="50"/>
+												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
+													<option th:value="-1">选择下级问题</option>
+													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
+												</select>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="5">
+										<input type='button' value='添加问题' id='addButton' />&nbsp;&nbsp;
+										<input type='button' value='删除问题' id='removeButton' />
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" align="center">
+										<input type="submit" name="" value="保存" />&nbsp;&nbsp;
+										<input type="reset" name="" value="重置" />&nbsp;&nbsp;
+										<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
+									</td>
+								</tr>					
+							</table>			
+						</form>
+    				</td>    
+  				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<script type="text/javascript">
+	$(function() {
+		$("#addButton").on("click", () => {
+			$("#TextBoxesGroups").append($("#TextBoxesGroup").html())
+		})
+	})
+	</script>
+</body>
+</html>
+

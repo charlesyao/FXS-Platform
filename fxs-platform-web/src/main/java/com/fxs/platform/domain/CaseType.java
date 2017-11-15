@@ -1,12 +1,11 @@
 package com.fxs.platform.domain;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
+//@Entity
 public class CaseType {
 	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")

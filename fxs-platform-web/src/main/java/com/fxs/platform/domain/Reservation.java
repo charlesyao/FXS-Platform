@@ -1,77 +1,99 @@
 package com.fxs.platform.domain;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 电话咨询
+ * 
+ */
 @Entity
-public class Reservation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Reservation implements Serializable {
 
-    /**
-     * 预约状态
-     */
-    private int status;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 当事人和律师预约电话联系的日期+时间
-     */
-    private Date researvationDatetime;
+	@Id
+	@GenericGenerator(name="idGenerator", strategy="uuid")
+    @GeneratedValue(generator="idGenerator")
+	private String id;
 
-    /**
-     * 当事人的联系方式
-     */
-    private String contactPhone;
+	/**
+	 * 预约状态
+	 */
+	private String status;
 
-    /**
-     * 电话预约的用户
-     */
-    //private User reservationUser;
+	/**
+	 * 当事人和律师预约电话联系的日期+时间
+	 */
+	private Date researvationDatetime;
 
-    /**
-     * 预约律师
-     */
-    private Lawyer reservedLaywer;
+	/**
+	 * 当事人的联系方式
+	 */
+	private String contactPhone;
 
-    public int getId() {
-        return id;
-    }
+	/**
+	 * 预约用户
+	 */
+	private String userId;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	/**
+	 * 响应律师
+	 */
+	private String lawyerId;
 
-    public int getStatus() {
-        return status;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public Date getResearvationDatetime() {
-        return researvationDatetime;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setResearvationDatetime(Date researvationDatetime) {
-        this.researvationDatetime = researvationDatetime;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public String getContactPhone() {
-        return contactPhone;
-    }
+	public Date getResearvationDatetime() {
+		return researvationDatetime;
+	}
 
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone;
-    }
+	public void setResearvationDatetime(Date researvationDatetime) {
+		this.researvationDatetime = researvationDatetime;
+	}
 
-   /* public User getReservationUser() {
-        return reservationUser;
-    }
+	public String getContactPhone() {
+		return contactPhone;
+	}
 
-    public void setReservationUser(User reservationUser) {
-        this.reservationUser = reservationUser;
-    }*/
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getLawyerId() {
+		return lawyerId;
+	}
+
+	public void setLawyerId(String lawyerId) {
+		this.lawyerId = lawyerId;
+	}
 }
-

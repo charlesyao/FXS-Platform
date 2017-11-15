@@ -1,7 +1,10 @@
 package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -12,6 +15,8 @@ public class Questionnaire {
 	 * 主键,根据案件类型以及子类型生成
 	 */
 	@Id
+	@GenericGenerator(name="idGenerator", strategy="uuid")
+    @GeneratedValue(generator="idGenerator")
 	private String id;
 
 	/**
@@ -38,7 +43,8 @@ public class Questionnaire {
 	/**
 	 * 显示条件
 	 */
-	private String condition;
+	//private String condition;
+	
 
 	public String getId() {
 		return id;
@@ -96,11 +102,11 @@ public class Questionnaire {
 		this.parentId = parentId;
 	}
 
-	public String getCondition() {
+	/*public String getCondition() {
 		return condition;
 	}
 
 	public void setCondition(String condition) {
 		this.condition = condition;
-	}
+	}*/
 }

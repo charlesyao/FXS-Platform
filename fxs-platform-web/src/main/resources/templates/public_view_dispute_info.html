@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/litigant_header :: litigant-header-css"></div>
+</head>
+<body>
+	<div th:replace="fragments/litigant_header :: litigant-header"></div>
+	<div class="mainPart">
+		<div class="container-fluid">
+			<table bgcolor="lightblue" width="750" height="500" align="center"
+				style="border-collapse: collapse;" border="1" bordercolor="#006699">
+				<tr>
+					<td align="center"><h3>详细信息</h3></td>
+				</tr>
+				<tr valign="top" align="center">
+					<td align="center">
+						<form th:object="${disputeInfo}">
+							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+								<tr>
+									<td width="100" align="right">编号</td>
+									<td width="150">
+										<input th:text="*{id}" readonly="true" />
+									</td>
+								</tr>
+								<tr>
+									<td width="100" align="right">名称</td>
+									<td>
+										<input th:text="*{name}" readonly="true" />	
+									</td>
+								</tr>
+								<tr>
+									<td width="100" align="right">状态</td>
+									<td>
+										<input th:text="*{status}" readonly="true" />	
+									</td>
+								</tr>
+								<tr>
+									<td width="100" align="right">创建日期</td>
+									<td>
+										<input th:text="*{createAt}" readonly="true" />	
+									</td>
+								</tr>
+							</table>
+							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+								<tr th:each="question : *{disputeInfo.question}">
+									<td width="100" align="right">编号</td>
+									<td width="150">
+										<input th:text="${question.id}" readonly="true" />
+									</td>
+									<td width="150">
+										<input th:text="${question.name}" readonly="true" />
+									</td>
+								</tr>
+							</table>
+							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+								<tr th:each="answer : *{disputeInfo.answer}">
+									<td width="100" align="right">编号</td>
+									<td width="150">
+										<input th:text="${answer.id}" readonly="true" />
+									</td>
+									<td width="150">
+										<input th:text="${answer.answer}" readonly="true" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer"></div>
+</body>
+</html>
+
