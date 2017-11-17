@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -35,8 +36,7 @@ public class DisputeInfoController {
 
 	@GetMapping("/getAllDisputeInfo")
 	public String getAllDisputeInfo(ModelMap map) {
-		List<DisputeInfo> disputeInfo = disputeInfoService.getAllDisputeInfo();
-		map.addAttribute("disputeInfoList", disputeInfo);
+		map.addAttribute("questionList", questionService.getAllQuestion());
 
 		return "public_list_dispute_info";
 	}
@@ -44,14 +44,13 @@ public class DisputeInfoController {
 	@GetMapping(value = "/createDisputeInfo")
 	public String newDisputeInfoForm(@ModelAttribute(value = "disputeInfo") DisputeInfo disputeInfo,
 			BindingResult bindingResult, ModelMap map) {
-		map.addAttribute("availableQuestions", questionService.getAllQuestion());
+		
 		return "public_add_dispute_info";
 	}
 
 	@PostMapping(value = "/createDisputeInfo")
-	public String create(@ModelAttribute("newSurdisputeInfovey") DisputeInfo disputeInfo, BindingResult result,
+	public String create(DisputeInfo disputeInfo, BindingResult result,
 			SessionStatus status) {
-		List<Integer> nextQuestionIds = disputeInfo.getNextQuestion();
 		disputeInfoService.save(disputeInfo);
 
 		List<String> questions = disputeInfo.getQuestion();
@@ -61,7 +60,8 @@ public class DisputeInfoController {
 		if (questions != null) {
 			for (String question : questions) {
 				ques = new Question();
-				ques.setName(question);
+				ques.setDescription(question);
+				ques.setIsRootQuestion(disputeInfo.getIsRootQuestion());
 				ques.setDisputeInfo(disputeInfo);
 
 				questionService.save(ques);
@@ -72,9 +72,8 @@ public class DisputeInfoController {
 				if (answers != null) {
 					for (int i = 0; i < answers.size(); i++) {
 						answer = new Answer();
-						answer.setAnswer(answers.get(i));
+						answer.setDescription(answers.get(i));
 						answer.setQuestion(ques);
-						answer.setNextQuestionId(nextQuestionIds.get(i));
 						answerService.save(answer);
 					}
 				}
@@ -88,7 +87,28 @@ public class DisputeInfoController {
 
 	@GetMapping(value = "/viewDisputeInfo/{id}")
 	public String view(@PathVariable("id") int id, ModelMap map) {
-		map.addAttribute("disputeInfo", disputeInfoService.getByDisputeInfoId(id));
+		
+		Question question = questionService.getByQuestionId(id);
+		map.addAttribute("availableQuestions", questionService.getAllQuestion());
+		map.addAttribute("question", question);
+		
 		return "public_view_dispute_info";
+	}
+	
+	@PostMapping(value = "/updateAnswer")
+	public String update(@ModelAttribute(value = "answer") Answer answer, BindingResult result,
+			SessionStatus status) {
+		//List<Integer> nextQuestionIds = question.getDisputeInfo().getNextQuestion();
+
+		//List<String> answers = question.getDisputeInfo().getAnswer();
+
+		/*if (answers != null) {
+			for (int i = 0; i < answers.size(); i++) {
+				//answerService.updateNextQuestion(answers.get(i));
+			}
+		}*/
+
+		status.setComplete();
+		return "redirect:/disputeInfo/getAllDisputeInfo";
 	}
 }

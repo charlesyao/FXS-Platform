@@ -1,13 +1,17 @@
 package com.fxs.platform.domain;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
@@ -22,10 +26,15 @@ public class Question {
 
 	private int id;
 
-	private String name;
+	private String description;
+	
+	private String isRootQuestion;
 
-	@Transient
-	private List<String> answers;
+	/*@Transient
+	private List<String> answers;*/
+	
+	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Answer> answers;
 
 	@ManyToOne
 	@JoinColumn(name = "disputeInfo_id")
@@ -34,10 +43,10 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(int id, String name, DisputeInfo disputeInfo) {
+	public Question(int id, String description, DisputeInfo disputeInfo) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.description = description;
 		this.disputeInfo = disputeInfo;
 	}
 
@@ -54,19 +63,19 @@ public class Question {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public List<String> getAnswers() {
+	public List<Answer> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(List<String> answers) {
+	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
 
@@ -78,4 +87,11 @@ public class Question {
 		this.disputeInfo = disputeInfo;
 	}
 
+	public String getIsRootQuestion() {
+		return isRootQuestion;
+	}
+
+	public void setIsRootQuestion(String isRootQuestion) {
+		this.isRootQuestion = isRootQuestion;
+	}
 }

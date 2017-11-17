@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Falltypus;
+import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.FalltypusDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
+import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.FalltypusService;
+import com.fxs.platform.service.QuestionService;
 import com.fxs.platform.service.RepresentativeService;
 
 @Controller
@@ -36,6 +40,12 @@ public class FalltypusController {
 	
 	@Autowired
 	RepresentativeService representativeService;
+	
+	@Autowired
+	private QuestionService questionService;
+	
+	@Autowired
+	private AnswerService answerService;
 	
 	@PostMapping
 	@ResponseBody
@@ -85,7 +95,12 @@ public class FalltypusController {
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
 		
 		if (subFalltypusList.size() == 0) {
-			map.addAttribute("representativeList", representativeService.findAll());
+			//map.addAttribute("representativeList", representativeService.findAll());
+			Question question = questionService.findRootQuestion();
+			List<Answer> answerList = answerService.getAllAnswerByQuestionId(question.getId());
+			
+			map.addAttribute("rootQuestion", question);
+			map.addAttribute("answers", answerList);
 			
 			target = "public_consulting_free_step2";
 		} else {

@@ -13,11 +13,11 @@
 			</ol>
 			<h1 class="blue">填写纠纷基本信息</h1>
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn">
-				<h3>您是代表谁找律师？</h3>
+				<h3 th:text="${rootQuestion.name}"></h3>
 				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="representative : ${representativeList}">
+					<ul class="col-md-2 col-sm-2" th:each="answer : ${answers}">
 						<li class="introcoupCell btnSquare">
-							<a href="#" th:id="${representative.id}" th:text="${representative.type}"></a>
+							<a th:href="@{/public/question/{id}(id=${answer.nextQuestionId})}" th:id="${answer.id}" th:text="${answer.answer}"></a>
 						</li>
 					</ul>
 				</div>

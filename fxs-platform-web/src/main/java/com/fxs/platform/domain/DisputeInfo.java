@@ -20,7 +20,7 @@ public class DisputeInfo {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_contacts")
 	private int id;
 
-	private String name;
+	private String description;
 
 	private String status;
 
@@ -33,15 +33,15 @@ public class DisputeInfo {
 	private List<String> answer;
 	
 	@Transient
-	private List<Integer> nextQuestion;
-
+	private String isRootQuestion;
+	
 	public DisputeInfo() {
 	}
 
-	public DisputeInfo(int id, String name, String status, Date createAt) {
+	public DisputeInfo(int id, String description, String status, Date createAt) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.description = description;
 		this.status = status;
 		this.createAt = createAt;
 	}
@@ -59,12 +59,12 @@ public class DisputeInfo {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getStatus() {
@@ -99,11 +99,11 @@ public class DisputeInfo {
 		this.createAt = createAt;
 	}
 
-	public List<Integer> getNextQuestion() {
-		return nextQuestion;
+	public String getIsRootQuestion() {
+		return isRootQuestion;
 	}
 
-	public void setNextQuestion(List<Integer> nextQuestion) {
-		this.nextQuestion = nextQuestion;
+	public void setIsRootQuestion(String isRootQuestion) {
+		this.isRootQuestion = isRootQuestion;
 	}
 }

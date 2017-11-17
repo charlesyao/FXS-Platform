@@ -19,7 +19,7 @@
 								<tr>
 									<td width="50" align="right">纷争名称</td>
 									<td width="50">
-										<input th:field="*{name}"/>
+										<input th:field="*{description}"/>
 									</td>
 								</tr>
 								<tr>
@@ -37,36 +37,26 @@
 								<tr id='TextBoxesGroups'>			
 									<td id='TextBoxesGroup'>				
 										<div >
-											<div id="TextBoxDiv1">问题 #1 :
+											<div id="TextBoxDiv1">
+												问题 #1 :
 												<input type="text" cols="29" rows="3" th:field="*{question}" />
+												<br /><br />
+												是否选为根问题？
+												<input type="radio" th:value="Y" th:text="是" cols="29" rows="3" th:field="*{isRootQuestion}" />
+												<br /><br />
+												<input type="radio" th:value="N" th:text="否" cols="29" rows="3" th:field="*{isRootQuestion}" />
 												<br /><br />
 												答案 #1 : &nbsp; 
 												<input type="text" th:field="*{answer}" id='answer1' size="50"/>
-												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
-													<option th:value="-1">选择下级问题</option>
-													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
-												</select>
 												<br /><br />
 												答案 #2 : &nbsp; 
 												<input type="text" th:field="*{answer}" id='answer2' size="50"/>
-												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
-													<option th:value="-1">选择下级问题</option>
-													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
-												</select>
 												<br /><br />
 												答案 #3 : &nbsp; 
 												<input type="text" th:field="*{answer}" id='answer3' size="50"/>
-												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
-													<option th:value="-1">选择下级问题</option>
-													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
-												</select>
 												<br /><br />
 												答案 #4 : &nbsp; 
 												<input type="text" th:field="*{answer}" id='answer4' size="50"/>
-												<select class="form-control" id="selectParent" th:field="*{nextQuestion}">
-													<option th:value="-1">选择下级问题</option>
-													<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.name}"></option>
-												</select>
 											</div>
 										</div>
 									</td>

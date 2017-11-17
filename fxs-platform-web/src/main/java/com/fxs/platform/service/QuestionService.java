@@ -16,4 +16,6 @@ public interface QuestionService {
 	void view(Question question);
 
 	void delete(int qId);
+	
+	Question findRootQuestion();
 }

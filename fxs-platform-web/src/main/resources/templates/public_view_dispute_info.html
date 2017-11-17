@@ -14,56 +14,48 @@
 				</tr>
 				<tr valign="top" align="center">
 					<td align="center">
-						<form th:object="${disputeInfo}">
 							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+								<tr bgcolor="lightblue">
+									<th>问题编号</th>
+									<th>问题描述</th>
+									<th>是否根问题</th>
+								</tr>
 								<tr>
-									<td width="100" align="right">编号</td>
 									<td width="150">
-										<input th:text="*{id}" readonly="true" />
+										<input type="text" th:value="${question.id}" />
 									</td>
-								</tr>
-								<tr>
-									<td width="100" align="right">名称</td>
 									<td>
-										<input th:text="*{name}" readonly="true" />	
+										<input type="text" th:value="${question.description}" />	
 									</td>
-								</tr>
-								<tr>
-									<td width="100" align="right">状态</td>
 									<td>
-										<input th:text="*{status}" readonly="true" />	
-									</td>
-								</tr>
-								<tr>
-									<td width="100" align="right">创建日期</td>
-									<td>
-										<input th:text="*{createAt}" readonly="true" />	
+										<input type="text" th:value="${question.isRootQuestion}" />	
 									</td>
 								</tr>
 							</table>
+							<form th:object="${question.answers}" th:action="@{/disputeInfo/updateAnswer}" th:method="POST">
 							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
-								<tr th:each="question : *{disputeInfo.question}">
-									<td width="100" align="right">编号</td>
+								<tr bgcolor="lightblue">
+									<th>答案编号</th>
+									<th>答案名称</th>
+									<th>匹配下级问题</th>
+								</tr>
+								<tr th:each="answer : ${answerList}">
 									<td width="150">
-										<input th:text="${question.id}" readonly="true" />
+										<input type="text" th:field="${id}" th:value="${answer.id}" th:text="${answer.id}"/>
 									</td>
 									<td width="150">
-										<input th:text="${question.name}" readonly="true" />
+										<input type="text" th:field="${description}" th:value="${answer.description}" th:text="${answer.description}"/>
+									</td>
+									<td>
+										<select id="selectParent" th:field="${nextQuestionId}">
+											<option th:value="-1">选择下级问题</option>
+											<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.description}"></option>
+										</select>
 									</td>
 								</tr>
 							</table>
-							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
-								<tr th:each="answer : *{disputeInfo.answer}">
-									<td width="100" align="right">编号</td>
-									<td width="150">
-										<input th:text="${answer.id}" readonly="true" />
-									</td>
-									<td width="150">
-										<input th:text="${answer.answer}" readonly="true" />
-									</td>
-								</tr>
-							</table>
-						</form>
+							<button type="submit" th:text="保存"></button>
+							</form>
 					</td>
 				</tr>
 			</table>

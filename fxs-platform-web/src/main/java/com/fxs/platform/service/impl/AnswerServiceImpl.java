@@ -50,4 +50,15 @@ public class AnswerServiceImpl implements AnswerService {
 		answerRepository.delete(s);
 	}
 
+	@Override
+	public List<Answer> getAllAnswerByQuestionId(int qId) {
+		return answerRepository.getAllAnswerByQuestionId(qId);
+	}
+
+	@Override
+	public Answer updateNextQuestion(int answerId, int nextQuestionId) {
+		// TODO Auto-generated method stub
+		return answerRepository.updateNextQuestion(answerId, nextQuestionId);
+	}
+
 }

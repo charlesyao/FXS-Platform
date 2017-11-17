@@ -1,6 +1,5 @@
 package com.fxs.platform.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +16,7 @@ public class Answer {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_contacts")
 	private int id;
 
-	@Column
-	private String answer;
+	private String description;
 
 	@ManyToOne
 	@JoinColumn(name = "question_id")
@@ -30,10 +28,10 @@ public class Answer {
 
 	}
 
-	public Answer(int id, String answer, Question question, int nextQuestionId) {
+	public Answer(int id, String description, Question question, int nextQuestionId) {
 		super();
 		this.id = id;
-		this.answer = answer;
+		this.description = description;
 		this.question = question;
 		this.nextQuestionId = nextQuestionId;
 	}
@@ -46,12 +44,12 @@ public class Answer {
 		this.id = id;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Question getQuestion() {

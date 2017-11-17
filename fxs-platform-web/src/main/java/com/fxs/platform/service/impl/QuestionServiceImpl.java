@@ -49,4 +49,9 @@ public class QuestionServiceImpl implements QuestionService {
 		questionRepository.delete(question);
 	}
 
+	@Override
+	public Question findRootQuestion() {
+		return questionRepository.findRootQuestion();
+	}
+
 }
