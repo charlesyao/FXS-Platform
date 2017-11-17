@@ -22,32 +22,33 @@
 								</tr>
 								<tr>
 									<td width="150">
-										<input type="text" th:value="${question.id}" />
+										<input th:attr="readonly='readonly'" type="text" th:value="${question.id}" />
 									</td>
 									<td>
-										<input type="text" th:value="${question.description}" />	
+										<input th:attr="readonly='readonly'" type="text" th:value="${question.description}" />	
 									</td>
 									<td>
-										<input type="text" th:value="${question.isRootQuestion}" />	
+										<input th:attr="readonly='readonly'" type="text" th:value="${question.isRootQuestion}" />	
 									</td>
 								</tr>
 							</table>
-							<form th:object="${question.answers}" th:action="@{/disputeInfo/updateAnswer}" th:method="POST">
+							<form th:action="@{/disputeInfo/updateAnswer}" th:method="POST">
 							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
 								<tr bgcolor="lightblue">
 									<th>答案编号</th>
 									<th>答案名称</th>
 									<th>匹配下级问题</th>
 								</tr>
-								<tr th:each="answer : ${answerList}">
+								<tr th:each="answer : ${question.answers}">
 									<td width="150">
-										<input type="text" th:field="${id}" th:value="${answer.id}" th:text="${answer.id}"/>
+										<input th:attr="readonly='readonly'" type="text" th:value="${answer.id}"/>
 									</td>
 									<td width="150">
-										<input type="text" th:field="${description}" th:value="${answer.description}" th:text="${answer.description}"/>
+										<!-- th:attr="disabled=${#strings.isEmpty(answer.description)} ? 'disabled' : 'false'" -->
+										<input th:attr="readonly='readonly'" type="text" th:value="${answer.description}"/>
 									</td>
 									<td>
-										<select id="selectParent" th:field="${nextQuestionId}">
+										<select id="selectParent" th:attr="disabled=${#strings.isEmpty(answer.description)} ? 'disabled' : 'false'">
 											<option th:value="-1">选择下级问题</option>
 											<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.description}"></option>
 										</select>
@@ -55,6 +56,7 @@
 								</tr>
 							</table>
 							<button type="submit" th:text="保存"></button>
+							<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
 							</form>
 					</td>
 				</tr>
