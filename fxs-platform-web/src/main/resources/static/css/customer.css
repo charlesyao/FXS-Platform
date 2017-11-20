@@ -4,7 +4,7 @@
 ul li{list-style:none;}
 .ft12{font-size:12px}
 
-.img-responsive{background: url(../img/mainBg.png) no-repeat top center;background-size:100% auto; min-height: 600px}
+.img-responsive{background: url(../img/mainBg.png) no-repeat top center;background-size:100% auto; min-height: 700px;height: 100%}
 
 
 /* ------------------------------------------------------------------------------------
@@ -30,16 +30,17 @@ SEARCH		 */
 
 
 /* ------------------------------------------------------------------------------------
-neiyene		 */
-.mainPart{background: url(../img/waves.png) no-repeat center bottom #F0F4FD;min-height: 600px;padding-top: 60px;}
-.mainPart .container{ padding:3em 0;}
+neiyene	*/	 
+.mainPart{min-height: 600px;padding-top: 75px;}
+
+/* -----.mainPart .container{ padding:3em 0;}--*/
 .mainPart .container h1{ text-align:center;color:#CFB87E; font-weight:300; margin: 1em 0 0.5em;}
 .mainPart .container p{text-align:center; font-size:14px;color:#9B9B9B;font-weight:200;margin-bottom:0px;}
 .introcouPhone .introcoupCell,.writeInfo .row .ulCell{ background-color: #fff;padding:20px;margin:3em 0.2em; border-radius: 0.8rem;    
 	box-shadow: 0px 1px 3px rgba(191,188,188,0.50);min-height: 220px;}
 .introcoupCell{ text-align:center; color:#58627C}	
 .introcoupCell span{margin:0.3em 0;display:block;}
-.topBar ul li span{color: #3C395D;}
+.topBar ul li span{color: #ac8873;}
 .btnSquare{}
 .introcouPhone .btnSquare{ text-align: center;background: #FFFFFF;border: 1px solid #CFB87E;box-shadow: 0 1px 3px 0 rgba(191,188,188,0.50);
 border-radius: 0.4rem;margin:0.2em;padding:0px; min-height:auto}
@@ -69,7 +70,7 @@ border-radius: 10px; cursor: pointer; width: 200px; height: 60px}
 .writeInfoText .orange{margin-bottom: 10px}
 .writeInfoText span{ color: #58627C }
 .writeInfo .row .writeInfoRight{ margin: 0em 0.2em; padding: 0px;position: relative;z-index:5}
-.exp{padding:10px 0px;border-bottom: 1px solid #EDEDED;}
+.exp{padding:30px 0px;border-bottom: 1px solid #EDEDED;}
 .exp li{ display: block;}
 .exp .fl{ width: 15%;border: 1px solid #6EA6E8;border-radius: 18px; text-align: center;font-size: 14px;
     color: #6EA6E8; padding: 5px 10px}
@@ -102,11 +103,10 @@ lawsuit		 */
 /* ------------------------------------------------------------------------------------
 login      */
 .bgBlack{background:rgba(0,0,0,0.50);;position: absolute;z-index:666; width: 100%;height:500%;overflow: hidden;}
-.signupBox{z-index: 5999999;position: absolute; background-color: #fff;
-    padding: 20px;
-    margin: 3em 0.2em;
-    border-radius: 0.8rem;
-    box-shadow: 0px 1px 3px rgba(191,188,188,0.50); width:400px; top: 20%;left: 35%}
+.signupBox{z-index: 5999999;
+    padding: 5px 0 0;
+    margin: 3em 0 0;
+    }
 .signupBox .form-group input{border:none;border-bottom: 1px solid #ccc; border-radius: 0em}
 .signupBox h3{ font-weight: 200; ; color: #CFB87E;}
 .signupTitle{text-align: center;display: block; margin: 0.5em 0 1em;}
@@ -118,7 +118,7 @@ login      */
     border-color: #CFB87E;
     border-radius: 5rem;
     font-size: 16px;
-    color: #FFFFFF; padding:.5rem 3rem; cursor: pointer;}
+    color: #FFFFFF;  cursor: pointer;}
  .signupBox .btn_cancel{ margin-right: 40px; background: #ccc; border:1px solid #ccc;}   
 .signupBox .fpw{ font-size: 12px;color: #999}
 .signupBox .fpw a{text-align: right;    display: block;}
@@ -161,19 +161,43 @@ my          */
 
 laywer center          */
 .writeInfo .row .laywer_right{min-height: auto;margin: 0em 0.2em;padding: 0px;}
-.laywer_right li{ padding: 20px 0; border-bottom: 1px solid #ccc;}
+.laywer_right li{ padding: 20px 0; border-bottom: 1px solid #f1f1f1;}
 .laywer_right li.lastItem{ border-bottom: none}
+.laywer_right .cur{ color:#CFB87E}
+.laywer_right li:hover{  background-color: #F0F4FD}
+.laywer_right .cur:hover{  background-color: #fff}
+.laywer_right li a{color: #9B9B9B}
+.laywer_right li a:hover{text-decoration: none;}
 .myCell h4{ display: inline;color: #689CE5}
 .myCell .form-control{border: 1px solid #CFB87E; }
 .mybox .btnSearch button{ width: auto;height: auto; font-size: 14px}
-.myCell .line{border-bottom: 1px solid #ccc; margin: 20px 0}
-.writeInfoText .listTitle{background: rgba(74,144,226,0.80); text-align: center;color: #fff; border-radius: 20px; padding: 0 20px; margin-bottom: 10px}
-.listTitle b,.writeInfoText .listTitle span{ padding: 0 10px; }
-.writeInfoText .listTitle span,.tableBox b{color: #fff;}
+.myCell .line{border-bottom: 1px solid #ededed; margin: 20px 0}
+.writeInfoText .listTitle{border:1px solid #CFB87E; border-left: none; border-right:none;
+    background: #FFFBF6; text-align: center;color: #C08E61;padding: 5px 20px; margin-bottom: 10px;
+}
+.writeInfoText .listTitle a{color: #C08E61}
+.writeInfoText .listTitle a:hover{ background-color: #fff;}
+.listTitle b,.writeInfoText .listTitle span{ padding: 0 10px;}
+.writeInfoText .listTitle span,.tableBox b{color: #C08E61;}
 .tableBox td,.tableBox th{ border: none; color: #666; font-size: 14px; padding: 0.4em}
 .caseBox ul{ margin-bottom: 15px;}
 .caseBox h4{font-size: 18px;}
 .caseBox ul li,.writeInfo .row .caseBox .gray{ color: #000; padding: 5px 0;}
 .writeInfo .row .caseBox .gray{ color: #999;}
+.tableBox{}
+
+
+
+
+
+.form-group .form-control{ border-radius: 4px;background: url(../img/arrow.png) no-repeat right #fff;appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;}
+
+
+
+
+
+
 
 
