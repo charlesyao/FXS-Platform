@@ -42,7 +42,7 @@ public class Reservation implements Serializable {
 	/**
 	 * 预约用户
 	 */
-	private String userId;
+	private String userId="";
 
 	/**
 	 * 响应律师
