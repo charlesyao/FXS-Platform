@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -62,7 +61,7 @@ public class DisputeInfoController {
 				ques = new Question();
 				ques.setDescription(question);
 				ques.setIsRootQuestion(disputeInfo.getIsRootQuestion());
-				ques.setDisputeInfo(disputeInfo);
+				//ques.setDisputeInfo(disputeInfo);
 
 				questionService.save(ques);
 

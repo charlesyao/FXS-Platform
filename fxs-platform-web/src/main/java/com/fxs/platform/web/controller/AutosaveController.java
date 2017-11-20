@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import com.fxs.platform.domain.Questionnaire;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
-import com.fxs.platform.service.QuestionnaireService;
 
 @RestController
 @RequestMapping("/autosave")
 public class AutosaveController {
-	String SESSION_KEY_PREFIX = "SESSION_KEY_FOR_QUESTIONNAIRE";
+	/*String SESSION_KEY_PREFIX = "SESSION_KEY_FOR_QUESTIONNAIRE";
 	
 	private static final String STEP1_PREFIX = "1";
 	private static final String STEP2_PREFIX = "2";
@@ -94,5 +92,5 @@ public class AutosaveController {
 	    result[lastIndex] = s.substring(j);
 
 	    return result;
-	}
+	}*/
 }

@@ -21,11 +21,11 @@
 					查看经典案例 ]</a>
 			</p>
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn">
-				<h3>您是代表谁找律师？</h3>
+				<h3 th:text="${rootQuestion.description}"></h3>
 				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="representative : ${representativeList}">
+					<ul class="col-md-2 col-sm-2" th:each="answer : ${answers}">
 						<li class="introcoupCell btnSquare">
-							<a href="#" th:id="${representative.id}" th:text="${representative.type}"></a>
+							<a th:href="@{/public/question/{id}(id=${answer.nextQuestionId})}" th:id="${answer.id}" th:text="${answer.description}"></a>
 						</li>
 					</ul>
 				</div>
@@ -108,7 +108,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 col-sm-12 btnNext">
-						<a type="button" class="btn btn-primary btn-lg" th:href="@{/public/lawsuit/next}">下一步</a>
+						<a type="button" class="btn btn-primary btn-lg" th:href="@{/public/case/lawsuit/next}">下一步</a>
 					</div>
 				</div>
 				<!-- <div class="row">

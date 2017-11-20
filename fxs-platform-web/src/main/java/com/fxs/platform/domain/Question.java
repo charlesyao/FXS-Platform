@@ -1,7 +1,6 @@
 package com.fxs.platform.domain;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -27,27 +25,34 @@ public class Question {
 	private int id;
 
 	private String description;
-	
+
 	private String isRootQuestion;
 
-	/*@Transient
-	private List<String> answers;*/
-	
+	/*
+	 * @Transient private List<String> answers;
+	 */
+
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Answer> answers;
 
 	@ManyToOne
-	@JoinColumn(name = "disputeInfo_id")
-	private DisputeInfo disputeInfo;
+	@JoinColumn(name = "cases_id")
+	private Cases cases;
+
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "disputeInfo_id") private DisputeInfo disputeInfo;
+	 */
 
 	public Question() {
 	}
 
-	public Question(int id, String description, DisputeInfo disputeInfo) {
+	public Question(int id, String description/* , DisputeInfo disputeInfo */) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.disputeInfo = disputeInfo;
+		// this.disputeInfo = disputeInfo;
 	}
 
 	@Override
@@ -79,13 +84,12 @@ public class Question {
 		this.answers = answers;
 	}
 
-	public DisputeInfo getDisputeInfo() {
-		return disputeInfo;
-	}
-
-	public void setDisputeInfo(DisputeInfo disputeInfo) {
-		this.disputeInfo = disputeInfo;
-	}
+	/*
+	 * public DisputeInfo getDisputeInfo() { return disputeInfo; }
+	 * 
+	 * public void setDisputeInfo(DisputeInfo disputeInfo) { this.disputeInfo =
+	 * disputeInfo; }
+	 */
 
 	public String getIsRootQuestion() {
 		return isRootQuestion;
@@ -94,4 +98,13 @@ public class Question {
 	public void setIsRootQuestion(String isRootQuestion) {
 		this.isRootQuestion = isRootQuestion;
 	}
+
+	public Cases getCases() {
+		return cases;
+	}
+
+	public void setCases(Cases cases) {
+		this.cases = cases;
+	}
+	
 }

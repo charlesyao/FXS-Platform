@@ -13,7 +13,7 @@
 				<div class="row">
 					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${firstLevelFalltypus}">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/falltypus/public/consultation/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
+							<a th:href="@{/public/falltypus/consulting/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
 						</li>
 					</ul>
 				</div>

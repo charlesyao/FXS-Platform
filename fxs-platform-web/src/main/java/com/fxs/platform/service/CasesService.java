@@ -3,9 +3,13 @@ package com.fxs.platform.service;
 import java.util.List;
 
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
 
 public interface CasesService {
+	
+	Reservation create(Reservation reservation);
+	
 	Cases create(Cases cases);
 
 	//List<CasesDto> findByTypeAndSubType(String caseType, String subType);

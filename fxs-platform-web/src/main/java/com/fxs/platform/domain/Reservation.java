@@ -70,7 +70,7 @@ public class Reservation implements Serializable {
 	}
 
 	public void setResearvationDatetime(Date researvationDatetime) {
-		this.researvationDatetime = researvationDatetime;
+		this.researvationDatetime = new Date();
 	}
 
 	public String getContactPhone() {

@@ -5,16 +5,21 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+/**
+ * 案件类型
+ * 
+ *
+ */
 @Entity
 public class Falltypus {
 	@Id
 	private String id;
 
-	@NotBlank(message="案件类型不能为空")
+	@NotBlank(message = "案件类型不能为空")
 	private String name;
-	
+
 	private String parentTypeId = "";
-	
+
 	public String getId() {
 		return id;
 	}

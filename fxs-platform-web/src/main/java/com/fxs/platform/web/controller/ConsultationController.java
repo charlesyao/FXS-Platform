@@ -8,17 +8,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Reservation;
-import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.ConsultationDto;
 import com.fxs.platform.repository.condition.ConsultationCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
@@ -42,27 +39,6 @@ public class ConsultationController {
 
 	@Autowired
 	ConsultationService consultationService;
-
-	/**
-	 * 提交法律咨询信息
-	 * 
-	 * @see com.fxs.platform.utils.ConsultationType
-	 * @param consultation
-	 * @return
-	 */
-	@PostMapping
-	@ResponseBody
-	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation consultation) {
-		User user = (User)session.getAttribute("userInfo");
-		
-		if(!ObjectUtils.isEmpty(user)) {
-			consultation.setUserId(String.valueOf(user.getId()));
-		} else {
-			consultation.setUserId("匿名用户");
-		}
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save.success"),
-				consultationService.create(consultation));
-	}
 
 	/**
 	 * 分页查找咨询信息

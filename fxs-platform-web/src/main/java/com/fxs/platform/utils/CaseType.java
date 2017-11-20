@@ -1,6 +1,6 @@
 package com.fxs.platform.utils;
 
-public enum CaseType_Deprecate_By_Jerome {
+public enum CaseType {
 	/**
 	 * 打官司
 	 */
@@ -13,7 +13,7 @@ public enum CaseType_Deprecate_By_Jerome {
 
 	private String type;
 
-	private CaseType_Deprecate_By_Jerome(String type) {
+	private CaseType(String type) {
 		this.type = type;
 	}
 

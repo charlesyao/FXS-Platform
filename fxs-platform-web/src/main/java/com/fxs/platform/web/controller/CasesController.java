@@ -2,9 +2,11 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.Reservation;
+import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
@@ -21,13 +25,36 @@ import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
 
 @RestController
-@RequestMapping("/case")
+@RequestMapping("/public/case")
 public class CasesController {
 	@Autowired
 	LocaleMessageSourceService localeMessageSourceService;
 
 	@Autowired
 	CasesService casesService;
+	
+	@Autowired
+    HttpSession session;
+	
+	/**
+	 * 提交法律咨询信息
+	 * 
+	 * @see com.fxs.platform.utils.ConsultationType
+	 * @param consultation
+	 * @return
+	 */
+	@PostMapping("/reservation")
+	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation reservation) {
+		User user = (User) session.getAttribute("userInfo");
+
+		if (!ObjectUtils.isEmpty(user)) {
+			reservation.setUserId(String.valueOf(user.getId()));
+		} else {
+			reservation.setUserId("匿名用户");
+		}
+		return Result.success(casesService.create(reservation));
+	}
+	
 
 	/**
 	 * 提交法律咨询信息
@@ -35,8 +62,8 @@ public class CasesController {
 	 * @param cases
 	 * @return
 	 */
-	@PostMapping
-	public ResponseMessage<Cases> create(@Valid @RequestBody Cases cases) {
+	@PostMapping("/{caseType}")
+	public ResponseMessage<Cases> create(@PathVariable String caseType, @Valid @RequestBody Cases cases) {
 		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save"),
 				casesService.create(cases));
 	}
