@@ -1,11 +1,13 @@
 package com.fxs.platform.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +21,14 @@ import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
+import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
+import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.SystemConstants;
 
 @RestController
 @RequestMapping("/public/case")
@@ -35,6 +41,12 @@ public class CasesController {
 	
 	@Autowired
     HttpSession session;
+	
+	@Autowired
+	CaseQuestionAnswerRelRepository repository;
+	
+	@Autowired
+	CasesRepository caseRepository;
 	
 	/**
 	 * 当事人提交电话咨询信息
@@ -69,8 +81,19 @@ public class CasesController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseMessage<Cases> create(@Valid @RequestBody Cases cases) {
-		return Result.success(casesService.create(cases));
+	public String create(@Valid @RequestBody Cases cases) {
+		String target = null;
+		
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			target = "redirect:/user/signIn";
+		} else {
+			CaseManager.saveCase(cases, session, caseRepository);
+			CaseManager.saveCaseQuestionRel(session, repository);
+			
+			target = "redirect:/user/dashboard";
+		}
+		
+		return target;
 	}
 
 	/**

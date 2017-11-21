@@ -76,12 +76,6 @@ public class RouterController {
 				} else if (action.equals("next")) {
 
 					target = "public_consulting_free_step3";
-				} else if (action.equals("submit")) {//提交免费法律咨询
-					if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-						target = "redirect:/user/signIn";
-					} else {
-						target = "redirect:/user/dashboard";
-					}
 				}
 				
 			} else if (caseType.equals("lawsuit")) {
@@ -95,12 +89,6 @@ public class RouterController {
 				} else if (action.equals("next")) {
 
 					target = "public_lawsuit_lawyer_step4";
-				} else if (action.equals("submit")) {//提交找律师打官司请求，如果未登录则跳转到登录界面同时提交信息，否则直接跳转到dashboard
-					if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-						target = "redirect:/user/signIn";
-					} else {
-						target = "redirect:/user/dashboard";
-					}
 				} else if (action.equals("self_service")) {//自助打官司
 
 					target = "public_lawsuit_self_service";

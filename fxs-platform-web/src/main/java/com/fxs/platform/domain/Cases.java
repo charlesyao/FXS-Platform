@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fxs.platform.utils.CaseStatus;
+
 /**
  * 案件领域模型 免费法律咨询、打官司
  *
@@ -36,10 +38,7 @@ public class Cases {
 	/**
 	 * @see com.fxs.platform.utils.CaseStatus
 	 */
-	private String status;
-
-	@Transient
-	private Map<Integer, Object[]> qaMap;
+	private String status = CaseStatus.NEW.getStatus();
 	
 	//免费法律咨询额外信息
 	private String comments;
@@ -70,14 +69,6 @@ public class Cases {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Map<Integer, Object[]> getQaMap() {
-		return qaMap;
-	}
-
-	public void setQaMap(Map<Integer, Object[]> qaMap) {
-		this.qaMap = qaMap;
 	}
 
 	public String getUserId() {
