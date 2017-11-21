@@ -20,6 +20,7 @@ import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.FalltypusDto;
+import com.fxs.platform.dto.QuestionDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
@@ -95,12 +96,15 @@ public class FalltypusController {
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
 
 		if (subFalltypusList.size() == 0) {// 判断没有子类型
-
+			QuestionDto qDto = new QuestionDto();
+			
 			Question rootQuestion = questionService.findRootQuestion();
 			List<Answer> answerList = answerService.getAllAnswerByQuestionId(rootQuestion.getId());
-
-			map.addAttribute("rootQuestion", rootQuestion);
-			map.addAttribute("answers", answerList);
+			
+			qDto.setQuestion(rootQuestion);
+			qDto.setAnswers(answerList);
+			
+			map.addAttribute("question", qDto);
 
 			if (caseType.equals("consulting")) {// 咨询跳转路由
 

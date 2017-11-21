@@ -2,6 +2,7 @@ package com.fxs.platform.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,7 @@ import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
+import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.repository.ReservationRepository;
@@ -23,10 +25,15 @@ import com.fxs.platform.utils.CaseStatus;
 public class CasesServiceImpl implements CasesService {
 
 	@Autowired
+    HttpSession session;
+	
+	@Autowired
 	CasesRepository caseRepository;
 	
 	@Autowired
 	ReservationRepository reservationRepository;
+	
+	User user = (User)(session.getAttribute("userInfo"));
 
 	@Override
 	public Reservation create(Reservation reservation) {
@@ -40,12 +47,6 @@ public class CasesServiceImpl implements CasesService {
 		return caseRepository.save(cases);
 	}
 
-	/*@Override
-	public List<CasesDto> findByTypeAndSubType(String caseType, String subType) {
-		List<Cases> cases = caseRepository.findByTypeAndSubType(caseType, subType);
-		return QueryResultConverter.convert(cases, CasesDto.class);
-	}*/
-
 	@Override
 	public List<CasesDto> findAll() {
 		return QueryResultConverter.convert(caseRepository.findAll(), CasesDto.class);
@@ -53,9 +54,16 @@ public class CasesServiceImpl implements CasesService {
 
 	@Override
 	public List<CasesDto> findByStatus(String status) {
-		return QueryResultConverter.convert(caseRepository.findByStatus(status), CasesDto.class);
+		
+		return caseRepository.findByStatus(String.valueOf(user.getId()), status);
 	}
+	
+	@Override
+	public List<CasesDto> findByType(String caseType) {
 
+		return caseRepository.findByType(String.valueOf(user.getId()), caseType);
+	}
+	
 	@Override
 	public Cases findByCaseId(String caseId) {
 		return caseRepository.findOne(caseId);

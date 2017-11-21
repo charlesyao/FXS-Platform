@@ -1,39 +1,55 @@
 package com.fxs.platform.dto;
 
+import java.util.List;
+
+import javax.persistence.Transient;
+
 public class CasesDto {
-	private Long id;
+	private String id;
 
 	/**
-	 * 主类型：法律咨询或者打官司
+	 * @see com.fxs.platform.utils.CaseType
 	 */
-	private String type;
+	private String caseType;
 
-	/**
-	 * 子类型： 免费咨询/找律师打官司/电话咨询
-	 */
+	private String parentType;
+
 	private String subType;
 
 	/**
-	 * 案件当前状态
-	 * 
 	 * @see com.fxs.platform.utils.CaseStatus
 	 */
 	private String status;
 
-	public Long getId() {
+	@Transient
+	private List<String> question;
+
+	private String userId;
+
+	private String lawyerId;
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public String getCaseType() {
+		return caseType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setCaseType(String caseType) {
+		this.caseType = caseType;
+	}
+
+	public String getParentType() {
+		return parentType;
+	}
+
+	public void setParentType(String parentType) {
+		this.parentType = parentType;
 	}
 
 	public String getSubType() {
@@ -50,5 +66,29 @@ public class CasesDto {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public List<String> getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(List<String> question) {
+		this.question = question;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getLawyerId() {
+		return lawyerId;
+	}
+
+	public void setLawyerId(String lawyerId) {
+		this.lawyerId = lawyerId;
 	}
 }

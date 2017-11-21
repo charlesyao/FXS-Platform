@@ -13,9 +13,9 @@
 			</ol>
 			<h1 class="blue">填写纠纷基本信息</h1>
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn" id="disputeInfo">
-				<h3 th:text="${rootQuestion.description}"></h3>
+				<h3 th:text="${question.question.description}"></h3>
 				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="answer : ${answers}">
+					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}">
 						<li class="introcoupCell btnSquare">
 							<a href="" th:id="${answer.nextQuestionId}" th:text="${answer.description}"></a>
 						</li>
@@ -31,33 +31,25 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
-	<script type="text/html" id="thymeleafTable">
-	<h3></h3>
-	<div class="row">
-		<ul class="col-md-2 col-sm-2" th:each="ans : ${qaList}">
-			<li class="introcoupCell btnSquare">
-				<a th:href="@{/public/question/{id}(id=${ans.nextQuestionId})}" th:id="${ans.id}" th:text="${ans.description}"></a>
-			</li>
-		</ul>
-	</div>
-	</script> 
-
-	<script type="text/javascript">
-	$(function() {
-		$("#disputeInfo a").on("click", function(e) {
-			e.preventDefault()
-			$.ajax({
-				type : 'GET',
-				url : '/public/question/' + $(this).attr("id"),
-				success : function(data) {
-					console.log($("#thymeleafTable").html())
-					$("#disputeInfo").append($("#thymeleafTable").html());  
-				},
-				error : function(error) {
-				}
-			});
+	<script th:inline="javascript">
+	
+	    $(function() {
+			$("#disputeInfo a").on("click", function(e) {
+				e.preventDefault()
+				$.ajax({
+					type : 'GET',
+					url : '/public/question/' + $(this).attr("id"),
+					success : function(data) {
+						/*<![CDATA[*/
+						var message = [[${questionItem}]];
+					    console.log(message); 
+					    /*]]>*/
+					},
+					error : function(error) {
+					}
+				});
+			})
 		})
-	})
 	</script>
 </body>
 </html>

@@ -57,45 +57,36 @@ public class CasesController {
 	
 
 	/**
-	 * 提交法律咨询信息
+	 * 提交案件信息，包括免费法律咨询，打官司案件
 	 * 
 	 * @param cases
 	 * @return
 	 */
-	@PostMapping("/{caseType}")
-	public ResponseMessage<Cases> create(@PathVariable String caseType, @Valid @RequestBody Cases cases) {
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.case.save"),
-				casesService.create(cases));
+	@PostMapping
+	public ResponseMessage<Cases> create(@Valid @RequestBody Cases cases) {
+		return Result.success(casesService.create(cases));
 	}
 
 	/**
-	 * 获取所有案件
+	 * 获取所有案件，针对律师的案件池
 	 * 
 	 * @return
 	 */
 	@GetMapping
 	public ResponseMessage<List<CasesDto>> query() {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] {}),
-				casesService.findAll());
+		return Result.success(casesService.findAll());
 	}
 
 	/**
-	 * 根据法律咨询类型获取 type: 免费/电话 例如： 当事人查询电话咨询或者自助打官司案件 或者免费法律咨询或者找律师打的官司
+	 * 根据不同类型获取案件 
 	 * 
-	 * @see com.fxs.platform.utils.CaseType
-	 * @see com.fxs.platform.utils.CaseSubType
-	 * 
-	 * @param type
 	 * @return
 	 */
-	/*@GetMapping("/{type}/{subType}")
-	public ResponseMessage<List<CasesDto>> query(@PathVariable String type, @PathVariable String subType) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { type }),
-				casesService.findByTypeAndSubType(type, subType));
-	}*/
-
+	@GetMapping("/type/{caseType}")
+	public ResponseMessage<List<CasesDto>> queryByType(@PathVariable String caseType) {
+		return Result.success(casesService.findByType(caseType));
+	}
+	
 	/**
 	 * 根据状态获取case
 	 * 
@@ -104,11 +95,9 @@ public class CasesController {
 	 * @param status
 	 * @return
 	 */
-	@GetMapping("/{status}")
-	public ResponseMessage<List<CasesDto>> query(@PathVariable String status) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { status }),
-				casesService.findByStatus(status));
+	@GetMapping("/status/{status}")
+	public ResponseMessage<List<CasesDto>> queryByStatus(@PathVariable String status) {
+		return Result.success(casesService.findByStatus(status));
 	}
 
 	/**
@@ -119,11 +108,15 @@ public class CasesController {
 	 */
 	@GetMapping("/{caseId}")
 	public ResponseMessage<Cases> viewDetail(@PathVariable String caseId) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { caseId }),
-				casesService.findByCaseId(caseId));
+		return Result.success(casesService.findByCaseId(caseId));
 	}
 
+	/**
+	 * 更新case信息
+	 * @param caseId
+	 * @param cases
+	 * @return
+	 */
 	@PutMapping("/{caseId}")
 	public ResponseMessage<Cases> update(@PathVariable String caseId, @Valid @RequestBody Cases cases) {
 		return Result.success(

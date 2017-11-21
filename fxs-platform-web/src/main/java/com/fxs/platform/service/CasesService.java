@@ -21,4 +21,7 @@ public interface CasesService {
 	Cases findByCaseId(String caseId);
 	
 	Cases update(String caseId, Cases cases);
+
+	//我的免费咨询和我的法律咨询
+	List<CasesDto> findByType(String caseType);
 }
