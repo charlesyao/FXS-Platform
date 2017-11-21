@@ -24,4 +24,6 @@ public interface CasesService {
 
 	//我的免费咨询和我的法律咨询
 	List<CasesDto> findByType(String caseType);
+	
+	List<Reservation> findAllReservation();
 }

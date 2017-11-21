@@ -4,12 +4,14 @@ public enum CaseType {
 	/**
 	 * 打官司
 	 */
-	CONSULTATION("0"), 
+	CONSULTING("0"), 
 	
 	/**
 	 * 法律咨询
 	 */
-	LAWSUIT("1");
+	LAWSUIT("1"),
+	
+	RESERVATION("2");
 
 	private String type;
 

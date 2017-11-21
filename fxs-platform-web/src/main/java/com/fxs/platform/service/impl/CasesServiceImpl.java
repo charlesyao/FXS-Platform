@@ -38,6 +38,12 @@ public class CasesServiceImpl implements CasesService {
 	@Override
 	public Reservation create(Reservation reservation) {
 
+		if (!ObjectUtils.isEmpty(user)) {
+			reservation.setUserId(String.valueOf(user.getId()));
+		} else {
+			reservation.setUserId("匿名用户");
+		}
+		
 		return reservationRepository.save(reservation);
 	}
 	
@@ -79,5 +85,10 @@ public class CasesServiceImpl implements CasesService {
 
 		BeanUtils.copyProperties(cases, c);
 		return caseRepository.saveAndFlush(c);
+	}
+
+	@Override
+	public List<Reservation> findAllReservation() {
+		return reservationRepository.queryAll(String.valueOf(user.getId()));
 	}
 }

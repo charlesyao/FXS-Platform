@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
+import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
 
@@ -26,6 +27,9 @@ public class RouterController {
 
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	CasesService casesService;
 
 	@ModelAttribute("roles")
 	public List<UserProfile> initializeProfiles() {
@@ -105,14 +109,19 @@ public class RouterController {
 		} else if (userRole.equals("litigant")) {//当事人页面路由
 			if(caseType.equals("consulting")) {
 				if (action.equals("free")) {
+					//获取免费咨询信息列表
+					map.addAttribute("myFreeConsultings", casesService.findByType(caseType));
 					target = "litigant_consulting_free";
 				} else if (action.equals("phone")) {
+					//获取所有电话咨询信息列表
+					map.addAttribute("myFreeConsultings", casesService.findAllReservation());
 					target = "litigant_consulting_phone";
 				}
 			} else if (caseType.equals("lawsuit")) {
+				//获取当事人的打官司信息列表
+				map.addAttribute("myLawsuit", casesService.findByType(caseType));
 				target = "litigant_lawsuit";
 			}
-
 		} else if (userRole.equals("lawyer")) {//律师页面路由
 			
 		}

@@ -37,7 +37,7 @@ public class CasesController {
     HttpSession session;
 	
 	/**
-	 * 提交法律咨询信息
+	 * 当事人提交电话咨询信息
 	 * 
 	 * @see com.fxs.platform.utils.ConsultationType
 	 * @param consultation
@@ -45,16 +45,22 @@ public class CasesController {
 	 */
 	@PostMapping("/reservation")
 	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation reservation) {
-		User user = (User) session.getAttribute("userInfo");
-
-		if (!ObjectUtils.isEmpty(user)) {
-			reservation.setUserId(String.valueOf(user.getId()));
-		} else {
-			reservation.setUserId("匿名用户");
-		}
+		
 		return Result.success(casesService.create(reservation));
 	}
 	
+	/**
+	 * 查询当事人的所有的电话咨询自信息
+	 * 
+	 * @see com.fxs.platform.utils.ConsultationType
+	 * @param consultation
+	 * @return
+	 */
+	@GetMapping("/reservation")
+	public ResponseMessage<List<Reservation>> getreservation() {
+		
+		return Result.success(casesService.findAllReservation());
+	}
 
 	/**
 	 * 提交案件信息，包括免费法律咨询，打官司案件
@@ -88,7 +94,7 @@ public class CasesController {
 	}
 	
 	/**
-	 * 根据状态获取case
+	 * 根据状态获取案件
 	 * 
 	 * @see com.fxs.platform.utils.CaseStatus
 	 * 
