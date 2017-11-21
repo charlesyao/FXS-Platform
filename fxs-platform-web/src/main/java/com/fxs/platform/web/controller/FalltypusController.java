@@ -2,12 +2,14 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
+import com.fxs.platform.utils.SystemConstants;
 
 /**
  * 案件类型控制器类
@@ -44,6 +47,9 @@ public class FalltypusController {
 
 	@Autowired
 	private AnswerService answerService;
+	
+	@Autowired
+	HttpSession session;
 
 	@PostMapping
 	@ResponseBody
@@ -69,17 +75,31 @@ public class FalltypusController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/{caseType}/{id}")
-	public String getSubFalltypusForConsultation(@PathVariable String caseType, @PathVariable String id, ModelMap map) {
+	@GetMapping("/{level}/{caseType}/{id}")
+	public String getSubFalltypusForConsultation(
+					@PathVariable String level, 
+					@PathVariable String caseType, 
+					@PathVariable String id, 
+					ModelMap map,
+					@ModelAttribute("question") Question question) {
+		
+		if (level.equals(SystemConstants.FALLTYPUS_LEVEL1_TYPE)) {
+			
+			session.setAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE, id);
+		} else if (level.equals(SystemConstants.FALLTYPUS_LEVEL2_TYPE)) {
+			
+			session.setAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE, id);
+		}
+		
 		String target = "";
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
 
 		if (subFalltypusList.size() == 0) {// 判断没有子类型
 
-			Question question = questionService.findRootQuestion();
-			List<Answer> answerList = answerService.getAllAnswerByQuestionId(question.getId());
+			Question rootQuestion = questionService.findRootQuestion();
+			List<Answer> answerList = answerService.getAllAnswerByQuestionId(rootQuestion.getId());
 
-			map.addAttribute("rootQuestion", question);
+			map.addAttribute("rootQuestion", rootQuestion);
 			map.addAttribute("answers", answerList);
 
 			if (caseType.equals("consulting")) {// 咨询跳转路由

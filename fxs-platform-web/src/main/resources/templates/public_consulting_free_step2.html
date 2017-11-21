@@ -12,117 +12,16 @@
 				<li class="active">填写纠纷基本信息</li>
 			</ol>
 			<h1 class="blue">填写纠纷基本信息</h1>
-			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn">
+			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn" id="disputeInfo">
 				<h3 th:text="${rootQuestion.description}"></h3>
 				<div class="row">
 					<ul class="col-md-2 col-sm-2" th:each="answer : ${answers}">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/public/question/{id}(id=${answer.nextQuestionId})}" th:id="${answer.id}" th:text="${answer.description}"></a>
+							<a href="" th:id="${answer.nextQuestionId}" th:text="${answer.description}"></a>
 						</li>
 					</ul>
 				</div>
-				<h3 class="space10">请问您本次咨询的主要目的是？</h3>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">纠纷已经发生，想咨询如何解决该纠纷</a></li>
-					</ul>
-				</div>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare cur"><a href="#">纠纷尚未发生，想咨询法律程序、风险等问题</a></li>
-					</ul>
-				</div>
-				<h3 class="space10">您家人的纠纷对象住所地在哪里？</h3>
-				<h4 class="gray">提示：如纠纷对象为个人，请填写纠纷对象的长期住所地，如纠纷对象为企业，请填写企业经营地点或者注册地点。如以上地点均无法获知，请填写纠纷发生地点。</h4>
-				<div class="row">
-					<div class="form-group col-md-4 col-sm-12">
-						<select class="form-control">
-							<option value="">选择您的所在地</option>
-						</select>
-					</div>
-				</div>
-				<h3 class="space10">纠纷是否已由法院判决或裁定？</h3>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">纠纷是否已由法院判决或裁定？</a></li>
-					</ul>
-				</div>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">是 -
-								已收到一审判决书或驳回起诉裁定书</a></li>
-					</ul>
-				</div>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">是 -
-								已收到二审判决书或驳回起诉裁定书</a></li>
-					</ul>
-				</div>
-				<h3 class="space10">请输入时间</h3>
-				<div class="row">
-					<div class="form-group col-md-3 col-sm-3">
-						<select class="form-control">
-							<option value="">请选择</option>
-							<option value="">2017</option>
-							<option value="">2016</option>
-							<option value="">2015</option>
-							<option value="">2014</option>
-						</select>
-					</div>
-					<div class="form-group col-md-1 col-sm-1 sLabel">
-						<label>年</label>
-					</div>
-					<div class="form-group col-md-3 col-sm-3">
-						<select class="form-control">
-							<option value="">请选择</option>
-							<option value="">12</option>
-							<option value="">11</option>
-							<option value="">10</option>
-							<option value="">9</option>
-						</select>
-					</div>
-					<div class="form-group col-md-1 col-sm-1 sLabel">
-						<label>月</label>
-					</div>
-				</div>
-				<h3 class="space10">您家人对法院判决或仲裁裁决的态度？</h3>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">不满意法院判决或仲裁裁决</a></li>
-					</ul>
-				</div>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">满意法院判决或仲裁裁决，但对方不满意</a></li>
-					</ul>
-				</div>
-				<div class="row">
-					<ul class="col-md-7 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">双方均不满意法院判决或仲裁裁决</a></li>
-					</ul>
-				</div>
-				<h3 class="space10">您希望委托律师处理什么问题？</h3>
-				<div class="row">
-					<ul class="col-md-4 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">准备上诉</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">准备对方上诉时应诉</a></li>
-					</ul>
-					<ul class="col-md-4 col-sm-12">
-						<li class="introcoupCell btnSquare"><a href="#">想找律师代理强制执行</a></li>
-					</ul>
-				</div>
-				<h3>您家人在原案件中是？</h3>
-				<div class="row">
-					<ul class="col-md-2 col-sm-2">
-						<li class="introcoupCell btnSquare"><a href="#">原告</a></li>
-					</ul>
-					<ul class="col-md-2 col-sm-2">
-						<li class="introcoupCell btnSquare"><a href="#">被告</a></li>
-					</ul>
-				</div>
+				
 				<div class="row">
 					<div class="col-md-12 col-sm-12 btnNext">
 						<a type="button" class="btn btn-primary btn-lg" th:href="@{/public/case/consulting/next}">下一步</a>
@@ -132,5 +31,33 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<script type="text/html" id="thymeleafTable">
+	<h3></h3>
+	<div class="row">
+		<ul class="col-md-2 col-sm-2" th:each="ans : ${qaList}">
+			<li class="introcoupCell btnSquare">
+				<a th:href="@{/public/question/{id}(id=${ans.nextQuestionId})}" th:id="${ans.id}" th:text="${ans.description}"></a>
+			</li>
+		</ul>
+	</div>
+	</script> 
+
+	<script type="text/javascript">
+	$(function() {
+		$("#disputeInfo a").on("click", function(e) {
+			e.preventDefault()
+			$.ajax({
+				type : 'GET',
+				url : '/public/question/' + $(this).attr("id"),
+				success : function(data) {
+					console.log($("#thymeleafTable").html())
+					$("#disputeInfo").append($("#thymeleafTable").html());  
+				},
+				error : function(error) {
+				}
+			});
+		})
+	})
+	</script>
 </body>
 </html>

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -28,32 +29,12 @@ public class Question {
 
 	private String isRootQuestion;
 
-	/*
-	 * @Transient private List<String> answers;
-	 */
-
-	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Answer> answers;
+	@Transient
+	private List<String> answers;
 
 	@ManyToOne
 	@JoinColumn(name = "cases_id")
 	private Cases cases;
-
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "disputeInfo_id") private DisputeInfo disputeInfo;
-	 */
-
-	public Question() {
-	}
-
-	public Question(int id, String description/* , DisputeInfo disputeInfo */) {
-		super();
-		this.id = id;
-		this.description = description;
-		// this.disputeInfo = disputeInfo;
-	}
 
 	@Override
 	public String toString() {
@@ -76,20 +57,13 @@ public class Question {
 		this.description = description;
 	}
 
-	public List<Answer> getAnswers() {
+	public List<String> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(List<Answer> answers) {
+	public void setAnswers(List<String> answers) {
 		this.answers = answers;
 	}
-
-	/*
-	 * public DisputeInfo getDisputeInfo() { return disputeInfo; }
-	 * 
-	 * public void setDisputeInfo(DisputeInfo disputeInfo) { this.disputeInfo =
-	 * disputeInfo; }
-	 */
 
 	public String getIsRootQuestion() {
 		return isRootQuestion;

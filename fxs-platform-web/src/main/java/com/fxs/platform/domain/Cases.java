@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -36,8 +37,8 @@ public class Cases {
 	 */
 	private String status;
 
-	@OneToMany(mappedBy = "cases", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Question> question;
+	@Transient
+	private List<String> question;
 
 	private String userId;
 
@@ -67,11 +68,11 @@ public class Cases {
 		this.status = status;
 	}
 
-	public List<Question> getQuestion() {
+	public List<String> getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(List<Question> question) {
+	public void setQuestion(List<String> question) {
 		this.question = question;
 	}
 

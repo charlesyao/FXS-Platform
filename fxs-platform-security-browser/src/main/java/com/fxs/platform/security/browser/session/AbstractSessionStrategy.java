@@ -68,6 +68,8 @@ public class AbstractSessionStrategy {
 			redirectStrategy.sendRedirect(request, response, targetUrl);
 		} else if (sourceUrl.equals("/")) {//application home page
 			redirectStrategy.sendRedirect(request, response, "/");
+		} else if (StringUtils.startsWithIgnoreCase(sourceUrl, "/public")) {
+			redirectStrategy.sendRedirect(request, response, sourceUrl);
 		} else {
 			Object result = buildResponseContent(request);
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());

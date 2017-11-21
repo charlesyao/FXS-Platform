@@ -24,18 +24,6 @@ public class Answer {
 	
 	private int nextQuestionId;
 
-	public Answer() {
-
-	}
-
-	public Answer(int id, String description, Question question, int nextQuestionId) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.question = question;
-		this.nextQuestionId = nextQuestionId;
-	}
-
 	public int getId() {
 		return id;
 	}
