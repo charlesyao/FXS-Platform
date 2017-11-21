@@ -1,0 +1,275 @@
+h1 {
+    font-size: 26px;
+        font-weight: 400;
+}
+body{
+    background-color: #f7f7f7;
+}
+.containerWapper{
+    background-color: #fff;
+    float: left;
+    width: 100%;
+    z-index: 1;
+    min-height: 570px;
+    padding: 0 50px 30px;
+}
+.form-control{
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.mainPart{
+    min-height: 650px;
+}
+.marginTop30{
+    margin-top: 50px;
+}
+.mainPart .container .containerWapper h1{
+    margin-top: 5%;
+}
+footer{
+    z-index: 999;
+    float: left;
+    width: 100%;
+}
+/*---counseling_free----*/
+.mainPart .container h1{
+    margin: 50px 0 10px 0;
+}
+
+.introcouPhone .btnSquare a{
+    font-size: 16px;
+    font-weight: 100;
+}
+.counseling_free{
+    margin-top: 40px;
+}
+.counseling_free .btnSquare a{
+    padding: 15px 0;
+}
+.btnNext button{
+    margin: 60px 0 80px;
+}
+.btnNext button.haveA{
+    margin-bottom: 10px;
+}
+
+/*---counseling_free_step1----*/
+.introcouPhone .btnSquare a{
+    font-size: 16px;
+    padding: 15px 0;
+}
+.mainPart .container .step1{
+    margin-top: 20px;
+}
+
+/*---counseling_free_step2----*/
+.step2Step{
+    margin: 50px auto 0;
+}
+.introcouPhone .btnSquare a.step2Line1{
+    padding: 5px 0;
+}
+.sBtn h3{
+    font-weight: 100;
+}
+h4.gray {
+    font-weight: 100;
+}
+label {
+    font-weight: 100;
+}
+
+/*---counseling_free_step3----*/
+.writeInfoRightTitle li{
+    font-size: 14px;
+    font-weight: 400;
+    padding: 15px 0;
+}
+.writeInfoRightItem li{
+    margin: 10px 0;
+    font-size: 12px;
+}
+.writeInfoRightItem{
+    padding: 10px 20px;
+}
+.writeInfo .row .writeInfoRight{
+    min-height: 200px;
+}
+.step3 .form-control{
+    background: none;
+}
+.btnNext a.seeMore{
+    margin: 0 auto 100px;
+}
+
+
+.lawsuit-content{
+    margin-top: 30px;
+}
+
+
+/*---login----*/
+.login-logo{
+    width: 230px;
+    margin: 0 auto;
+}
+.loginInput .form-group .form-control{
+    background: none;
+}
+.login-loginBTN{
+    color: #fff;
+    padding:.5rem 3rem;
+}
+.loginWapper{
+    margin-top: 12%;
+}
+.login-BG img{
+    width: 99%;
+}
+.signupBox{
+    width: 70%;
+}
+.loginInput .signupTitle button{
+    margin-top: 30px;
+}
+.login-header{
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: #CFB87E;
+}
+.loginInput .checkbox label{
+    margin-left: 15px;
+}
+.login-loginBTN:hover{
+    color: #fff;
+}
+.loginInput .form-group .form-controlBG{
+    background: url(../img/arrow.png) no-repeat right #fff;
+}
+.LawsignupBox{
+    padding-top: 0;
+    margin-top: 0;
+}
+.loginlaw{
+    margin-top: 6%;
+}
+.loginlawLeft{
+    margin-top: 6%;
+}
+.loginBGWhite{
+    background-color: #fff;
+}
+/*---index----*/
+.headerRight .loginBox{
+    float: right;
+    margin: 5px 0 0 ;
+}
+.headerline{
+    float: left;
+    width: 100%;
+}
+.loginBox .mainNav{
+    margin: 0;
+}
+.loginBox .mainNav li{
+    margin-top: 0;
+}
+.mapId{
+    margin-left: 20px;
+}
+footer.indexFooter{
+    background-color: transparent;
+}
+.logoLine{
+    margin: 10px 0;
+}
+.homeInner{
+    margin-top: 17%;
+}
+.homeInner .mainBannerTitle{
+    margin: 10px 0 40px 0;
+}
+.searchNow{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.searchBox div{
+    margin: 0 auto;
+}
+.searchBox div input,
+.searchBox div button{
+    height: 50px;
+    padding: 0 20px;
+}
+.searchBox div button{
+    font-size: 14px;
+    padding: 0 30px;
+}
+
+
+/*---lawsuit----*/
+.lawsuit-content h3.heading{
+    margin-top: 5%;
+}
+.lawsuit-content p,
+.lawsuit-content p{
+    margin-bottom: 40px;
+}
+.lawsuit-content h3.heading{
+    margin-top: 3%;
+}
+.solutionTwoBtn{
+    margin: 30px 0 10px;
+}
+
+/*----mycase-----*/
+.mycasePart{
+    padding-top: 55px;
+}
+.mycaseLabel{
+    text-align: right; 
+}
+.mycaseCheckBox{
+    margin-left: -5px;
+}
+.mycasebtnSearch button{
+    margin: 20px 0;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+/*----center---*/
+.sLabelOne{
+    padding-left: 0;
+}
+.sLabelOneUl li label{
+    margin-right: 20px;
+}
+.laybtnSearch button{
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 20px 0;
+}
+.writeInfoText .listTitle{
+    border-top: none;
+    background:transparent;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.centerLi li{
+    margin-bottom: 10px;
+}
+.caseTwoBtn button{
+    margin: 0 15px;
+}
+
+
+
+
+
+
+

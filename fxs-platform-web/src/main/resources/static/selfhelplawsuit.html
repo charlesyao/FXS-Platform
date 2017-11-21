@@ -8,6 +8,7 @@
       <link rel="stylesheet" type="text/css" href="css/header.css">
       <link rel="stylesheet" type="text/css" href="css/footer.css">
      <link rel="stylesheet" type="text/css" href="css/customer.css">
+     <link rel="stylesheet" type="text/css" href="css/css.css">
      <script src="bootstrap/js/jquery.min.js"></script>
      <script src="bootstrap/js/bootstrap.min.js"></script>
      
@@ -18,67 +19,56 @@
  <body>
   <div class="topBar col-md-12">
     <div class="container">
-     <ul class="nav loginBox">
-      <li><a href="my.html" target="_self">个人中心</a><span>|</span></li>
-       <li><a href="#" target="_self">关于我们</a><span>|</span></li>
-       <li><a href="laywer_sign.html" target="_self">律师入口</a></li>                           
-
-     </ul>
-    <ul class="clearboth"></ul>
-    
-    </div>
-    <div class="line"></div>
-
-    <div class="container">
       <div class="row">
-        <div class="col-md-3">
-          <img src="img/logo.png">
-
+        <div class="col-md-4">
+          <div>
+            <p class="logoLine"><img src="img/logo.png"><span class="mapId">上海</span></p>
+          </div>
         </div>
-        <div class="col-md-1 mapId">上海</div>
-        <nav class="col-md-8 navbar-default" role="navigation">
-          <ul class="nav mainNav" >
-            <li class="active"><a href="index.html">首页</a></li>
-            <li class="dropdown">
-              <a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown">
-                法律咨询
-                
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="counseling_free.html">免费法律咨询</a></li>
-                <li class="divider"></li>
-                <li><a href="counseling.html">电话咨询</a></li>
+        <div class="col-md-8 headerRight">
+          <div class="headerline">
+            <div class="loginBox">
+              <ul class="nav loginBox">
+                <li><a href="login_login.html" target="_self">登录</a><span>|</span></li>
+                <li><a href="login_sign.html" target="_self">注册</a><span>|</span></li>
+                <li><a href="#" target="_self">关于我们</a><span>|</span></li>
+                <li><a href="laywer_sign.html" target="_self">律师入口</a></li>                  
               </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                打官司
-                
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="lawsuit.html">找律师打官司</a></li>
-                <li class="divider"></li>
-                <li><a href="selfhelplawsuit.html">自助打官司</a></li>
-              </ul>
-            </li>
-            <li><a href="#">其他法律业务</a></li>
-            <li class="lastItem"><a href="#">投诉</a></li>
-            
-          </ul>
-                                        
-
-        </nav>
+            </div>
+          </div>
+          <div class="headerline">
+            <div class="loginBox">
+              <nav class="navbar-default" role="navigation">
+                <ul class="nav mainNav" >
+                  <li class="active"><a href="index.html">首页</a></li>
+                  <li class="dropdown">
+                    <a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown">
+                      法律咨询</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="counseling_free.html">免费法律咨询</a></li>
+                      <li class="divider"></li>
+                      <li><a href="counseling.html">电话咨询</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      打官司
+                      
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="lawsuit.html">找律师打官司</a></li>
+                      <li class="divider"></li>
+                      <li><a href="selfhelplawsuit.html">自助打官司</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">其他法律业务</a></li>
+                  <li class="lastItem"><a href="#">投诉</a></li>                  
+                </ul>                                           
+              </nav>
+            </div>
+          </div>
+        </div>
       </div>
-      
-     
- 
-
-
-
-
-
-
-
     </div>
 
 
@@ -86,21 +76,23 @@
   </div>
   <div class="mainPart">
   	<div class="container">
-	    <h1>自助打官司</h1>
-	    <p>律师帮您扫除专业障碍，让您自己就能轻松打官司。</p>
-		  <div class="video">
-       <embed height="415" width="544" quality="high" allowfullscreen="true" type="application/x-shockwave-flash" src="//static.hdslb.com/miniloader.swf" flashvars="aid=15866376&page=1" pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
-	    </div>
+      <div class="containerWapper">
+  	    <h1>自助打官司</h1>
+  	    <p>律师帮您扫除专业障碍，让您自己就能轻松打官司。</p>
+  		  <div class="video">
+         
+  	    </div>
+      </div>
   	</div>
   </div>
 
   <footer>
-  <ul class="list-group">
-    <li>© 2013-2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2</li>
-    <li>地址：上海市静安区XXXXXXXXX</li>
-    <li></li>
-    <li>沪公网安备 31011002000396号</li>
-  </ul>
+    <ul class="list-group">
+      <li>© 2013-2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2</li>
+      <li>地址：上海市静安区XXXXXXXXX</li>
+      <li></li>
+      <li>沪公网安备 31011002000396号</li>
+    </ul>
   </footer>
  
 
