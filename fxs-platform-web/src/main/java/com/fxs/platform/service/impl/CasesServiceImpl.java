@@ -19,6 +19,7 @@ import com.fxs.platform.repository.ReservationRepository;
 import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseStatus;
+import com.fxs.platform.utils.SystemConstants;
 
 @Service
 @Transactional
@@ -33,11 +34,12 @@ public class CasesServiceImpl implements CasesService {
 	@Autowired
 	ReservationRepository reservationRepository;
 	
-	User user = (User)(session.getAttribute("userInfo"));
-
+	@Autowired
+	HttpSession httpSession;
+	
 	@Override
 	public Reservation create(Reservation reservation) {
-
+		User user = (User)(session.getAttribute("userInfo"));
 		if (!ObjectUtils.isEmpty(user)) {
 			reservation.setUserId(String.valueOf(user.getId()));
 		} else {
@@ -49,7 +51,15 @@ public class CasesServiceImpl implements CasesService {
 	
 	@Override
 	public Cases create(Cases cases) {
+		User user = (User)(session.getAttribute("userInfo"));
+		String parentFalltypusType = String.valueOf(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE));
+		String subTypeFalltypusType = String.valueOf(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE));
+		
+		cases.setParentType(parentFalltypusType);
+		cases.setSubType(subTypeFalltypusType);
+		cases.setUserId(String.valueOf(user.getId()));
 		cases.setStatus(CaseStatus.NEW.getStatus());
+		
 		return caseRepository.save(cases);
 	}
 
@@ -60,13 +70,13 @@ public class CasesServiceImpl implements CasesService {
 
 	@Override
 	public List<CasesDto> findByStatus(String status) {
-		
+		User user = (User)(session.getAttribute("userInfo"));
 		return caseRepository.findByStatus(String.valueOf(user.getId()), status);
 	}
 	
 	@Override
 	public List<CasesDto> findByType(String caseType) {
-
+		User user = (User)(session.getAttribute("userInfo"));
 		return caseRepository.findByType(String.valueOf(user.getId()), caseType);
 	}
 	
@@ -89,6 +99,7 @@ public class CasesServiceImpl implements CasesService {
 
 	@Override
 	public List<Reservation> findAllReservation() {
+		User user = (User)(session.getAttribute("userInfo"));
 		return reservationRepository.queryAll(String.valueOf(user.getId()));
 	}
 }

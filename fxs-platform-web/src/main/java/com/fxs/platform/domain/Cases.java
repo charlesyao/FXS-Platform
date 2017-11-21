@@ -1,6 +1,7 @@
 package com.fxs.platform.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,7 +39,10 @@ public class Cases {
 	private String status;
 
 	@Transient
-	private List<String> question;
+	private Map<Integer, Object[]> qaMap;
+	
+	//免费法律咨询额外信息
+	private String comments;
 
 	private String userId;
 
@@ -68,12 +72,12 @@ public class Cases {
 		this.status = status;
 	}
 
-	public List<String> getQuestion() {
-		return question;
+	public Map<Integer, Object[]> getQaMap() {
+		return qaMap;
 	}
 
-	public void setQuestion(List<String> question) {
-		this.question = question;
+	public void setQaMap(Map<Integer, Object[]> qaMap) {
+		this.qaMap = qaMap;
 	}
 
 	public String getUserId() {
@@ -108,4 +112,12 @@ public class Cases {
 		this.subType = subType;
 	}
 
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	
 }

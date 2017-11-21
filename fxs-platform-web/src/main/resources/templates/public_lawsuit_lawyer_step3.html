@@ -21,9 +21,9 @@
 					查看经典案例 ]</a>
 			</p>
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn">
-				<h3 th:text="${rootQuestion.description}"></h3>
+				<h3 th:text="${question.question.description}"></h3>
 				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="answer : ${answers}">
+					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}">
 						<li class="introcoupCell btnSquare">
 							<a th:href="@{/public/question/{id}(id=${answer.nextQuestionId})}" th:id="${answer.id}" th:text="${answer.description}"></a>
 						</li>

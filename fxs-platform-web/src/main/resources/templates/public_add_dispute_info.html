@@ -15,35 +15,20 @@
 				<tr valign="top" align="center">
     				<td align="center">
  						<form th:action="@{/disputeInfo/createDisputeInfo}" th:method="post" th:object="${disputeInfo}">
-							<table width="700" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">	
-								<tr>
-									<td width="50" align="right">纷争名称</td>
-									<td width="50">
-										<input th:field="*{description}"/>
-									</td>
-								</tr>
-								<tr>
-									<td width="50" align="right">状态</td>
-									<td>						
-										<select th:field="*{status}">
-								            <option th:value="Completed" label="Completed"/>
-								            <option th:value="Incomplete" label="Incomplete"/>
-								        </select>						
-									</td>					
-								</tr>
-							</table>
 							<table width="700" style="border-collapse: collapse;" border="0" bordercolor="#006699" 
-								cellspacing="2" cellpadding="2">						
+								cellspacing="2" cellpadding="2">				
 								<tr id='TextBoxesGroups'>			
 									<td id='TextBoxesGroup'>				
 										<div >
 											<div id="TextBoxDiv1">
+												纷争名称 :
+												<input type="text" size="50" th:field="*{description}"/>
+												<br /><br />
 												问题 #1 :
-												<input type="text" cols="29" rows="3" th:field="*{question}" />
+												<input type="text" size="50" th:field="*{question}" />
 												<br /><br />
 												是否选为根问题？
 												<input type="radio" th:value="Y" th:text="是" cols="29" rows="3" th:field="*{isRootQuestion}" />
-												<br /><br />
 												<input type="radio" th:value="N" th:text="否" cols="29" rows="3" th:field="*{isRootQuestion}" />
 												<br /><br />
 												答案 #1 : &nbsp; 
