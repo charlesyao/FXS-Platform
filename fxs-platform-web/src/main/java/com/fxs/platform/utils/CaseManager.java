@@ -12,6 +12,7 @@ import org.springframework.util.ObjectUtils;
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.CaseQuestionAnswerRel;
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.CaseQuestionAnswerRelDto;
 import com.fxs.platform.dto.CasesDto;
@@ -78,10 +79,20 @@ public class CaseManager {
 			CasesDto caseDto = new CasesDto();
 			BeanUtils.copyProperties(c, caseDto);
 			
-			caseDto.setParentType(falltypusRepository.findById(c.getParentType()).getName());
+			if (! ObjectUtils.isEmpty(c.getParentType())) {
+				Falltypus type = falltypusRepository.findById(c.getParentType());
+				
+				if (! ObjectUtils.isEmpty(type)) {
+					caseDto.setParentType(type.getName());
+				}
+			}
 			
 			if (! ObjectUtils.isEmpty(c.getSubType())) {
-				caseDto.setSubType(falltypusRepository.findById(c.getSubType()).getName());
+				Falltypus type = falltypusRepository.findById(c.getSubType());
+				
+				if (! ObjectUtils.isEmpty(type)) {
+					caseDto.setSubType(type.getName());
+				}
 			}
 			
 			List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
