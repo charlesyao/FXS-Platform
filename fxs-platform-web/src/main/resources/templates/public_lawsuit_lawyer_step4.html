@@ -41,7 +41,7 @@
 						<ul class="writeInfoText ulCell">
 							<form role="form">
 								<div class="form-group">
-									<textarea class="form-control" rows="10"
+									<textarea class="form-control" rows="10" id="freeComments"
 										placeholder="请至少输入20个字，详细描述问题有助于我们更好地帮助您"></textarea>
 								</div>
 							</form>
@@ -51,7 +51,7 @@
 						</ul>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 btnNext">
-								<a th:href="@{/public/case}" type="button" class="btn btn-primary btn-lg">提交咨询</a>
+								<a href="" type="button" id="submitLawsuit" class="btn btn-primary btn-lg">提交咨询</a>
 								<a href="#">[查看解答示例]</a>
 							</div>
 						</div>
@@ -75,5 +75,26 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<script type="text/javascript">
+		$(function() {
+			$("#submitLawsuit").on("click", (e) => {
+				e.preventDefault()
+				$.ajax({
+					type : 'POST',
+					url : '/public/case',
+					data : JSON.stringify({
+						"caseType": "1",
+						"comments": $("#freeComments").val()
+					}),
+					contentType : "application/json; charset=utf-8",
+					success : function(res) {
+						window.location.assign(res.data);
+					},
+					error : function(error) {
+					}
+				});
+			})
+		})
+	</script>
 </body>
 </html>

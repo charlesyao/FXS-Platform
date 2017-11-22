@@ -106,7 +106,7 @@ public class RouterController {
 					target = "litigant_consulting_free";
 				} else if (action.equals("phone")) {
 					//获取所有电话咨询信息列表
-					map.addAttribute("myFreeConsultings", casesService.findAllReservation());
+					map.addAttribute("myPhoneConsultings", casesService.findAllReservation());
 					target = "litigant_consulting_phone";
 				}
 			} else if (caseType.equals("lawsuit")) {

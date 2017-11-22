@@ -105,7 +105,7 @@ public class CasesController {
 	 */
 	@GetMapping
 	@ResponseBody
-	public ResponseMessage<List<Cases>> query() {
+	public ResponseMessage<List<CasesDto>> query() {
 		return Result.success(casesService.findAll());
 	}
 
@@ -140,13 +140,18 @@ public class CasesController {
 	 * @param caseId
 	 * @return
 	 */
-	@GetMapping("/viewDetail/{caseId}")
-	public String viewDetail(@PathVariable String caseId, ModelMap map) {
-		
+	@GetMapping("/{userRole}/viewDetail/{caseId}")
+	public String viewDetail(@PathVariable String userRole, @PathVariable String caseId, ModelMap map) {
+		String target = "";
 		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(
 				casesService.findByCaseId(caseId), caseQuestionAnswerRelRepository, falltypusRepository));
 		
-		return "litigant_consulting_free_detail";
+		if (userRole.equals("litigant")) {
+			target = "litigant_consulting_free_detail";
+		} else if (userRole.equals("lawyer")) {
+			target = "lawyer_case_detail";
+		}
+		return target;
 	}
 
 	/**

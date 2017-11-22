@@ -18,7 +18,7 @@ public interface CasesRepository extends FxsRepository<Cases> {
 	@Query("SELECT o FROM Cases o where o.id=?1")
 	Cases findOne(String caseId);
 	
-	@Query("SELECT o FROM Cases o where o.userId=?1 AND o.caseType=?2")
+	@Query("SELECT o FROM Cases o where o.userId=?1 AND o.caseType=?2 ORDER BY createAt DESC")
 	List<Cases> findByType(String userId, String caseType);
 	
 	@Query("UPDATE Cases o SET o.status =?1 where o.id=?2")

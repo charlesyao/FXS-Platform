@@ -67,7 +67,9 @@ public class CaseManager {
 		return repository.save(cases);
 	}
 	
-	public static List<CasesDto> caseWrapper(List<Cases> cases, CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository) {
+	public static List<CasesDto> caseWrapper(List<Cases> cases, 
+			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
+			FalltypusRepository falltypusRepository) {
 		
 		List<CasesDto> casesDtoList = new ArrayList<CasesDto>();
 		
@@ -75,6 +77,12 @@ public class CaseManager {
 		for (Cases c : cases) {
 			CasesDto caseDto = new CasesDto();
 			BeanUtils.copyProperties(c, caseDto);
+			
+			caseDto.setParentType(falltypusRepository.findById(c.getParentType()).getName());
+			
+			if (! ObjectUtils.isEmpty(c.getSubType())) {
+				caseDto.setSubType(falltypusRepository.findById(c.getSubType()).getName());
+			}
 			
 			List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 			

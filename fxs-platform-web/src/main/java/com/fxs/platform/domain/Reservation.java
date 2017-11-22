@@ -2,6 +2,7 @@ package com.fxs.platform.domain;
 
 import javax.persistence.*;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
@@ -32,7 +33,7 @@ public class Reservation implements Serializable {
 	/**
 	 * 当事人和律师预约电话联系的日期+时间
 	 */
-	private Date researvationDatetime;
+	private Date researvationDatetime = new Date();
 
 	/**
 	 * 当事人的联系方式
@@ -65,8 +66,8 @@ public class Reservation implements Serializable {
 		this.status = status;
 	}
 
-	public Date getResearvationDatetime() {
-		return researvationDatetime;
+	public String getResearvationDatetime() {
+		return DateFormatUtils.format(researvationDatetime, "yyyy-MM-dd HH:MM:SS");
 	}
 
 	public void setResearvationDatetime(Date researvationDatetime) {

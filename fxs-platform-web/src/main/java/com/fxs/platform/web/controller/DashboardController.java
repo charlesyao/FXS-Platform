@@ -19,6 +19,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
+import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.SystemConstants;
 
@@ -34,6 +35,9 @@ public class DashboardController {
 	
 	@Autowired
 	CasesRepository caseRepository;
+	
+	@Autowired
+	CasesService casesService;
 	
 	
 	@GetMapping("/dashboard")
@@ -62,6 +66,7 @@ public class DashboardController {
 		}
 
 		if (isLawyer(roles)) {
+			map.addAttribute("myBidCases", casesService.findAll());
 			target = "/lawyer_dashboard";
 		} else if (isAdmin(roles)) {
 			target = "/admin_dashboard";
