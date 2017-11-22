@@ -39,6 +39,11 @@ public class RouterController {
 	public String index(ModelMap map) throws Exception {
 		return "index";
 	}
+	
+	@GetMapping("/invalid-session")
+	public String invalidSession() throws Exception {
+		return "invalidSession";
+	}
 
 	@GetMapping("/user/signIn")
 	public String userSignIn() {

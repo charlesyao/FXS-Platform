@@ -71,10 +71,13 @@ public class AbstractSessionStrategy {
 		} else if (StringUtils.startsWithIgnoreCase(sourceUrl, "/public")) {
 			redirectStrategy.sendRedirect(request, response, sourceUrl);
 		} else {
+			redirectStrategy.sendRedirect(request, response, destinationUrl);
+			/*
 			Object result = buildResponseContent(request);
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(result));
+			*/
 		}
 
 	}

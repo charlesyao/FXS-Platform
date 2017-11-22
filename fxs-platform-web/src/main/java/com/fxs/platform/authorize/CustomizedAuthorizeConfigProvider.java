@@ -20,6 +20,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 		config
 			.antMatchers(
 					"/",
+					"/invalid-session",
 					"/autosave/**", 
 					"/lawyer/signIn",
 					"/user/*",
