@@ -1,15 +1,11 @@
 package com.fxs.platform.domain;
 
-import java.util.List;
-import java.util.Map;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -42,7 +38,12 @@ public class Cases {
 	
 	//免费法律咨询额外信息
 	private String comments;
-
+	
+	//免费法律咨询额外信息
+	private String lawyerComments;
+	
+	private Date createAt = new Date();
+	
 	private String userId;
 
 	private String lawyerId;
@@ -110,5 +111,20 @@ public class Cases {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
+
+	public String getLawyerComments() {
+		return lawyerComments;
+	}
+
+	public void setLawyerComments(String lawyerComments) {
+		this.lawyerComments = lawyerComments;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 }

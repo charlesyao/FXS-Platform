@@ -14,13 +14,15 @@ public interface CasesService {
 
 	//List<CasesDto> findByTypeAndSubType(String caseType, String subType);
 	
-	List<CasesDto> findAll();
+	List<Cases> findAll();
 	
-	List<CasesDto> findByStatus(String status);
+	List<Cases> findByStatus(String status);
 	
 	Cases findByCaseId(String caseId);
 	
 	Cases update(String caseId, Cases cases);
+	
+	void updateStatus(String statusCode, String caseId);
 
 	//我的免费咨询和我的法律咨询
 	List<CasesDto> findByType(String caseType);

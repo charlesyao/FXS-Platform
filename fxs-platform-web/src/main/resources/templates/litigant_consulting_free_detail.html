@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
+</head>
+<body>
+	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="mainPart">
+		<div class="container">
+			<div class="containerWapper">
+				<ol class="breadcrumb">
+					<li><a href="my.html">个人中心</a></li>
+					<li><a href="my_freelist.html">我的免费咨询</a></li>
+					<li class="active">问题详情</li>
+				</ol>
+				<h1 class="blue">我的问题</h1>
+				<section class="col-md-12 col-sm-12 writeInfo space20">
+					<div class="row">
+						<div class="col-md-10 col-sm-10">
+							<ul class="writeInfoText ulCell myCell">
+								<li class="orange">律师正在查看中，预计在24小时内为您提供解答。</li>
+								<li th:text="${caseDetailInfo.comments}"></li>
+								<li class="gray" th:text="${caseDetailInfo.createAt}"> <!--您可以在23分43秒内 <a href="">修改问题</a>--></li>
+								<li class="line"></li>
+								<li class="orange">您的案件类型</li>
+								<li th:text="${caseDetailInfo.parentType} + ' - ' + ${caseDetailInfo.subType}"></li>
+								<li class="line"></li>
+								<li class="orange">您的问卷调查信息</li>
+								<ul th:each="qa : ${caseDetailInfo.qaMapping}">
+									<li>问题: <span th:text="${qa.questionDesc}"></span></li>
+									<li>答案: <span th:text="${qa.answerDesc}"></span></li>
+									<li class="line"></li>
+								</ul>
+								<li class="line"></li>
+								<li class="orange">附加信息:</li>
+								<li th:text="${caseDetailInfo.comments}"></li>
+								<li class="line"></li>
+								<li><h5>法律分析</h5></li>
+								<li>对于问题描述，可以作如下分析：</li>
+								<li>尊敬的用户您好，您咨询的内容无有效信息，律师难以从法律的专业角度做出分析和判断。您可以参考提问示例，重新提交法律咨询，以便律师为您提供可靠的解答。</li>
+								<li class="gray">2017.11.06 10:57</li>
+								<div class="row mybox">
+									<div class="col-md-12 btnSearch solutionTwoBtn">
+										<button type="button" class="btn btn-primary btn-lg">追问</button>
+										&nbsp;&nbsp;
+										<button type="button" id="resolveDispute" class="btn btn-primary btn-lg">解决纠纷</button>
+									</div>
+								</div>
+							</ul>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<div class="writeInfoRight ulCell">
+								<ul class="writeInfoRightTitle">
+									<li>电话咨询</li>
+								</ul>
+
+								<ul class="writeInfoRightItem">
+									<li>立即响应</li>
+									<li>专业</li>
+									<li>高性价比</li>
+									<li>服务细节到位</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">提示信息</h4>
+		            </div>
+		            <div class="modal-body" id="modalContent"></div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<script th:inline="javascript">
+		$(function() {
+			$("#resolveDispute").on("click", function() {
+				$.ajax({
+					type : 'PUT',
+					url : '/public/case/update/' + [[${caseDetailInfo.id}]] + "/5",
+					data : JSON.stringify({}),
+					contentType : "application/json; charset=utf-8",
+					success : function(data) {
+						$("#modalContent").empty().append("更新成功")
+						$("#notificationModal").modal("show")
+					},
+					error : function(error) {
+						$("#modalContent").empty().append("更新失败")
+						$("#notificationModal").modal("show")
+					}
+				});
+			})
+		})
+	</script>
+</body>
+</html>

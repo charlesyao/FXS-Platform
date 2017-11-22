@@ -1,32 +1,35 @@
 package com.fxs.platform.dto;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Transient;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 public class CasesDto {
+	
 	private String id;
 
-	/**
-	 * @see com.fxs.platform.utils.CaseType
-	 */
 	private String caseType;
 
 	private String parentType;
 
 	private String subType;
 
-	/**
-	 * @see com.fxs.platform.utils.CaseStatus
-	 */
 	private String status;
-
-	@Transient
-	private List<String> question;
+	
+	//免费法律咨询额外信息
+	private String comments;
+	
+	private String lawyerComments;
+	
+	private Date createAt;
 
 	private String userId;
 
 	private String lawyerId;
+	
+	//List of QA mapping
+	private List<CaseQuestionAnswerRelDto> qaMapping;
 
 	public String getId() {
 		return id;
@@ -68,12 +71,12 @@ public class CasesDto {
 		this.status = status;
 	}
 
-	public List<String> getQuestion() {
-		return question;
+	public String getComments() {
+		return comments;
 	}
 
-	public void setQuestion(List<String> question) {
-		this.question = question;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	public String getUserId() {
@@ -90,5 +93,30 @@ public class CasesDto {
 
 	public void setLawyerId(String lawyerId) {
 		this.lawyerId = lawyerId;
+	}
+
+	public List<CaseQuestionAnswerRelDto> getQaMapping() {
+		return qaMapping;
+	}
+
+	public void setQaMapping(List<CaseQuestionAnswerRelDto> qaMapping) {
+		this.qaMapping = qaMapping;
+	}
+
+	public String getLawyerComments() {
+		return lawyerComments;
+	}
+
+	public void setLawyerComments(String lawyerComments) {
+		this.lawyerComments = lawyerComments;
+	}
+
+	public String getCreateAt() {
+		
+		return DateFormatUtils.format(createAt, "yyyy-mm-dd HH:MM:SS");
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 }

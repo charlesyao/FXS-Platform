@@ -20,4 +20,7 @@ public interface FalltypusRepository extends FxsRepository<Falltypus> {
 
 	@Query("SELECT o FROM Falltypus o WHERE o.parentTypeId=?1")
 	List<Falltypus> findSubFalltypusByParentId(String falltypusId);
+	
+	@Query("SELECT o FROM Falltypus o WHERE o.id=?1")
+	Falltypus findById(String falltypusId);
 }

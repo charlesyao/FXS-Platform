@@ -12,14 +12,14 @@ import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
-import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.repository.ReservationRepository;
-import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CasesService;
-import com.fxs.platform.utils.CaseStatus;
+import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.SystemConstants;
+import com.fxs.platform.utils.UserManager;
 
 @Service
 @Transactional
@@ -35,23 +35,22 @@ public class CasesServiceImpl implements CasesService {
 	ReservationRepository reservationRepository;
 	
 	@Autowired
+	CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository;
+	
+	@Autowired
 	HttpSession httpSession;
 	
 	@Override
 	public Reservation create(Reservation reservation) {
-		User user = (User)(session.getAttribute("userInfo"));
-		if (!ObjectUtils.isEmpty(user)) {
-			reservation.setUserId(String.valueOf(user.getId()));
-		} else {
-			reservation.setUserId("匿名用户");
-		}
 		
+		reservation.setUserId(UserManager.getSessionUser(httpSession));
+
 		return reservationRepository.save(reservation);
 	}
 	
 	@Override
 	public Cases create(Cases cases) {
-		User user = (User)(session.getAttribute("userInfo"));
+		/*User user = (User)(session.getAttribute(SystemConstants.USER_INFO));
 		String parentFalltypusType = String.valueOf(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE));
 		String subTypeFalltypusType = String.valueOf(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE));
 		
@@ -60,24 +59,27 @@ public class CasesServiceImpl implements CasesService {
 		cases.setUserId(String.valueOf(user.getId()));
 		cases.setStatus(CaseStatus.NEW.getStatus());
 		
-		return caseRepository.save(cases);
+		return caseRepository.save(cases);*/
+		
+		return null;
 	}
 
 	@Override
-	public List<CasesDto> findAll() {
-		return QueryResultConverter.convert(caseRepository.findAll(), CasesDto.class);
+	public List<Cases> findAll() {
+		return caseRepository.findAll();
 	}
 
 	@Override
-	public List<CasesDto> findByStatus(String status) {
-		User user = (User)(session.getAttribute("userInfo"));
-		return caseRepository.findByStatus(String.valueOf(user.getId()), status);
+	public List<Cases> findByStatus(String status) {
+		
+		return caseRepository.findByStatus(UserManager.getSessionUser(httpSession), status);
 	}
 	
 	@Override
 	public List<CasesDto> findByType(String caseType) {
-		User user = (User)(session.getAttribute("userInfo"));
-		return caseRepository.findByType(String.valueOf(user.getId()), caseType);
+		List<Cases> cases = caseRepository.findByType(UserManager.getSessionUser(httpSession), caseType.equals(SystemConstants.CASE_TYPE_CONSULTING) ? "0" : "1");
+		
+		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository);
 	}
 	
 	@Override
@@ -99,7 +101,15 @@ public class CasesServiceImpl implements CasesService {
 
 	@Override
 	public List<Reservation> findAllReservation() {
-		User user = (User)(session.getAttribute("userInfo"));
-		return reservationRepository.queryAll(String.valueOf(user.getId()));
+		return reservationRepository.queryAll(UserManager.getSessionUser(httpSession));
+	}
+
+	/**
+	 * 更新案件状态
+	 */
+	@Override
+	public void updateStatus(String statusCode, String caseId) {
+		
+		caseRepository.updateStatus(statusCode, caseId);
 	}
 }

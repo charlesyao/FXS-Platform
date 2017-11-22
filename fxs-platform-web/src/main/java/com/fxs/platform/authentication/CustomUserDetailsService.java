@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.UserRepository;
+import com.fxs.platform.utils.SystemConstants;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
@@ -40,7 +41,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Username not found");
 		}
 		
-		session.setAttribute("userInfo", user);
+		session.setAttribute(SystemConstants.USER_INFO, user);
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				user.getState().equals("Active"), true, true, true, getGrantedAuthorities(user));
 	}

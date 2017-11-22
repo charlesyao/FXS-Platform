@@ -84,10 +84,10 @@ public class FalltypusController {
 					ModelMap map,
 					@ModelAttribute("question") Question question) {
 		
-		if (level.equals(SystemConstants.FALLTYPUS_LEVEL1_TYPE)) {
+		if (level.equals("level1")) {
 			
 			session.setAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE, id);
-		} else if (level.equals(SystemConstants.FALLTYPUS_LEVEL2_TYPE)) {
+		} else if (level.equals("level2")) {
 			
 			session.setAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE, id);
 		}

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -65,7 +64,7 @@ public class QuestionController {
 	@GetMapping("/answer/{answerId}")
 	@ResponseBody
 	public ResponseMessage<QuestionDto> getNextQuestion(@PathVariable int answerId, ModelMap map) {
-		Object[] qaArray = new Object[] {};
+		Object[] qaArray = new Object[2];
 		
 		QuestionDto qDto = new QuestionDto();
 		

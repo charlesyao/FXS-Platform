@@ -17,19 +17,12 @@
 			<section class="col-md-12 col-sm-12 writeInfo space20">
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
-						<ul class="writeInfoText ulCell myCell">
-							<li>啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得</li>
-							<li class="gray">2017.11.06 10:57
-								<a href="my_freedetails.html">查看详情</a>
+						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${myFreeConsultings}">
+							<li th:text="${freeConsulting.comments}"></li>
+							<li class="gray" th:text="${freeConsulting.createAt}">
+								
 							</li>
-						</ul>
-						<ul class="writeInfoText ulCell myCell">
-							<li>啊得得得得得得啊得得得得得得啊得得得得完成安装工具栏一个集成了所有功能...快速设置层导出选项的预设和
-								规范导出得得得得得得啊得得得得得得啊得得得得得得啊得得得得得得
-							</li>
-							<li class="gray">2017.11.06 10:57
-								<a href="my_freedetails.html">查看详情</a>
-							</li>
+							<a th:href="@{/public/case/viewDetail/{id}(id=${freeConsulting.id})}">查看详情</a>
 						</ul>
 					</div>
 					<div class="col-md-4 col-sm-4">

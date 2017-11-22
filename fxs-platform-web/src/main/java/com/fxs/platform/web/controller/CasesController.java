@@ -1,28 +1,27 @@
 package com.fxs.platform.web.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.ObjectUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
-import com.fxs.platform.domain.User;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
-import com.fxs.platform.repository.CasesRepository;
+import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
@@ -30,7 +29,7 @@ import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.SystemConstants;
 
-@RestController
+@Controller
 @RequestMapping("/public/case")
 public class CasesController {
 	@Autowired
@@ -43,10 +42,10 @@ public class CasesController {
     HttpSession session;
 	
 	@Autowired
-	CaseQuestionAnswerRelRepository repository;
+	CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository;
 	
 	@Autowired
-	CasesRepository caseRepository;
+	FalltypusRepository falltypusRepository;
 	
 	/**
 	 * 当事人提交电话咨询信息
@@ -56,6 +55,7 @@ public class CasesController {
 	 * @return
 	 */
 	@PostMapping("/reservation")
+	@ResponseBody
 	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation reservation) {
 		
 		return Result.success(casesService.create(reservation));
@@ -69,6 +69,7 @@ public class CasesController {
 	 * @return
 	 */
 	@GetMapping("/reservation")
+	@ResponseBody
 	public ResponseMessage<List<Reservation>> getreservation() {
 		
 		return Result.success(casesService.findAllReservation());
@@ -81,19 +82,20 @@ public class CasesController {
 	 * @return
 	 */
 	@PostMapping
-	public String create(@Valid @RequestBody Cases cases) {
+	@ResponseBody
+	public ResponseMessage<String> create(@Valid @RequestBody Cases cases) {
 		String target = null;
 		
+		session.setAttribute(SystemConstants.GEN_CASES, cases);
+		
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
-			target = "redirect:/user/signIn";
+			target = "/user/signIn";
 		} else {
-			CaseManager.saveCase(cases, session, caseRepository);
-			CaseManager.saveCaseQuestionRel(session, repository);
 			
-			target = "redirect:/user/dashboard";
+			target = "/user/dashboard";
 		}
 		
-		return target;
+		return Result.success(target);
 	}
 
 	/**
@@ -102,7 +104,8 @@ public class CasesController {
 	 * @return
 	 */
 	@GetMapping
-	public ResponseMessage<List<CasesDto>> query() {
+	@ResponseBody
+	public ResponseMessage<List<Cases>> query() {
 		return Result.success(casesService.findAll());
 	}
 
@@ -112,7 +115,8 @@ public class CasesController {
 	 * @return
 	 */
 	@GetMapping("/type/{caseType}")
-	public ResponseMessage<List<CasesDto>> queryByType(@PathVariable String caseType) {
+	@ResponseBody
+	public ResponseMessage<List<CasesDto>> queryByType(@PathVariable String caseType, ModelMap map) {
 		return Result.success(casesService.findByType(caseType));
 	}
 	
@@ -125,7 +129,8 @@ public class CasesController {
 	 * @return
 	 */
 	@GetMapping("/status/{status}")
-	public ResponseMessage<List<CasesDto>> queryByStatus(@PathVariable String status) {
+	@ResponseBody
+	public ResponseMessage<List<Cases>> queryByStatus(@PathVariable String status) {
 		return Result.success(casesService.findByStatus(status));
 	}
 
@@ -135,9 +140,13 @@ public class CasesController {
 	 * @param caseId
 	 * @return
 	 */
-	@GetMapping("/{caseId}")
-	public ResponseMessage<Cases> viewDetail(@PathVariable String caseId) {
-		return Result.success(casesService.findByCaseId(caseId));
+	@GetMapping("/viewDetail/{caseId}")
+	public String viewDetail(@PathVariable String caseId, ModelMap map) {
+		
+		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(
+				casesService.findByCaseId(caseId), caseQuestionAnswerRelRepository, falltypusRepository));
+		
+		return "litigant_consulting_free_detail";
 	}
 
 	/**
@@ -146,10 +155,16 @@ public class CasesController {
 	 * @param cases
 	 * @return
 	 */
-	@PutMapping("/{caseId}")
+	@PutMapping("/update/{caseId}")
+	@ResponseBody
 	public ResponseMessage<Cases> update(@PathVariable String caseId, @Valid @RequestBody Cases cases) {
-		return Result.success(
-				localeMessageSourceService.getMessage("fxs.platform.application.case.get", new Object[] { caseId }),
-				casesService.update(caseId, cases));
+		return Result.success(casesService.update(caseId, cases));
+	}
+	
+	@PutMapping("/update/{caseId}/{statusCode}")
+	@ResponseBody
+	public ResponseMessage<Integer> resolve(@PathVariable String caseId, @PathVariable String statusCode) {
+		casesService.updateStatus(statusCode, caseId);
+		return Result.success(1);
 	}
 }
