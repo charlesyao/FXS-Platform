@@ -1,24 +1,26 @@
 $(document).ready(function() {
-	$("#userRegister").on("click", function(e) {
+	$("#userRegister").on("click", function() {
 		$.ajax({
 			type : 'POST',
-			contentType : 'application/json',
 			url : '/user',
-			data : JSON.stringify({
-				"username": $("#username").val(),
-				"email": $("#email").val(),
-				"mobile": $("#mobile").val(),
-				"password": $("#password").val()
-			}),
-			dataType : 'json',
-			cache : false,
-			timeout : 600000,
+			data : JSON.stringify(
+					{
+						"name": type
+					}
+			),
+			contentType : "application/json; charset=utf-8",
 			success : function(data) {
-				console.log(data)
+				$("#modalContent").empty().append("案件类型添加成功")
+				$("#notificationModal").modal("show")
 			},
 			error : function(error) {
-				console.log(error)
+				$("#modalContent").empty().append("案件类型添加失败")
+				$("#notificationModal").modal("show")
 			}
 		});
+	})
+	
+	$('#notificationModal').on('hidden.bs.modal', function () {
+		$("#parentType").val("")
 	})
 });

@@ -1,5 +1,7 @@
 package com.fxs.platform.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,6 +16,8 @@ public interface UserService {
 	void delete(String id);
 	
 	User update(String id);
+	
+	List<User> findOne(String username);
 
 	Page<UserDto> query(UserCondition condition, Pageable pageable);
 }

@@ -42,8 +42,6 @@ public class QuestionController {
 	@Autowired
 	HttpSession httpSession;
 
-	Map<Integer, Object[]> qaMap = new HashMap<Integer, Object[]>();
-	
 	/**
 	 * 获取根问题
 	 * 
@@ -65,6 +63,8 @@ public class QuestionController {
 	@GetMapping("/answer/{answerId}")
 	@ResponseBody
 	public ResponseMessage<QuestionDto> getNextQuestion(@PathVariable int answerId, ModelMap map) {
+		Map<Integer, Object[]> qaMap = new HashMap<Integer, Object[]>();
+		
 		Object[] qaArray = new Object[2];
 		
 		QuestionDto qDto = new QuestionDto();

@@ -16,6 +16,11 @@
 	                                    <h2>用户注册</h2>
 	                                </div>
 	                                <div class="mt-4">
+	                                	<div th:if="${DUPLICATE_USER}">
+								            <div class="alert alert-danger">
+								               <div th:text="${DUPLICATE_USER}"></div>
+								            </div>
+								        </div>
 	                                    <form th:action="@{/user}" th:method="POST" th:object="${user}">
 	                                        <div class="form-group">
 	                                            <input type="text" class="form-control" th:field="*{username}" th:id="username" placeholder="输入用户名" />
@@ -62,6 +67,5 @@
         <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
 		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
 		<script type="text/javascript" th:src="@{/bootstrap/dist/js/bootstrap.min.js}"></script>
-        <script type="text/javascript" th:src="@{/js/userRegister.js}"></script>
     </body>
 </html>

@@ -2,10 +2,13 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +22,7 @@ import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
+import com.fxs.platform.utils.SystemConstants;
 
 @Controller
 @SessionAttributes("roles")
@@ -31,6 +35,9 @@ public class RouterController {
 	
 	@Autowired
 	CasesService casesService;
+	
+	@Autowired
+	HttpSession session;
 
 	@ModelAttribute("roles")
 	public List<UserProfile> initializeProfiles() {
@@ -53,7 +60,13 @@ public class RouterController {
 	}
 
 	@GetMapping("/user/register")
-	public String userRegister(@ModelAttribute(value = "user") User user, BindingResult bindingResult) {
+	public String userRegister(@ModelAttribute(value = "user") User user, ModelMap map) {
+		
+		if (! ObjectUtils.isEmpty(session.getAttribute(SystemConstants.DUPLICATE_USER))) {
+			map.addAttribute(SystemConstants.DUPLICATE_USER, session.getAttribute(SystemConstants.DUPLICATE_USER));
+		}
+		
+		session.removeAttribute(SystemConstants.DUPLICATE_USER);
 		return "userRegister";
 	}
 

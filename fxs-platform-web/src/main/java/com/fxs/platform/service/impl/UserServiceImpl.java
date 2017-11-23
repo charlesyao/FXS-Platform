@@ -1,5 +1,7 @@
 package com.fxs.platform.service.impl;
 
+import java.util.List;
+
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,5 +49,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User update(String id) {
 		return null;
+	}
+
+	@Override
+	public List<User> findOne(String username) {
+		// TODO Auto-generated method stub
+		return userRepository.checkUserExist(username);
 	}
 }

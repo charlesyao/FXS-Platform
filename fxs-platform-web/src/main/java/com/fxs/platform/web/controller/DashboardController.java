@@ -21,6 +21,7 @@ import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.SessionVariableManager;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
@@ -75,6 +76,8 @@ public class DashboardController {
 		} else {
 			target = "/accessDenied";
 		}
+		
+		SessionVariableManager.clearSession(session);
 		
 		return target;
 	}
