@@ -27,9 +27,11 @@ public class CaseManager {
 	public static void saveCaseQuestionRel(Cases cases, HttpSession session, CaseQuestionAnswerRelRepository repository) {
 		CaseQuestionAnswerRel rel = null;
 		Map<Integer, Object[]> qaMap = null;
-
-		if (!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.QA_MAP))) {
-			qaMap = (Map<Integer, Object[]>) session.getAttribute(SystemConstants.QA_MAP);
+		
+		Object qaMapInSession = session.getAttribute(SystemConstants.QA_MAP);
+		
+		if (!ObjectUtils.isEmpty(qaMapInSession)) {
+			qaMap = (Map<Integer, Object[]>) qaMapInSession;
 
 			for (Object[] value : qaMap.values()) {
 				rel = new CaseQuestionAnswerRel();
@@ -53,14 +55,15 @@ public class CaseManager {
 
 	public static Cases saveCase(Cases cases, HttpSession session, CasesRepository repository) {
 		
-		if (!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE))) {
-			String parentFalltypusId = String.valueOf((session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE)));
-			cases.setParentType(parentFalltypusId);
+		String level1TypeInSession = (String)session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE);
+		String level2TypeInSession = (String)session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE);
+		
+		if (!ObjectUtils.isEmpty(level1TypeInSession)) {
+			cases.setParentType(level1TypeInSession);
 		}
 		
-		if (!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE))) {
-			String subFalltypusId = String.valueOf((session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE)));
-			cases.setSubType(subFalltypusId);
+		if (!ObjectUtils.isEmpty(level2TypeInSession)) {
+			cases.setSubType(level2TypeInSession);
 		}
 		
 		cases.setUserId(UserManager.getSessionUser(session));

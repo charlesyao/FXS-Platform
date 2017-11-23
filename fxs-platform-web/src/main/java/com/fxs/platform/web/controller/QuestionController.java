@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,26 +72,31 @@ public class QuestionController {
 		//取得当前选择的答案
 		Answer currentAnswer = answerService.getByAnswerId(answerId);
 		
-		//取得当前的问题
-		Question currentQuestion = currentAnswer.getQuestion();
+		if (! ObjectUtils.isEmpty(currentAnswer)) {
+			//取得当前的问题
+			Question currentQuestion = currentAnswer.getQuestion();
+			
+			qaArray[0] = currentQuestion;
+			qaArray[1] = currentAnswer;
+			
+			qaMap.put(currentQuestion.getId(), qaArray);
+			
+			httpSession.setAttribute(SystemConstants.QA_MAP, qaMap);
+		}
 		
-		qaArray[0] = currentQuestion;
-		qaArray[1] = currentAnswer;
-		
-		qaMap.put(currentQuestion.getId(), qaArray);
-		
-		httpSession.setAttribute(SystemConstants.QA_MAP, qaMap);
 		
 		//取得当前答案对应的下一个问题的ID, 并根据此ID取得相应的问题
 		Question nextQuestion = questionService.getByQuestionId(currentAnswer.getNextQuestionId());
 		
-		//取得问题所对应的所有的答案
-		List<Answer> nextAnswers = answerService.getAllAnswerByQuestionId(nextQuestion.getId());
-		
-		qDto.setQuestion(nextQuestion);
-		qDto.setAnswers(nextAnswers);
-		
-		map.addAttribute("questionItem", qDto);
+		if (! ObjectUtils.isEmpty(nextQuestion)) {
+			//取得问题所对应的所有的答案
+			List<Answer> nextAnswers = answerService.getAllAnswerByQuestionId(nextQuestion.getId());
+			
+			qDto.setQuestion(nextQuestion);
+			qDto.setAnswers(nextAnswers);
+			
+			map.addAttribute("questionItem", qDto);
+		}
 		
 		return Result.success(qDto);
 	}
