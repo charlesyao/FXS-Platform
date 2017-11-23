@@ -115,7 +115,7 @@ public class RouterController {
 				}
 			} else if (caseType.equals("lawsuit")) {
 				//获取当事人的打官司信息列表
-				map.addAttribute("myLawsuit", casesService.findByType(caseType));
+				map.addAttribute("myLawsuit", casesService.query(condition, pageable));
 				target = "litigant_lawsuit";
 			}
 		} else if (userRole.equals("lawyer")) {//律师页面路由
