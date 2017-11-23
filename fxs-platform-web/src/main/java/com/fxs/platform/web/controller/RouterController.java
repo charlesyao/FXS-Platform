@@ -3,6 +3,7 @@ package com.fxs.platform.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
+import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
@@ -64,6 +66,8 @@ public class RouterController {
 	public String router(@PathVariable String userRole, 
 							 @PathVariable String caseType, 
 							 @PathVariable String action, 
+							 CasesCondition condition,
+							 Pageable pageable,
 							 ModelMap map) {
 		
 		String target = "";
@@ -102,7 +106,7 @@ public class RouterController {
 			if(caseType.equals("consulting")) {
 				if (action.equals("free")) {
 					//获取免费咨询信息列表
-					map.addAttribute("myFreeConsultings", casesService.findByType(caseType));
+					map.addAttribute("myFreeConsultings", casesService.query(condition, pageable));
 					target = "litigant_consulting_free";
 				} else if (action.equals("phone")) {
 					//获取所有电话咨询信息列表

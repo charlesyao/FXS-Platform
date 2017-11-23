@@ -14,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 系统用户: 当事人，律师，系统管理员
@@ -40,7 +39,6 @@ public class User {
 
 	private String state = State.ACTIVE.getState();
 
-	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "APP_USER_USER_PROFILE", 
              joinColumns = { @JoinColumn(name = "USER_ID") }, 

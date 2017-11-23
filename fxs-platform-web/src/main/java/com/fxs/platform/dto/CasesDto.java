@@ -112,8 +112,7 @@ public class CasesDto {
 	}
 
 	public String getCreateAt() {
-		
-		return DateFormatUtils.format(createAt, "yyyy-mm-dd HH:MM:SS");
+		return DateFormatUtils.format(createAt, "yyyy-MM-dd HH:MM:SS");
 	}
 
 	public void setCreateAt(Date createAt) {

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +23,7 @@ import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.FalltypusRepository;
+import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
@@ -171,5 +173,11 @@ public class CasesController {
 	public ResponseMessage<Integer> resolve(@PathVariable String caseId, @PathVariable String statusCode) {
 		casesService.updateStatus(statusCode, caseId);
 		return Result.success(1);
+	}
+	
+	@GetMapping("/multicondition")
+	@ResponseBody
+	public ResponseMessage<List<CasesDto>> query(CasesCondition condition, Pageable pageable) {
+		return Result.success(casesService.query(condition, pageable));
 	}
 }

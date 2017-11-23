@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -17,6 +19,8 @@ import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.ReservationRepository;
+import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.repository.specification.CaseSpecification;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.SystemConstants;
@@ -117,5 +121,18 @@ public class CasesServiceImpl implements CasesService {
 	public void updateStatus(String statusCode, String caseId) {
 		
 		caseRepository.updateStatus(statusCode, caseId);
+	}
+
+	@Override
+	public List<CasesDto> query(CasesCondition condition, Pageable pageable) {
+
+		condition.setUserId(UserManager.getSessionUser(httpSession));
+		Page<Cases> pageableCases = caseRepository.findAll(new CaseSpecification(condition), pageable);
+		
+		List<Cases> cases = pageableCases.getContent();
+		
+		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository);
+		
+		
 	}
 }

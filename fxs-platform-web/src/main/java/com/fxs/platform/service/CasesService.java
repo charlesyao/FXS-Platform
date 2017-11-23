@@ -2,9 +2,12 @@ package com.fxs.platform.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.repository.condition.CasesCondition;
 
 public interface CasesService {
 	
@@ -28,4 +31,6 @@ public interface CasesService {
 	List<CasesDto> findByType(String caseType);
 	
 	List<Reservation> findAllReservation();
+	
+	List<CasesDto> query(CasesCondition condition, Pageable pageable);
 }
