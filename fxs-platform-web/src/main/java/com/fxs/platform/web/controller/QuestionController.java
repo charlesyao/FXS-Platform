@@ -1,6 +1,5 @@
 package com.fxs.platform.web.controller;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.QuestionService;
-import com.fxs.platform.utils.QuestionWrapper;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
@@ -113,7 +111,7 @@ public class QuestionController {
 			questionId = String.valueOf(qDto.getQuestion().getId());
 			
 			for (int index = 0; index < qDto.getAnswers().size(); index ++ ) {
-				String singleAnswer = "<ul class='col-md-2 col-sm-2' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
+				String singleAnswer = "<ul class='col-md-2 col-sm-2' isroot='" + qDto.getQuestion().getIsRootQuestion() + "' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
 									  "<li class='introcoupCell btnSquare'>" + 
 									  "<a class='answerLink' href='' id='" + qDto.getAnswers().get(index).getId() + "'>" + qDto.getAnswers().get(index).getDescription() + "</a>" + 
 									  "</li>" + 

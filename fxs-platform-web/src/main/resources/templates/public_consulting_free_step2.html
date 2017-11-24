@@ -15,7 +15,7 @@
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn" id="disputeInfo">
 				<h3 th:text="${question.question.description}"></h3>
 				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}">
+					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}" th:attr="isRoot=${question.question.isRootQuestion}">
 						<li class="introcoupCell btnSquare">
 							<!-- th:href="@{/public/question/answer/{id}(id=${answer.id})}" -->
 							<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
@@ -37,12 +37,17 @@
 	    $(function() {
 			$("#disputeInfo").on("click", 'ul', function(e) {
 				e.preventDefault()
+				
+				if ($(this).attr("isroot") === 'Y') {
+					$("#nextQuestionContainer").empty()
+				}
 				$.ajax({
 					type : 'GET',
 					url : '/public/question/answer/' + $(this).attr("id"),
 					success : function(res) {
 						console.log(res)
 						console.log(res.message)
+
 						$("#question_" + res.message).remove();
 						$("#nextQuestionContainer").append(res.data)
 					},
