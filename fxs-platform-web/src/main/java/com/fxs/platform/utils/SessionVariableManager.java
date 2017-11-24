@@ -1,5 +1,7 @@
 package com.fxs.platform.utils;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 public class SessionVariableManager {
@@ -8,5 +10,6 @@ public class SessionVariableManager {
 		session.removeAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE);
 		session.removeAttribute(SystemConstants.QA_MAP);
 		session.removeAttribute(SystemConstants.GEN_CASES);
+		session.setAttribute(SystemConstants.QA_MAP, new HashMap<Integer, Object[]>());
 	}
 }

@@ -62,8 +62,10 @@ public class QuestionController {
 	 */
 	@GetMapping("/answer/{answerId}")
 	@ResponseBody
+	@SuppressWarnings("unchecked")
 	public ResponseMessage<QuestionDto> getNextQuestion(@PathVariable int answerId, ModelMap map) {
-		Map<Integer, Object[]> qaMap = new HashMap<Integer, Object[]>();
+		
+		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
 		
 		Object[] qaArray = new Object[2];
 		
@@ -79,9 +81,10 @@ public class QuestionController {
 			qaArray[0] = currentQuestion;
 			qaArray[1] = currentAnswer;
 			
-			qaMap.put(currentQuestion.getId(), qaArray);
+			mapping.put(currentQuestion.getId(), qaArray);
+
+			httpSession.setAttribute(SystemConstants.QA_MAP, mapping);
 			
-			httpSession.setAttribute(SystemConstants.QA_MAP, qaMap);
 		}
 		
 		
