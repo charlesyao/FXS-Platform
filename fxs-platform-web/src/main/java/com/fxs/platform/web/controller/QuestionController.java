@@ -24,6 +24,7 @@ import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.QuestionService;
+import com.fxs.platform.utils.QuestionWrapper;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
@@ -63,13 +64,19 @@ public class QuestionController {
 	@GetMapping("/answer/{answerId}")
 	@ResponseBody
 	@SuppressWarnings("unchecked")
-	public ResponseMessage<QuestionDto> getNextQuestion(@PathVariable int answerId, ModelMap map) {
+	public ResponseMessage<String> getNextQuestion(@PathVariable int answerId, ModelMap map) {
 		
 		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
 		
 		Object[] qaArray = new Object[2];
 		
 		QuestionDto qDto = new QuestionDto();
+		
+		String questionSection ="";
+		String startDiv ="";
+		String endDiv ="";
+		String answerSection = "";
+		String questionId = "";
 		
 		//取得当前选择的答案
 		Answer currentAnswer = answerService.getByAnswerId(answerId);
@@ -98,9 +105,23 @@ public class QuestionController {
 			qDto.setQuestion(nextQuestion);
 			qDto.setAnswers(nextAnswers);
 			
-			map.addAttribute("questionItem", qDto);
+			//map.addAttribute("questionItem", qDto);
+			
+			questionSection = "<div id='question_" + qDto.getQuestion().getId() + "'><h3>" + qDto.getQuestion().getDescription() + "</h3>";
+			startDiv = "<div class='row'>";
+			endDiv = "</div></div>";
+			questionId = String.valueOf(qDto.getQuestion().getId());
+			
+			for (int index = 0; index < qDto.getAnswers().size(); index ++ ) {
+				String singleAnswer = "<ul class='col-md-2 col-sm-2' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
+									  "<li class='introcoupCell btnSquare'>" + 
+									  "<a class='answerLink' href='' id='" + qDto.getAnswers().get(index).getId() + "'>" + qDto.getAnswers().get(index).getDescription() + "</a>" + 
+									  "</li>" + 
+									  "</ul>";
+				answerSection += singleAnswer;
+			}
 		}
 		
-		return Result.success(qDto);
+		return Result.success(questionId, questionSection + startDiv + answerSection + endDiv);
 	}
 }

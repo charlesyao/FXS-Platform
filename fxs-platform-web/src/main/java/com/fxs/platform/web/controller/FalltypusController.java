@@ -1,5 +1,6 @@
 package com.fxs.platform.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -96,6 +97,8 @@ public class FalltypusController {
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
 
 		if (subFalltypusList.size() == 0) {// 判断没有子类型
+			//初始化默认QA列表
+			session.setAttribute(SystemConstants.QA_MAP, new HashMap<Integer, Object[]>());
 			QuestionDto qDto = new QuestionDto();
 			
 			Question rootQuestion = questionService.findRootQuestion();

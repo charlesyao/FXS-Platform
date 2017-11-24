@@ -82,21 +82,7 @@ public class CaseManager {
 			CasesDto caseDto = new CasesDto();
 			BeanUtils.copyProperties(c, caseDto);
 			
-			if (! ObjectUtils.isEmpty(c.getParentType())) {
-				Falltypus type = falltypusRepository.findById(c.getParentType());
-				
-				if (! ObjectUtils.isEmpty(type)) {
-					caseDto.setParentType(type.getName());
-				}
-			}
-			
-			if (! ObjectUtils.isEmpty(c.getSubType())) {
-				Falltypus type = falltypusRepository.findById(c.getSubType());
-				
-				if (! ObjectUtils.isEmpty(type)) {
-					caseDto.setSubType(type.getName());
-				}
-			}
+			falltypusWrapper(caseDto, c, falltypusRepository);
 			
 			List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 			
@@ -115,13 +101,30 @@ public class CaseManager {
 		CasesDto caseDto = new CasesDto();
 		BeanUtils.copyProperties(cases, caseDto);
 		
-		caseDto.setParentType(falltypusRepository.findById(cases.getParentType()).getName());
-		caseDto.setSubType(falltypusRepository.findById(cases.getSubType()).getName());
+		falltypusWrapper(caseDto, cases, falltypusRepository);
 		
 		List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 		
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
 		
 		return caseDto;
+	}
+	
+	private static void falltypusWrapper(CasesDto caseDto, Cases cases, FalltypusRepository falltypusRepository) {
+		if (! ObjectUtils.isEmpty(cases.getParentType())) {
+			Falltypus type = falltypusRepository.findById(cases.getParentType());
+			
+			if (! ObjectUtils.isEmpty(type)) {
+				caseDto.setParentType(type.getName());
+			}
+		}
+		
+		if (! ObjectUtils.isEmpty(cases.getSubType())) {
+			Falltypus type = falltypusRepository.findById(cases.getSubType());
+			
+			if (! ObjectUtils.isEmpty(type)) {
+				caseDto.setSubType(type.getName());
+			}
+		}
 	}
 }

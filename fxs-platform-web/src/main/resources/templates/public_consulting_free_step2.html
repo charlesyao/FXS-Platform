@@ -15,21 +15,15 @@
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn" id="disputeInfo">
 				<h3 th:text="${question.question.description}"></h3>
 				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}">
+					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}">
 						<li class="introcoupCell btnSquare">
-							<a th:href="@{/public/question/answer/{id}(id=${answer.id})}" th:id="${answer.id}" th:text="${answer.description}"></a>
+							<!-- th:href="@{/public/question/answer/{id}(id=${answer.id})}" -->
+							<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
 						</li>
 					</ul>
 				</div>
-				
-				<div class="row">
-					<ul class="col-md-2 col-sm-2">
-						<li class="introcoupCell btnSquare">
-							<a th:href="@{/public/question/answer/10}" id="10">11</a>
-						</li>
-					</ul>
+				<div id="nextQuestionContainer">
 				</div>
-				
 				<div class="row">
 					<div class="col-md-12 col-sm-12 btnNext">
 						<a type="button" class="btn btn-primary btn-lg" th:href="@{/public/case/consulting/next}">下一步</a>
@@ -40,19 +34,23 @@
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
 	<script th:inline="javascript">
-	    /* $(function() {
-			$("#disputeInfo a").on("click", function(e) {
+	    $(function() {
+			$("#disputeInfo").on("click", 'ul', function(e) {
 				e.preventDefault()
 				$.ajax({
 					type : 'GET',
 					url : '/public/question/answer/' + $(this).attr("id"),
-					success : function(data) {
+					success : function(res) {
+						console.log(res)
+						console.log(res.message)
+						$("#question_" + res.message).remove();
+						$("#nextQuestionContainer").append(res.data)
 					},
 					error : function(error) {
 					}
 				});
 			})
-		}) */
+		})
 	</script>
 </body>
 </html>
