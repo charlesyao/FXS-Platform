@@ -83,6 +83,10 @@ public class QuestionController {
 			//取得当前的问题
 			Question currentQuestion = currentAnswer.getQuestion();
 			
+			if(! ObjectUtils.isEmpty(currentQuestion.getIsRootQuestion()) && currentQuestion.getIsRootQuestion().equals("Y")) {
+				mapping.clear();
+			}
+			
 			qaArray[0] = currentQuestion;
 			qaArray[1] = currentAnswer;
 			
