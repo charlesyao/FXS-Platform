@@ -24,6 +24,11 @@ public class Result {
 	public static ResponseMessage error() {
         return error("");
     }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public static <T> ResponseMessage<T> error(T t) {
+        return new ResponseMessage(ResponseMessageCodeEnum.ERROR.getCode(), "", t);
+    }
 
     @SuppressWarnings("rawtypes")
 	public static ResponseMessage error(String message) {

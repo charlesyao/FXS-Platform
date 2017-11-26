@@ -3,8 +3,6 @@ package com.fxs.platform.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,9 +19,7 @@ public class DetailedInquiry {
 
 	private String thirdComments;
 
-	@ManyToOne
-	@JoinColumn(name = "cases_id")
-	private Cases Cases;
+	private String caseId;
 
 	public String getId() {
 		return id;
@@ -57,4 +53,11 @@ public class DetailedInquiry {
 		this.thirdComments = thirdComments;
 	}
 
+	public String getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
 }

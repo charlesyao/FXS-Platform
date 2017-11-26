@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
@@ -27,7 +29,9 @@ import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
+import com.fxs.platform.service.DetailedInquiryService;
 import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.ResponseCodeEnum;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
@@ -46,6 +50,9 @@ public class CasesController {
 	
 	@Autowired
 	FalltypusRepository falltypusRepository;
+	
+	@Autowired
+	DetailedInquiryService detailedInquiryService;
 	
 	/**
 	 * 当事人提交电话咨询信息
@@ -152,11 +159,23 @@ public class CasesController {
 		return Result.success(casesService.update(caseId, cases));
 	}
 	
+	@PutMapping("/user/case/addDetailedInquiry/{caseId}")
+	@ResponseBody
+	public ResponseMessage<Integer> addDetailedInquiry(@PathVariable String caseId, @Valid @RequestBody Cases cases) {
+		DetailedInquiry di = detailedInquiryService.save(caseId, cases.getDetailedInquirys());
+		
+		if (ObjectUtils.isEmpty(di)) {
+			return Result.success(ResponseCodeEnum.ERROR.getCode());
+		}
+
+		return Result.success(ResponseCodeEnum.SUCCESS.getCode());
+	}
+	
 	@PutMapping("/user/case/update/{caseId}/{statusCode}")
 	@ResponseBody
 	public ResponseMessage<Integer> resolve(@PathVariable String caseId, @PathVariable String statusCode) {
 		casesService.updateStatus(statusCode, caseId);
-		return Result.success(1);
+		return Result.success(ResponseCodeEnum.SUCCESS.getCode());
 	}
 	
 	@GetMapping("/user/case/multicondition")
