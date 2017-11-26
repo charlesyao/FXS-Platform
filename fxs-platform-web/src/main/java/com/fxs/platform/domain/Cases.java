@@ -2,10 +2,12 @@ package com.fxs.platform.domain;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -41,6 +43,9 @@ public class Cases {
 	
 	//免费法律咨询额外信息
 	private String lawyerComments;
+	
+	@Transient
+	private String detailedInquirys;
 	
 	private Date createAt = new Date();
 	
@@ -126,5 +131,13 @@ public class Cases {
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+
+	public String getDetailedInquirys() {
+		return detailedInquirys;
+	}
+
+	public void setDetailedInquirys(String detailedInquirys) {
+		this.detailedInquirys = detailedInquirys;
 	}
 }

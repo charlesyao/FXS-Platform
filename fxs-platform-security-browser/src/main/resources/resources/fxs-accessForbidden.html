@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style type="text/css">
+	*{
+		box-sizing: border-box;
+	}
+
+	body {
+	    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	    font-size: 1rem;
+	    font-weight: 400;
+	    line-height: 1.5;
+	    color: #292b2c;
+	    background: lightblue;
+	}
+	.w-100{
+		width: 100%;
+	}
+	.w-50{
+		width: 50%;
+	}
+	.w-60{
+		width: 60%;
+	}
+	.w-40{
+		width: 40%;
+	}
+	.pull-left{
+		float: left;
+	}
+	.pull-right{
+		float: right;
+	}
+	.px-15p{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.pr-15p{
+		padding-right: 15px;
+	}
+	.pl-15p{
+		padding-left: 15px;
+	}
+	.pr-15p{
+		padding-right: 15px;
+	}
+	.text-xs-right{
+		text-align: right;
+	}
+	.form-group {
+	    margin-bottom: 1rem;
+	}
+	.of-hidden{
+		overflow: hidden;
+	}
+	#loginWrapper{
+		max-width: 400px;
+		margin: 0 auto;
+	}
+	.tab-out-wrapper{
+		background-color: #fff;
+	}
+	/* Style the tab */
+	div.tab {
+	    overflow: hidden;
+	    border: 1px solid #ccc;
+	    background-color: #f1f1f1;
+	}
+
+	/* Style the buttons inside the tab */
+	div.tab button {
+	    background-color: inherit;
+	    float: left;
+	    border: none;
+	    outline: none;
+	    cursor: pointer;
+	    padding: 14px 16px;
+	    transition: 0.3s;
+	    width: 50%;
+	}
+
+	/* Change background color of buttons on hover */
+	div.tab button:hover {
+	    background-color: #ddd;
+	}
+
+	/* Create an active/current tablink class */
+	div.tab button.active {
+	    background-color: #ccc;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+	    display: none;
+	    padding: 20px;
+	    border: 1px solid #ccc;
+	    border-top: none;
+	}
+	.tabcontent {
+	    -webkit-animation: fadeEffect 1s;
+	    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+	}
+	.social-login{
+		padding: 15px;
+		background-color: #fff;
+		overflow: hidden;
+	}
+	#loginType,
+	#loginType h2{
+		text-align: center;
+	}
+	#loginType img{
+		width: 100px;
+	}
+	.tabcontent input{
+		height: 38px;
+	    padding-left: 0.625rem;
+	    outline: none;
+	    border-radius: 0.125rem;
+	    margin-bottom: 10px;
+	    border: 0.0625rem solid #d8d8d8;
+	}
+	@-webkit-keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+
+	@keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+	.form-control {
+	    display: block;
+	    width: 100%;
+	    padding: .5rem .75rem;
+	    font-size: 1rem;
+	    line-height: 1.25;
+	    color: #464a4c;
+	    background-color: #fff;
+	    background-image: none;
+	    -webkit-background-clip: padding-box;
+	    background-clip: padding-box;
+	    border: 1px solid rgba(0,0,0,.15);
+	    border-radius: .25rem;
+	    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	    transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	}
+	.form-check {
+	    position: relative;
+	    display: block;
+	    margin-bottom: .5rem;
+	}
+	.form-check-label {
+	    padding-left: 1.25rem;
+	    margin-bottom: 0;
+	    cursor: pointer;
+	}
+	.form-check-label .form-check-input {
+	    position: absolute;
+	    margin-top: .25rem;
+	    margin-left: -1.25rem;
+	    height: inherit;
+	}
+	.form-check-input:only-child {
+	    position: static;
+	}
+	.btn {
+	    display: inline-block;
+	    font-weight: 400;
+	    line-height: 1.25;
+	    text-align: center;
+	    white-space: nowrap;
+	    vertical-align: middle;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	    border: 1px solid transparent;
+	    padding: .5rem 1rem;
+	    font-size: 1rem;
+	    border-radius: .25rem;
+	    -webkit-transition: all .2s ease-in-out;
+	    -o-transition: all .2s ease-in-out;
+	    transition: all .2s ease-in-out;
+	}
+	a.btn{
+		text-decoration: none;
+	}
+	.btn-primary {
+	    color: #fff;
+	    background-color: #0275d8;
+	    border-color: #0275d8;
+	}
+	.btn-info {
+	    color: #fff;
+	    background-color: #5bc0de;
+	    border-color: #5bc0de;
+	}
+	.btn-danger {
+	    color: #fff;
+	    background-color: #d9534f;
+	    border-color: #d9534f;
+	}
+	.btn-danger:hover {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #c12e2a;
+	}
+	.btn-info:hover {
+	    color: #fff;
+	    background-color: #31b0d5;
+	    border-color: #2aabd2;
+	}
+	.btn-primary:hover {
+	    color: #fff;
+	    background-color: #025aa5;
+	    border-color: #01549b;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div id="loginWrapper">
+			<div class="tab-out-wrapper">
+				无权访问该页面
+			</div>
+		</div>
+	</div>
+</body>
+</html>

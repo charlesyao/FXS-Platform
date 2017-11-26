@@ -12,6 +12,8 @@ public class BrowserProperties {
 	 */
 	private String signInPage = SecurityConstants.DEFAULT_SIGN_IN_PAGE_URL;
 	
+	private String accessForbiddenUrl = SecurityConstants.DEFAULT_ACCESS_FORBIDDEN_PAGE_URL;
+	
 	/**
 	 * '记住我'功能的有效时间，默认1小时
 	 */
@@ -90,5 +92,13 @@ public class BrowserProperties {
 
 	public void setIgnoringUrl(String ignoringUrl) {
 		this.ignoringUrl = ignoringUrl;
+	}
+
+	public String getAccessForbiddenUrl() {
+		return accessForbiddenUrl;
+	}
+
+	public void setAccessForbiddenUrl(String accessForbiddenUrl) {
+		this.accessForbiddenUrl = accessForbiddenUrl;
 	}
 }

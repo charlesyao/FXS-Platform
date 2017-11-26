@@ -46,7 +46,8 @@ fxs:
       sign-in-response-type: REDIRECT
       sing-in-successUrl: /user/dashboard
       remember-me-seconds: 29400
-      sign-out-url: /user/signIn
+      sign-out-url: /user/signIn\
+      acces-forbidden-url: /accessForbidden
       ignoring-url: /city/**
       session:
         #maximum-sessions: 1

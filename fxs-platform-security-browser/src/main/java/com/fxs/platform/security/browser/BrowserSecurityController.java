@@ -62,6 +62,8 @@ public class BrowserSecurityController {
 					localeMessageSourceService.getMessage("fxs.platform.browser.session.trigger-redirect", new Object[] {targetUrl}));
 			if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
 				redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getSignInPage());
+			} else {
+				redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getAccessForbiddenUrl());
 			}
 		}
 		

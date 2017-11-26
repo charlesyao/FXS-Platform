@@ -8,6 +8,8 @@ public interface SecurityConstants {
 	 * @see SecurityController
 	 */
 	String DEFAULT_SIGN_IN_PAGE_URL = "/fxs-signIn.html";
+	
+	String DEFAULT_ACCESS_FORBIDDEN_PAGE_URL = "/fxs-accessForbidden.html";
 
 	/**
 	 * session失效默认的跳转地址

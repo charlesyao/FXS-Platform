@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Cases;
@@ -32,7 +31,6 @@ import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
-@RequestMapping("/public/case")
 public class CasesController {
 	@Autowired
 	LocaleMessageSourceService localeMessageSourceService;
@@ -56,25 +54,11 @@ public class CasesController {
 	 * @param consultation
 	 * @return
 	 */
-	@PostMapping("/reservation")
+	@PostMapping("/public/case/reservation")
 	@ResponseBody
 	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation reservation) {
 		
 		return Result.success(casesService.create(reservation));
-	}
-	
-	/**
-	 * 查询当事人的所有的电话咨询自信息
-	 * 
-	 * @see com.fxs.platform.utils.ConsultationType
-	 * @param consultation
-	 * @return
-	 */
-	@GetMapping("/reservation")
-	@ResponseBody
-	public ResponseMessage<List<Reservation>> getreservation() {
-		
-		return Result.success(casesService.findAllReservation());
 	}
 
 	/**
@@ -83,7 +67,7 @@ public class CasesController {
 	 * @param cases
 	 * @return
 	 */
-	@PostMapping
+	@PostMapping("/public/case")
 	@ResponseBody
 	public ResponseMessage<String> create(@Valid @RequestBody Cases cases) {
 		String target = null;
@@ -105,7 +89,7 @@ public class CasesController {
 	 * 
 	 * @return
 	 */
-	@GetMapping
+	@GetMapping("/user/case")
 	@ResponseBody
 	public ResponseMessage<List<CasesDto>> query() {
 		return Result.success(casesService.findAll());
@@ -116,7 +100,7 @@ public class CasesController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/type/{caseType}")
+	@GetMapping("/user/case/type/{caseType}")
 	@ResponseBody
 	public ResponseMessage<List<CasesDto>> queryByType(@PathVariable String caseType, ModelMap map) {
 		return Result.success(casesService.findByType(caseType));
@@ -130,7 +114,7 @@ public class CasesController {
 	 * @param status
 	 * @return
 	 */
-	@GetMapping("/status/{status}")
+	@GetMapping("/user/case/status/{status}")
 	@ResponseBody
 	public ResponseMessage<List<Cases>> queryByStatus(@PathVariable String status) {
 		return Result.success(casesService.findByStatus(status));
@@ -142,7 +126,7 @@ public class CasesController {
 	 * @param caseId
 	 * @return
 	 */
-	@GetMapping("/{userRole}/viewDetail/{caseId}")
+	@GetMapping("/user/case/{userRole}/viewDetail/{caseId}")
 	public String viewDetail(@PathVariable String userRole, @PathVariable String caseId, ModelMap map) {
 		String target = "";
 		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(
@@ -162,20 +146,20 @@ public class CasesController {
 	 * @param cases
 	 * @return
 	 */
-	@PutMapping("/update/{caseId}")
+	@PutMapping("/user/case/update/{caseId}")
 	@ResponseBody
 	public ResponseMessage<Cases> update(@PathVariable String caseId, @Valid @RequestBody Cases cases) {
 		return Result.success(casesService.update(caseId, cases));
 	}
 	
-	@PutMapping("/update/{caseId}/{statusCode}")
+	@PutMapping("/user/case/update/{caseId}/{statusCode}")
 	@ResponseBody
 	public ResponseMessage<Integer> resolve(@PathVariable String caseId, @PathVariable String statusCode) {
 		casesService.updateStatus(statusCode, caseId);
 		return Result.success(1);
 	}
 	
-	@GetMapping("/multicondition")
+	@GetMapping("/user/case/multicondition")
 	@ResponseBody
 	public ResponseMessage<List<CasesDto>> query(CasesCondition condition, Pageable pageable) {
 		return Result.success(casesService.query(condition, pageable));

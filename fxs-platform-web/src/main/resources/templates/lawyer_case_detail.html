@@ -146,7 +146,7 @@
 			$("#joinBidding").on("click", function() {
 				$.ajax({
 					type : 'PUT',
-					url : '/public/case/update/' + [[${caseDetailInfo.id}]] + "/4",
+					url : '/user/case/update/' + [[${caseDetailInfo.id}]] + "/4",
 					data : JSON.stringify({}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {

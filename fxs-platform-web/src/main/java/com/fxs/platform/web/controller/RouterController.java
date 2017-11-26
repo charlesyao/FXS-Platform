@@ -53,6 +53,11 @@ public class RouterController {
 	public String invalidSession() throws Exception {
 		return "invalidSession";
 	}
+	
+	@GetMapping("/accessForbidden")
+	public String accessForbidden() throws Exception {
+		return "accessForbidden";
+	}
 
 	@GetMapping("/user/signIn")
 	public String userSignIn() {
