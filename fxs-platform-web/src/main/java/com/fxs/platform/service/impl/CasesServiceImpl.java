@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +22,6 @@ import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.repository.specification.CaseSpecification;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
-import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SystemConstants;
 import com.fxs.platform.utils.UserManager;
 

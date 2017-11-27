@@ -25,6 +25,8 @@ public class Question {
 	private String description;
 
 	private String isRootQuestion;
+	
+	private String questionType;
 
 	@Transient
 	private List<String> answers;
@@ -77,5 +79,12 @@ public class Question {
 	public void setCases(Cases cases) {
 		this.cases = cases;
 	}
-	
+
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
 }

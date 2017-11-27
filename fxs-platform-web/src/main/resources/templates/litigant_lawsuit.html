@@ -17,7 +17,7 @@
 					<div class="col-md-8 col-sm-8 mybox">
 						<ul class="writeInfoText ulCell myCell" th:each="myLawsuit : ${myLawsuit}">
 							<li>起诉地点 : 南京</li>
-							<li>案件类型 : <span th:text="${myLawsuit.parentType} + ' - ' + ${myLawsuit.subType}"></span></li>
+							<li>案件类型 : <span th:text="${myLawsuit.falltypusType}"></span></li>
 							<li class="gray">
 								<span>案件编号 : <span th:text="${myLawsuit.id}"></span></span><br />
 								<span>案件提交时间: <span th:text="${myLawsuit.createAt}"></span></span>

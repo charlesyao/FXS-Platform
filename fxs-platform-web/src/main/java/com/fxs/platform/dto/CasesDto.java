@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.springframework.util.ObjectUtils;
 
 public class CasesDto {
 	
@@ -147,5 +148,9 @@ public class CasesDto {
 
 	public void setCounselFee(String counselFee) {
 		this.counselFee = counselFee;
+	}
+	
+	public String getFalltypusType () {
+		return this.getParentType() + (ObjectUtils.isEmpty(this.getSubType()) ? "" : "-" + this.getSubType());
 	}
 }

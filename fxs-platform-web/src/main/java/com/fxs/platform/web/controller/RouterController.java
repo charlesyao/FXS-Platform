@@ -22,6 +22,7 @@ import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
+import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
@@ -144,7 +145,10 @@ public class RouterController {
 	}
 
 	@GetMapping("/lawyer/case_pool")
-	public String casePool() {
+	public String casePool(ModelMap map) {
+		
+		map.addAttribute("freeConsultings", casesService.findAll(CaseType.CONSULTING.getType()));
+		
 		return "lawyer_case_pool";
 	}
 

@@ -23,7 +23,7 @@
 								<li class="gray" th:text="${caseDetailInfo.createAt}"> <!--您可以在23分43秒内 <a href="">修改问题</a>--></li>
 								<li class="line"></li>
 								<li class="orange">您的案件类型</li>
-								<li th:text="${caseDetailInfo.parentType} + ' - ' + ${caseDetailInfo.subType}"></li>
+								<li th:text="${caseDetailInfo.falltypusType}"></li>
 								<li class="line"></li>
 								<li class="orange">律师意见</li>
 								<li th:if="${ not #strings.isEmpty(caseDetailInfo.lawyerComments)}" th:text="${caseDetailInfo.lawyerComments}"></li>
