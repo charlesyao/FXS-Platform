@@ -12,6 +12,9 @@ import com.fxs.platform.domain.Cases;
 public interface CasesRepository extends FxsRepository<Cases> {
 	//List<Cases> findByTypeAndSubType(String caseType, String subType);
 
+	@Query("SELECT o FROM Cases o where o.caseType=?1")
+	List<Cases> findAllCases(String type);
+	
 	@Query("SELECT o FROM Cases o where o.userId=?1 AND o.status=?2")
 	List<Cases> findByStatus(String userId, String status);
 	

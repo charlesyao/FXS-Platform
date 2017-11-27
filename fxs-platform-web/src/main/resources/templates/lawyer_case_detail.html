@@ -115,8 +115,7 @@
 							<ul>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch caseTwoBtn">
-										<button type="button" class="btn btn-primary btn-lg" onclick="#'">按键信息反馈</button>
-										<button type="button" id="joinBidding" class="btn btn-primary btn-lg">加入竞标</button>
+										<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#joinBiddingModal">加入竞标</button>
 									</div>
 								</div>
 							</ul>
@@ -124,6 +123,32 @@
 					</div>
 				</section>
 			</div>
+		</div>
+		<div class="modal fade" id="joinBiddingModal" tabindex="-1" role="dialog" aria-labelledby="joinBiddingModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+			          <div class="form-group">
+			            <label for="recipient-name" class="form-control-label">竞价:</label>
+			            <input type="text" class="form-control" id="counselFee" />
+			          </div>
+			          <div class="form-group">
+			            <label for="recipient-name" class="form-control-label">律师意见:</label>
+			            <input type="text" class="form-control" id="lawyerComments" />
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" id="joinBidding">加入竞标</button>
+			      </div>
+			    </div>
+			  </div>
 		</div>
 		<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
 		    <div class="modal-dialog">
@@ -146,15 +171,25 @@
 			$("#joinBidding").on("click", function() {
 				$.ajax({
 					type : 'PUT',
-					url : '/user/case/update/' + [[${caseDetailInfo.id}]] + "/4",
-					data : JSON.stringify({}),
+					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
+					data : JSON.stringify({
+						"status": "4",
+						"counselFee": $("#counselFee").val(),
+						"lawyerComments": $("#lawyerComments").val()
+					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
-						$("#modalContent").empty().append("更新成功")
+						$("#joinBiddingModal").modal('hide');
+						$("#counselFee").val('')
+						$("#lawyerComments").val('')
+						$("#modalContent").empty().append("加入竞标成功")
 						$("#notificationModal").modal("show")
 					},
 					error : function(error) {
-						$("#modalContent").empty().append("更新失败")
+						$("#joinBiddingModal").modal('hide');
+						$("#counselFee").val('')
+						$("#lawyerComments").val('')
+						$("#modalContent").empty().append("加入竞标失败")
 						$("#notificationModal").modal("show")
 					}
 				});

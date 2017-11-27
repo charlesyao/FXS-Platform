@@ -20,6 +20,8 @@ public class CasesDto {
 	//免费法律咨询额外信息
 	private String comments;
 	
+	private String counselFee;
+	
 	private String lawyerComments;
 	
 	private Date createAt;
@@ -27,6 +29,8 @@ public class CasesDto {
 	private String userId;
 
 	private String lawyerId;
+	
+	private String isRead;
 	
 	//List of QA mapping
 	private List<CaseQuestionAnswerRelDto> qaMapping;
@@ -127,5 +131,21 @@ public class CasesDto {
 
 	public void setDetailedInquiries(List<String> detailedInquiries) {
 		this.detailedInquiries = detailedInquiries;
+	}
+
+	public String getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(String isRead) {
+		this.isRead = isRead;
+	}
+
+	public String getCounselFee() {
+		return counselFee;
+	}
+
+	public void setCounselFee(String counselFee) {
+		this.counselFee = counselFee;
 	}
 }

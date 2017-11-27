@@ -32,6 +32,8 @@ import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.DetailedInquiryService;
 import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.CaseStatus;
+import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.ResponseCodeEnum;
 import com.fxs.platform.utils.SystemConstants;
 
@@ -103,7 +105,7 @@ public class CasesController {
 	@GetMapping("/user/case")
 	@ResponseBody
 	public ResponseMessage<List<CasesDto>> query() {
-		return Result.success(casesService.findAll());
+		return Result.success(casesService.findAll(CaseType.CONSULTING.getType()));
 	}
 
 	/**
@@ -140,8 +142,15 @@ public class CasesController {
 	@GetMapping("/user/case/{userRole}/{type}/viewDetail/{caseId}")
 	public String viewDetail(@PathVariable String userRole, @PathVariable String type, @PathVariable String caseId, ModelMap map) {
 		String target = "";
-		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(
-				casesService.findByCaseId(caseId), caseQuestionAnswerRelRepository, falltypusRepository, detailedInquiryRepository));
+		Cases currentCase = casesService.findByCaseId(caseId);
+		
+		if (userRole.equals("lawyer")) {
+			currentCase.setIsRead(CaseStatus.READ.getStatus());
+			
+			casesService.create(currentCase);
+		}
+		
+		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(currentCase, caseQuestionAnswerRelRepository, falltypusRepository, detailedInquiryRepository));
 		
 		if (userRole.equals("litigant")) {
 			//consulting

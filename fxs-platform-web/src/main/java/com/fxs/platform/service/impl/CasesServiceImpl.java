@@ -23,6 +23,7 @@ import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.repository.specification.CaseSpecification;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SystemConstants;
 import com.fxs.platform.utils.UserManager;
 
@@ -69,12 +70,12 @@ public class CasesServiceImpl implements CasesService {
 		
 		return caseRepository.save(cases);*/
 		
-		return null;
+		return caseRepository.save(cases);
 	}
 
 	@Override
-	public List<CasesDto> findAll() {
-		List<Cases> cases = caseRepository.findAll();
+	public List<CasesDto> findAll(String type) {
+		List<Cases> cases = caseRepository.findAllCases(type);
 		
 		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository);
 	}
@@ -105,7 +106,18 @@ public class CasesServiceImpl implements CasesService {
 			return null;
 		}
 
-		BeanUtils.copyProperties(cases, c);
+		if(! ObjectUtils.isEmpty(cases.getCounselFee())) {
+			c.setCounselFee(cases.getCounselFee());
+		}
+		
+		if(! ObjectUtils.isEmpty(cases.getStatus())) {
+			c.setStatus(cases.getStatus());
+		}
+		
+		if (!ObjectUtils.isEmpty(cases.getLawyerComments())) {
+			c.setLawyerComments(cases.getLawyerComments());
+		}
+
 		return caseRepository.saveAndFlush(c);
 	}
 

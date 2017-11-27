@@ -21,6 +21,7 @@ import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SessionVariableManager;
 import com.fxs.platform.utils.SystemConstants;
 
@@ -67,7 +68,7 @@ public class DashboardController {
 		}
 
 		if (isLawyer(roles)) {
-			map.addAttribute("myBidCases", casesService.findAll());
+			map.addAttribute("myBidCases", casesService.findAll(CaseType.LAWSUIT.getType()));
 			target = "/lawyer_dashboard";
 		} else if (isAdmin(roles)) {
 			target = "/admin_dashboard";

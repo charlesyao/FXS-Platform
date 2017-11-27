@@ -17,7 +17,7 @@ public interface CasesService {
 
 	//List<CasesDto> findByTypeAndSubType(String caseType, String subType);
 	
-	List<CasesDto> findAll();
+	List<CasesDto> findAll(String type);
 	
 	List<Cases> findByStatus(String status);
 	

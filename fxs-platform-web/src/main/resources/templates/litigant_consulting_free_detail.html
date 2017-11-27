@@ -25,6 +25,10 @@
 								<li class="orange">您的案件类型</li>
 								<li th:text="${caseDetailInfo.parentType} + ' - ' + ${caseDetailInfo.subType}"></li>
 								<li class="line"></li>
+								<li class="orange">律师意见</li>
+								<li th:if="${ not #strings.isEmpty(caseDetailInfo.lawyerComments)}" th:text="${caseDetailInfo.lawyerComments}"></li>
+								<li th:if="${#strings.isEmpty(caseDetailInfo.lawyerComments)}">尚未有律师回复</li>
+								<li class="line"></li>
 								<li class="orange">您的问卷调查信息</li>
 								<ul th:each="qa : ${caseDetailInfo.qaMapping}">
 									<li>问题: <span th:text="${qa.questionDesc}"></span></li>

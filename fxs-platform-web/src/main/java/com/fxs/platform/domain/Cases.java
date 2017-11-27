@@ -39,8 +39,14 @@ public class Cases {
 	//免费法律咨询额外信息
 	private String comments;
 	
+	//律师费用
+	private String counselFee;
+	
 	//免费法律咨询额外信息
 	private String lawyerComments;
+	
+	//是否已经查看
+	private String isRead = CaseStatus.UNREAD.getStatus();
 	
 	@Transient
 	private String detailedInquirys;
@@ -137,5 +143,21 @@ public class Cases {
 
 	public void setDetailedInquirys(String detailedInquirys) {
 		this.detailedInquirys = detailedInquirys;
+	}
+
+	public String getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(String isRead) {
+		this.isRead = isRead;
+	}
+
+	public String getCounselFee() {
+		return counselFee;
+	}
+
+	public void setCounselFee(String counselFee) {
+		this.counselFee = counselFee;
 	}
 }

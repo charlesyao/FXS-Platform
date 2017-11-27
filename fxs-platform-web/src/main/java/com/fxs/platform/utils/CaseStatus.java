@@ -29,7 +29,17 @@ public enum CaseStatus {
 	/**
 	 * 案件结束
 	 */
-	END("5");
+	END("5"),
+	
+	/**
+	 * 已读
+	 */
+	READ("Y"),
+	
+	/**
+	 * 未读
+	 */
+	UNREAD("N");
 
 	private String status;
 

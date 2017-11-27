@@ -11,6 +11,16 @@ public class CasesCondition {
 	private String caseType;
 	
 	private String userId;
+	
+	private String isRead;
+
+	public String getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(String isRead) {
+		this.isRead = isRead;
+	}
 
 	public String getUserId() {
 		return userId;
