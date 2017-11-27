@@ -23,6 +23,7 @@ import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
+import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
@@ -50,6 +51,9 @@ public class CasesController {
 	
 	@Autowired
 	FalltypusRepository falltypusRepository;
+	
+	@Autowired
+	DetailedInquiryRepository detailedInquiryRepository;
 	
 	@Autowired
 	DetailedInquiryService detailedInquiryService;
@@ -133,14 +137,20 @@ public class CasesController {
 	 * @param caseId
 	 * @return
 	 */
-	@GetMapping("/user/case/{userRole}/viewDetail/{caseId}")
-	public String viewDetail(@PathVariable String userRole, @PathVariable String caseId, ModelMap map) {
+	@GetMapping("/user/case/{userRole}/{type}/viewDetail/{caseId}")
+	public String viewDetail(@PathVariable String userRole, @PathVariable String type, @PathVariable String caseId, ModelMap map) {
 		String target = "";
 		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(
-				casesService.findByCaseId(caseId), caseQuestionAnswerRelRepository, falltypusRepository));
+				casesService.findByCaseId(caseId), caseQuestionAnswerRelRepository, falltypusRepository, detailedInquiryRepository));
 		
 		if (userRole.equals("litigant")) {
-			target = "litigant_consulting_free_detail";
+			//consulting
+			if (type.equals("consulting")) {
+				target = "litigant_consulting_free_detail";
+			} else {
+				//lawsuit
+				target = "litigant_lawsuit_detail";
+			}
 		} else if (userRole.equals("lawyer")) {
 			target = "lawyer_case_detail";
 		}

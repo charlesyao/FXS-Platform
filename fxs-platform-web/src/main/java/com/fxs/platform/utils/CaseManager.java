@@ -12,12 +12,14 @@ import org.springframework.util.ObjectUtils;
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.CaseQuestionAnswerRel;
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.CaseQuestionAnswerRelDto;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
+import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.support.QueryResultConverter;
 
@@ -96,7 +98,7 @@ public class CaseManager {
 	
 	public static CasesDto caseWrapper(Cases cases, 
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
-			FalltypusRepository falltypusRepository) {
+			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository) {
 		
 		CasesDto caseDto = new CasesDto();
 		BeanUtils.copyProperties(cases, caseDto);
@@ -105,7 +107,28 @@ public class CaseManager {
 		
 		List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 		
+		DetailedInquiry detailedInquiry = detailedInquiryRepository.findByCaseId(caseDto.getId());
+		
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
+		
+		List<String> detailedInquiries = new ArrayList<String>();
+		
+		if (! ObjectUtils.isEmpty(detailedInquiry)) {
+			if (! ObjectUtils.isEmpty(detailedInquiry.getFirstComments())) {
+				detailedInquiries.add(detailedInquiry.getFirstComments());
+			}
+			
+			if (! ObjectUtils.isEmpty(detailedInquiry.getSecondComments())) {
+				detailedInquiries.add(detailedInquiry.getSecondComments());
+			}
+			
+			if (! ObjectUtils.isEmpty(detailedInquiry.getThirdComments())) {
+				detailedInquiries.add(detailedInquiry.getThirdComments());
+			}
+			
+		}
+		
+		caseDto.setDetailedInquiries(detailedInquiries);
 		
 		return caseDto;
 	}

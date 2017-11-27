@@ -30,6 +30,8 @@ public class CasesDto {
 	
 	//List of QA mapping
 	private List<CaseQuestionAnswerRelDto> qaMapping;
+	
+	private List<String> detailedInquiries;
 
 	public String getId() {
 		return id;
@@ -117,5 +119,13 @@ public class CasesDto {
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+
+	public List<String> getDetailedInquiries() {
+		return detailedInquiries;
+	}
+
+	public void setDetailedInquiries(List<String> detailedInquiries) {
+		this.detailedInquiries = detailedInquiries;
 	}
 }

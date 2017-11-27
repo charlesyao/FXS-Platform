@@ -15,16 +15,16 @@
 			<section class="col-md-12 col-sm-12 writeInfo space20">
 				<div class="row">
 					<div class="col-md-8 col-sm-8 mybox">
-						<a href="" th:each="myLawsuit : ${myLawsuit}">
-							<ul class="writeInfoText ulCell myCell">
-								<li>起诉地点 : 南京</li>
-								<li>案件类型 : <span th:text="${myLawsuit.parentType} + ' - ' + ${myLawsuit.subType}"></span></li>
-								<li class="gray">
-									<span>案件编号 : <span th:text="${myLawsuit.id}"></span></span>
-									<span>案件提交时间: <span th:text="${myLawsuit.createAt}"></span></span>
-								</li>
-							</ul> 
-						</a> 
+						<ul class="writeInfoText ulCell myCell" th:each="myLawsuit : ${myLawsuit}">
+							<li>起诉地点 : 南京</li>
+							<li>案件类型 : <span th:text="${myLawsuit.parentType} + ' - ' + ${myLawsuit.subType}"></span></li>
+							<li class="gray">
+								<span>案件编号 : <span th:text="${myLawsuit.id}"></span></span><br />
+								<span>案件提交时间: <span th:text="${myLawsuit.createAt}"></span></span>
+							</li>
+							<br />
+							<a th:href="@{/user/case/litigant/lawsuit/viewDetail/{id}(id=${myLawsuit.id})}">查看详情</a>
+						</ul> 
 					</div>
 					<div class="col-md-4 col-sm-4">
 						<div class="writeInfoRight ulCell">

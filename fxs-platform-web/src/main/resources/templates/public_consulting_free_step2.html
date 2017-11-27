@@ -17,7 +17,6 @@
 				<div class="row">
 					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}" th:attr="isRoot=${question.question.isRootQuestion}">
 						<li class="introcoupCell btnSquare">
-							<!-- th:href="@{/public/question/answer/{id}(id=${answer.id})}" -->
 							<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
 						</li>
 					</ul>

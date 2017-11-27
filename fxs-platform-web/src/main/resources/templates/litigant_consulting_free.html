@@ -18,11 +18,13 @@
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
 						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${myFreeConsultings}">
-							<li th:text="${freeConsulting.comments}"></li>
-							<li class="gray" th:text="${freeConsulting.createAt}">
-								
+							<li>案件类型 : <span th:text="${freeConsulting.parentType} + ' - ' + ${freeConsulting.subType}"></span></li>
+							<li class="gray">
+								<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span><br />
+								<span>案件提交时间: <span th:text="${freeConsulting.createAt}"></span></span>
 							</li>
-							<a th:href="@{/user/case/litigant/viewDetail/{id}(id=${freeConsulting.id})}">查看详情</a>
+							<br />
+							<a th:href="@{/user/case/litigant/consulting/viewDetail/{id}(id=${freeConsulting.id})}">查看详情</a>
 						</ul>
 					</div>
 					<div class="col-md-4 col-sm-4">
