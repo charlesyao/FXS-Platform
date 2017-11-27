@@ -56,7 +56,7 @@
 								<li class="gray">2017.11.06 10:57</li>
 								<div class="row mybox">
 									<div class="col-md-12 btnSearch solutionTwoBtn">
-										<button th:attr="disabled=${#lists.size(caseDetailInfo.detailedInquiries) eq 3} ? 'disabled' : 'false'" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addDetailedInquiry">追问</button>
+										<button th:attr="disabled=(${#lists.size(caseDetailInfo.detailedInquiries) eq 3} or ${caseDetailInfo.status eq '5'}) ? 'disabled' : 'false'" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addDetailedInquiry">追问</button>
 										&nbsp;&nbsp;
 										<button th:attr="disabled=${caseDetailInfo.status eq '5'} ? 'disabled' : 'false'" type="button" id="resolveDispute" class="btn btn-primary btn-lg">解决纠纷</button>
 									</div>
