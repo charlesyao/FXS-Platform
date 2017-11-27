@@ -69,6 +69,10 @@ public class CaseManager {
 		}
 		
 		cases.setUserId(UserManager.getSessionUser(session));
+		
+		cases.setStatus(CaseStatus.NEW.getStatus());
+		
+		cases.setIsRead(CaseStatus.UNREAD.getStatus());
 
 		return repository.save(cases);
 	}

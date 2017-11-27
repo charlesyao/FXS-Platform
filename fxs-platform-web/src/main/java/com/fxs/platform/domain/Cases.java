@@ -34,7 +34,7 @@ public class Cases {
 	/**
 	 * @see com.fxs.platform.utils.CaseStatus
 	 */
-	private String status = CaseStatus.NEW.getStatus();
+	private String status;
 	
 	//免费法律咨询额外信息
 	private String comments;
@@ -46,7 +46,7 @@ public class Cases {
 	private String lawyerComments;
 	
 	//是否已经查看
-	private String isRead = CaseStatus.UNREAD.getStatus();
+	private String isRead;
 	
 	@Transient
 	private String detailedInquirys;

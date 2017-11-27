@@ -114,7 +114,7 @@
 							<ul>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch caseTwoBtn">
-										<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#joinBiddingModal">加入竞标</button>
+										<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addFeedbackModal">律师反馈</button>
 									</div>
 								</div>
 							</ul>
@@ -123,7 +123,7 @@
 				</section>
 			</div>
 		</div>
-		<div class="modal fade" id="joinBiddingModal" tabindex="-1" role="dialog" aria-labelledby="joinBiddingModalLabel" aria-hidden="true">
+		<div class="modal fade" id="addFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addFeedbackModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -134,17 +134,13 @@
 			      <div class="modal-body">
 			        <form>
 			          <div class="form-group">
-			            <label for="recipient-name" class="form-control-label">竞价:</label>
-			            <input type="text" class="form-control" id="counselFee" />
-			          </div>
-			          <div class="form-group">
 			            <label for="recipient-name" class="form-control-label">律师意见:</label>
 			            <input type="text" class="form-control" id="lawyerComments" />
 			          </div>
 			        </form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary" id="joinBidding">加入竞标</button>
+			        <button type="button" class="btn btn-primary" id="addFeedback">保存</button>
 			      </div>
 			    </div>
 			  </div>
@@ -167,7 +163,7 @@
 	<div th:replace="fragments/public_footer :: public-footer"></div>
 	<script th:inline="javascript">
 		$(function() {
-			$("#joinBidding").on("click", function() {
+			$("#addFeedback").on("click", function() {
 				$.ajax({
 					type : 'PUT',
 					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
@@ -178,24 +174,22 @@
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
-						$("#joinBiddingModal").modal('hide');
-						$("#counselFee").val('')
+						$("#addFeedbackModal").modal('hide');
 						$("#lawyerComments").val('')
-						$("#modalContent").empty().append("加入竞标成功")
+						$("#modalContent").empty().append("反馈信息添加成功")
 						$("#notificationModal").modal("show")
 					},
 					error : function(error) {
-						$("#joinBiddingModal").modal('hide');
-						$("#counselFee").val('')
+						$("#addFeedbackModal").modal('hide');
 						$("#lawyerComments").val('')
-						$("#modalContent").empty().append("加入竞标失败")
+						$("#modalContent").empty().append("反馈信息添加失败")
 						$("#notificationModal").modal("show")
 					}
 				});
 			})
 			
 			$("#notificationModal").on("hidden.bs.modal", function() {
-				window.location.assign("/user/dashboard");
+				window.location.assign(location.href);
 			})
 		})
 	</script>
