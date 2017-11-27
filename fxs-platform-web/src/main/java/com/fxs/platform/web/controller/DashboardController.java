@@ -24,6 +24,7 @@ import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SessionVariableManager;
 import com.fxs.platform.utils.SystemConstants;
+import com.fxs.platform.utils.UserManager;
 
 @Controller
 @RequestMapping("/user")
@@ -67,12 +68,12 @@ public class DashboardController {
 			roles.add(a.getAuthority());
 		}
 
-		if (isLawyer(roles)) {
+		if (UserManager.isLawyer(roles)) {
 			map.addAttribute("myBidCases", casesService.findAll(CaseType.LAWSUIT.getType()));
 			target = "/lawyer_dashboard";
-		} else if (isAdmin(roles)) {
+		} else if (UserManager.isAdmin(roles)) {
 			target = "/admin_dashboard";
-		} else if (isUser(roles)) {
+		} else if (UserManager.isUser(roles)) {
 			target = "/litigant_dashboard";
 		} else {
 			target = "/accessDenied";
@@ -81,26 +82,5 @@ public class DashboardController {
 		SessionVariableManager.clearSession(session);
 		
 		return target;
-	}
-
-	private boolean isUser(List<String> roles) {
-		if (roles.contains("ROLE_USER")) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isAdmin(List<String> roles) {
-		if (roles.contains("ROLE_ADMIN")) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isLawyer(List<String> roles) {
-		if (roles.contains("ROLE_LAWYER")) {
-			return true;
-		}
-		return false;
 	}
 }

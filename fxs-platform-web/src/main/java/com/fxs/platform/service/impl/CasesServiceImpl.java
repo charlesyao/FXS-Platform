@@ -1,5 +1,7 @@
 package com.fxs.platform.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,12 +10,17 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.repository.FalltypusRepository;
@@ -22,6 +29,7 @@ import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.repository.specification.CaseSpecification;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
+import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SystemConstants;
 import com.fxs.platform.utils.UserManager;
 
@@ -43,6 +51,9 @@ public class CasesServiceImpl implements CasesService {
 	
 	@Autowired
 	FalltypusRepository falltypusRepository;
+	
+	@Autowired
+	CaseFeedbackInfoRepository caseFeedbackInfoRepository;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -97,33 +108,42 @@ public class CasesServiceImpl implements CasesService {
 	}
 
 	@Override
-	public Cases update(String caseId, Cases cases) {
+	public Cases update(String caseId, CaseFeedbackInfo cases) {
 		Cases c = caseRepository.findOne(caseId);
 
+		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		
+		List<String> roles = new ArrayList<String>();
+
+		for (GrantedAuthority a : authorities) {
+			roles.add(a.getAuthority());
+		}
+		
 		if (ObjectUtils.isEmpty(c)) {
 			return null;
 		}
 
-		if(! ObjectUtils.isEmpty(cases.getCounselFee())) {
-			c.setCounselFee(cases.getCounselFee());
-		}
-		
 		if(! ObjectUtils.isEmpty(cases.getStatus())) {
 			c.setStatus(cases.getStatus());
 		}
 		
-		if (!ObjectUtils.isEmpty(cases.getLawyerComments())) {
-			c.setLawyerComments(cases.getLawyerComments());
-		}
-		
-		if (c.getFeedbackCount() <= SystemConstants.FEEDBACK_COUNT_TOTAL) {
-			c.setFeedbackCount(c.getFeedbackCount() + 1);
+		if (UserManager.isLawyer(roles)) {
+			cases.setCaseId(caseId);
+			cases.setLawyerName(UserManager.getPrincipal());
+			cases.setLawyerId(UserManager.getSessionUser(httpSession));
 			
-			return caseRepository.saveAndFlush(c);
+			if (c.getFeedbackCount() <= SystemConstants.FEEDBACK_COUNT_TOTAL) {
+				c.setFeedbackCount(c.getFeedbackCount() + 1);
+				
+				caseFeedbackInfoRepository.save(cases);
+				
+				return caseRepository.saveAndFlush(c);
+			}
 		} else {
-			return null;
+			return caseRepository.saveAndFlush(c);
 		}
 		
+		return null;
 	}
 
 	@Override

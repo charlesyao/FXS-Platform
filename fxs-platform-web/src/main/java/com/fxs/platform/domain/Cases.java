@@ -39,12 +39,6 @@ public class Cases {
 	//免费法律咨询额外信息
 	private String comments;
 	
-	//律师费用
-	private String counselFee;
-	
-	//免费法律咨询额外信息
-	private String lawyerComments;
-	
 	//标识当前免费的法律咨询共有多少个律师反馈, 最多十个
 	private int feedbackCount;
 	
@@ -57,8 +51,6 @@ public class Cases {
 	private Date createAt = new Date();
 	
 	private String userId;
-
-	private String lawyerId;
 
 	public String getId() {
 		return id;
@@ -92,14 +84,6 @@ public class Cases {
 		this.userId = userId;
 	}
 
-	public String getLawyerId() {
-		return lawyerId;
-	}
-
-	public void setLawyerId(String lawyerId) {
-		this.lawyerId = lawyerId;
-	}
-
 	public String getParentType() {
 		return parentType;
 	}
@@ -124,14 +108,6 @@ public class Cases {
 		this.comments = comments;
 	}
 
-	public String getLawyerComments() {
-		return lawyerComments;
-	}
-
-	public void setLawyerComments(String lawyerComments) {
-		this.lawyerComments = lawyerComments;
-	}
-
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -154,14 +130,6 @@ public class Cases {
 
 	public void setIsRead(String isRead) {
 		this.isRead = isRead;
-	}
-
-	public String getCounselFee() {
-		return counselFee;
-	}
-
-	public void setCounselFee(String counselFee) {
-		this.counselFee = counselFee;
 	}
 
 	public int getFeedbackCount() {

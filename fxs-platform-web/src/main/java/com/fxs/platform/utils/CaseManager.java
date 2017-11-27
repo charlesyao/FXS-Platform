@@ -10,13 +10,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Answer;
+import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.CaseQuestionAnswerRel;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.domain.Question;
+import com.fxs.platform.dto.CaseFeedbackInfoDto;
 import com.fxs.platform.dto.CaseQuestionAnswerRelDto;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.repository.DetailedInquiryRepository;
@@ -102,7 +105,8 @@ public class CaseManager {
 	
 	public static CasesDto caseWrapper(Cases cases, 
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
-			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository) {
+			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository,
+			CaseFeedbackInfoRepository caseFeedbackInfoRepository) {
 		
 		CasesDto caseDto = new CasesDto();
 		BeanUtils.copyProperties(cases, caseDto);
@@ -113,7 +117,10 @@ public class CaseManager {
 		
 		DetailedInquiry detailedInquiry = detailedInquiryRepository.findByCaseId(caseDto.getId());
 		
+		List<CaseFeedbackInfo> caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseId(cases.getId());
+		
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
+		caseDto.setCaseFeedbackInfo(QueryResultConverter.convert(caseFeedbackInfo, CaseFeedbackInfoDto.class));
 		
 		List<String> detailedInquiries = new ArrayList<String>();
 		

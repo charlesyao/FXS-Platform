@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.util.ObjectUtils;
 
+import com.fxs.platform.domain.CaseFeedbackInfo;
+
 public class CasesDto {
 	
 	private String id;
@@ -37,6 +39,8 @@ public class CasesDto {
 	
 	//List of QA mapping
 	private List<CaseQuestionAnswerRelDto> qaMapping;
+	
+	private List<CaseFeedbackInfoDto> caseFeedbackInfo;
 	
 	private List<String> detailedInquiries;
 
@@ -162,5 +166,13 @@ public class CasesDto {
 
 	public void setFeedbackCount(int feedbackCount) {
 		this.feedbackCount = feedbackCount;
+	}
+
+	public List<CaseFeedbackInfoDto> getCaseFeedbackInfo() {
+		return caseFeedbackInfo;
+	}
+
+	public void setCaseFeedbackInfo(List<CaseFeedbackInfoDto> caseFeedbackInfo) {
+		this.caseFeedbackInfo = caseFeedbackInfo;
 	}
 }

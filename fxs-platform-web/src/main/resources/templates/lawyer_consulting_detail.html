@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/lawyer_header :: lawyer-header-css"></div>
+</head>
+<body>
+	<div th:replace="fragments/lawyer_header :: lawyer-header"></div>
+	<div class="mainPart mycasePart">
+		<div class="container">
+			<div class="containerWapper">
+				<ol class="breadcrumb">
+					<li><a href="laywer_center.html">待加入竞标</a></li>
+					<li class="active">案件 <span th:text="${caseDetailInfo.id}"></span></li>
+				</ol>
+				<h1 class="blue">案件 <span th:text="${caseDetailInfo.id}"></span></h1>
+				<section class="col-md-12 col-sm-12 writeInfo space20">
+					<div class="row">
+						<div class="col-md-12 mybox">
+							<ul class="writeInfoText ulCell myCell">
+								<div class="row">
+									<table class="table tableBox">
+										<tbody>
+											<tr class="listTitle">
+												<td colspan="2">
+													<b th:text="${caseDetailInfo.falltypusType}"></b>
+													<span>案件编号 : <span th:text="${caseDetailInfo.id}"></span></span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2"><a href="">赢积分：</a> <span
+													class="orange">20</span></td>
+											</tr>
+											<tr>
+												<td colspan="2">竞标发布时间： <span th:text="${caseDetailInfo.createAt}"></span></td>
+											</tr>
+											<tr>
+												<td colspan="2">法律意见提交截止时间： 2017.11.09 10:25 还剩(22天15小时5分30秒)</td>
+											</tr>
+											<tr>
+												<td colspan="2">加入竞标人数： 较少</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell">
+								<div class="row">
+									<table class="table tableBox">
+										<tbody>
+											<tr>
+												<td>案件类型： <span th:text="${caseDetailInfo.parentType}"></span></td>
+												<td>案件阶段：尚未有判决或裁决</td>
+											</tr>
+											<tr>
+												<td>当事人角色： 原告</td>
+												<td>对法院判决态度： -</td>
+											</tr>
+											<tr>
+												<td>您是代表谁找律师： 本人</td>
+												<td>起诉地点：上海</td>
+											</tr>
+											<tr>
+												<td>律师所在地：上海</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<ul>
+										<li><h4>案件事实</h4></li>
+									</ul>
+								</div>
+								<div class="row" th:each="qaMapping : ${caseDetailInfo.qaMapping}">
+									<ul>
+										<li><b>问题： <span th:text="${qaMapping.questionDesc}"></span></b></li>
+										<li><b>选项： <span th:text="${qaMapping.answerDesc}"></span></b></li>
+										<li class="gray">未选项：已取得营业执照的企业包工头其他</li>
+									</ul>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<ul>
+										<li><h4>您的期望与理由</h4></li>
+										<li class="gray" th:text="${caseDetailInfo.comments}"></li>
+									</ul>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<ul>
+										<li><h4>证据材料</h4></li>
+									</ul>
+								</div>
+								<div class="row" th:each="qaMapping : ${caseDetailInfo.qaMapping}">
+									<ul>
+										<li><b>问题：<span th:text="${qaMapping.questionDesc}"></span></b></li>
+										<li><b>问题：<span th:text="${qaMapping.answerDesc}"></span></b></li>
+										<li class="gray">未选项：已取得营业执照的企业包工头其他</li>
+									</ul>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<li class="orange">当事人的追问信息:</li>
+								<li th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">您对此案件还没有追问信息</li>
+								<li th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}" th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}" th:text="'第'+ ${iterState.count} + '次追问: ' + ${inquiry}"></li>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<ul>
+										<li><h4>已采取的行动与结果</h4></li>
+										<li class="gray">无</li>
+									</ul>
+								</div>
+							</ul>
+							<ul>
+								<div class="row">
+									<div class="col-md-12 col-sm-12 btnNext btnSearch caseTwoBtn">
+										<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addFeedbackModal">律师反馈</button>
+									</div>
+								</div>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="modal fade" id="addFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addFeedbackModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+			          <div class="form-group">
+			            <label for="recipient-name" class="form-control-label">律师意见:</label>
+			            <input type="text" class="form-control" id="lawyerComments" />
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" id="addFeedback">保存</button>
+			      </div>
+			    </div>
+			  </div>
+		</div>
+		<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">提示信息</h4>
+		            </div>
+		            <div class="modal-body" id="modalContent"></div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<script th:inline="javascript">
+		$(function() {
+			$("#addFeedback").on("click", function() {
+				$.ajax({
+					type : 'PUT',
+					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
+					data : JSON.stringify({
+						"status": "1",
+						"lawyerComments": $("#lawyerComments").val()
+					}),
+					contentType : "application/json; charset=utf-8",
+					success : function(data) {
+						$("#addFeedbackModal").modal('hide');
+						$("#lawyerComments").val('')
+						$("#modalContent").empty().append("反馈信息添加成功")
+						$("#notificationModal").modal("show")
+					},
+					error : function(error) {
+						$("#addFeedbackModal").modal('hide');
+						$("#lawyerComments").val('')
+						$("#modalContent").empty().append("反馈信息添加失败")
+						$("#notificationModal").modal("show")
+					}
+				});
+			})
+			
+			$("#notificationModal").on("hidden.bs.modal", function() {
+				window.location.assign(location.href);
+			})
+		})
+	</script>
+</body>
+</html>

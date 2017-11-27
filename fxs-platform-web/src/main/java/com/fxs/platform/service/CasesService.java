@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
@@ -23,7 +24,7 @@ public interface CasesService {
 	
 	Cases findByCaseId(String caseId);
 	
-	Cases update(String caseId, Cases cases);
+	Cases update(String caseId, CaseFeedbackInfo cases);
 	
 	void updateStatus(String statusCode, String caseId);
 

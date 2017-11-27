@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
+import com.fxs.platform.repository.UserRepository;
 import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
@@ -33,7 +36,6 @@ import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.DetailedInquiryService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.CaseStatus;
-import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.ResponseCodeEnum;
 import com.fxs.platform.utils.SystemConstants;
 
@@ -59,6 +61,12 @@ public class CasesController {
 	
 	@Autowired
 	DetailedInquiryService detailedInquiryService;
+	
+	@Autowired
+	CaseFeedbackInfoRepository caseFeedbackInfoRepository;
+	
+	@Autowired
+	UserRepository userRepository; 
 	
 	/**
 	 * 当事人提交电话咨询信息
@@ -98,40 +106,20 @@ public class CasesController {
 	}
 
 	/**
-	 * 获取所有案件，针对律师的案件池
+	 * 根据不同类型获取案件 
 	 * 
 	 * @return
 	 */
 	@GetMapping("/user/case")
 	@ResponseBody
-	public ResponseMessage<List<CasesDto>> query() {
-		return Result.success(casesService.findAll(CaseType.CONSULTING.getType()));
+	public ResponseMessage<List<CasesDto>> query(
+						CasesCondition condition,
+						Pageable pageable,
+						@PathVariable String caseType, 
+						ModelMap map) {
+		return Result.success(casesService.query(condition, pageable));
 	}
 
-	/**
-	 * 根据不同类型获取案件 
-	 * 
-	 * @return
-	 */
-	@GetMapping("/user/case/type/{caseType}")
-	@ResponseBody
-	public ResponseMessage<List<CasesDto>> queryByType(@PathVariable String caseType, ModelMap map) {
-		return Result.success(casesService.findByType(caseType));
-	}
-	
-	/**
-	 * 根据状态获取案件
-	 * 
-	 * @see com.fxs.platform.utils.CaseStatus
-	 * 
-	 * @param status
-	 * @return
-	 */
-	@GetMapping("/user/case/status/{status}")
-	@ResponseBody
-	public ResponseMessage<List<Cases>> queryByStatus(@PathVariable String status) {
-		return Result.success(casesService.findByStatus(status));
-	}
 
 	/**
 	 * 查看case详细信息
@@ -150,7 +138,8 @@ public class CasesController {
 			casesService.create(currentCase);
 		}
 		
-		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(currentCase, caseQuestionAnswerRelRepository, falltypusRepository, detailedInquiryRepository));
+		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(currentCase, caseQuestionAnswerRelRepository, 
+				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository));
 		
 		if (userRole.equals("litigant")) {
 			//consulting
@@ -161,7 +150,13 @@ public class CasesController {
 				target = "litigant_lawsuit_detail";
 			}
 		} else if (userRole.equals("lawyer")) {
-			target = "lawyer_case_detail";
+			
+			if (type.equals("consulting")) {
+				target = "lawyer_consulting_detail";
+			} else {
+				//lawsuit
+				target = "lawyer_lawsuit_detail";
+			}
 		}
 		return target;
 	}
@@ -174,7 +169,7 @@ public class CasesController {
 	 */
 	@PutMapping("/user/case/update/{caseId}")
 	@ResponseBody
-	public ResponseMessage<Cases> update(@PathVariable String caseId, @Valid @RequestBody Cases cases) {
+	public ResponseMessage<Cases> update(@PathVariable String caseId, @Valid @RequestBody CaseFeedbackInfo cases) {
 		return Result.success(casesService.update(caseId, cases));
 	}
 	
@@ -188,18 +183,5 @@ public class CasesController {
 		}
 
 		return Result.success(ResponseCodeEnum.SUCCESS.getCode());
-	}
-	
-	@PutMapping("/user/case/update/{caseId}/{statusCode}")
-	@ResponseBody
-	public ResponseMessage<Integer> resolve(@PathVariable String caseId, @PathVariable String statusCode) {
-		casesService.updateStatus(statusCode, caseId);
-		return Result.success(ResponseCodeEnum.SUCCESS.getCode());
-	}
-	
-	@GetMapping("/user/case/multicondition")
-	@ResponseBody
-	public ResponseMessage<List<CasesDto>> query(CasesCondition condition, Pageable pageable) {
-		return Result.success(casesService.query(condition, pageable));
 	}
 }
