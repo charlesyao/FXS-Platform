@@ -45,6 +45,9 @@ public class Cases {
 	//免费法律咨询额外信息
 	private String lawyerComments;
 	
+	//标识当前免费的法律咨询共有多少个律师反馈, 最多十个
+	private int feedbackCount;
+	
 	//是否已经查看
 	private String isRead;
 	
@@ -159,5 +162,13 @@ public class Cases {
 
 	public void setCounselFee(String counselFee) {
 		this.counselFee = counselFee;
+	}
+
+	public int getFeedbackCount() {
+		return feedbackCount;
+	}
+
+	public void setFeedbackCount(int feedbackCount) {
+		this.feedbackCount = feedbackCount;
 	}
 }

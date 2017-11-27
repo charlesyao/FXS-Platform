@@ -115,8 +115,15 @@ public class CasesServiceImpl implements CasesService {
 		if (!ObjectUtils.isEmpty(cases.getLawyerComments())) {
 			c.setLawyerComments(cases.getLawyerComments());
 		}
-
-		return caseRepository.saveAndFlush(c);
+		
+		if (c.getFeedbackCount() <= SystemConstants.FEEDBACK_COUNT_TOTAL) {
+			c.setFeedbackCount(c.getFeedbackCount() + 1);
+			
+			return caseRepository.saveAndFlush(c);
+		} else {
+			return null;
+		}
+		
 	}
 
 	@Override

@@ -104,6 +104,11 @@
 								</div>
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
+								<li class="orange">当事人的追问信息:</li>
+								<li th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">您对此案件还没有追问信息</li>
+								<li th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}" th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}" th:text="'第'+ ${iterState.count} + '次追问: ' + ${inquiry}"></li>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
 									<ul>
 										<li><h4>已采取的行动与结果</h4></li>

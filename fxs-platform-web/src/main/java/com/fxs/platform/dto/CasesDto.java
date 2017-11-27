@@ -33,6 +33,8 @@ public class CasesDto {
 	
 	private String isRead;
 	
+	private int feedbackCount;
+	
 	//List of QA mapping
 	private List<CaseQuestionAnswerRelDto> qaMapping;
 	
@@ -152,5 +154,13 @@ public class CasesDto {
 	
 	public String getFalltypusType () {
 		return this.getParentType() + (ObjectUtils.isEmpty(this.getSubType()) ? "" : "-" + this.getSubType());
+	}
+
+	public int getFeedbackCount() {
+		return feedbackCount;
+	}
+
+	public void setFeedbackCount(int feedbackCount) {
+		this.feedbackCount = feedbackCount;
 	}
 }

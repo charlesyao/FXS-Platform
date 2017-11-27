@@ -9,4 +9,6 @@ public class SystemConstants {
 	public static final String CASE_TYPE_CONSULTING = "consulting";
 	public static final String CASE_TYPE_LAWSUIT = "lawsuit";
 	public static final String DUPLICATE_USER = "DUPLICATE_USER";
+	public static final int FEEDBACK_COUNT_SETP = 1;
+	public static final int FEEDBACK_COUNT_TOTAL = 10;
 }
