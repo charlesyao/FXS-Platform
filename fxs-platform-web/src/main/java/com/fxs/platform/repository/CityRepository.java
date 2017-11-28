@@ -18,4 +18,7 @@ public interface CityRepository extends FxsRepository<City> {
 
 	@Query("SELECT o FROM City o WHERE o.level=1 AND o.cityId in ?1")
 	List<City> findFirstLevelCityByIds(String[] ids, Sort sort);
+	
+	@Query("SELECT o FROM City o WHERE o.cityId=?1")
+	City findByCityId(String cityId);
 }

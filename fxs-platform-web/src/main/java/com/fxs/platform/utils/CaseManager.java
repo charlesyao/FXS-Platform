@@ -13,6 +13,7 @@ import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.CaseQuestionAnswerRel;
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.City;
 import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.domain.Question;
@@ -22,12 +23,19 @@ import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
+import com.fxs.platform.repository.CityRepository;
 import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.support.QueryResultConverter;
 
 public class CaseManager {
 
+	/**
+	 * 保存案件对应的问题答案的关系
+	 * @param cases
+	 * @param session
+	 * @param repository
+	 */
 	@SuppressWarnings("unchecked")
 	public static void saveCaseQuestionRel(Cases cases, HttpSession session, CaseQuestionAnswerRelRepository repository) {
 		CaseQuestionAnswerRel rel = null;
@@ -58,10 +66,19 @@ public class CaseManager {
 
 	}
 
+	/**
+	 * 保存案件
+	 * @param cases
+	 * @param session
+	 * @param repository
+	 * @return
+	 */
 	public static Cases saveCase(Cases cases, HttpSession session, CasesRepository repository) {
 		
 		String level1TypeInSession = (String)session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE);
 		String level2TypeInSession = (String)session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE);
+		String level1CityInSession = (String)session.getAttribute(SystemConstants.LEVEL_1_CITY);
+		String level2CityInSession = (String)session.getAttribute(SystemConstants.LEVEL_2_CITY);
 		
 		if (!ObjectUtils.isEmpty(level1TypeInSession)) {
 			cases.setParentType(level1TypeInSession);
@@ -69,6 +86,14 @@ public class CaseManager {
 		
 		if (!ObjectUtils.isEmpty(level2TypeInSession)) {
 			cases.setSubType(level2TypeInSession);
+		}
+		
+		if (!ObjectUtils.isEmpty(level1CityInSession)) {
+			cases.setParentLocation(level1CityInSession);
+		}
+		
+		if (!ObjectUtils.isEmpty(level2CityInSession)) {
+			cases.setSubLocation(level2CityInSession);
 		}
 		
 		cases.setUserId(UserManager.getSessionUser(session));
@@ -80,9 +105,16 @@ public class CaseManager {
 		return repository.save(cases);
 	}
 	
+	/**
+	 * 封装案件列表
+	 * @param cases
+	 * @param caseQuestionAnswerRelRepository
+	 * @param falltypusRepository
+	 * @return
+	 */
 	public static List<CasesDto> caseWrapper(List<Cases> cases, 
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
-			FalltypusRepository falltypusRepository) {
+			FalltypusRepository falltypusRepository, CityRepository cityRepository) {
 		
 		List<CasesDto> casesDtoList = new ArrayList<CasesDto>();
 		
@@ -92,7 +124,7 @@ public class CaseManager {
 			BeanUtils.copyProperties(c, caseDto);
 			
 			falltypusWrapper(caseDto, c, falltypusRepository);
-			
+			cityWrapper(caseDto, c, cityRepository);
 			List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 			
 			caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
@@ -103,15 +135,27 @@ public class CaseManager {
 		return casesDtoList;
 	}
 	
+	/**
+	 * 封装当个案件对象
+	 * @param cases
+	 * @param caseQuestionAnswerRelRepository
+	 * @param falltypusRepository
+	 * @param detailedInquiryRepository
+	 * @param caseFeedbackInfoRepository
+	 * @param cityRepository
+	 * @return
+	 */
 	public static CasesDto caseWrapper(Cases cases, 
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
 			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository,
-			CaseFeedbackInfoRepository caseFeedbackInfoRepository) {
+			CaseFeedbackInfoRepository caseFeedbackInfoRepository,
+			CityRepository cityRepository) {
 		
 		CasesDto caseDto = new CasesDto();
 		BeanUtils.copyProperties(cases, caseDto);
 		
 		falltypusWrapper(caseDto, cases, falltypusRepository);
+		cityWrapper(caseDto, cases, cityRepository);
 		
 		List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 		
@@ -144,6 +188,12 @@ public class CaseManager {
 		return caseDto;
 	}
 	
+	/**
+	 * 案件类型编号-名称转换
+	 * @param caseDto
+	 * @param cases
+	 * @param falltypusRepository
+	 */
 	private static void falltypusWrapper(CasesDto caseDto, Cases cases, FalltypusRepository falltypusRepository) {
 		if (! ObjectUtils.isEmpty(cases.getParentType())) {
 			Falltypus type = falltypusRepository.findById(cases.getParentType());
@@ -158,6 +208,30 @@ public class CaseManager {
 			
 			if (! ObjectUtils.isEmpty(type)) {
 				caseDto.setSubType(type.getName());
+			}
+		}
+	}
+	
+	/**
+	 * 城市编号-名称转换
+	 * @param caseDto
+	 * @param cases
+	 * @param cityRepository
+	 */
+	private static void cityWrapper(CasesDto caseDto, Cases cases, CityRepository cityRepository) {
+		if (! ObjectUtils.isEmpty(cases.getParentLocation())) {
+			City level1CityName = cityRepository.findByCityId(cases.getParentLocation());
+			
+			if (! ObjectUtils.isEmpty(level1CityName)) {
+				caseDto.setParentLocation(level1CityName.getName());
+			}
+		}
+		
+		if (! ObjectUtils.isEmpty(cases.getSubLocation())) {
+			City level2CityName = cityRepository.findByCityId(cases.getSubLocation());
+			
+			if (! ObjectUtils.isEmpty(level2CityName)) {
+				caseDto.setSubLocation(level2CityName.getName());
 			}
 		}
 	}

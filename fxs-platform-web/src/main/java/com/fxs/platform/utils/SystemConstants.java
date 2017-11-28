@@ -11,4 +11,6 @@ public class SystemConstants {
 	public static final String DUPLICATE_USER = "DUPLICATE_USER";
 	public static final int FEEDBACK_COUNT_SETP = 1;
 	public static final int FEEDBACK_COUNT_TOTAL = 10;
+	public static final String LEVEL_1_CITY = "LEVEL_1_CITY";
+	public static final String LEVEL_2_CITY = "LEVEL_2_CITY";
 }

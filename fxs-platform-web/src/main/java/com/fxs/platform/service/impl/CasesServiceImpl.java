@@ -23,6 +23,7 @@ import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
+import com.fxs.platform.repository.CityRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.ReservationRepository;
 import com.fxs.platform.repository.condition.CasesCondition;
@@ -56,6 +57,9 @@ public class CasesServiceImpl implements CasesService {
 	CaseFeedbackInfoRepository caseFeedbackInfoRepository;
 	
 	@Autowired
+	CityRepository cityRepository;
+	
+	@Autowired
 	HttpSession httpSession;
 	
 	@Override
@@ -86,7 +90,7 @@ public class CasesServiceImpl implements CasesService {
 	public List<CasesDto> findAll(String type) {
 		List<Cases> cases = caseRepository.findAllCases(type);
 		
-		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository);
+		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
 	}
 
 	@Override
@@ -99,7 +103,7 @@ public class CasesServiceImpl implements CasesService {
 	public List<CasesDto> findByType(String caseType) {
 		List<Cases> cases = caseRepository.findByType(UserManager.getSessionUser(httpSession), caseType.equals(SystemConstants.CASE_TYPE_CONSULTING) ? "0" : "1");
 		
-		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository);
+		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
 	}
 	
 	@Override
@@ -168,7 +172,7 @@ public class CasesServiceImpl implements CasesService {
 		
 		List<Cases> cases = pageableCases.getContent();
 		
-		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository);
+		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
 		
 		
 	}

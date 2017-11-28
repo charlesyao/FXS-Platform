@@ -9,9 +9,13 @@ import org.springframework.util.ObjectUtils;
 import com.fxs.platform.domain.CaseFeedbackInfo;
 
 public class CasesDto {
-	
+
 	private String id;
 
+	private String parentLocation;
+
+	private String subLocation;
+	
 	private String caseType;
 
 	private String parentType;
@@ -19,29 +23,29 @@ public class CasesDto {
 	private String subType;
 
 	private String status;
-	
-	//免费法律咨询额外信息
+
+	// 免费法律咨询额外信息
 	private String comments;
-	
+
 	private String counselFee;
-	
+
 	private String lawyerComments;
-	
+
 	private Date createAt;
 
 	private String userId;
 
 	private String lawyerId;
-	
+
 	private String isRead;
-	
+
 	private int feedbackCount;
-	
-	//List of QA mapping
+
+	// List of QA mapping
 	private List<CaseQuestionAnswerRelDto> qaMapping;
-	
+
 	private List<CaseFeedbackInfoDto> caseFeedbackInfo;
-	
+
 	private List<String> detailedInquiries;
 
 	public String getId() {
@@ -155,8 +159,8 @@ public class CasesDto {
 	public void setCounselFee(String counselFee) {
 		this.counselFee = counselFee;
 	}
-	
-	public String getFalltypusType () {
+
+	public String getFalltypusType() {
 		return this.getParentType() + (ObjectUtils.isEmpty(this.getSubType()) ? "" : "-" + this.getSubType());
 	}
 
@@ -174,5 +178,25 @@ public class CasesDto {
 
 	public void setCaseFeedbackInfo(List<CaseFeedbackInfoDto> caseFeedbackInfo) {
 		this.caseFeedbackInfo = caseFeedbackInfo;
+	}
+
+	public String getParentLocation() {
+		return parentLocation;
+	}
+
+	public void setParentLocation(String parentLocation) {
+		this.parentLocation = parentLocation;
+	}
+
+	public String getSubLocation() {
+		return subLocation;
+	}
+
+	public void setSubLocation(String subLocation) {
+		this.subLocation = subLocation;
+	}
+	
+	public String getLocation() {
+		return this.getParentLocation() + (ObjectUtils.isEmpty(this.getSubLocation()) ? "" : "-" + this.getSubLocation());
 	}
 }

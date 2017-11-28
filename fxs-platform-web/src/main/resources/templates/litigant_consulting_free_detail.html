@@ -25,6 +25,9 @@
 								<li class="orange">您的案件类型</li>
 								<li th:text="${caseDetailInfo.falltypusType}"></li>
 								<li class="line"></li>
+								<li class="orange">您的地址</li>
+								<li th:text="${caseDetailInfo.location}"></li>
+								<li class="line"></li>
 								<li class="orange">律师意见
 									<ul class="writeInfoText ulCell myCell" th:if="${ not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}" th:each="lawyerComments : ${caseDetailInfo.caseFeedbackInfo}">
 										<li class="orange">内容</li>

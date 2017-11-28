@@ -25,6 +25,7 @@ import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
+import com.fxs.platform.repository.CityRepository;
 import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.UserRepository;
@@ -67,6 +68,9 @@ public class CasesController {
 	
 	@Autowired
 	UserRepository userRepository; 
+	
+	@Autowired
+	CityRepository cityRepository;
 	
 	/**
 	 * 当事人提交电话咨询信息
@@ -139,7 +143,7 @@ public class CasesController {
 		}
 		
 		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(currentCase, caseQuestionAnswerRelRepository, 
-				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository));
+				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository, cityRepository));
 		
 		if (userRole.equals("litigant")) {
 			//consulting

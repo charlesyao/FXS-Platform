@@ -21,6 +21,9 @@
 					查看经典案例 ]</a>
 			</p>
 			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn" id="disputeInfo">
+				<div class="col-md-12 col-sm-12 btnNext">
+					<button id="getCity" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#selectCity">选择城市</button>
+				</div>
 				<h3 th:text="${question.question.description}"></h3>
 				<div class="row">
 					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}" th:attr="isRoot=${question.question.isRootQuestion}">
@@ -37,6 +40,45 @@
 					</div>
 				</div>
 			</section>
+			<div class="modal fade" id="selectCity" tabindex="-1" role="dialog" aria-labelledby="buyConsultingeModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body" id="location">
+					        <form class="form-horizontal signupBox chooseAds" role="form" style="top:900px">
+							  <div class="pop_close" style="left:730px"><a href="#"></a></div>
+							  <div class="row signupTitle"><h3>请选择纷对象住所地／纠纷发生地</h3></div>
+							  <div class="chooseAdsItem">
+							   <h4>热门城市</h4>
+							   <ul id="hotCity">
+							    <li><a href="#">北京</a></li>
+							    <li><a href="#">广州</a></li>
+							    <li><a href="#">深圳</a></li>
+							    <li><a href="#">天津</a></li>
+							    <li><a href="#">重庆</a></li>
+							    <div class="clearboth"></div>
+							   </ul>
+							  </div>
+							  <div class="chooseAdsItem">
+							   <h4>选择省份</h4>
+							   <ul id="level1City"></ul>
+							  </div>
+							  <div class="chooseAdsItem">
+							   <h4>选择城市</h4>
+							   <ul id="level2City"> </ul>
+							  </div>
+							</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+					      </div>
+					    </div>
+					  </div>
+				</div>
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
@@ -57,6 +99,44 @@
 
 						$("#question_" + res.message).remove();
 						$("#nextQuestionContainer").append(res.data)
+					},
+					error : function(error) {
+					}
+				});
+			})
+			$("#getCity").on("click", function(e) {
+				$.ajax({
+					type : 'GET',
+					url : '/city',
+					success : function(res) {
+						$("#level1City").empty().append(res.data)
+					},
+					error : function(error) {
+					}
+				});
+			})
+			$("#level1City").on("click", 'li', function(e) {
+				e.preventDefault()
+				$(this).parent().children().removeClass("cur")
+				$(this).addClass("cur")
+				$.ajax({
+					type : 'GET',
+					url : '/city/' + $(this).attr("id"),
+					success : function(res) {
+						$("#level2City").empty().append(res.data)
+					},
+					error : function(error) {
+					}
+				});
+			})
+			$("#level2City").on("click", 'li', function(e) {
+				e.preventDefault()
+				$(this).parent().children().removeClass("cur")
+				$(this).addClass("cur")
+				$.ajax({
+					type : 'GET',
+					url : '/city/autosave/' + $(this).attr("id"),
+					success : function(res) {
 					},
 					error : function(error) {
 					}

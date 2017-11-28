@@ -22,6 +22,9 @@ public class Cases {
 	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
+	private String parentLocation;
+	
+	private String subLocation;
 	/**
 	 * @see com.fxs.platform.utils.CaseType
 	 */
@@ -138,5 +141,21 @@ public class Cases {
 
 	public void setFeedbackCount(int feedbackCount) {
 		this.feedbackCount = feedbackCount;
+	}
+
+	public String getParentLocation() {
+		return parentLocation;
+	}
+
+	public void setParentLocation(String parentLocation) {
+		this.parentLocation = parentLocation;
+	}
+
+	public String getSubLocation() {
+		return subLocation;
+	}
+
+	public void setSubLocation(String subLocation) {
+		this.subLocation = subLocation;
 	}
 }
