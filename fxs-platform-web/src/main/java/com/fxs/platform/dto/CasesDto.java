@@ -27,15 +27,9 @@ public class CasesDto {
 	// 免费法律咨询额外信息
 	private String comments;
 
-	private String counselFee;
-
-	private String lawyerComments;
-
 	private Date createAt;
 
 	private String userId;
-
-	private String lawyerId;
 
 	private String isRead;
 
@@ -104,28 +98,12 @@ public class CasesDto {
 		this.userId = userId;
 	}
 
-	public String getLawyerId() {
-		return lawyerId;
-	}
-
-	public void setLawyerId(String lawyerId) {
-		this.lawyerId = lawyerId;
-	}
-
 	public List<CaseQuestionAnswerRelDto> getQaMapping() {
 		return qaMapping;
 	}
 
 	public void setQaMapping(List<CaseQuestionAnswerRelDto> qaMapping) {
 		this.qaMapping = qaMapping;
-	}
-
-	public String getLawyerComments() {
-		return lawyerComments;
-	}
-
-	public void setLawyerComments(String lawyerComments) {
-		this.lawyerComments = lawyerComments;
 	}
 
 	public String getCreateAt() {
@@ -150,14 +128,6 @@ public class CasesDto {
 
 	public void setIsRead(String isRead) {
 		this.isRead = isRead;
-	}
-
-	public String getCounselFee() {
-		return counselFee;
-	}
-
-	public void setCounselFee(String counselFee) {
-		this.counselFee = counselFee;
 	}
 
 	public String getFalltypusType() {

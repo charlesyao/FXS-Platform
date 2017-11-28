@@ -25,13 +25,22 @@
 								<li class="orange">您的案件类型</li>
 								<li th:text="${caseDetailInfo.falltypusType}"></li>
 								<li class="line"></li>
-								<li class="orange">案件律师费用</li>
-								<li th:if="${ not #strings.isEmpty(caseDetailInfo.counselFee)}" th:text="'￥' + ${caseDetailInfo.counselFee} + '元'"></li>
-								<li th:if="${#strings.isEmpty(caseDetailInfo.counselFee)}">尚未有律师回复</li>
+								<li class="orange">您的地址</li>
+								<li th:text="${caseDetailInfo.location}"></li>
 								<li class="line"></li>
-								<li class="orange">律师意见</li>
-								<li th:if="${ not #strings.isEmpty(caseDetailInfo.lawyerComments)}" th:text="${caseDetailInfo.lawyerComments}"></li>
-								<li th:if="${#strings.isEmpty(caseDetailInfo.lawyerComments)}">尚未有律师回复</li>
+								<li class="orange">律师意见
+									<ul class="writeInfoText ulCell myCell" th:if="${ not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}" th:each="lawyerComments : ${caseDetailInfo.caseFeedbackInfo}">
+										<li class="orange">内容</li>
+										<li th:text="${lawyerComments.lawyerComments}"></li>
+										<li class="line"></li>
+										<li class="orange">案件律师费用</li>
+										<li th:text="${lawyerComments.counselFee}"></li>
+										<li class="line"></li>
+										<li class="orange">律师</li>
+										<li th:text="${lawyerComments.lawyerName}"></li>
+									</ul>
+									<li th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}">尚未有律师回复</li>
+								</li>
 								<li class="line"></li>
 								<li class="orange">您的问卷调查信息</li>
 								<ul th:each="qa : ${caseDetailInfo.qaMapping}">

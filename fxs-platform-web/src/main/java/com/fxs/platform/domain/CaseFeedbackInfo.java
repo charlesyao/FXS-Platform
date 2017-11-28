@@ -27,7 +27,6 @@ public class CaseFeedbackInfo {
 	//免费法律咨询额外信息
 	private String lawyerComments;
 	
-	@Transient
 	private String status;
 
 	public String getStatus() {
