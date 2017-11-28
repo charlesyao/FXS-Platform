@@ -149,7 +149,8 @@ public class CaseManager {
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
 			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository,
 			CaseFeedbackInfoRepository caseFeedbackInfoRepository,
-			CityRepository cityRepository) {
+			CityRepository cityRepository,
+			HttpSession session) {
 		
 		CasesDto caseDto = new CasesDto();
 		BeanUtils.copyProperties(cases, caseDto);
@@ -165,6 +166,13 @@ public class CaseManager {
 		
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
 		caseDto.setCaseFeedbackInfo(QueryResultConverter.convert(caseFeedbackInfo, CaseFeedbackInfoDto.class));
+		
+		if(! ObjectUtils.isEmpty(caseFeedbackInfo)) {
+			caseDto.setDisableFeedback(caseFeedbackInfo.get(0).getLawyerId().equals(UserManager.getSessionUser(session)) 
+					&& CaseStatus.BID.getStatus().equals(caseFeedbackInfo.get(0).getStatus()));
+		} else {
+			caseDto.setDisableFeedback(Boolean.FALSE);
+		}
 		
 		List<String> detailedInquiries = new ArrayList<String>();
 		

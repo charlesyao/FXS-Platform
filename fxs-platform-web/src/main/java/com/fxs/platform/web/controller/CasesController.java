@@ -143,7 +143,7 @@ public class CasesController {
 		}
 		
 		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(currentCase, caseQuestionAnswerRelRepository, 
-				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository, cityRepository));
+				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository, cityRepository, session));
 		
 		if (userRole.equals("litigant")) {
 			//consulting

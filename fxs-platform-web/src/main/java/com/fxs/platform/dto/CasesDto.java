@@ -41,6 +41,8 @@ public class CasesDto {
 	private List<CaseFeedbackInfoDto> caseFeedbackInfo;
 
 	private List<String> detailedInquiries;
+	
+	private boolean disableFeedback;
 
 	public String getId() {
 		return id;
@@ -168,5 +170,13 @@ public class CasesDto {
 	
 	public String getLocation() {
 		return this.getParentLocation() + (ObjectUtils.isEmpty(this.getSubLocation()) ? "" : "-" + this.getSubLocation());
+	}
+
+	public boolean isDisableFeedback() {
+		return disableFeedback;
+	}
+
+	public void setDisableFeedback(boolean disableFeedback) {
+		this.disableFeedback = disableFeedback;
 	}
 }
