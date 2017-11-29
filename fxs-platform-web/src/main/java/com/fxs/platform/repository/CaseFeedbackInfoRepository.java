@@ -10,7 +10,7 @@ import com.fxs.platform.domain.CaseFeedbackInfo;
 @Repository
 public interface CaseFeedbackInfoRepository extends FxsRepository<CaseFeedbackInfo> {
 	
-	@Query("SELECT o FROM CaseFeedbackInfo o where o.caseId=?1")
-	List<CaseFeedbackInfo> findByCaseId(String caseId);
+	@Query("SELECT o FROM CaseFeedbackInfo o where o.caseId=?1 AND o.lawyerId=?2")
+	List<CaseFeedbackInfo> findByCaseIdAndLawyerId(String caseId, String lawyerId);
 
 }

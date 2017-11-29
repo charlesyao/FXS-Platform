@@ -137,6 +137,7 @@ public class CaseManager {
 	
 	/**
 	 * 封装当个案件对象
+	 * 
 	 * @param cases
 	 * @param caseQuestionAnswerRelRepository
 	 * @param falltypusRepository
@@ -155,21 +156,34 @@ public class CaseManager {
 		CasesDto caseDto = new CasesDto();
 		BeanUtils.copyProperties(cases, caseDto);
 		
+		//转换案件类型
 		falltypusWrapper(caseDto, cases, falltypusRepository);
+		
+		//转换城市
 		cityWrapper(caseDto, cases, cityRepository);
 		
+		//获取所有当前案件相关的问题以及问题选择的选项
 		List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 		
+		//获取当事人对当前案件添加的追问信息
 		DetailedInquiry detailedInquiry = detailedInquiryRepository.findByCaseId(caseDto.getId());
 		
-		List<CaseFeedbackInfo> caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseId(cases.getId());
+		//获取律师对当前案件的反馈信息
+		List<CaseFeedbackInfo> caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId(), UserManager.getSessionUser(session));
 		
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
 		caseDto.setCaseFeedbackInfo(QueryResultConverter.convert(caseFeedbackInfo, CaseFeedbackInfoDto.class));
 		
 		if(! ObjectUtils.isEmpty(caseFeedbackInfo)) {
-			caseDto.setDisableFeedback(caseFeedbackInfo.get(0).getLawyerId().equals(UserManager.getSessionUser(session)) 
-					&& CaseStatus.BID.getStatus().equals(caseFeedbackInfo.get(0).getStatus()));
+			//如果是打官司案件,每个律师只能又一次竞标,页面行为是竞标过了按钮为禁用
+			if (cases.getCaseType().equals(CaseType.LAWSUIT.getType())) {
+				caseDto.setDisableFeedback(caseFeedbackInfo.get(0).getLawyerId().equals(UserManager.getSessionUser(session)) 
+						&& CaseStatus.BID.getStatus().equals(caseFeedbackInfo.get(0).getStatus()));
+			//如果是咨询类案件,律师只能有一次反馈的机会，页面行为为反馈过了按钮禁用
+			} else if (cases.getCaseType().equals(CaseType.CONSULTING.getType())) {
+				caseDto.setDisableFeedback(caseFeedbackInfo.get(0).getLawyerId().equals(UserManager.getSessionUser(session)) 
+						&& CaseStatus.FEEDBACK.getStatus().equals(caseFeedbackInfo.get(0).getStatus()));
+			}
 		} else {
 			caseDto.setDisableFeedback(Boolean.FALSE);
 		}
