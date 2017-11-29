@@ -3,6 +3,7 @@ package com.fxs.platform.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class FalltypusServiceImpl implements FalltypusService {
 	 * @see com.fxs.platform.service.FalltypusService#findFirstLevelFalltypus()
 	 */
 	@Override
-	@Cacheable(value="_firstLevelFalltypus_")
+	@CachePut(value="_firstLevelFalltypus_")
 	public List<FalltypusDto> findFirstLevelFalltypus() {
 		// TODO Auto-generated method stub
 		return QueryResultConverter.convert(falltypusRepository.findFirstLevelFalltypus(), FalltypusDto.class);
@@ -32,7 +33,7 @@ public class FalltypusServiceImpl implements FalltypusService {
 	 * @see com.fxs.platform.service.FalltypusService#findSubFalltypusByParentId(java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="_subFalltypus_", key="#falltypusId")
+	@CachePut(value="_subFalltypus_", key="#falltypusId")
 	public List<FalltypusDto> findSubFalltypusByParentId(String falltypusId) {
 		// TODO Auto-generated method stub
 		return QueryResultConverter.convert(falltypusRepository.findSubFalltypusByParentId(falltypusId), FalltypusDto.class);

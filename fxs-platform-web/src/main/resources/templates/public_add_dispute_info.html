@@ -31,6 +31,11 @@
 												<input type="radio" th:value="Y" th:text="是" cols="29" rows="3" th:field="*{isRootQuestion}" />
 												<input type="radio" th:value="N" th:text="否" cols="29" rows="3" th:field="*{isRootQuestion}" />
 												<br /><br />
+												问题类型？
+												<input type="radio" th:value="0" th:text="单选" cols="29" rows="3" th:field="*{questionType}" />
+												<input type="radio" th:value="1" th:text="多选" cols="29" rows="3" th:field="*{questionType}" />
+												<input type="radio" th:value="2" th:text="文本输入" cols="29" rows="3" th:field="*{questionType}" />
+												<br /><br />
 												答案 #1 : &nbsp; 
 												<input type="text" th:field="*{answer}" id='answer1' size="50"/>
 												<br /><br />

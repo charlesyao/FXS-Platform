@@ -54,4 +54,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionRepository.findRootQuestion();
 	}
 
+	@Override
+	public List<Question> findOptionalQuestions() {
+		return questionRepository.findOptionalQuestions();
+	}
+
 }

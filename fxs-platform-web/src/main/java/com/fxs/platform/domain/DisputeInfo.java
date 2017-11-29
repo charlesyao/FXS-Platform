@@ -35,6 +35,9 @@ public class DisputeInfo {
 	@Transient
 	private String isRootQuestion;
 	
+	@Transient
+	private String questionType;
+	
 	public DisputeInfo() {
 	}
 
@@ -105,5 +108,13 @@ public class DisputeInfo {
 
 	public void setIsRootQuestion(String isRootQuestion) {
 		this.isRootQuestion = isRootQuestion;
+	}
+
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
 	}
 }

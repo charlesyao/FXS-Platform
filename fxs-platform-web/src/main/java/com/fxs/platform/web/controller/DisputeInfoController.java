@@ -61,6 +61,7 @@ public class DisputeInfoController {
 				ques = new Question();
 				ques.setDescription(question);
 				ques.setIsRootQuestion(disputeInfo.getIsRootQuestion());
+				ques.setQuestionType(disputeInfo.getQuestionType());
 				//ques.setDisputeInfo(disputeInfo);
 
 				questionService.save(ques);
@@ -76,7 +77,6 @@ public class DisputeInfoController {
 						answerService.save(answer);
 					}
 				}
-
 			}
 		}
 

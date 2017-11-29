@@ -18,4 +18,6 @@ public interface QuestionService {
 	void delete(int qId);
 	
 	Question findRootQuestion();
+	
+	List<Question> findOptionalQuestions();
 }

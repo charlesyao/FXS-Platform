@@ -21,6 +21,7 @@ import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
+import com.fxs.platform.service.QuestionService;
 import com.fxs.platform.service.RoleService;
 import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SystemConstants;
@@ -36,6 +37,9 @@ public class RouterController {
 	
 	@Autowired
 	CasesService casesService;
+	
+	@Autowired
+	QuestionService questionService;
 	
 	@Autowired
 	HttpSession session;
@@ -114,7 +118,8 @@ public class RouterController {
 					map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
 					target = "public_lawsuit_lawyer_step1";
 				} else if (action.equals("next")) {
-
+					
+					map.addAttribute("optionalQuestions", questionService.findOptionalQuestions());
 					target = "public_lawsuit_lawyer_step4";
 				} else if (action.equals("self_service")) {//自助打官司
 
