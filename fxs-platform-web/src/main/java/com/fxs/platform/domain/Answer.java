@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @Entity
 public class Answer {
@@ -18,15 +19,16 @@ public class Answer {
 
 	private String description;
 	
-	private String addAfterConfirm;
-	
-	private String noAnswer;
+	private String other;
 
 	@ManyToOne
 	@JoinColumn(name = "question_id")
 	private Question question;
 	
 	private int nextQuestionId;
+	
+	@Transient
+	private String questionId;
 
 	public int getId() {
 		return id;
@@ -60,19 +62,19 @@ public class Answer {
 		this.nextQuestionId = nextQuestionId;
 	}
 
-	public String getAddAfterConfirm() {
-		return addAfterConfirm;
+	public String getOther() {
+		return other;
 	}
 
-	public void setAddAfterConfirm(String addAfterConfirm) {
-		this.addAfterConfirm = addAfterConfirm;
+	public void setOther(String other) {
+		this.other = other;
 	}
 
-	public String getNoAnswer() {
-		return noAnswer;
+	public String getQuestionId() {
+		return questionId;
 	}
 
-	public void setNoAnswer(String noAnswer) {
-		this.noAnswer = noAnswer;
+	public void setQuestionId(String questionId) {
+		this.questionId = questionId;
 	}
 }

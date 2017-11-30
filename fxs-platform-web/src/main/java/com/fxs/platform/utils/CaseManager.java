@@ -55,8 +55,12 @@ public class CaseManager {
 				for (Answer answer : answers) {
 					rel = new CaseQuestionAnswerRel();
 					
+					//如果选择了“不能回答”或者“确认后回答”，默认answerId为0
 					rel.setAnswerId(String.valueOf(answer.getId()));
-					rel.setAnswerDesc(answer.getDescription());
+					
+					//判断是否选择了正确的答案，还是选择了“不能回答”或者“确认后回答”
+					rel.setAnswerDesc(ObjectUtils.isEmpty(answer.getDescription()) ? answer.getOther() : answer.getDescription());
+					
 
 					rel.setQuestionId(String.valueOf(question.getId()));
 					rel.setQuestionDesc(question.getDescription());

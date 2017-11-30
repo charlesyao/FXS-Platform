@@ -14,4 +14,5 @@ public class SystemConstants {
 	public static final int FEEDBACK_COUNT_TOTAL = 10;
 	public static final String LEVEL_1_CITY = "LEVEL_1_CITY";
 	public static final String LEVEL_2_CITY = "LEVEL_2_CITY";
+	public static final String NA = "NA";
 }

@@ -52,7 +52,7 @@
 						<ul class="writeInfoText ulCell">
 							<form class="form-horizontal signupBox chooseAds" role="form" style="top:900px" id="optionalQAForm">
 							  <div class="chooseAdsItem" th:each="qa : ${optionalQuestions}">
-							   	<h3 th:text="${qa.question.description}"></h3>
+							   	<h3 th:text="${qa.question.description}" th:id="${qa.question.id}"></h3>
 							   	<ul>
 							   		<!-- 文本输入框 -->
 							   		<div th:if="${qa.question.questionType eq '2'}">
@@ -70,6 +70,10 @@
 								   			<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
 								   		</li>
 							   		</div>
+							   		<div>
+							   			<li id="addAfterConfirm"><a href="">确认后补充</a></li>
+							   			<li id="noAnswer"><a href="">不能回答</a></li>
+								   	</div>
 							   	</ul>
 							  </div>
 							</form>
@@ -108,12 +112,52 @@
 				if ($(this).hasClass("cur")) {
 					return;
 				}
-				
 				if ($(this).attr("data-type") == 'single') {
 					$(this).parent().children().removeClass("cur")
 					$(this).addClass("cur")
 				} else if ($(this).attr("data-type") == 'multi') {
 					$(this).addClass("cur")
+				}
+				
+				if ($(this).attr('id') === 'addAfterConfirm') {
+					e.preventDefault()
+					$(this).addClass("cur")
+					$.ajax({
+						type : 'POST',
+						url : '/public/question/optional/other/answer',
+						data : JSON.stringify({
+							"other": "确认后补充",
+							"questionId": $(this).parent().parent().prev().attr("id")
+						}),
+						contentType : "application/json; charset=utf-8",
+						success : function(res) {
+						},
+						error : function(error) {
+						}
+					});
+					
+					
+					return;
+				}
+				
+				if ($(this).attr('id') === 'noAnswer') {
+					e.preventDefault()
+					$(this).addClass("cur")
+					$.ajax({
+						type : 'POST',
+						url : '/public/question/optional/other/answer',
+						data : JSON.stringify({
+							"other": "无法回答",
+							"questionId": $(this).parent().parent().prev().attr("id")
+						}),
+						contentType : "application/json; charset=utf-8",
+						success : function(res) {
+						},
+						error : function(error) {
+						}
+					});
+					
+					return
 				}
 				
 				$.ajax({

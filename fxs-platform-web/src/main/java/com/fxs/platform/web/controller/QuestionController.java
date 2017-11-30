@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Answer;
+import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.QuestionDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
@@ -52,6 +56,41 @@ public class QuestionController {
 		Question question = questionService.findRootQuestion();
 		
 		return Result.success(question);
+	}
+	
+	@PostMapping("/optional/other/answer")
+	@ResponseBody
+	@SuppressWarnings("unchecked")
+	public ResponseMessage<?> otherSelection(@Valid @RequestBody Answer answer) {
+		//问题-答案对集合
+		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		List<Answer> selectedAnswer = new ArrayList<Answer>();
+		
+		if(ObjectUtils.isEmpty(mapping)) {
+			mapping = new HashMap<Integer, Object[]>();
+		}
+		
+		//二维数组
+		//[0]: 问题对象
+		//[1]: 选择的答案的集合
+		Object[] qaArray = new Object[2];
+
+		Question currentQuestion = questionService.getByQuestionId(Integer.parseInt(answer.getQuestionId()));
+		
+		
+		if (! ObjectUtils.isEmpty(currentQuestion)) {
+			
+			selectedAnswer.add(answer);
+			
+			qaArray[0] = currentQuestion;
+			qaArray[1] = selectedAnswer;
+			
+			mapping.put(currentQuestion.getId(), qaArray);
+			
+			httpSession.setAttribute(SystemConstants.QA_MAP, mapping);
+		}
+
+		return Result.success();
 	}
 
 	@GetMapping("/optional/single/answer/{answerId}")
