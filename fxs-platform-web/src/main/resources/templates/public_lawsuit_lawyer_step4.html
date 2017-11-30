@@ -135,12 +135,7 @@
 						error : function(error) {
 						}
 					});
-					
-					
-					return;
-				}
-				
-				if ($(this).attr('id') === 'noAnswer') {
+				} else if ($(this).attr('id') === 'noAnswer') {
 					e.preventDefault()
 					$(this).addClass("cur")
 					$.ajax({
@@ -156,19 +151,17 @@
 						error : function(error) {
 						}
 					});
-					
-					return
+				} else {
+					$.ajax({
+						type : 'GET',
+						url : '/public/question/optional/' + $(this).attr("data-type") + '/answer/' + $(this).attr("id"),
+						success : function(res) {
+							
+						},
+						error : function(error) {
+						}
+					});
 				}
-				
-				$.ajax({
-					type : 'GET',
-					url : '/public/question/optional/' + $(this).attr("data-type") + '/answer/' + $(this).attr("id"),
-					success : function(res) {
-						
-					},
-					error : function(error) {
-					}
-				});
 			})
 			
 			$("#submitLawsuit").on("click", (e) => {
