@@ -49,6 +49,31 @@
 								还可以输入<span>1000</span>字
 							</div>
 						</ul>
+						<ul class="writeInfoText ulCell">
+							<form class="form-horizontal signupBox chooseAds" role="form" style="top:900px" id="optionalQAForm">
+							  <div class="chooseAdsItem" th:each="qa : ${optionalQuestions}">
+							   	<h3 th:text="${qa.question.description}"></h3>
+							   	<ul>
+							   		<!-- 文本输入框 -->
+							   		<div th:if="${qa.question.questionType eq '2'}">
+										<textarea class="form-control" rows="3" id="freeComments" placeholder="请至少输入20个字，详细描述问题有助于我们更好地帮助您"></textarea>
+									</div>
+									<!-- 多选项 -->
+							   		<div class="optionalMultiQA" th:if="${qa.question.questionType eq '1'}">
+								   		<li th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="multi">
+								   			<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
+								   		</li>
+							   		</div>
+							   		<!-- 单选项 -->
+							   		<div class="optionalSingleQA" th:if="${qa.question.questionType eq '0'}">
+								   		<li th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="single">
+								   			<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
+								   		</li>
+							   		</div>
+							   	</ul>
+							  </div>
+							</form>
+						</ul>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 btnNext">
 								<a href="" type="button" id="submitLawsuit" class="btn btn-primary btn-lg">提交咨询</a>
@@ -77,6 +102,31 @@
 	<div th:replace="fragments/public_footer :: public-footer"></div>
 	<script type="text/javascript">
 		$(function() {
+			$("#optionalQAForm").on("click", 'li', function(e) {
+				e.preventDefault()
+				
+				if ($(this).hasClass("cur")) {
+					return;
+				}
+				
+				if ($(this).attr("data-type") == 'single') {
+					$(this).parent().children().removeClass("cur")
+					$(this).addClass("cur")
+				} else if ($(this).attr("data-type") == 'multi') {
+					$(this).addClass("cur")
+				}
+				
+				$.ajax({
+					type : 'GET',
+					url : '/public/question/optional/' + $(this).attr("data-type") + '/answer/' + $(this).attr("id"),
+					success : function(res) {
+						
+					},
+					error : function(error) {
+					}
+				});
+			})
+			
 			$("#submitLawsuit").on("click", (e) => {
 				e.preventDefault()
 				$.ajax({

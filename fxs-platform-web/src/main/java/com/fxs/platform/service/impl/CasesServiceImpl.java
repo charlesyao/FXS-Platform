@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,6 @@ import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.repository.specification.CaseSpecification;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
-import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SystemConstants;
 import com.fxs.platform.utils.UserManager;
 

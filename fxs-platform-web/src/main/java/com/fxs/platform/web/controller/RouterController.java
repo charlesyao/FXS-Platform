@@ -1,5 +1,6 @@
 package com.fxs.platform.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
+import com.fxs.platform.dto.QuestionDto;
 import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
@@ -40,6 +44,9 @@ public class RouterController {
 	
 	@Autowired
 	QuestionService questionService;
+	
+	@Autowired
+	AnswerService answerService;
 	
 	@Autowired
 	HttpSession session;
@@ -119,7 +126,22 @@ public class RouterController {
 					target = "public_lawsuit_lawyer_step1";
 				} else if (action.equals("next")) {
 					
-					map.addAttribute("optionalQuestions", questionService.findOptionalQuestions());
+					List<QuestionDto> questionDtoList = new ArrayList<QuestionDto>();
+					
+					List<Question> optionalQuestionList = questionService.findOptionalQuestions();
+					
+					for (Question question : optionalQuestionList) {
+						QuestionDto questionDto = new QuestionDto();
+						List<Answer> answerList = answerService.getAllAnswerByQuestionId(question.getId());
+						
+						questionDto.setQuestion(question);
+						questionDto.setAnswers(answerList);
+						
+						questionDtoList.add(questionDto);
+					}
+					
+					map.addAttribute("optionalQuestions", questionDtoList);
+					
 					target = "public_lawsuit_lawyer_step4";
 				} else if (action.equals("self_service")) {//自助打官司
 

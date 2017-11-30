@@ -17,6 +17,10 @@ public class Answer {
 	private int id;
 
 	private String description;
+	
+	private String addAfterConfirm;
+	
+	private String noAnswer;
 
 	@ManyToOne
 	@JoinColumn(name = "question_id")
@@ -54,5 +58,21 @@ public class Answer {
 
 	public void setNextQuestionId(int nextQuestionId) {
 		this.nextQuestionId = nextQuestionId;
+	}
+
+	public String getAddAfterConfirm() {
+		return addAfterConfirm;
+	}
+
+	public void setAddAfterConfirm(String addAfterConfirm) {
+		this.addAfterConfirm = addAfterConfirm;
+	}
+
+	public String getNoAnswer() {
+		return noAnswer;
+	}
+
+	public void setNoAnswer(String noAnswer) {
+		this.noAnswer = noAnswer;
 	}
 }

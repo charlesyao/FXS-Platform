@@ -1,7 +1,5 @@
 package com.fxs.platform.dto;
 
-import com.fxs.platform.utils.UserManager;
-
 public class CaseFeedbackInfoDto {
 
 	private int id;

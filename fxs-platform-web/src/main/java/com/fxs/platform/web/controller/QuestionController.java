@@ -1,5 +1,6 @@
 package com.fxs.platform.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,91 @@ public class QuestionController {
 		return Result.success(question);
 	}
 
+	@GetMapping("/optional/single/answer/{answerId}")
+	@ResponseBody
+	@SuppressWarnings("unchecked")
+	public ResponseMessage<?> optionalSingleQuestion(@PathVariable int answerId, ModelMap map) {
+		//问题-答案对集合
+		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		List<Answer> selectedAnswer = new ArrayList<Answer>();
+		
+		if(ObjectUtils.isEmpty(mapping)) {
+			mapping = new HashMap<Integer, Object[]>();
+		}
+		
+		//二维数组
+		//[0]: 问题对象
+		//[1]: 选择的答案的集合
+		Object[] qaArray = new Object[2];
+
+		//取得当前选择的答案
+		Answer currentAnswer = answerService.getByAnswerId(answerId);
+		
+		if (! ObjectUtils.isEmpty(currentAnswer)) {
+			//取得当前的问题
+			Question currentQuestion = currentAnswer.getQuestion();
+
+			selectedAnswer.add(currentAnswer);
+			
+			qaArray[0] = currentQuestion;
+			qaArray[1] = selectedAnswer;
+			
+			mapping.put(currentQuestion.getId(), qaArray);
+			
+			httpSession.setAttribute(SystemConstants.QA_MAP, mapping);
+		}
+
+		return Result.success();
+	}
+	
+	@GetMapping("/optional/multi/answer/{answerId}")
+	@ResponseBody
+	public ResponseMessage<?> optionalMultiQuestion(@PathVariable int answerId, ModelMap map) {
+		//问题-答案对集合
+		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		List<Answer> selectedAnswer = (List<Answer>)httpSession.getAttribute("selectedAnswer");
+		
+		if(ObjectUtils.isEmpty(mapping)) {
+			mapping = new HashMap<Integer, Object[]>();
+		}
+		
+		if(ObjectUtils.isEmpty(selectedAnswer)) {
+			selectedAnswer = new ArrayList<Answer>();
+		}
+		
+		//二维数组
+		//[0]: 问题对象
+		//[1]: 选择的答案的集合
+		Object[] qaArray = new Object[2];
+		
+		Answer currentAnswer = answerService.getByAnswerId(answerId);
+
+		if (! ObjectUtils.isEmpty(currentAnswer)) {
+			Question currentQuestion = currentAnswer.getQuestion();
+
+			//选择新的问题,重置选择的答案列表 
+			if (!mapping.keySet().contains(currentQuestion.getId())) {
+				selectedAnswer = new ArrayList<Answer>();
+			} else {
+				//重新选择之前选择过的问题的答案，直接在原有答案的列表中追加
+				Object[] obj = mapping.get(currentQuestion.getId());
+				List<Answer> al = (List<Answer>)obj[1];
+				selectedAnswer = al;
+			}
+
+			selectedAnswer.add(currentAnswer);
+			qaArray[0] = currentQuestion;
+			qaArray[1] = selectedAnswer;
+			
+			mapping.put(currentQuestion.getId(), qaArray);
+
+			httpSession.setAttribute("selectedAnswer", selectedAnswer);
+			httpSession.setAttribute(SystemConstants.QA_MAP, mapping);
+		}
+		
+		return Result.success();
+	}
+	
 	/**
 	 * 根据问卷选择的答案加载下一个问题
 	 * 
@@ -65,6 +151,7 @@ public class QuestionController {
 	public ResponseMessage<String> getNextQuestion(@PathVariable int answerId, ModelMap map) {
 		
 		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		List<Answer> selectedAnswer = new ArrayList<Answer>();
 		
 		Object[] qaArray = new Object[2];
 		
@@ -87,8 +174,10 @@ public class QuestionController {
 				mapping.clear();
 			}
 			
+			selectedAnswer.add(currentAnswer);
+			
 			qaArray[0] = currentQuestion;
-			qaArray[1] = currentAnswer;
+			qaArray[1] = selectedAnswer;
 			
 			mapping.put(currentQuestion.getId(), qaArray);
 

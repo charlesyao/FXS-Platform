@@ -9,8 +9,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fxs.platform.utils.CaseStatus;
-
 /**
  * 案件领域模型 免费法律咨询、打官司
  *

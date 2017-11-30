@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.util.ObjectUtils;
 
-import com.fxs.platform.domain.CaseFeedbackInfo;
-
 public class CasesDto {
 
 	private String id;

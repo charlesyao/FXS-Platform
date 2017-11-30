@@ -47,23 +47,26 @@ public class CaseManager {
 			qaMap = (Map<Integer, Object[]>) qaMapInSession;
 
 			for (Object[] value : qaMap.values()) {
-				rel = new CaseQuestionAnswerRel();
+				
 
 				Question question = (Question) value[0];
-				Answer answer = (Answer) value[1];
+				List<Answer> answers = (List<Answer>) value[1];
 
-				rel.setAnswerId(String.valueOf(answer.getId()));
-				rel.setAnswerDesc(answer.getDescription());
+				for (Answer answer : answers) {
+					rel = new CaseQuestionAnswerRel();
+					
+					rel.setAnswerId(String.valueOf(answer.getId()));
+					rel.setAnswerDesc(answer.getDescription());
 
-				rel.setQuestionId(String.valueOf(question.getId()));
-				rel.setQuestionDesc(question.getDescription());
-				
-				rel.setCaseId(cases.getId());
-				
-				repository.save(rel);
+					rel.setQuestionId(String.valueOf(question.getId()));
+					rel.setQuestionDesc(question.getDescription());
+					
+					rel.setCaseId(cases.getId());
+					
+					repository.saveAndFlush(rel);
+				}
 			}
 		}
-
 	}
 
 	/**
