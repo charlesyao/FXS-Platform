@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+/**
+ *城市信息封装类 
+ *
+ */
 public class CityDto {
 
 	private Long id;

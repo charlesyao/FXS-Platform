@@ -10,6 +10,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *记住我功能实现领域模型,Spring Security默认提供 
+ *
+ */
 @Entity
 @Table(name="PERSISTENT_LOGINS")
 public class PersistentLogin implements Serializable{

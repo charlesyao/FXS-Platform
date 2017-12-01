@@ -1,5 +1,9 @@
 package com.fxs.platform.domain;
 
+/**
+ *用户状态枚举类 
+ *
+ */
 public enum State {
 
 	ACTIVE("Active"), INACTIVE("Inactive"), DELETED("Deleted"), LOCKED("Locked");

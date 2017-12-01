@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * 切面： 记录请求信息
+ *
+ */
 @Aspect
 @Component
 @Order(1)

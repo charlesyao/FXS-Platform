@@ -1,5 +1,9 @@
 package com.fxs.platform.repository.condition;
 
+/**
+ *城市查找条件封装 
+ *
+ */
 public class CityCondition {
 	// 城市ID
 	public String[] cityId;

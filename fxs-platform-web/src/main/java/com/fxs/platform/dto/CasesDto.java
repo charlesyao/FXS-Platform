@@ -6,6 +6,10 @@ import java.util.List;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.util.ObjectUtils;
 
+/**
+ * 案件所有主要信息封装类，如想获得更多信息，可进一步扩展此类
+ *
+ */
 public class CasesDto {
 
 	private String id;

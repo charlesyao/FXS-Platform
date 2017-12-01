@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+/**
+ *案件-免费法律咨询的信息封装 
+ *
+ */
 public class ConsultationDto {
 
 	private String id;

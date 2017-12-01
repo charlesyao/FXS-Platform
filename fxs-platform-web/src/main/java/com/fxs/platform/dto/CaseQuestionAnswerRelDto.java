@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+/**
+ * 案件-问题-答案关联关系封装类
+ *
+ */
 public class CaseQuestionAnswerRelDto {
 
 	private String caseId;

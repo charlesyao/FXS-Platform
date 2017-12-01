@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 import com.fxs.platform.security.core.authorize.AuthorizeConfigProvider;
 
+/**
+ * 系统URL授权配置
+ *
+ */
 @Component
 public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
@@ -17,8 +21,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 		 * .anyRequest().authenticated(); return true; return false;
 		 */
 
-		config
-			.antMatchers(
+		config.antMatchers(
 					"/",
 					"/invalid-session",
 					"/autosave/**", 
@@ -32,7 +35,5 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 			.permitAll().anyRequest().authenticated();
 		
 		return true;
-
 	}
-
 }

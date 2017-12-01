@@ -5,6 +5,10 @@ import java.util.List;
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
 
+/**
+ *问题-答案对应关系的封装 
+ *
+ */
 public class QuestionDto {
 
 	private Question question;

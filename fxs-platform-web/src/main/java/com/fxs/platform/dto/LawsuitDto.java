@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+/**
+ * 案件-官司案件的信息封装
+ *
+ */
 public class LawsuitDto {
 	private String id;
 

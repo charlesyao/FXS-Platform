@@ -14,6 +14,10 @@ import org.thymeleaf.util.StringUtils;
 import com.fxs.platform.domain.Falltypus;
 import com.fxs.platform.repository.FalltypusRepository;
 
+/**
+ *案件类型初始化 
+ *
+ */
 @Component
 @Order(1)
 public class FalltypusDataInitializer extends AbstractDataInitializer {

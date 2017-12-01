@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+/**
+ *案件反馈领域模型 
+ *
+ */
 @Entity
 public class CaseFeedbackInfo {
 

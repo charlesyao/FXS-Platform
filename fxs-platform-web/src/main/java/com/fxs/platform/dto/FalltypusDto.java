@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+/**
+ * 案件类型信息封装
+ *
+ */
 public class FalltypusDto {
 	private int id;
 

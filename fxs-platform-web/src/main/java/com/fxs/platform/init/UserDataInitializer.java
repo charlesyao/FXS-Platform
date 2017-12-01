@@ -14,6 +14,10 @@ import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.RoleRepository;
 import com.fxs.platform.repository.UserRepository;
 
+/**
+ *用户信息初始化 
+ *
+ */
 @Component
 public class UserDataInitializer extends AbstractDataInitializer {
 

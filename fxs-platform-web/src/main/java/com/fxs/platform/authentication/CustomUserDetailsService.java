@@ -21,26 +21,30 @@ import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.repository.UserRepository;
 import com.fxs.platform.utils.SystemConstants;
 
+/**
+ * 授权认证模块，重写系统核心模块的默认实现。必须实现该方法
+ *
+ */
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
-    HttpSession session;
+	HttpSession session;
 
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
-		
+
 		logger.info("User : " + user);
 		if (user == null) {
 			logger.info("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
-		
+
 		session.setAttribute(SystemConstants.USER_INFO, user);
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				user.getState().equals("Active"), true, true, true, getGrantedAuthorities(user));
@@ -56,5 +60,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 		logger.info("authorities :" + authorities);
 		return authorities;
 	}
-
 }

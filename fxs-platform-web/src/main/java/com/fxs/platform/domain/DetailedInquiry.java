@@ -6,6 +6,10 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ *案件追加信息领域模型 
+ *
+ */
 @Entity
 public class DetailedInquiry {
 	@Id

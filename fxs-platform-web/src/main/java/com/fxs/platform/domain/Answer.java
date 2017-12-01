@@ -9,6 +9,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
+/**
+ * 答案领域模型 
+ *
+ */
 @Entity
 public class Answer {
 

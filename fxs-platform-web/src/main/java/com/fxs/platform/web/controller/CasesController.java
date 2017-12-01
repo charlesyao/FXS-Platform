@@ -32,7 +32,6 @@ import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.UserRepository;
 import com.fxs.platform.repository.condition.CasesCondition;
-import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
@@ -44,8 +43,6 @@ import com.fxs.platform.utils.SystemConstants;
 
 @Controller
 public class CasesController {
-	@Autowired
-	LocaleMessageSourceService localeMessageSourceService;
 
 	@Autowired
 	CasesService casesService;
@@ -172,6 +169,7 @@ public class CasesController {
 
 	/**
 	 * 更新case信息
+	 * 
 	 * @param caseId
 	 * @param cases
 	 * @return
@@ -182,6 +180,13 @@ public class CasesController {
 		return Result.success(casesService.update(caseId, cases));
 	}
 	
+	/**
+	 * 对案件添加追问
+	 * 
+	 * @param caseId
+	 * @param cases
+	 * @return
+	 */
 	@PutMapping("/user/case/addDetailedInquiry/{caseId}")
 	@ResponseBody
 	public ResponseMessage<Integer> addDetailedInquiry(@PathVariable String caseId, @Valid @RequestBody Cases cases) {

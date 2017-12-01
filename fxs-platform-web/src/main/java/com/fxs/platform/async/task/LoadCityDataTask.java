@@ -13,6 +13,9 @@ import com.fxs.platform.service.CityService;
 import com.fxs.platform.utils.CityDataHelper;
 import com.fxs.platform.utils.CityDataType;
 
+/**
+ * 异步任务： 系统启动时加载所有的城市信息（包括二级城市）到数据库，并保存到缓存供页面显示
+ */
 @Component
 @Order(1)
 public class LoadCityDataTask implements ApplicationListener<ApplicationReadyEvent> {
@@ -25,7 +28,7 @@ public class LoadCityDataTask implements ApplicationListener<ApplicationReadyEve
 	@Async
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 		try {
-			if(cityService.count() == 0) {
+			if (cityService.count() == 0) {
 				logger.info("========================== Start Loading City Data into local DB ==========================");
 				CityDataHelper helper = new CityDataHelper();
 				helper.getCitys(cityService, 1, "", CityDataType.CITY.getUrl());

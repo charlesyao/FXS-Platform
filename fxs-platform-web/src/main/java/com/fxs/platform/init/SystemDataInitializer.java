@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 
+/**
+ * 
+ *
+ */
 @Component
 public class SystemDataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 

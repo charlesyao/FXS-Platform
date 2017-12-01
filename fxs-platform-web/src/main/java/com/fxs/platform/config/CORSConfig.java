@@ -8,6 +8,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ *系统跨域访问配置，为前后端分离开发预留 
+ *
+ */
 //@Configuration
 public class CORSConfig {
 	private CorsConfiguration buildConfig() {

@@ -32,7 +32,12 @@ public class DisputeInfoController {
 	@Autowired
 	private QuestionService questionService;
 
-
+	/**
+	 * 获取所有的纷争信息
+	 * 
+	 * @param map
+	 * @return
+	 */
 	@GetMapping("/getAllDisputeInfo")
 	public String getAllDisputeInfo(ModelMap map) {
 		map.addAttribute("questionList", questionService.getAllQuestion());

@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+/**
+ *案件反馈信息的封装类 
+ *
+ */
 public class CaseFeedbackInfoDto {
 
 	private int id;

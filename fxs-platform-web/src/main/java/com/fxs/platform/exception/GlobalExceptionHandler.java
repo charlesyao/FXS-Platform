@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ *全局异常处理，如有自定义异常，可扩展 
+ *
+ */
 @ControllerAdvice
 class GlobalExceptionHandler {
 	public static final String DEFAULT_ERROR_VIEW = "error";

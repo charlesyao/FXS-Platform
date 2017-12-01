@@ -1,5 +1,9 @@
 package com.fxs.platform.repository.condition;
 
+/**
+ *案件查找条件封装 
+ *
+ */
 public class CasesCondition {
 
 	private String parentType;

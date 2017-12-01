@@ -48,7 +48,17 @@ public class DashboardController {
 	@Autowired
 	CasesService casesService;
 	
-	
+	/**
+	 * 用户登录成功后公共页面跳转
+	 * 
+	 * @param authentication
+	 * @param map
+	 * @param request
+	 * @param page
+	 * @param size
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("/dashboard")
 	public String dashboard(
 				Authentication authentication, 
@@ -61,6 +71,11 @@ public class DashboardController {
 		
 		Object caseInSession = session.getAttribute(SystemConstants.GEN_CASES);
 		
+		/**
+		 * 针对未登录的用户提交的案件信息特殊处理
+		 * 1. 如果用户未登录，系统会在提交案件的最后一步跳转到此处，
+		 * 自动从session中获取所有的填写的案件信息并做保存，包括案件基本信息以及与之对应的问题答案信息
+		 */
 		if (! ObjectUtils.isEmpty(caseInSession)) {
 			
 			Cases newCase = CaseManager.saveCase((Cases)caseInSession, session, caseRepository);
@@ -80,8 +95,6 @@ public class DashboardController {
 		}
 
 		if (UserManager.isLawyer(roles)) {
-			
-			
 			Sort sort = new Sort(Sort.Direction.DESC, "id");
 		    Pageable pageable = new PageRequest(page, size, sort);
 		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
@@ -90,10 +103,13 @@ public class DashboardController {
 		    
 			target = "/lawyer_dashboard";
 		} else if (UserManager.isAdmin(roles)) {
+			
 			target = "/admin_dashboard";
 		} else if (UserManager.isUser(roles)) {
+			
 			target = "/litigant_dashboard";
 		} else {
+			
 			target = "/accessDenied";
 		}
 		

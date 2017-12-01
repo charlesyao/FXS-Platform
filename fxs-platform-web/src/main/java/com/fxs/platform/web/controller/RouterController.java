@@ -95,6 +95,18 @@ public class RouterController {
 		return "lawyerSignIn";
 	}
 
+	/**
+	 * 所有路由跳转配置
+	 * 
+	 * @param userRole
+	 * @param caseType
+	 * @param action
+	 * @param condition
+	 * @param map
+	 * @param page
+	 * @param size
+	 * @return
+	 */
 	@GetMapping("/{userRole}/case/{caseType}/{action}")
 	public String router(@PathVariable String userRole, 
 							 @PathVariable String caseType, 

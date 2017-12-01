@@ -12,6 +12,10 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ *纷争信息领域模型 
+ *
+ */
 @Entity
 public class DisputeInfo {
 

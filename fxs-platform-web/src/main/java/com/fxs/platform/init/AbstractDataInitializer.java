@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 
+/**
+ *抽象初始化器 
+ *
+ */
 public abstract class AbstractDataInitializer implements DataInitializer {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());

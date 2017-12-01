@@ -8,7 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * 案件类型
+ * 案件类型领域模型
  * 
  *
  */

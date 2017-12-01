@@ -19,6 +19,10 @@ import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.RoleService;
 import com.fxs.platform.support.EnabledCitySettings;
 
+/**
+ *异步任务： 加载所有系统静态数据，包括案件类型，城市数据，用户角色 
+ *
+ */
 @Component
 @Order(2)
 public class LoadStaticDataTask implements ApplicationListener<ApplicationReadyEvent> {

@@ -49,6 +49,7 @@ public class CityController {
 	}
 
 	/**
+	 *获取一级城市（省份）
 	 *
 	 * @param id
 	 * @return
@@ -69,6 +70,11 @@ public class CityController {
 		return Result.success(level2CityListHTML + "<div class='clearboth'></div>");
 	}
 	
+	/**
+	 * 当页面选择城市时，自动保存到缓存
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/autosave/{id}")
 	public ResponseMessage<String> autosaveLevel2(@PathVariable String id) {
 		
@@ -76,18 +82,4 @@ public class CityController {
 		
 		return Result.success("1");
 	}
-
-	/**
-	 * 查询一级城市和与之对应的省份
-	 *
-	 * @param condition
-	 * @return
-	 */
-	/*
-	@GetMapping
-	public ResponseMessage<List<CityDto>> query(CityCondition condition) {
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.city"),
-				cityService.query(condition));
-	}
-	*/
 }
