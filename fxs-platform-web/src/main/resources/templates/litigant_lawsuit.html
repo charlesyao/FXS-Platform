@@ -15,7 +15,7 @@
 			<section class="col-md-12 col-sm-12 writeInfo space20">
 				<div class="row">
 					<div class="col-md-8 col-sm-8 mybox">
-						<ul class="writeInfoText ulCell myCell" th:each="myLawsuit : ${myLawsuit}">
+						<ul class="writeInfoText ulCell myCell" th:each="myLawsuit : ${pageableData}">
 							<li>起诉地点 : 南京</li>
 							<li>案件类型 : <span th:text="${myLawsuit.falltypusType}"></span></li>
 							<li class="gray">
@@ -24,7 +24,10 @@
 							</li>
 							<br />
 							<a th:href="@{/user/case/litigant/lawsuit/viewDetail/{id}(id=${myLawsuit.id})}">查看详情</a>
-						</ul> 
+						</ul>
+						<div th:if="${not #lists.isEmpty(pageableData)}">
+							<div th:include="fragments/page :: pager" th:remove="tag"></div>
+						</div>
 					</div>
 					<div class="col-md-4 col-sm-4">
 						<div class="writeInfoRight ulCell">

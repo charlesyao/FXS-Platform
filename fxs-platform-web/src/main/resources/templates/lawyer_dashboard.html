@@ -59,7 +59,7 @@
 									</div>
 								</div>
 							</ul>
-							<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${myBidCases}">
+							<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${pageableData}">
 								<li class="listTitle">案件类型 : <b th:text="${myBidCase.parentType}"></b> 
 									<span>案件编号 : <span th:text="${myBidCase.id}"></span></span>
 								</li>
@@ -73,6 +73,7 @@
 									</div>
 								</div>
 							</ul>
+							<div th:include="fragments/page :: pager" th:remove="tag"></div>
 						</div>
 					</div>
 				</section>

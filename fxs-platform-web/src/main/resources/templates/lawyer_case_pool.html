@@ -53,7 +53,7 @@
 									</div>
 								</div>
 							</ul>
-							<ul th:if="${not #lists.isEmpty(freeConsultings)}" class="writeInfoText ulCell myCell centerLi" th:each="freeConsulting : ${freeConsultings}">
+							<ul th:if="${not #lists.isEmpty(pageableData)}" class="writeInfoText ulCell myCell centerLi" th:each="freeConsulting : ${pageableData}">
 								<li class="listTitle">案件类型 : <b th:text="${freeConsulting.falltypusType}"></b> 
 									<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span>
 								</li>
@@ -64,7 +64,10 @@
 									</div>
 								</div>
 							</ul>
-							<ul th:if="${#lists.isEmpty(freeConsultings)}" class="writeInfoText ulCell myCell">未找到相关记录</ul>
+							<div th:if="${not #lists.isEmpty(pageableData)}">
+								<div th:include="fragments/page :: pager" th:remove="tag"></div>
+							</div>
+							<ul th:if="${#lists.isEmpty(pageableData)}" class="writeInfoText ulCell myCell">未找到相关记录</ul>
 						</div>
 					</div>
 				</section>

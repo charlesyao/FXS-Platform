@@ -2,6 +2,8 @@ package com.fxs.platform.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,7 +15,7 @@ public interface CasesRepository extends FxsRepository<Cases> {
 	//List<Cases> findByTypeAndSubType(String caseType, String subType);
 
 	@Query("SELECT o FROM Cases o where o.caseType=?1  AND o.feedbackCount<=10 AND o.status != '5' ORDER BY o.createAt DESC")
-	List<Cases> findAllCases(String type);
+	Page<Cases> findAllCases(String type, Pageable pageable);
 	
 	@Query("SELECT o FROM Cases o where o.userId=?1 AND o.status=?2")
 	List<Cases> findByStatus(String userId, String status);

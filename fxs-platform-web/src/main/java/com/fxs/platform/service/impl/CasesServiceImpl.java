@@ -70,25 +70,15 @@ public class CasesServiceImpl implements CasesService {
 	
 	@Override
 	public Cases create(Cases cases) {
-		/*User user = (User)(session.getAttribute(SystemConstants.USER_INFO));
-		String parentFalltypusType = String.valueOf(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL1_TYPE));
-		String subTypeFalltypusType = String.valueOf(session.getAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE));
-		
-		cases.setParentType(parentFalltypusType);
-		cases.setSubType(subTypeFalltypusType);
-		cases.setUserId(String.valueOf(user.getId()));
-		cases.setStatus(CaseStatus.NEW.getStatus());
-		
-		return caseRepository.save(cases);*/
-		
+
 		return caseRepository.save(cases);
 	}
 
 	@Override
-	public List<CasesDto> findAll(String type) {
-		List<Cases> cases = caseRepository.findAllCases(type);
+	public Page<CasesDto> findAll(String type, Pageable pageable) {
+		Page<Cases> cases = caseRepository.findAllCases(type, pageable);
 		
-		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
+		return CaseManager.caseWrapperPageable(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository, pageable);
 	}
 
 	@Override
@@ -149,8 +139,8 @@ public class CasesServiceImpl implements CasesService {
 	}
 
 	@Override
-	public List<Reservation> findAllReservation() {
-		return reservationRepository.queryAll(UserManager.getSessionUser(httpSession));
+	public Page<Reservation> findAllReservation(Pageable pageable) {
+		return reservationRepository.queryAll(UserManager.getSessionUser(httpSession), pageable);
 	}
 
 	/**
@@ -163,15 +153,11 @@ public class CasesServiceImpl implements CasesService {
 	}
 
 	@Override
-	public List<CasesDto> query(CasesCondition condition, Pageable pageable) {
+	public Page<CasesDto> query(CasesCondition condition, Pageable pageable) {
 
 		condition.setUserId(UserManager.getSessionUser(httpSession));
 		Page<Cases> pageableCases = caseRepository.findAll(new CaseSpecification(condition), pageable);
 		
-		List<Cases> cases = pageableCases.getContent();
-		
-		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
-		
-		
+		return CaseManager.caseWrapperPageable(pageableCases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository, pageable);
 	}
 }

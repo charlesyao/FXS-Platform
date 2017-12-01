@@ -6,7 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
@@ -14,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fxs.platform.domain.Answer;
@@ -97,8 +100,9 @@ public class RouterController {
 							 @PathVariable String caseType, 
 							 @PathVariable String action, 
 							 CasesCondition condition,
-							 Pageable pageable,
-							 ModelMap map) {
+							 ModelMap map,
+							 @RequestParam(value = "page", defaultValue = "0") Integer page,
+				             @RequestParam(value = "size", defaultValue = "5") Integer size) {
 		
 		String target = "";
 		
@@ -152,16 +156,25 @@ public class RouterController {
 			if(caseType.equals("consulting")) {
 				if (action.equals("free")) {
 					//获取免费咨询信息列表
-					map.addAttribute("myFreeConsultings", casesService.query(condition, pageable));
+					Sort sort = new Sort(Sort.Direction.DESC, "id");
+				    Pageable pageable = new PageRequest(page, size, sort);
+					map.addAttribute("pageableData", casesService.query(condition, pageable));
+					
 					target = "litigant_consulting_free";
 				} else if (action.equals("phone")) {
 					//获取所有电话咨询信息列表
-					map.addAttribute("myPhoneConsultings", casesService.findAllReservation());
+					Sort sort = new Sort(Sort.Direction.DESC, "id");
+				    Pageable pageable = new PageRequest(page, size, sort);
+					map.addAttribute("pageableData", casesService.findAllReservation(pageable));
+					
 					target = "litigant_consulting_phone";
 				}
 			} else if (caseType.equals("lawsuit")) {
 				//获取当事人的打官司信息列表
-				map.addAttribute("myLawsuit", casesService.query(condition, pageable));
+				Sort sort = new Sort(Sort.Direction.DESC, "id");
+			    Pageable pageable = new PageRequest(page, size, sort);
+				map.addAttribute("pageableData", casesService.query(condition, pageable));
+				
 				target = "litigant_lawsuit";
 			}
 		} else if (userRole.equals("lawyer")) {//律师页面路由
@@ -172,9 +185,15 @@ public class RouterController {
 	}
 
 	@GetMapping("/lawyer/case_pool")
-	public String casePool(ModelMap map) {
+	public String casePool(
+				ModelMap map,
+				@RequestParam(value = "page", defaultValue = "0") Integer page,
+                @RequestParam(value = "size", defaultValue = "5") Integer size) {
 		
-		map.addAttribute("freeConsultings", casesService.findAll(CaseType.CONSULTING.getType()));
+		Sort sort = new Sort(Sort.Direction.DESC, "id");
+	    Pageable pageable = new PageRequest(page, size, sort);
+	    
+		map.addAttribute("pageableData", casesService.findAll(CaseType.CONSULTING.getType(), pageable));
 		
 		return "lawyer_case_pool";
 	}

@@ -1,12 +1,13 @@
 package com.fxs.platform.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.CaseFeedbackInfo;
@@ -116,11 +118,14 @@ public class CasesController {
 	 */
 	@GetMapping("/user/case")
 	@ResponseBody
-	public ResponseMessage<List<CasesDto>> query(
+	public ResponseMessage<Page<CasesDto>> query(
 						CasesCondition condition,
-						Pageable pageable,
-						@PathVariable String caseType, 
-						ModelMap map) {
+						ModelMap map,
+						@RequestParam(value = "page", defaultValue = "0") Integer page,
+		                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+		Sort sort = new Sort(Sort.Direction.DESC, "id");
+	    Pageable pageable = new PageRequest(page, size, sort);
+	    
 		return Result.success(casesService.query(condition, pageable));
 	}
 
@@ -142,7 +147,7 @@ public class CasesController {
 			casesService.create(currentCase);
 		}
 		
-		map.addAttribute("caseDetailInfo", CaseManager.caseWrapper(currentCase, caseQuestionAnswerRelRepository, 
+		map.addAttribute("caseDetailInfo", CaseManager.caseWrapperDetail(currentCase, caseQuestionAnswerRelRepository, 
 				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository, cityRepository, session));
 		
 		if (userRole.equals("litigant")) {

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fxs.platform.domain.Answer;
-import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.QuestionDto;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
@@ -130,6 +129,7 @@ public class QuestionController {
 		return Result.success();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping("/optional/multi/answer/{answerId}")
 	@ResponseBody
 	public ResponseMessage<?> optionalMultiQuestion(@PathVariable int answerId, ModelMap map) {

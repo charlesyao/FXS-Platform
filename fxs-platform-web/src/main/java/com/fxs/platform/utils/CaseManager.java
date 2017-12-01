@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Answer;
@@ -112,6 +115,31 @@ public class CaseManager {
 		return repository.save(cases);
 	}
 	
+	public static Page<CasesDto> caseWrapperPageable(Page<Cases> cases, 
+			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
+			FalltypusRepository falltypusRepository, CityRepository cityRepository, Pageable pageable) {
+		
+		List<CasesDto> casesDtoList = new ArrayList<CasesDto>();
+		
+		
+		for (Cases c : cases) {
+			CasesDto caseDto = new CasesDto();
+			BeanUtils.copyProperties(c, caseDto);
+			
+			falltypusWrapper(caseDto, c, falltypusRepository);
+			cityWrapper(caseDto, c, cityRepository);
+			List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
+			
+			caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
+			
+			casesDtoList.add(caseDto);
+		}
+		
+		Page<CasesDto> page = new PageImpl<CasesDto>(casesDtoList, pageable, cases.getTotalElements());
+		
+		return page;
+	}
+	
 	/**
 	 * 封装案件列表
 	 * @param cases
@@ -153,7 +181,7 @@ public class CaseManager {
 	 * @param cityRepository
 	 * @return
 	 */
-	public static CasesDto caseWrapper(Cases cases, 
+	public static CasesDto caseWrapperDetail(Cases cases, 
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
 			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository,
 			CaseFeedbackInfoRepository caseFeedbackInfoRepository,

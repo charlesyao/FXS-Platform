@@ -2,6 +2,7 @@ package com.fxs.platform.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.fxs.platform.domain.CaseFeedbackInfo;
@@ -18,7 +19,7 @@ public interface CasesService {
 
 	//List<CasesDto> findByTypeAndSubType(String caseType, String subType);
 	
-	List<CasesDto> findAll(String type);
+	Page<CasesDto> findAll(String type, Pageable pageable);
 	
 	List<Cases> findByStatus(String status);
 	
@@ -31,7 +32,7 @@ public interface CasesService {
 	//我的免费咨询和我的法律咨询
 	List<CasesDto> findByType(String caseType);
 	
-	List<Reservation> findAllReservation();
+	Page<Reservation> findAllReservation(Pageable pageable);
 	
-	List<CasesDto> query(CasesCondition condition, Pageable pageable);
+	Page<CasesDto> query(CasesCondition condition, Pageable pageable);
 }

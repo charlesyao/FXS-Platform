@@ -7,6 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -14,9 +18,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.service.CasesService;
@@ -44,7 +50,12 @@ public class DashboardController {
 	
 	
 	@GetMapping("/dashboard")
-	public String dashboard(Authentication authentication, ModelMap map, ServletWebRequest request) throws Exception {
+	public String dashboard(
+				Authentication authentication, 
+				ModelMap map, 
+				ServletWebRequest request,
+				@RequestParam(value = "page", defaultValue = "0") Integer page,
+                @RequestParam(value = "size", defaultValue = "5") Integer size) throws Exception {
 		
 		String target = "";
 		
@@ -69,7 +80,14 @@ public class DashboardController {
 		}
 
 		if (UserManager.isLawyer(roles)) {
-			map.addAttribute("myBidCases", casesService.findAll(CaseType.LAWSUIT.getType()));
+			
+			
+			Sort sort = new Sort(Sort.Direction.DESC, "id");
+		    Pageable pageable = new PageRequest(page, size, sort);
+		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
+
+		    map.addAttribute("pageableData", myBidCases);
+		    
 			target = "/lawyer_dashboard";
 		} else if (UserManager.isAdmin(roles)) {
 			target = "/admin_dashboard";
