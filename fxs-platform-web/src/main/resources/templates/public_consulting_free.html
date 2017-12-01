@@ -11,7 +11,7 @@
 			<p>请先选择咨询类型，以便为您精准解答</p>
 			<section class="col-md-12 col-sm-12 introcouPhone space20" id="falltypusLevel1">
 				<div class="row">
-					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${firstLevelFalltypus}">
+					<ul class="col-md-4 col-sm-6" th:each="falltypus : ${session.firstLevelFalltypus}">
 						<li class="introcoupCell btnSquare">
 							<a th:class="falltypus" th:href="@{/public/falltypus/level1/consulting/{id}(id=${falltypus.id})}" th:id="${falltypus.id}" th:text="${falltypus.name}"></a>
 						</li>

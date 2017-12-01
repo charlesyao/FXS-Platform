@@ -67,8 +67,7 @@ public class FalltypusController {
 	@GetMapping
 	@ResponseBody
 	public ResponseMessage<List<FalltypusDto>> getFirstLevelFalltypus() {
-		return Result.success(localeMessageSourceService.getMessage("fxs.platform.application.falltypus"),
-				falltypusService.findFirstLevelFalltypus());
+		return Result.success(falltypusService.findFirstLevelFalltypus());
 	}
 
 	/**

@@ -1,9 +1,12 @@
 package com.fxs.platform.utils;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.ObjectUtils;
@@ -34,6 +37,19 @@ public class UserManager {
 			username = principal.toString();
 		}
 		return username;
+	}
+	
+	public static List<String> getRoles () {
+		
+		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+		List<String> roles = new ArrayList<String>();
+
+		for (GrantedAuthority a : authorities) {
+			roles.add(a.getAuthority());
+		}
+		
+		return roles;
 	}
 	
 	public static boolean isUser(List<String> roles) {

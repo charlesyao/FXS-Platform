@@ -155,7 +155,10 @@ public class CasesServiceImpl implements CasesService {
 	@Override
 	public Page<CasesDto> query(CasesCondition condition, Pageable pageable) {
 
-		condition.setUserId(UserManager.getSessionUser(httpSession));
+		if (UserManager.isUser(UserManager.getRoles())) {
+			condition.setUserId(UserManager.getSessionUser(httpSession));
+		}
+		
 		Page<Cases> pageableCases = caseRepository.findAll(new CaseSpecification(condition), pageable);
 		
 		return CaseManager.caseWrapperPageable(pageableCases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository, pageable);

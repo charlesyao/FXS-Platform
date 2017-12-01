@@ -1,9 +1,5 @@
 package com.fxs.platform.web.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
@@ -26,6 +21,7 @@ import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.service.CasesService;
+import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.SessionVariableManager;
@@ -47,6 +43,9 @@ public class DashboardController {
 	
 	@Autowired
 	CasesService casesService;
+	
+	@Autowired
+	FalltypusService falltypusService;
 	
 	/**
 	 * 用户登录成功后公共页面跳转
@@ -86,26 +85,27 @@ public class DashboardController {
 			return "redirect:/";
 		}
 
-		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		/*Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
 		List<String> roles = new ArrayList<String>();
 
 		for (GrantedAuthority a : authorities) {
 			roles.add(a.getAuthority());
-		}
+		}*/
 
-		if (UserManager.isLawyer(roles)) {
+		if (UserManager.isLawyer(UserManager.getRoles())) {
 			Sort sort = new Sort(Sort.Direction.DESC, "id");
 		    Pageable pageable = new PageRequest(page, size, sort);
 		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
-
-		    map.addAttribute("pageableData", myBidCases);
 		    
+		    map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
+		    
+		    map.addAttribute("pageableData", myBidCases);
 			target = "/lawyer_dashboard";
-		} else if (UserManager.isAdmin(roles)) {
+		} else if (UserManager.isAdmin(UserManager.getRoles())) {
 			
 			target = "/admin_dashboard";
-		} else if (UserManager.isUser(roles)) {
+		} else if (UserManager.isUser(UserManager.getRoles())) {
 			
 			target = "/litigant_dashboard";
 		} else {

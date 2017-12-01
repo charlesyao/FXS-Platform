@@ -122,7 +122,9 @@ public class RouterController {
 			if (caseType.equals("consulting")) {//法律咨询总路由
 				if (action.equals("free")) {//免费法律咨询路由
 					
-					map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
+					//map.addAttribute("firstLevelFalltypus", falltypusList);
+					session.setAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
+					
 					target = "public_consulting_free";
 				} else if (action.equals("phone")) {//电话咨询路由
 					

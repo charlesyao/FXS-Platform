@@ -36,15 +36,9 @@
 										<label>业务领域:</label>
 									</div>
 									<ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
-										<li>
-											<label>
-												<input type="checkbox" checked="checked" /> 房产土地
-											</label>
-											<label>
-												<input type="checkbox" checked="" /> 劳动纠纷
-											</label>
-											<label>
-												<input type="checkbox" checked="" /> 婚姻家庭
+										<li id="searchByFalltypus">
+											<label th:each="falltypus : ${firstLevelFalltypus}">
+												<input type="checkbox" th:id="${falltypus.id}" th:text="${falltypus.name}" />
 											</label>
 										</li>
 										<div class="clearboth"></div>
@@ -55,7 +49,7 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
-										<button type="button" class="btn btn-primary btn-lg">查询</button>
+										<button id="searchCases" type="button" class="btn btn-primary btn-lg">查询</button>
 									</div>
 								</div>
 							</ul>
@@ -81,5 +75,26 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<script type="text/javascript">
+		$(function() {
+			var ids= new Array()
+			$("#searchByFalltypus").on('click', 'input', function() {
+				console.log($(this).attr("id"))
+				ids.push($(this).attr("id"))
+			})
+			$("#searchCases").on("click", function() {
+				$.ajax({
+					type : 'GET',
+					url : '/user/case?parentType='+ids+'',
+					success : function(data) {
+						console.log(data)
+					},
+					error : function(error) {
+						console.log(error)
+					}
+				});
+			})
+		})
+	</script>
 </body>
 </html>

@@ -1,12 +1,14 @@
 package com.fxs.platform.repository.condition;
 
+import java.util.List;
+
 /**
  *案件查找条件封装 
  *
  */
 public class CasesCondition {
 
-	private String parentType;
+	private String[] parentType;
 
 	private String id;
 
@@ -58,12 +60,11 @@ public class CasesCondition {
 		this.id = id;
 	}
 
-	public String getParentType() {
+	public String[] getParentType() {
 		return parentType;
 	}
 
-	public void setParentType(String parentType) {
+	public void setParentType(String[] parentType) {
 		this.parentType = parentType;
 	}
-
 }
