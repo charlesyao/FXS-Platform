@@ -101,13 +101,13 @@ public class DashboardController {
 		    map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
 		    
 		    map.addAttribute("pageableData", myBidCases);
-			target = "/lawyer_dashboard";
+			target = "lawyer_dashboard";
 		} else if (UserManager.isAdmin(UserManager.getRoles())) {
 			
-			target = "/admin_dashboard";
+			target = "admin_dashboard";
 		} else if (UserManager.isUser(UserManager.getRoles())) {
 			
-			target = "/litigant_dashboard";
+			target = "litigant_dashboard";
 		} else {
 			
 			target = "/accessDenied";
