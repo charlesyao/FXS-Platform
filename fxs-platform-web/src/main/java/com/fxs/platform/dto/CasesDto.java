@@ -30,6 +30,8 @@ public class CasesDto {
 	private String comments;
 
 	private Date createAt;
+	
+	private Date expiredDate;
 
 	private String userId;
 
@@ -180,5 +182,13 @@ public class CasesDto {
 
 	public void setDisableFeedback(boolean disableFeedback) {
 		this.disableFeedback = disableFeedback;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
 	}
 }

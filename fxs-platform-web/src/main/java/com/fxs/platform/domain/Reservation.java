@@ -35,6 +35,8 @@ public class Reservation implements Serializable {
 	 */
 	private Date researvationDatetime = new Date();
 
+	private Date expiredDate;
+	
 	/**
 	 * 当事人的联系方式
 	 */
@@ -96,5 +98,13 @@ public class Reservation implements Serializable {
 
 	public void setLawyerId(String lawyerId) {
 		this.lawyerId = lawyerId;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
 	}
 }

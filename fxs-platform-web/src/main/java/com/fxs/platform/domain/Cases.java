@@ -51,6 +51,8 @@ public class Cases {
 	
 	private Date createAt = new Date();
 	
+	private Date expiredDate;
+	
 	private String userId;
 
 	public String getId() {
@@ -155,5 +157,13 @@ public class Cases {
 
 	public void setSubLocation(String subLocation) {
 		this.subLocation = subLocation;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
 	}
 }

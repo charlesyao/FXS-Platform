@@ -106,7 +106,10 @@
 				$.ajax({
 					type : 'POST',
 					url : '/public/case/reservation',
-					data : JSON.stringify({"contactPhone": $("#contactPhone").val()}),
+					data : JSON.stringify({
+						"contactPhone": $("#contactPhone").val(),
+						"expiredDate": "2017-12-19"
+					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
 						$("#modalContent").empty().append("电话咨询提交成功")

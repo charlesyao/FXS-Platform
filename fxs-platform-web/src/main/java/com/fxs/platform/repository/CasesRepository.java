@@ -29,4 +29,7 @@ public interface CasesRepository extends FxsRepository<Cases> {
 	@Query("UPDATE Cases o SET o.status =?1 where o.id=?2")
 	@Modifying
 	void updateStatus(String statusCode, String caseTId);
+	
+	@Query("SELECT o FROM Cases o where o.status != '5' AND o.expiredDate=CURDATE()")
+	List<Cases> findByStatus();
 }
