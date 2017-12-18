@@ -121,6 +121,8 @@
 				
 				if ($(this).attr('id') === 'addAfterConfirm') {
 					e.preventDefault()
+					$(this).parent().prev().children().removeClass("cur")
+					$(this).parent().children().removeClass("cur")
 					$(this).addClass("cur")
 					$.ajax({
 						type : 'POST',
@@ -137,6 +139,8 @@
 					});
 				} else if ($(this).attr('id') === 'noAnswer') {
 					e.preventDefault()
+					$(this).parent().prev().children().removeClass("cur")
+					$(this).parent().children().removeClass("cur")
 					$(this).addClass("cur")
 					$.ajax({
 						type : 'POST',
