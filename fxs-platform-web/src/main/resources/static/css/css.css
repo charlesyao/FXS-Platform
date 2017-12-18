@@ -10,8 +10,8 @@ body{
     float: left;
     width: 100%;
     z-index: 1;
-    min-height: 570px;
-    padding: 0 50px 30px;
+    min-height: 550px;
+    padding: 0 5% 5%;
 }
 .form-control{
     font-size: 16px;
@@ -19,7 +19,8 @@ body{
 }
 
 .mainPart{
-    min-height: 650px;
+    min-height: 530px;
+    z-index: 1;
 }
 .marginTop30{
     margin-top: 50px;
@@ -31,6 +32,10 @@ footer{
     z-index: 999;
     float: left;
     width: 100%;
+}
+.headerline .loginBox .loginBox li{
+    width: auto;
+    float: left;
 }
 /*---counseling_free----*/
 .mainPart .container h1{
@@ -176,6 +181,9 @@ label {
 .loginBox .mainNav li{
     margin-top: 0;
 }
+.loginBox .mainNav li:first-child{
+    margin-top: 2px;
+}
 .mapId{
     margin-left: 20px;
 }
@@ -266,9 +274,182 @@ footer.indexFooter{
 .caseTwoBtn button{
     margin: 0 15px;
 }
+.active{
+    display: block;
+}
+.nav-tabs li{
+    display: block;
+    float: left;
+    width: 100%;
+    text-align: center
+}
+.nav-tabs li.active a{
+    color: #CFB87E;
+}
+/*.buttonPop{
+    background-color: #000;
+    z-index: 999;
+    opacity: 0.8;
+}*/
+.wapperPopup{
+    margin-top: 25%;
+}
+.anwerGroup{
+    margin: 30px 0 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.answerBTN .btnNext{
+    float: right;
+    text-align: right;
+}
+.answerBTN .btnNext button{
+    width: auto;
+    height: auto;
+    margin: 0;
+}
+.answerBTN{
+    margin-bottom: 30px;
+}
+.feed .box1 .dateAnswer .fabu_ls{
+    text-align: left;
+}
+
+
+.feed .box1 {
+    width: 700px;
+    float: left;
+    background: #f6f6f6;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom:10px;
+}
 
 
 
+/*----兼容性----*/
+@media screen and (max-width: 768px) {
+    .mainPart{
+        padding-top: 60px;
+    }
+    .introcouPhone ul.col-md-6,
+    .introcouPhone ul.col-md-4,
+    .writeInfo div.col-md-10,
+    .step2Step ul.ui-choose li.col-md-5{
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+    .writeInfo div.col-md-2{
+        display: none;
+    }
+    .feed .box1 {
+        width: 500px;
+    }
+    .logoLine img{
+        width: 70%;
+    }
+    .step2Step div.col-md-12{
+        margin-right: -15px;
+        width: 100%;
+        padding-right: 0;
+    }
+}
+@media screen and (max-width: 425px) {
+    .col-md-4 .logoLine img{
+        width: 40%
+    }
+    .mapId{
+        float: right;
+        margin-top: 10px;
+    }
+    .mainPart {
+        padding-top: 120px;
+    }
+    .breadcrumb{
+        display: none;
+    }
+    .mainPart .container .containerWapper h1 {
+        margin-top: 10%;
+    }
+    .step2Step .form-group{
+        width: 87%;
+        height: 40px;
+        margin-bottom: 5px;
+    }
+    .step2Step .sLabel{
+        width: 5%;
+        padding: 6px 0;
+    }
+    .introcouPhone .form-control{
+        margin-top: 0;
+    }
+    .mycasePart{
+        padding-top: 50px;
+    }
+    .topBar .col-md-3{
+        width: 40%;
+        padding: 8px 0 5px;
+    }
+    .topBar .col-md-3 img{
+        width: 100%;
+    }
+    .topBar .col-md-9{
+        width: 60%;
+    }
+    .mainNav{
+        padding-bottom: 13px;
+    }
+    .space20{
+        margin: 20px 0;
+    }
+    .col-md-9 ul.mainNav li:first-child{
+        margin-top: 10px;
+    }
+    .step2Step{
+        margin-top: 30px;
+    }
+    .caseBox ul{
+        padding-left: 5px;
+    }
+    .writeInfoText .listTitle td span{
+        display: block;
+        margin: 3px 0;
+    }
+    .writeInfoText .listTitle td:nth-child(2){
+        display: none;
+    }
+    .tableBox td{
+        display: block;
+    }
+    .btnNext button{
+        display: block;
+        float: left;
+    }
+    .lawyer2button{
+        margin: 0;
+        padding: 0;
+    }
+    .mybox .btnSearch button{
+        margin: 0 27px;
+    }
+    footer .list-group{
+        padding: 0 30px;
+    }
+    .empty {
+        margin: 10em 0 0;
+    }
+    .lawsuit-content h3.heading{
+        padding: 0 0 20px;
+    }
+    .lawsuit-content {
+        padding-bottom: 7em;
+    }
+    .feed .box1 {
+        width: 260px;
+    }
+    .btnNext button.haveA {
+        margin-left: 20%;
+    }
+}
 
 
 

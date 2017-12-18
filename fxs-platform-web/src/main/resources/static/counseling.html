@@ -4,7 +4,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <!-- 引入 Bootstrap -->
-     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+     <link href="css/bootstrap.min.css" rel="stylesheet">
      <link rel="stylesheet" type="text/css" href="css/header.css">
       <link rel="stylesheet" type="text/css" href="css/footer.css">
      <link rel="stylesheet" type="text/css" href="css/customer.css">
@@ -66,10 +66,28 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
+
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
+
+
+
   <div class="mainPart">
   	<div class="container">
 	    <h1>电话咨询</h1>
@@ -84,7 +102,7 @@
 		
 		    		</ul>
 		    	</div>
-				<div class="col-md-3 col-sm-6">
+				  <div class="col-md-3 col-sm-6">
 		    		<ul class="introcoupCell">
 		    			<li><img src="img/icon_counseling2.png"></li>
 						<li><span>专业</span></li>
@@ -92,7 +110,7 @@
 		
 		    		</ul>
 		    	</div>
-				<div class="col-md-3 col-sm-6">
+				  <div class="col-md-3 col-sm-6">
 		    		<ul class="introcoupCell">
 		    			<li><img src="img/icon_counseling3.png"></li>
 						<li><span>高性价比</span></li>
@@ -100,7 +118,7 @@
 		
 		    		</ul>
 		    	</div>
-				<div class="col-md-3 col-sm-6">
+				  <div class="col-md-3 col-sm-6">
 		    		<ul class="introcoupCell">
 		    			<li><img src="img/icon_counseling4.png"></li>
 						<li><span>服务细节到位</span></li>
@@ -108,8 +126,11 @@
 		
 		    		</ul>
 		    	</div>
-		
 		    </div>
+
+        <div class="row buttonPop btnNext">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">按钮</button>
+        </div>
 		</section>
 	
   	</div>
@@ -124,6 +145,8 @@
   </ul>
   </footer>
  
+
+
 
  </body>
 

@@ -10,80 +10,83 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/customer.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/css.css}" />
 </div>
 </head>
 <body>
 	<div th:fragment="public-header">
-		<div class="container">
-			<ul class="nav loginBox">
-				<li sec:authorize="isAnonymous()">
-					<a th:href="@{/user/signIn}">登录</a>
-					<span>|</span>
-				</li>
-				<li sec:authorize="isAnonymous()">
-					<a th:href="@{/user/register}">注册</a>
-					<span>|</span>
-				</li>
-				<li sec:authorize="isAuthenticated()">
-					<a th:href="@{/user/dashboard}">个人中心</a>
-					<span>|</span>
-				</li>
-				<li>
-					<a href="#">关于我们</a>
-					<span>|</span>
-				</li>
-				<li sec:authorize="isAnonymous()">
-					<a th:href="@{/lawyer/signIn}">律师入口</a>
-				</li>
-			</ul>
-			<ul class="clearboth"></ul>
-		</div>
-		<div class="line"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<img th:src="@{/img/logo.png}" />
-				</div>
-				<div class="col-md-1 mapId">上海</div>
-				<nav class="col-md-8 navbar-default" role="navigation">
-					<ul class="nav mainNav">
-						<li class="active">
-							<a th:href="@{/}">首页</a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 法律咨询 </a>
-							<ul class="dropdown-menu">
-								<li>
-									<a th:href="@{/public/case/consulting/free}">免费法律咨询</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a th:href="@{/public/case/consulting/phone}">电话咨询</a>
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 打官司 </a>
-							<ul class="dropdown-menu">
-								<li>
-									<a th:href="@{/public/case/lawsuit/lawyer}">找律师打官司</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a th:href="@{/public/case/lawsuit/self_service}">自助打官司</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">其他法律业务</a>
-						</li>
-						<li class="lastItem">
-							<a href="#">投诉</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div>
+                        <p class="logoLine"><img th:src="@{/img/logo.png}" /><span class="mapId">上海</span></p>
+                    </div>
+                </div>
+                <div class="col-md-8 headerRight">
+                    <div class="headerline">
+                        <div class="loginBox">
+                            <ul class="nav loginBox">
+                                <li sec:authorize="isAnonymous()">
+                                    <a th:href="@{/user/signIn}">登录</a>
+                                    <span>|</span>
+                                </li>
+                                <li>
+                                <a th:href="@{/user/register}">注册</a>
+                                <span>|</span>
+                                </li>
+                                <li sec:authorize="isAuthenticated()">
+                                    <a th:href="@{/user/dashboard}">个人中心</a>
+                                    <span>|</span>
+                                </li>
+                                <li>
+                                    <a href="#">关于我们</a>
+                                    <span>|</span>
+                                </li>
+                                <li sec:authorize="isAnonymous()">
+                                    <a th:href="@{/lawyer/signIn}">律师入口</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="headerline">
+                        <div class="loginBox">
+                            <nav class="navbar-default" role="navigation">
+                                <ul class="nav mainNav" >
+                                    <li class="active"><a th:href="@{/}">首页</a></li>
+                                    <li class="dropdown">
+                                        <a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown">
+                                            法律咨询</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a th:href="@{/public/case/consulting/free}">免费法律咨询</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a th:href="@{/public/case/lawsuit/self_service}">自助打官司</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">打官司</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a th:href="@{/public/case/lawsuit/lawyer}">找律师打官司</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a th:href="@{/public/case/lawsuit/self_service}">自助打官司</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">其他法律业务</a></li>
+                                    <li class="lastItem"><a href="#">投诉</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </body>
 </html>
