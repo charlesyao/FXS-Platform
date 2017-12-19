@@ -14,8 +14,8 @@ public interface AnswerRepository extends FxsRepository<Answer> {
 	
 	@Query("SELECT o FROM Answer o WHERE o.question.id=?1")
 	List<Answer> getAllAnswerByQuestionId(int qId);
-	
+
+	@Query("UPDATE Answer o SET o.nextQuestionId =?1 where o.id=?2")
 	@Modifying
-	@Query("UPDATE Answer o SET o.nextQuestionId=?2 WHERE o.id=?1")
-	Answer updateNextQuestion(int answerId, int nextQuestionId);
+	void updateNextQuestion(int nextQuestionId, int answerId);
 }

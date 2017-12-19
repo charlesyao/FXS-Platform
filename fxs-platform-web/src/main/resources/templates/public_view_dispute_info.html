@@ -33,37 +33,86 @@
 								</tr>
 							</table>
 							<form th:action="@{/disputeInfo/updateAnswer}" th:method="POST">
-							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+							<table width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
 								<tr bgcolor="lightblue">
 									<th>答案编号</th>
 									<th>答案名称</th>
 									<th>匹配下级问题</th>
+									<th>绑定</th>
 								</tr>
-								<tr th:each="answer : ${question.answers}">
+								<tr th:each="answer : ${mappedQuestionAnswers}">
 									<td width="150">
-										<input th:attr="readonly='readonly'" type="text" th:value="${answer.id}"/>
+										<input th:id="${answer.id}+_currentAnswer" th:attr="readonly='readonly'" type="text" th:value="${answer.id}"/>
 									</td>
 									<td width="150">
 										<!-- th:attr="disabled=${#strings.isEmpty(answer.description)} ? 'disabled' : 'false'" -->
 										<input th:attr="readonly='readonly'" type="text" th:value="${answer.description}"/>
 									</td>
 									<td>
-										<select id="selectParent" th:attr="disabled=${#strings.isEmpty(answer.description)} ? 'disabled' : 'false'">
+										<select th:id="${answer.id}+_selectParent" th:attr="disabled=${#strings.isEmpty(answer.description) or answer.nextQuestionId ne 0} ? 'disabled' : 'false'">
 											<option th:value="-1">选择下级问题</option>
 											<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.description}"></option>
 										</select>
 									</td>
+									<td>
+										<button type="button" 
+												th:id="${answer.id}+_currentBind" 
+												th:attr="disabled=${answer.nextQuestionId ne 0} ? 'disabled' : 'false'" 
+												class="btn btn-primary addQAMapping">保存</button>
+									</td>
 								</tr>
 							</table>
-							<button type="submit" th:text="保存"></button>
 							<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
 							</form>
 					</td>
 				</tr>
 			</table>
+			<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">提示信息</h4>
+		            </div>
+		            <div class="modal-body" id="modalContent"></div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".addQAMapping").on("click", function() {
+			var index = $(this).attr("id").split("_")[0];
+			var currentAnswerId = index;
+			var questionContainerId = index + "_selectParent";
+			var selectedQuestionId = $("#"+questionContainerId+"").find("option:selected").attr("id")
+
+			$.ajax({
+				type : 'PUT',
+				url : '/admin/answer',
+				data : JSON.stringify({
+					"id": currentAnswerId,
+					"nextQuestionId": selectedQuestionId
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					$("#"+questionContainerId+" option[value='"+selectedQuestionId+"']").remove()
+					$("#modalContent").empty().append("绑定成功")
+					$("#notificationModal").modal("show")
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("绑定失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+	});
+	</script>
 </body>
 </html>
 

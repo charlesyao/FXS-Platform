@@ -56,9 +56,8 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public Answer updateNextQuestion(int answerId, int nextQuestionId) {
+	public void updateNextQuestion(int nextQuestionId, int answerId) {
 		// TODO Auto-generated method stub
-		return answerRepository.updateNextQuestion(answerId, nextQuestionId);
+		answerRepository.updateNextQuestion(nextQuestionId, answerId);
 	}
-
 }

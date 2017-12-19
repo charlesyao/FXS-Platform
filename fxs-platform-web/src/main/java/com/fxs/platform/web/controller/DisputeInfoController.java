@@ -93,7 +93,8 @@ public class DisputeInfoController {
 	public String view(@PathVariable("id") int id, ModelMap map) {
 		
 		Question question = questionService.getByQuestionId(id);
-		map.addAttribute("availableQuestions", questionService.getAllQuestion());
+		map.addAttribute("availableQuestions", questionService.getAllAvailableQuestion());
+		map.addAttribute("mappedQuestionAnswers", answerService.getAllAnswerByQuestionId(question.getId()));
 		map.addAttribute("question", question);
 		
 		return "public_view_dispute_info";

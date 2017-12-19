@@ -27,6 +27,11 @@ public class QuestionServiceImpl implements QuestionService {
 	public List<Question> getAllQuestion() {
 		return questionRepository.findAll();
 	}
+	
+	@Override
+	public List<Question> getAllAvailableQuestion() {
+		return questionRepository.getAllAvailableQuestion();
+	}
 
 	@Override
 	public Question save(Question question) {

@@ -8,6 +8,8 @@ public interface QuestionService {
 	Question getByQuestionId(int qId);
 
 	List<Question> getAllQuestion();
+	
+	List<Question> getAllAvailableQuestion();
 
 	Question save(Question question);
 

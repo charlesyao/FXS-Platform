@@ -14,4 +14,7 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	
 	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL")
 	public List<Question> findOptionalQuestions();
+	
+	@Query("SELECT o FROM Question o where o.id not in (SELECT a.nextQuestionId FROM Answer a)")
+	public List<Question> getAllAvailableQuestion();
 }
