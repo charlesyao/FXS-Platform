@@ -4,7 +4,7 @@
 ul li{list-style:none;}
 .ft12{font-size:12px}
 
-.img-responsive{background: url(../img/mainBg.png) no-repeat top center;background-size:100% auto; min-height: 700px;height: 100%}
+.img-responsive{background: url(../img/mainBg.png) no-repeat top center; min-height: 500px;}
 
 
 /* ------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ SEARCH		 */
     background-color: #CFB87E;
     border-color: #CFB87E; cursor: pointer;border-radius: 5rem;
 }
-.empty{ margin: 15em 0 0; display: block;}
+.empty{ margin: 14em 0 0; display: block;}
 
 
 /* ------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ border-radius: 10px; cursor: pointer; width: 200px; height: 60px}
 .sLabel{ padding: 15px 0}
 /* ------------------------------------------------------------------------------------
 lawsuit		 */
-.img-lawsuit{background: url(../img/lawsuit.png) no-repeat top center;background-size:100% auto;}
+.img-lawsuit{background: url(../img/lawsuit.png) no-repeat top center;}
 .lawsuit-content{text-align: center; padding: 2em 0 12em}
 .lawsuit-content .heading{font-size: 40px;color: #CFB87E;padding: 1em 0 0.5em;font-weight: 200;}
 .lawsuit-content p{font-size: 30px;color: #FFFFFF;padding: 0em 0 0.5em;font-weight: 200;}

@@ -9,7 +9,9 @@
       <link rel="stylesheet" type="text/css" href="css/footer.css">
      <link rel="stylesheet" type="text/css" href="css/customer.css">
      <link rel="stylesheet" type="text/css" href="css/css.css">
-     <script src="bootstrap/js/jquery.min.js"></script>
+	 <link href="css/ui-choose.css" rel="stylesheet" />
+	<script src="js/jquery.js"></script>
+	<script src="js/ui-choose.js"></script>   
      <script src="bootstrap/js/bootstrap.min.js"></script>
  </head>
  <body>
@@ -80,31 +82,22 @@
   	    <h1 class="blue step1">填写纠纷基本信息</h1>
   	    <section class="step2Step introcouPhone marginTop30 sBtn">
           <h3>您是代表谁找律师？</h3>
-          <div class="row">
+          <div class="row col-md-12 col-sm-12">
 
-            <ul class="col-md-2 col-sm-2">
-              <li class="introcoupCell btnSquare"><a href="#" class="step2Line1">本人</a></li>
-            </ul>
-            <ul class="col-md-2 col-sm-2">
-              <li class="introcoupCell btnSquare"><a href="#" class="step2Line1">家人</a></li>
-            </ul>
-            <ul class="col-md-2 col-sm-2">
-              <li class="introcoupCell btnSquare"><a href="#" class="step2Line1">朋友</a></li>
-            </ul>
-            <ul class="col-md-2 col-sm-2">
-              <li class="introcoupCell btnSquare"><a href="#" class="step2Line1">企业</a></li>
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_03">
+              <li class="introcoupCell btnSquare col-md-2"><a class="step2Line1">本人</a></li>
+              <li class="introcoupCell btnSquare col-md-2"><a class="step2Line1">家人</a></li>
+              <li class="introcoupCell btnSquare col-md-2"><a class="step2Line1">朋友</a></li>
+              <li class="introcoupCell btnSquare col-md-2"><a class="step2Line1">企业</a></li>
             </ul>
           </div>
           <h3 class="space10">请问您本次咨询的主要目的是？</h3>
-          <div class="row">
-
-            <ul class="col-md-6 col-sm-6">
-              <li class="introcoupCell btnSquare"><a href="#">纠纷已经发生，想咨询如何解决该纠纷</a></li>
-            </ul>
-            <ul class="col-md-6 col-sm-6">
-              <li class="introcoupCell btnSquare cur"><a href="#">纠纷尚未发生，想咨询法律程序、风险等问题</a></li>
-            </ul>
-          </div>
+          <div class="row col-md-12 col-sm-8">
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_04">
+              <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">纠纷已经发生，想咨询如何解决该纠纷</a></li>
+              <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">纠纷尚未发生，想咨询法律程序、风险等问题</a></li>
+          </ul>
+        </div>
           <h3 class="space10">您家人的纠纷对象住所地在哪里？</h3>
           <h4 class="gray">提示：如纠纷对象为个人，请填写纠纷对象的长期住所地，如纠纷对象为企业，请填写企业经营地点或者注册地点。如以上地点均无法获知，请填写纠纷发生地点。</h4>
           <div class="row">
@@ -116,19 +109,10 @@
           </div>
           <h3 class="space10">纠纷是否已由法院判决或裁定？</h3>
           
-          <div class="row">
-
-            <ul class="col-md-6 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">纠纷是否已由法院判决或裁定？</a></li>
-            </ul>
-            <ul class="col-md-6 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">是 - 已收到一审判决书或驳回起诉裁定书</a></li>
-            </ul>
-          </div>
-          
-          <div class="row"> 
-            <ul class="col-md-6 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">是 - 已收到二审判决书或驳回起诉裁定书</a></li>
+         <div class="row col-md-12 col-sm-12">
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_04" >
+              <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">是 - 已收到一审判决书或驳回起诉裁定书</a></li>
+              <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">是 - 已收到二审判决书或驳回起诉裁定书</a></li>
             </ul>
             
           </div>
@@ -163,46 +147,34 @@
             </div>
           </div>
           <h3 class="space10">您家人对法院判决或仲裁裁决的态度？</h3>
-          <div class="row">
+          <div class="row col-md-12 col-sm-12">
 
-            <ul class="col-md-6 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">不满意法院判决或仲裁裁决</a></li>
-            </ul>
-            <ul class="col-md-6 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">满意法院判决或仲裁裁决，但对方不满意</a></li>
-            </ul>
-          </div>
-          <div class="row"> 
-            <ul class="col-md-6 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">双方均不满意法院判决或仲裁裁决</a></li>
-            </ul>
-            
-          </div>
-          <h3 class="space10">您希望委托律师处理什么问题？</h3>
-          <div class="row">
-
-            <ul class="col-md-4 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">准备上诉</a></li>
-            </ul>
-            <ul class="col-md-4 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">准备对方上诉时应诉</a></li>
-            </ul>
-            <ul class="col-md-4 col-sm-12">
-              <li class="introcoupCell btnSquare"><a href="#">想找律师代理强制执行</a></li>
-            </ul>
-          </div>
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_05" >
+              <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">不满意法院判决或仲裁裁决</a></li>
+              <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">满意法院判决或仲裁裁决，但对方不满意</a></li>
+            <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">双方均不满意法院判决或仲裁裁决</a></li>
+          </ul>
           
-         <h3>您家人在原案件中是？</h3>
-          <div class="row">
+        </div>
+          <h3 class="space10">您希望委托律师处理什么问题？</h3>
+        <div class="row col-md-12 col-sm-12">
 
-            <ul class="col-md-2 col-sm-2">
-              <li class="introcoupCell btnSquare"><a href="#">原告</a></li>
-            </ul>
-            <ul class="col-md-2 col-sm-2">
-              <li class="introcoupCell btnSquare"><a href="#">被告</a></li>
-            </ul>
-           
-          </div>
+          <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_06" >
+            <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">准备上诉</a></li>
+            <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">准备对方上诉时应诉</a></li>
+            <li class="introcoupCell btnSquare col-md-5"><a class="step2Line1">想找律师代理强制执行</a></li>
+          </ul>
+        </div>
+          
+         <h3 class="space10">您家人在原案件中是？</h3>
+        <div class="row col-md-12 col-sm-12">
+
+          <ul class="ui-choose col-md-12 col-sm-12" id="uc_07">
+            <li class="introcoupCell btnSquare col-md-2"><a class="step2Line1">原告</a></li>
+            <li class="introcoupCell btnSquare col-md-2"><a class="step2Line1">被告</a></li>
+          </ul>
+         
+        </div>
           <div class="row">
             <div class="col-md-12 col-sm-12 btnNext">
               <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='counseling_free_step3.html'">下一步</button>
@@ -224,7 +196,16 @@
     <li>沪公网安备 31011002000396号</li>
   </ul>
   </footer>
- 
+ <script>
+ $('.ui-choose').ui_choose();   
+ var uc_03 = $('#uc_03').data('ui-choose');
+uc_03.click = function(index, item) {
+    console.log('click', index);
+};
+uc_03.change = function(index, item) {
+    console.log('change', index);
+};    
+ </script> 
 
  </body>
 

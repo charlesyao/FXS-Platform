@@ -47,116 +47,589 @@
             <div class="row">
               <div class="col-md-4 col-sm-4">
                 <div class="ulCell laywer_right">
-                  <ul>
-                    <li class="cur">待加入的竞标</li>
-                    <li><a href="#">进行中的竞标</a></li>
-                    <li><a href="#">评审中的竞标</a></li>
-                    <li><a href="#">已评审的竞标</a></li>
-                    <li><a href="#">可申请复核的竞标</a></li>
-                    <li class="lastItem"><a href="#">已复核的竞标</a></li>
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                      <a href="#lineOne" role="tab" data-toggle="tab">待加入的竞标</a>
+                    </li>
+                    <li role="presentation" class="">
+                      <a href="#lineTwo" role="tab" data-toggle="tab">进行中的竞标</a>
+                    </li>
+                    <li role="presentation" class="">
+                      <a href="#lineThree" role="tab" data-toggle="tab">评审中的竞标</a>
+                    </li>
+                    <li role="presentation" class="">
+                      <a href="#lineFour" role="tab" data-toggle="tab">已评审的竞标</a>
+                    </li>
+                    <li role="presentation" class="">
+                      <a href="#lineFive" role="tab" data-toggle="tab">可申请复核的竞标</a>
+                    </li>
+                    <li role="presentation" class="lastItem">
+                      <a href="#lineSix" role="tab" data-toggle="tab">已复核的竞标</a>
+                    </li>
                    
                   </ul>
                 </div>
                 
               </div>
-              <div class="col-md-8 col-sm-8 mybox">
-                <ul class="writeInfoText ulCell myCell">
-                 <li>当前已加入竞标 <h4>1个</h4></li>
-                
-                </ul>
-                <ul class="writeInfoText ulCell myCell">
-                  <div class="row">
-                  <div class="form-group col-md-3 col-sm-3 sLabelOne">
-                    <label>业务领域:</label>
-                  </div>
-                  <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
-                    <li>
-                      <label><input type="checkbox" checked="checked"> 房产土地</label>
-                      <label><input type="checkbox" checked=""> 劳动纠纷</label>
-                      <label><input type="checkbox" checked=""> 婚姻家庭</label>
-                    </li>
-                    
-                    <div class="clearboth"></div>
-                   </ul>
-              
-                 </div>
-                 <div class="row">
-                  <div class="form-group col-md-3 col-sm-3 sLabel">
-                    <label>选择榜单周期：</label>
-                  </div>
-                  <div class="form-group col-md-6 col-sm-6">
-                    <select class="form-control">
-                      <option value="">---全部---</option>
-                      <option value="">第20171104期</option>
-                      <option value="">第20171104期</option>
-                       <option value="">第20171104期</option>
-                      <option value="">第20171104期</option>
+              <div class="col-md-8 col-sm-8 mybox tab-content">
 
-                    </select>
-                  </div>
-              
-                 </div>
-                 <div class="row">
-                    <label><input type="checkbox" > 只看未读的竞标</label>
-                 </div>
-                 <div class="row">
-                  <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
-                    <button type="button" class="btn btn-primary btn-lg">查询</button>
-                  </div>
-                   
-                 </div>
-                 
-                </ul>
-               <ul class="writeInfoText ulCell myCell centerLi">
-                 <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
-                 <li><a href="">赢积分：</a> <span class="orange">20</span></li>
-                 <li>竞标发布时间： 2017.11.08 10:14 </li>    
-                 <li>法律意见提交截止时间： 2017.11.09 10:25</li>
-                 <li>加入竞标人数： 较少</li>
-                 <div class="row">
-                  <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
-                  </div>
-                   
-                 </div>
-                 
-                </ul>
-                <ul class="writeInfoText ulCell myCell centerLi">
-                 <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
-                 <li><a href="">赢积分：</a><span class="orange">20</span></li>
-                 <li>竞标发布时间： 2017.11.08 10:14 </li>    
-                 <li>法律意见提交截止时间： 2017.11.09 10:25</li>
-                 <li>加入竞标人数： 较少</li>
-                 <div class="row">
-                  <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
-                  </div>
-                   
-                 </div>
-                 
-                </ul>
-                <ul class="writeInfoText ulCell myCell centerLi">
-                 <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
-                 <li><a href="">赢积分：</a> <span class="orange">20</span></li>
-                 <li>竞标发布时间： 2017.11.08 10:14 </li>    
-                 <li>法律意见提交截止时间： 2017.11.09 10:25</li>
-                 <li>加入竞标人数： 较少</li>
-                 <div class="row">
-                  <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
-                  </div>
-                   
-                 </div>
-                 
-                </ul>
+                <div class="tab-pane active" role="tabpanel" id="lineOne">
+                  <ul class="writeInfoText ulCell myCell">
+                   <li>当前已加入竞标 <h4>1个</h4></li>
+                  
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell">
+                    <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabelOne">
+                      <label>业务领域:</label>
+                    </div>
+                    <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
+                      <li>
+                        <label><input type="checkbox" checked="checked"> 房产土地</label>
+                        <label><input type="checkbox" checked=""> 劳动纠纷</label>
+                        <label><input type="checkbox" checked=""> 婚姻家庭</label>
+                      </li>
+                      
+                      <div class="clearboth"></div>
+                     </ul>
                 
+                   </div>
+                   <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabel">
+                      <label>选择榜单周期：</label>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                      <select class="form-control">
+                        <option value="">---全部---</option>
+                        <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+                         <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+
+                      </select>
+                    </div>
+                
+                   </div>
+                   <div class="row">
+                      <label><input type="checkbox" > 只看未读的竞标</label>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg">查询</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                 <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a><span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>                
+                </div>
+
+                <div class="tab-pane" role="tabpanel" id="lineTwo">
+                  <ul class="writeInfoText ulCell myCell">
+                   <li>进行中的竞标 <h4>10个</h4></li>
+                  
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell">
+                    <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabelOne">
+                      <label>业务领域:</label>
+                    </div>
+                    <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
+                      <li>
+                        <label><input type="checkbox" checked="checked"> 房产土地</label>
+                        <label><input type="checkbox" checked=""> 劳动纠纷</label>
+                        <label><input type="checkbox" checked=""> 婚姻家庭</label>
+                      </li>
+                      
+                      <div class="clearboth"></div>
+                     </ul>
+                
+                   </div>
+                   <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabel">
+                      <label>选择榜单周期：</label>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                      <select class="form-control">
+                        <option value="">---全部---</option>
+                        <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+                         <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+
+                      </select>
+                    </div>
+                
+                   </div>
+                   <div class="row">
+                      <label><input type="checkbox" > 只看未读的竞标</label>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg">查询</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                 <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a><span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>                
+                </div>
+
+                <div class="tab-pane" role="tabpanel" id="lineThree">
+                  <ul class="writeInfoText ulCell myCell">
+                   <li>评审中的竞标 <h4>5个</h4></li>
+                  
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell">
+                    <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabelOne">
+                      <label>业务领域:</label>
+                    </div>
+                    <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
+                      <li>
+                        <label><input type="checkbox" checked="checked"> 房产土地</label>
+                        <label><input type="checkbox" checked=""> 劳动纠纷</label>
+                        <label><input type="checkbox" checked=""> 婚姻家庭</label>
+                      </li>
+                      
+                      <div class="clearboth"></div>
+                     </ul>
+                
+                   </div>
+                   <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabel">
+                      <label>选择榜单周期：</label>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                      <select class="form-control">
+                        <option value="">---全部---</option>
+                        <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+                         <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+
+                      </select>
+                    </div>
+                
+                   </div>
+                   <div class="row">
+                      <label><input type="checkbox" > 只看未读的竞标</label>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg">查询</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                 <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a><span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>                
+                </div> 
+
+                <div class="tab-pane" role="tabpanel" id="lineFour">
+                  <ul class="writeInfoText ulCell myCell">
+                   <li>已评审的竞标 <h4>3个</h4></li>
+                  
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell">
+                    <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabelOne">
+                      <label>业务领域:</label>
+                    </div>
+                    <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
+                      <li>
+                        <label><input type="checkbox" checked="checked"> 房产土地</label>
+                        <label><input type="checkbox" checked=""> 劳动纠纷</label>
+                        <label><input type="checkbox" checked=""> 婚姻家庭</label>
+                      </li>
+                      
+                      <div class="clearboth"></div>
+                     </ul>
+                
+                   </div>
+                   <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabel">
+                      <label>选择榜单周期：</label>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                      <select class="form-control">
+                        <option value="">---全部---</option>
+                        <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+                         <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+
+                      </select>
+                    </div>
+                
+                   </div>
+                   <div class="row">
+                      <label><input type="checkbox" > 只看未读的竞标</label>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg">查询</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                 <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a><span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>                
+                </div>
+
+                <div class="tab-pane" role="tabpanel" id="lineFive">
+                  <ul class="writeInfoText ulCell myCell">
+                   <li>可申请复核的竞标 <h4>2个</h4></li>
+                  
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell">
+                    <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabelOne">
+                      <label>业务领域:</label>
+                    </div>
+                    <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
+                      <li>
+                        <label><input type="checkbox" checked="checked"> 房产土地</label>
+                        <label><input type="checkbox" checked=""> 劳动纠纷</label>
+                        <label><input type="checkbox" checked=""> 婚姻家庭</label>
+                      </li>
+                      
+                      <div class="clearboth"></div>
+                     </ul>
+                
+                   </div>
+                   <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabel">
+                      <label>选择榜单周期：</label>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                      <select class="form-control">
+                        <option value="">---全部---</option>
+                        <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+                         <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+
+                      </select>
+                    </div>
+                
+                   </div>
+                   <div class="row">
+                      <label><input type="checkbox" > 只看未读的竞标</label>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg">查询</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                 <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a><span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>                
+                </div>
+
+                <div class="tab-pane" role="tabpanel" id="lineSix">
+                  <ul class="writeInfoText ulCell myCell">
+                   <li>已复核的竞标 <h4>8个</h4></li>
+                  
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell">
+                    <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabelOne">
+                      <label>业务领域:</label>
+                    </div>
+                    <ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
+                      <li>
+                        <label><input type="checkbox" checked="checked"> 房产土地</label>
+                        <label><input type="checkbox" checked=""> 劳动纠纷</label>
+                        <label><input type="checkbox" checked=""> 婚姻家庭</label>
+                      </li>
+                      
+                      <div class="clearboth"></div>
+                     </ul>
+                
+                   </div>
+                   <div class="row">
+                    <div class="form-group col-md-3 col-sm-3 sLabel">
+                      <label>选择榜单周期：</label>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                      <select class="form-control">
+                        <option value="">---全部---</option>
+                        <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+                         <option value="">第20171104期</option>
+                        <option value="">第20171104期</option>
+
+                      </select>
+                    </div>
+                
+                   </div>
+                   <div class="row">
+                      <label><input type="checkbox" > 只看未读的竞标</label>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg">查询</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                 <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a><span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>
+                  <ul class="writeInfoText ulCell myCell centerLi">
+                   <li class="listTitle"><b>劳动纠纷</b> <span>案件编号 : 43826</span>  <span>榜单周期: 第20171108期</span></li>
+                   <li><a href="">赢积分：</a> <span class="orange">20</span></li>
+                   <li>竞标发布时间： 2017.11.08 10:14 </li>    
+                   <li>法律意见提交截止时间： 2017.11.09 10:25</li>
+                   <li>加入竞标人数： 较少</li>
+                   <div class="row">
+                    <div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+                      <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='laywer_mycasedetail.html'">查看详情</button>
+                    </div>
+                     
+                   </div>
+                   
+                  </ul>                
+                </div>
+
+
+
               </div>
 
 
-
-            
-            
-        
             </div>
         </section>  
       
@@ -174,9 +647,33 @@
   </footer>
  
 
+
+
+
+
+
+
+<script type="text/javascript">
+$(".lineOne a").click(function() {
+  $(".OneBox").show();
+  $(".TwoBox").hide();
+});
+$(".lineTwo a").click(function() {
+  $(".OneBox").hide();
+  $(".TwoBox").show();
+});
+
+// $(".lineOne a").click(function() {
+//   $(".OneBox").addClass("active").removeClass("centerBox");
+//   $(".TwoBox").addClass("centerBox").removeClass("active");
+// });
+// $(".lineTwo a").click(function() {
+//   $(".TwoBox").addClass("active").removeClass("centerBox");
+//   $(".OneBox").addClass("centerBox").removeClass("active");
+// });
+</script>
+
  </body>
-
-
 
 
 </html>

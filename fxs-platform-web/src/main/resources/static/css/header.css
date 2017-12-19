@@ -7,6 +7,10 @@ NAV			 */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333F5F ', endColorstr='#9D7961', GradientType='0');  
     
 }
+
+.modal-dialog{
+	margin:200px auto;
+}
 .topBar .line{border-bottom: 1px solid rgba(255,255,255,0.1);}
 .loginBox,.mainNav{float: right; margin: 10px 0 0 0;}
 .loginBox a{color:white;font-size: 12px;}
