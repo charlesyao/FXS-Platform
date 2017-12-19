@@ -90,6 +90,7 @@
 			var index = $(this).attr("id").split("_")[0];
 			var currentAnswerId = index;
 			var questionContainerId = index + "_selectParent";
+			var buttonId = index + "_currentBind"
 			var selectedQuestionId = $("#"+questionContainerId+"").find("option:selected").attr("id")
 
 			$.ajax({
@@ -101,7 +102,9 @@
 				}),
 				contentType : "application/json; charset=utf-8",
 				success : function(data) {
-					$("#"+questionContainerId+" option[value='"+selectedQuestionId+"']").remove()
+					//$("#"+questionContainerId+" option[value='"+selectedQuestionId+"']").remove()
+					$("#"+buttonId+"").attr("disabled", "disabled")
+					$("#"+questionContainerId+"").attr("disabled", "disabled")
 					$("#modalContent").empty().append("绑定成功")
 					$("#notificationModal").modal("show")
 				},
