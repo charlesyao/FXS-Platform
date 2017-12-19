@@ -37,6 +37,9 @@
 						<a href="#">关于我们</a>
 						<span>|</span>
 					</li>
+					<li>
+						<a th:href="@{/signOut}" sec:authorize="isAuthenticated()">登出</a>
+					</li>
 					<li sec:authorize="isAnonymous()">
 						<a th:href="@{/lawyer/signIn}">律师入口</a>
 					</li>
