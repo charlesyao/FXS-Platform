@@ -47,6 +47,8 @@ public class CasesDto {
 	private List<String> detailedInquiries;
 	
 	private boolean disableFeedback;
+	
+	private String acceptedLawyerFeedback;
 
 	public String getId() {
 		return id;
@@ -190,5 +192,13 @@ public class CasesDto {
 
 	public void setExpiredDate(Date expiredDate) {
 		this.expiredDate = expiredDate;
+	}
+
+	public String getAcceptedLawyerFeedback() {
+		return acceptedLawyerFeedback;
+	}
+
+	public void setAcceptedLawyerFeedback(String acceptedLawyerFeedback) {
+		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
 	}
 }

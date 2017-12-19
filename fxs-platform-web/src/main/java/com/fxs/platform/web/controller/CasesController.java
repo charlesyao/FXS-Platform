@@ -144,7 +144,7 @@ public class CasesController {
 			casesService.create(currentCase);
 		}
 		
-		map.addAttribute("caseDetailInfo", CaseManager.caseWrapperDetail(currentCase, caseQuestionAnswerRelRepository, 
+		map.addAttribute("caseDetailInfo", CaseManager.caseWrapperDetail(userRole, currentCase, caseQuestionAnswerRelRepository, 
 				falltypusRepository, detailedInquiryRepository, caseFeedbackInfoRepository, cityRepository, session));
 		
 		if (userRole.equals("litigant")) {

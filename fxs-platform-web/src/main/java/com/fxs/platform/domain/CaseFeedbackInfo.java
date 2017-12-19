@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 /**
  *案件反馈领域模型 
@@ -31,6 +32,9 @@ public class CaseFeedbackInfo {
 	private String lawyerComments;
 	
 	private String status;
+	
+	@Transient
+	private String acceptedLawyerFeedback;
 
 	public String getStatus() {
 		return status;
@@ -86,5 +90,13 @@ public class CaseFeedbackInfo {
 
 	public void setLawyerName(String lawyerName) {
 		this.lawyerName = lawyerName;
+	}
+
+	public String getAcceptedLawyerFeedback() {
+		return acceptedLawyerFeedback;
+	}
+
+	public void setAcceptedLawyerFeedback(String acceptedLawyerFeedback) {
+		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
 	}
 }

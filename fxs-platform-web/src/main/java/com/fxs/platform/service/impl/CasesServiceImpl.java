@@ -124,7 +124,7 @@ public class CasesServiceImpl implements CasesService {
 			cases.setLawyerName(UserManager.getPrincipal());
 			cases.setLawyerId(UserManager.getSessionUser(httpSession));
 			
-			if (c.getFeedbackCount() <= SystemConstants.FEEDBACK_COUNT_TOTAL) {
+			if (c.getFeedbackCount() < SystemConstants.FEEDBACK_COUNT_TOTAL) {
 				c.setFeedbackCount(c.getFeedbackCount() + 1);
 				
 				caseFeedbackInfoRepository.save(cases);
@@ -132,6 +132,7 @@ public class CasesServiceImpl implements CasesService {
 				return caseRepository.saveAndFlush(c);
 			}
 		} else {
+			c.setAcceptedLawyerFeedback(cases.getAcceptedLawyerFeedback());
 			return caseRepository.saveAndFlush(c);
 		}
 		

@@ -181,7 +181,7 @@ public class CaseManager {
 	 * @param cityRepository
 	 * @return
 	 */
-	public static CasesDto caseWrapperDetail(Cases cases, 
+	public static CasesDto caseWrapperDetail(String userRole, Cases cases, 
 			CaseQuestionAnswerRelRepository caseQuestionAnswerRelRepository,
 			FalltypusRepository falltypusRepository, DetailedInquiryRepository detailedInquiryRepository,
 			CaseFeedbackInfoRepository caseFeedbackInfoRepository,
@@ -204,7 +204,12 @@ public class CaseManager {
 		DetailedInquiry detailedInquiry = detailedInquiryRepository.findByCaseId(caseDto.getId());
 		
 		//获取律师对当前案件的反馈信息
-		List<CaseFeedbackInfo> caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId(), UserManager.getSessionUser(session));
+		List<CaseFeedbackInfo> caseFeedbackInfo;
+		if (userRole.equals("lawyer")) {
+			caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId(), UserManager.getSessionUser(session));
+		} else {
+			caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId());
+		}
 		
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
 		caseDto.setCaseFeedbackInfo(QueryResultConverter.convert(caseFeedbackInfo, CaseFeedbackInfoDto.class));

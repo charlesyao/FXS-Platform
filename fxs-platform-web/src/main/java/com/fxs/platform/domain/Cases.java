@@ -53,6 +53,8 @@ public class Cases {
 	
 	private Date expiredDate;
 	
+	private String acceptedLawyerFeedback;
+	
 	private String userId;
 
 	public String getId() {
@@ -165,5 +167,13 @@ public class Cases {
 
 	public void setExpiredDate(Date expiredDate) {
 		this.expiredDate = expiredDate;
+	}
+
+	public String getAcceptedLawyerFeedback() {
+		return acceptedLawyerFeedback;
+	}
+
+	public void setAcceptedLawyerFeedback(String acceptedLawyerFeedback) {
+		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
 	}
 }

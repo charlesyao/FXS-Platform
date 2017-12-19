@@ -116,6 +116,19 @@
 									</ul>
 								</div>
 							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<ul>
+										<li><h4>我提供的信息反馈</h4></li>
+									</ul>
+								</div>
+								<div class="row" th:each="feedbackInfo : ${caseDetailInfo.caseFeedbackInfo}">
+									<ul>
+										<li><b>报价： <span th:text="${feedbackInfo.counselFee}"></span></b></li>
+										<li><b>意见： <span th:text="${feedbackInfo.lawyerComments}"></span></b></li>
+									</ul>
+								</div>
+							</ul>
 							<ul>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch caseTwoBtn">

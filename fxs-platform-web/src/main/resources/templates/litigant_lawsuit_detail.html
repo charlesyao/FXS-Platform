@@ -17,6 +17,24 @@
 				<section class="col-md-12 col-sm-12 writeInfo space20">
 					<div class="row">
 						<div class="col-md-10 col-sm-10">
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<ul>
+										<li><h4>律师反馈信息</h4></li>
+									</ul>
+								</div>
+								<div class="row"  id="lawyerFeedback">
+									<ul th:each="feedbackInfo : ${caseDetailInfo.caseFeedbackInfo}">
+										<li>
+											<a href="" th:id="${feedbackInfo.id}">
+												<b>律师： <span th:text="${feedbackInfo.lawyerName}"></span></b>
+												<b>报价： <span th:text="${feedbackInfo.counselFee}"></span></b>
+												<b>意见： <span th:text="${feedbackInfo.lawyerComments}"></span></b>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</ul>
 							<ul class="writeInfoText ulCell myCell">
 								<li class="orange">律师正在查看中，预计在24小时内为您提供解答。</li>
 								<li th:text="${caseDetailInfo.comments}"></li>
@@ -127,12 +145,21 @@
 	<div th:replace="fragments/public_footer :: public-footer" ></div>
 	<script th:inline="javascript">
 		$(function() {
+			var acceptedFeddback = '';
+			$("#lawyerFeedback").on("click", 'a', function(e) {
+				e.preventDefault()
+
+				$(this).parent().parent().parent().children().removeAttr("style")
+				$(this).parent().parent().css("background-color", "green")
+				acceptedFeddback = $(this).attr("id")
+			})
 			$("#resolveDispute").on("click", function() {
 				$.ajax({
 					type : 'PUT',
 					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
 					data : JSON.stringify({
-						"status": "5"
+						"status": "5",
+						"acceptedLawyerFeedback": acceptedFeddback
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
