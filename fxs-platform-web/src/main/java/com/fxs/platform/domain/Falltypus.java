@@ -1,10 +1,8 @@
 package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -15,8 +13,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Falltypus {
 	@Id
-	@GenericGenerator(name="idGenerator", strategy="uuid")
-    @GeneratedValue(generator="idGenerator")
 	private String id;
 
 	@NotBlank(message = "案件类型不能为空")

@@ -1,6 +1,7 @@
 package com.fxs.platform.service.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
@@ -41,6 +42,7 @@ public class FalltypusServiceImpl implements FalltypusService {
 	@Override
 	public Falltypus create(Falltypus falltypus) {
 		// TODO Auto-generated method stub
+		falltypus.setId(String.valueOf(new Random().nextInt(99999999)));
 		return falltypusRepository.save(falltypus);
 	}
 }
