@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -243,11 +244,16 @@ public class QuestionController {
 			questionId = String.valueOf(qDto.getQuestion().getId());
 			
 			for (int index = 0; index < qDto.getAnswers().size(); index ++ ) {
-				String singleAnswer = "<ul class='col-md-2 col-sm-2' isroot='" + qDto.getQuestion().getIsRootQuestion() + "' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
-									  "<li class='introcoupCell btnSquare'>" + 
-									  "<a class='answerLink' href='' id='" + qDto.getAnswers().get(index).getId() + "'>" + qDto.getAnswers().get(index).getDescription() + "</a>" + 
-									  "</li>" + 
-									  "</ul>";
+				String singleAnswer = "";
+				
+				if (StringUtils.isNotBlank(qDto.getAnswers().get(index).getDescription())) {
+					singleAnswer += "<ul class='col-md-2 col-sm-2' isroot='" + qDto.getQuestion().getIsRootQuestion() + "' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
+							  "<li class='introcoupCell btnSquare'>" + 
+							  "<a class='answerLink' href='' id='" + qDto.getAnswers().get(index).getId() + "'>" + qDto.getAnswers().get(index).getDescription() + "</a>" + 
+							  "</li>" + 
+							  "</ul>";
+				}
+				 
 				answerSection += singleAnswer;
 			}
 		}

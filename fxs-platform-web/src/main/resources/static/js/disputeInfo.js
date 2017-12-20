@@ -3,15 +3,19 @@ $(function() {
 	//加载问题-答案
 	$("#disputeInfo").on("click", 'ul', function(e) {
 		e.preventDefault()
+		var _this = this
 
-		if ($(this).attr("isroot") === 'Y') {
-			$("#nextQuestionContainer").empty()
-		}
+		$(_this).children().css("background-color", "green")
 		$.ajax({
 			type : 'GET',
-			url : '/public/question/answer/' + $(this).attr("id"),
+			url : '/public/question/answer/' + $(_this).attr("id"),
 			success : function(res) {
 				$("#question_" + res.message).remove();
+				if ($(_this).attr("isroot") === 'Y') {
+					$("#nextQuestionContainer").empty()
+				} else {
+					$(_this).parent().parent().nextAll().remove()
+				}
 				$("#nextQuestionContainer").append(res.data)
 			},
 			error : function(error) {
