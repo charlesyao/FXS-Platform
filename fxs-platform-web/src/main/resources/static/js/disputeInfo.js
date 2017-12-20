@@ -4,7 +4,12 @@ $(function() {
 	$("#disputeInfo").on("click", 'ul', function(e) {
 		e.preventDefault()
 		var _this = this
-
+		var sections = $(this).parent().children();
+		
+		for (var index = 0; index < sections.length; index ++) {
+			$($(sections.get(index)).children().get(0)).attr("style","")
+		}
+		
 		$(_this).children().css("background-color", "green")
 		$.ajax({
 			type : 'GET',
