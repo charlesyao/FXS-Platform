@@ -56,6 +56,10 @@ public class UserController {
 	@PostMapping
 	public String create(@Valid User user, BindingResult result, ModelMap model) {
 		
+		if (result.hasErrors()) {
+            return "userRegister";
+        }
+		
 		if (ObjectUtils.isEmpty(userService.findOne(user.getUsername()))) {
 			userService.create(user);
 		} else {

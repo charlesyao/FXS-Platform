@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -26,11 +30,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
+	@NotEmpty(message="用户名不能为空")
+	@Size(min=2, max=6, message="用户名长度必须为2-6个字符")
 	private String username;
 
+	@NotEmpty(message="密码不能为空")
+	@Size(min=8, message="密码不能为空且长度在8位以上")
 	private String password;
 
+	@NotEmpty(message="邮箱不能为空")
+	@Email(message="邮箱格式不正确")
 	private String email;
 
 	private String mobile;
