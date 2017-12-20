@@ -167,6 +167,7 @@
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
 	<script th:inline="javascript">
+		/*<![CDATA[*/
 		$(function() {
 			$("#addFeedback").on("click", function() {
 				$.ajax({
@@ -196,6 +197,7 @@
 				window.location.assign(location.href);
 			})
 		})
+		/*]]>*/
 	</script>
 </body>
 </html>
