@@ -43,7 +43,7 @@
 	                                        <div class="form-group">
 												<select class="form-control" th:id="userProfiles" th:field="*{userProfiles}" style="background-color: black;">
 													<option th:selected="true" th:value="-1">请选择角色</option>
-													<option th:each="role : ${roles}" th:id="${role.id}" th:value="${role.id}" th:text="${role.type}"></option>
+													<option th:each="role : ${session.roles}" th:id="${role.id}" th:value="${role.id}" th:text="${role.type}"></option>
 												</select>
 											</div>
 	                                        <button type="submit" id="userRegister" class="btn btn-primary btn-block">创建账户</button>

@@ -56,7 +56,9 @@ public class RouterController {
 
 	@ModelAttribute("roles")
 	public List<UserProfile> initializeProfiles() {
-		return roleService.findAll();
+		List<UserProfile> userProfile = roleService.findAll();
+		session.setAttribute("roles", userProfile);
+		return userProfile;
 	}
 
 	@GetMapping("/")
