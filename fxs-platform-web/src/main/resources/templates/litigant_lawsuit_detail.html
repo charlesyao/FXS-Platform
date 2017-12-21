@@ -2,6 +2,133 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
+<style type="text/css">
+            @CHARSET "UTF-8";
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .feed {
+                font-family: "微软雅黑";
+                width: 720px;
+                margin: 8px 0 ;
+
+            }
+
+			.answerBTN .btnNext button {
+		    	width: auto;
+		    	height: auto;
+		    	margin: 0;
+		    	text-align: right;
+		    }
+            .avatar {
+                width: 50px;
+                float: left;
+                margin: 0 8px 0 0;
+                box-shadow: 0 0 3px #e0e0e0;
+                border-radius: 5px;
+                border: 1px solid #e0e0e0;
+                height: 50px;
+            }
+
+            .feed .avatar img {
+                width: 50px;
+                height: 50px;
+            }
+
+            
+
+            .feed .box1 .current {
+                font-size: 14px;
+                margin: 8px;
+				text-align:left
+            }
+			
+			.feed .box1 .fabu {
+                font-size: 8px;
+                margin: 8px;
+				text-align:left
+            }
+			
+			.feed .box1 .fabu_ls {
+                font-size: 8px;
+                margin: 8px;
+				text-align:right
+            }
+			
+
+            .feed .box1 .info {
+                margin: 0 8px;
+            }
+
+            .feed .box1 .info span {
+                float: right;
+            }
+
+            .feed .box1 .line {
+                padding: 8px 0 0 0;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .feed .box1 .box2 {
+                margin: 8px;
+                padding: 0 0 8px 0;
+            }
+
+            .feed .box1 .box2_comments {
+                width: 650px;
+                overflow: hidden;
+                float: left;
+            }
+
+            .feed .box1 .say {
+                margin: 0 0 8px;
+            }
+
+            .clear {
+                clear: both;
+            }
+
+            .feed .box1 .box2_comments .box3 {
+                margin: 8px 0;
+            }
+
+            .feed .box1 .box2_comments .box3_comments {
+                float: left;
+                width: 500px;
+            }
+
+			.feed .box1 .current {
+			    font-size: 14px;
+			    margin: 8px;
+			    text-align: left;
+			 }
+			 .feed .box1 .dateAnswer .fabu_ls {
+			    text-align: left;
+			}
+			.feed .box1 .fabu_ls {
+			    font-size: 8px;
+			    margin: 8px;
+			    text-align: right;
+			 }
+            .reply_area {
+                border: 1px solid #e0e0e0;
+                height: 30px;
+                line-height: 30px;
+                width: 620px;
+                margin: 8px;
+                color: #666;
+                font-size: 12px;
+                font-family: "微软雅黑";
+                clear: both;
+            }
+            @media screen and (max-width: 425px) {
+              .feed{
+                  margin: 20px 0 0;
+              }
+            }
+        </style>
 </head>
 <body>
 	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
@@ -17,6 +144,68 @@
 				<section class="col-md-12 col-sm-12 writeInfo space20">
 					<div class="row">
 						<div class="col-md-10 col-sm-10">
+							<ul class="row">
+								<li class="feed col-md-12 col-sm-12">
+									<div class="avatar">
+										<img th:src="@{/img/icon_counseling4.png}" alt="" />
+									</div>
+									<div class="box1">
+										<p class="current">
+											<a href="">用户1：</a>
+											<a>资讯了房间打开附件三发快递饭卡房间爱恋的积分卡的房间乐山大佛就是垃圾对方是否是否流设计饭卡时代峻峰宽带积分酸辣粉就速度看了积分是</a>
+										</p>
+										<p class='info'>
+											<span th:onclick="'ShowFLT()'">
+												<a id="A1" href="">展开</a>
+											</span>
+										</p>
+										<p class='fabu' style="text-align: left">发布于 2017-1-11</p>
+										<p class="line"></p>
+										<div id="LM1" style="display: none">
+											<div class="box2" id="lawyerFeedbacks">
+												<div  
+												th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}" class="anwerGroup row" >
+													<div>
+														<span>尚未有律师回复</span>
+													</div>
+												</div>
+												<div
+												th:if="${ not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}"
+												class="anwerGroup row" 
+												th:each="feedbackInfo, iterationStatus : ${caseDetailInfo.caseFeedbackInfo}">
+													<div th:style="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? 'background-color: green;' : 'background-color:'">>
+<!-- 													<div th:style="'background-color: ' + ${caseDetailInfo.bgColor}"> -->
+														<div class="avatar">
+															<img th:src="@{/img/icon_counseling4.png}" alt="" />
+														</div>
+														<div class="box2_comments">
+															<p class='current'>
+																<a href="" th:text="${'律师' + iterationStatus.count}"></a>
+																<div>
+																	<p><b>律师姓名： <span th:text="${feedbackInfo.lawyerName}"></span></b></p>
+																	<p><b>报价： <span th:text="${feedbackInfo.counselFee}"></span></b></p>
+																	<p><b>意见： <span th:text="${feedbackInfo.lawyerComments}"></span></b></p>
+																</div>
+															</p>
+															<div class="answerBTN row">
+																<div class="col-md-6 col-sm-12 dateAnswer" >
+																	<p class='fabu_ls'>发布于 2017-1-11</p>
+																</div>
+																<div class="col-md-6 col-sm-12 btnNext">
+																	<button 
+																	th:attr="disabled=(${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
+																	type="button" class="btn btn-primary" th:id="${feedbackInfo.id}">采纳</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
 									<ul>
@@ -143,11 +332,25 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<script type="text/javascript">
+		function ShowFLT() {
+		    if ($('#LM1').css('display') == 'none') {
+		    	$("#LM1").css("display", "")
+				$("#A1").innerHTML='收起'
+		    } else {
+		    	$("#LM1").css("display", "none")
+		        $("#A1").innerHTML='展开'
+		    }
+		}
+	</script>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {
+			$("#A1").on("click", function(e) {
+				e.preventDefault()
+			})
 			var acceptedFeddback = '';
-			$("#lawyerFeedback").on("click", 'li', function(e) {
+			/* $("#lawyerFeedback").on("click", 'li', function(e) {
 				e.preventDefault()
 
 				var sections = $(this).parent().parent().children();
@@ -158,6 +361,25 @@
 		
 				$(this).css("background-color", "green")
 				acceptedFeddback = $(this).attr("id")
+			}) */
+			$("#lawyerFeedbacks").on("click", "button", function() {
+				console.log($(this).attr("id"))
+				$.ajax({
+					type : 'PUT',
+					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
+					data : JSON.stringify({
+						"acceptedLawyerFeedback": $(this).attr("id")
+					}),
+					contentType : "application/json; charset=utf-8",
+					success : function(data) {
+						$("#modalContent").empty().append("更新成功")
+						$("#notificationModal").modal("show")
+					},
+					error : function(error) {
+						$("#modalContent").empty().append("更新失败")
+						$("#notificationModal").modal("show")
+					}
+				});
 			})
 			$("#resolveDispute").on("click", function() {
 				$.ajax({

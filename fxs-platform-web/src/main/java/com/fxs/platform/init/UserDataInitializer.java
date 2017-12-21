@@ -58,6 +58,7 @@ public class UserDataInitializer extends AbstractDataInitializer {
 	private void initUser(UserProfile userProfiles, String type) {
 		User user = new User();
 		user.setUsername(type);
+		user.setEmail("test@test.com");
 		user.setPassword(passwordEncoder.encode("123456"));
 		
 		Set<UserProfile> set = new HashSet<UserProfile>();
