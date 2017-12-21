@@ -173,7 +173,7 @@
 												th:if="${ not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}"
 												class="anwerGroup row" 
 												th:each="feedbackInfo, iterationStatus : ${caseDetailInfo.caseFeedbackInfo}">
-													<div th:style="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? 'background-color: green;' : 'background-color:'">>
+													<div th:style="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? 'background-color: green;' : 'background-color:'">
 <!-- 													<div th:style="'background-color: ' + ${caseDetailInfo.bgColor}"> -->
 														<div class="avatar">
 															<img th:src="@{/img/icon_counseling4.png}" alt="" />
