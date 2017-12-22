@@ -17,14 +17,14 @@
 			<section class="col-md-12 col-sm-12 writeInfo space20">
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
-						<ul class="writeInfoText ulCell" th:if="${#lists.isEmpty(pageableData)}">
+						<ul class="writeInfoText ulCell" th:if="${#lists.isEmpty(session.pageableData)}">
 							<li class="orange">您暂时没有电话咨询</li>
 						</ul>
-						<ul th:if="${not #lists.isEmpty(pageableData)}" class="writeInfoText ulCell myCell" th:each="phoneConsulting : ${pageableData}">
+						<ul th:if="${not #lists.isEmpty(session.pageableData)}" class="writeInfoText ulCell myCell" th:each="phoneConsulting : ${session.pageableData}">
 							<li>电话号码: <span th:text="${phoneConsulting.contactPhone}"></span></li>
 							<li>提交时间： <span class="gray" th:text="${phoneConsulting.researvationDatetime}"></span></li>
 						</ul>
-						<div th:if="${not #lists.isEmpty(pageableData)}">
+						<div th:if="${not #lists.isEmpty(session.pageableData)}">
 							<div th:include="fragments/page :: pager" th:remove="tag"></div>
 						</div>
 						<div class="row">

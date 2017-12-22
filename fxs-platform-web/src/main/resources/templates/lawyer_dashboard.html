@@ -45,7 +45,7 @@
 									</ul>
 								</div>
 								<div class="row">
-									<label><input type="checkbox" /> 只看未读的竞标</label>
+									<label><input type="checkbox" id="viewUnRead"/> 只看未读的竞标</label>
 								</div>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
@@ -53,20 +53,22 @@
 									</div>
 								</div>
 							</ul>
-							<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${pageableData}">
-								<li class="listTitle">案件类型 : <b th:text="${myBidCase.parentType}"></b> 
-									<span>案件编号 : <span th:text="${myBidCase.id}"></span></span>
-								</li>
-								<li><a href="">赢积分 : </a> <span class="orange">20</span></li>
-								<li>竞标发布时间 : <span th:text="${myBidCase.createAt}"></span></li>
-								<li>法律意见提交截止时间： 2017.11.09 10:25</li>
-								<li>加入竞标人数： 较少</li>
-								<div class="row">
-									<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-										<a th:href="@{/user/case/lawyer/lawsuit/viewDetail/{id}(id=${myBidCase.id})}" type="button" class="btn btn-primary btn-lg">查看详情</a>
+							<div id="lawsuits">
+								<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${session.pageableData}">
+									<li class="listTitle">案件类型 : <b th:text="${myBidCase.parentType}"></b> 
+										<span>案件编号 : <span th:text="${myBidCase.id}"></span></span>
+									</li>
+									<li><a href="">赢积分 : </a> <span class="orange">20</span></li>
+									<li>竞标发布时间 : <span th:text="${myBidCase.createAt}"></span></li>
+									<li>法律意见提交截止时间： 2017.11.09 10:25</li>
+									<li>加入竞标人数： 较少</li>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+											<a th:href="@{/user/case/lawyer/lawsuit/viewDetail/{id}(id=${myBidCase.id})}" type="button" class="btn btn-primary btn-lg">查看详情</a>
+										</div>
 									</div>
-								</div>
-							</ul>
+								</ul>
+							</div>
 							<div th:include="fragments/page :: pager" th:remove="tag"></div>
 						</div>
 					</div>
@@ -75,9 +77,19 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
-	<script type="text/javascript">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
 		$(function() {
 			var ids= new Array()
+			var viewUnRead = "Y"
+			
+			$("#viewUnRead").on("click", function() {
+				if($(this).is(":checked")) {
+					viewUnRead = "N"
+				} else {
+					viewUnRead = "Y"
+				}
+			})
 			$("#searchByFalltypus").on('click', 'input', function() {
 				if($(this).is(':checked')) {
 					ids.push($(this).attr("id"))
@@ -91,10 +103,10 @@
 			$("#searchCases").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : '/user/case?parentType='+ids+'',
+					url : "/user/case?parentType="+ids+"&caseType=1&"+(viewUnRead=='N' ? "isRead=N" : "")+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD",
 					success : function(data) {
-						console.log(ids)
 						console.log(data)
+						location.reload();
 					},
 					error : function(error) {
 						console.log(error)
@@ -102,6 +114,7 @@
 				});
 			})
 		})
+		/*]]>*/
 	</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ public class SessionVariableManager {
 		session.removeAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE);
 		session.removeAttribute(SystemConstants.QA_MAP);
 		session.removeAttribute(SystemConstants.GEN_CASES);
+		session.removeAttribute(SystemConstants.SEARCH_FROM_KEY);
 		session.setAttribute(SystemConstants.QA_MAP, new HashMap<Integer, Object[]>());
 	}
 }

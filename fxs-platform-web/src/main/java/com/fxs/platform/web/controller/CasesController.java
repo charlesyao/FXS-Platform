@@ -123,7 +123,16 @@ public class CasesController {
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
-		return Result.success(casesService.query(condition, pageable));
+	    Page<CasesDto> cases = casesService.query(condition, pageable);
+	    session.setAttribute("pageableData", cases);
+	    
+	    if(!ObjectUtils.isEmpty(condition.getSearchFrom())
+	    		&& condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
+	    	
+	    	session.setAttribute(SystemConstants.SEARCH_FROM_KEY, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
+	    }
+	    
+		return Result.success(cases);
 	}
 
 

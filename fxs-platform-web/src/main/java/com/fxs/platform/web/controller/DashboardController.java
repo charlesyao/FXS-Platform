@@ -100,7 +100,12 @@ public class DashboardController {
 		    
 		    map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
 		    
-		    map.addAttribute("pageableData", myBidCases);
+		    if(!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.SEARCH_FROM_KEY)) 
+		    		&& session.getAttribute(SystemConstants.SEARCH_FROM_KEY).equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
+		    } else {
+		    	session.setAttribute("pageableData", myBidCases);
+		    }
+		    
 			target = "lawyer_dashboard";
 		} else if (UserManager.isAdmin(UserManager.getRoles())) {
 			

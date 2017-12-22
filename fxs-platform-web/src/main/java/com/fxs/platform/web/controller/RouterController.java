@@ -174,14 +174,14 @@ public class RouterController {
 					//获取免费咨询信息列表
 					Sort sort = new Sort(Sort.Direction.DESC, "id");
 				    Pageable pageable = new PageRequest(page, size, sort);
-					map.addAttribute("pageableData", casesService.query(condition, pageable));
+				    session.setAttribute("pageableData", casesService.query(condition, pageable));
 					
 					target = "litigant_consulting_free";
 				} else if (action.equals("phone")) {
 					//获取所有电话咨询信息列表
 					Sort sort = new Sort(Sort.Direction.DESC, "id");
 				    Pageable pageable = new PageRequest(page, size, sort);
-					map.addAttribute("pageableData", casesService.findAllReservation(pageable));
+				    session.setAttribute("pageableData", casesService.findAllReservation(pageable));
 					
 					target = "litigant_consulting_phone";
 				}
@@ -189,7 +189,7 @@ public class RouterController {
 				//获取当事人的打官司信息列表
 				Sort sort = new Sort(Sort.Direction.DESC, "id");
 			    Pageable pageable = new PageRequest(page, size, sort);
-				map.addAttribute("pageableData", casesService.query(condition, pageable));
+			    session.setAttribute("pageableData", casesService.query(condition, pageable));
 				
 				target = "litigant_lawsuit";
 			}
@@ -209,7 +209,7 @@ public class RouterController {
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
-		map.addAttribute("pageableData", casesService.findAll(CaseType.CONSULTING.getType(), pageable));
+	    session.setAttribute("pageableData", casesService.findAll(CaseType.CONSULTING.getType(), pageable));
 		
 		return "lawyer_case_pool";
 	}

@@ -1,6 +1,5 @@
 package com.fxs.platform.repository.condition;
 
-import java.util.List;
 
 /**
  *案件查找条件封装 
@@ -19,6 +18,8 @@ public class CasesCondition {
 	private String userId;
 	
 	private String isRead;
+	
+	private String searchFrom;
 
 	public String getIsRead() {
 		return isRead;
@@ -66,5 +67,13 @@ public class CasesCondition {
 
 	public void setParentType(String[] parentType) {
 		this.parentType = parentType;
+	}
+
+	public String getSearchFrom() {
+		return searchFrom;
+	}
+
+	public void setSearchFrom(String searchFrom) {
+		this.searchFrom = searchFrom;
 	}
 }

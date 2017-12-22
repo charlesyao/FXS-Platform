@@ -17,7 +17,7 @@
 			<section class="col-md-12 col-sm-12 writeInfo space20">
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
-						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${pageableData}">
+						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${session.pageableData}">
 							<li>案件类型 : <span th:text="${freeConsulting.falltypusType}"></span></li>
 							<li class="gray">
 								<span>地址 : <span th:text="${freeConsulting.location}"></span></span><br />

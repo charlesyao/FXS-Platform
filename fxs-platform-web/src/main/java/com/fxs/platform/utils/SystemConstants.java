@@ -15,4 +15,6 @@ public class SystemConstants {
 	public static final String LEVEL_1_CITY = "LEVEL_1_CITY";
 	public static final String LEVEL_2_CITY = "LEVEL_2_CITY";
 	public static final String NA = "NA";
+	public static final String SEARCH_FROM_KEY = "SEARCH_FROM_KEY";
+	public static final String SEARCH_FROM_LAWYER_DASHBOARD = "SEARCH_FROM_LAWYER_DASHBOARD";
 }
