@@ -79,14 +79,21 @@
 		$(function() {
 			var ids= new Array()
 			$("#searchByFalltypus").on('click', 'input', function() {
-				console.log($(this).attr("id"))
-				ids.push($(this).attr("id"))
+				if($(this).is(':checked')) {
+					ids.push($(this).attr("id"))
+				} else {
+					var i = ids.indexOf($(this).attr("id"));
+					if(i != -1) {
+						ids.splice(i, 1);
+					}
+				}
 			})
 			$("#searchCases").on("click", function() {
 				$.ajax({
 					type : 'GET',
 					url : '/user/case?parentType='+ids+'',
 					success : function(data) {
+						console.log(ids)
 						console.log(data)
 					},
 					error : function(error) {
