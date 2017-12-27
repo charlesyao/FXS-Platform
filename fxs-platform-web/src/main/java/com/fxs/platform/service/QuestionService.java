@@ -2,11 +2,10 @@ package com.fxs.platform.service;
 
 import java.util.List;
 
-import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
 
 public interface QuestionService {
-	Question getByQuestionId(int qId);
+	Question getByQuestionId(String qId);
 
 	List<Question> getAllQuestion();
 	
@@ -18,7 +17,7 @@ public interface QuestionService {
 
 	void view(Question question);
 
-	void delete(int qId);
+	void delete(String qId);
 	
 	Question findRootQuestion();
 	

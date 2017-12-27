@@ -1,5 +1,6 @@
 package com.fxs.platform.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -102,9 +104,13 @@ public class FalltypusController {
 			//初始化默认QA列表
 			session.setAttribute(SystemConstants.QA_MAP, new HashMap<Integer, Object[]>());
 			QuestionDto qDto = new QuestionDto();
+			List<Answer> answerList = new ArrayList<Answer>();
 			
 			Question rootQuestion = questionService.findRootQuestion();
-			List<Answer> answerList = answerService.getAllAnswerByQuestionId(rootQuestion.getId());
+			
+			if (! ObjectUtils.isEmpty(rootQuestion)) {
+				answerList = answerService.getAllAnswerByQuestionId(rootQuestion.getId());
+			}
 			
 			qDto.setQuestion(rootQuestion);
 			qDto.setAnswers(answerList);

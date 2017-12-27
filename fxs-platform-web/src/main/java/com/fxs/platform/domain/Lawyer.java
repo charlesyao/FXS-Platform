@@ -3,10 +3,7 @@ package com.fxs.platform.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 律师领域类
@@ -14,8 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Lawyer {
 	@Id
-	@GenericGenerator(name="idGenerator", strategy="uuid")
-    @GeneratedValue(generator="idGenerator")
 	private String id;
 	
 	private String username;

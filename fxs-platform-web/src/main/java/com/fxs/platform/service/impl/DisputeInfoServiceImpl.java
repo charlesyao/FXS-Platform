@@ -1,6 +1,7 @@
 package com.fxs.platform.service.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class DisputeInfoServiceImpl implements DisputeInfoService {
 	@Autowired
 	private DisputeInfoRepository disputeInfoRepository;
 
-	public DisputeInfo getByDisputeInfoId(int dId) {
+	public DisputeInfo getByDisputeInfoId(String dId) {
 		return disputeInfoRepository.findOne(dId);
 	}
 
@@ -25,6 +26,7 @@ public class DisputeInfoServiceImpl implements DisputeInfoService {
 	}
 
 	public DisputeInfo save(DisputeInfo disputeInfo) {
+		disputeInfo.setId(String.valueOf(new Random().nextInt(99999999)));
 		return disputeInfoRepository.save(disputeInfo);
 	}
 
@@ -36,7 +38,7 @@ public class DisputeInfoServiceImpl implements DisputeInfoService {
 		save(disputeInfo);
 	}
 
-	public void delete(int dId) {
+	public void delete(String dId) {
 		DisputeInfo dispute = getByDisputeInfoId(dId);
 		disputeInfoRepository.delete(dispute);
 	}

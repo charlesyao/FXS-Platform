@@ -1,5 +1,7 @@
 package com.fxs.platform.service.impl;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -30,7 +32,7 @@ public class DetailedInquiryServiceImpl implements DetailedInquiryService {
 		if (ObjectUtils.isEmpty(detailedInquiry)) {
 			//第一次追问
 			di = new DetailedInquiry();
-			
+			di.setId(String.valueOf(new Random().nextInt(99999999)));
 			di.setFirstComments(content);
 			di.setCaseId(caseId);
 			

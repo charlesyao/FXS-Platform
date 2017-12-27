@@ -1,12 +1,9 @@
 package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 /**
@@ -17,9 +14,7 @@ import javax.persistence.Transient;
 public class Answer {
 
 	@Id
-	@SequenceGenerator(name = "seq_contacts", sequenceName = "seq_contacts")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_contacts")
-	private int id;
+	private String id;
 
 	private String description;
 	
@@ -29,16 +24,16 @@ public class Answer {
 	@JoinColumn(name = "question_id")
 	private Question question;
 	
-	private int nextQuestionId;
+	private String nextQuestionId;
 	
 	@Transient
 	private String questionId;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -58,11 +53,11 @@ public class Answer {
 		this.question = question;
 	}
 
-	public int getNextQuestionId() {
+	public String getNextQuestionId() {
 		return nextQuestionId;
 	}
 
-	public void setNextQuestionId(int nextQuestionId) {
+	public void setNextQuestionId(String nextQuestionId) {
 		this.nextQuestionId = nextQuestionId;
 	}
 

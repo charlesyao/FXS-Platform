@@ -48,37 +48,5 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer" ></div>
-	<script type="text/javascript">
-	/* $(document).ready(function() {
-		$("#addParentLevel").on("click", function() {
-			var type = $("#parentType").val()
-			
-			if($.trim(type) == '') {
-				$("#modalContent").empty().append("案件类型不能为空")
-				$("#notificationModal").modal("show")
-				return false
-			}
-			
-			$.ajax({
-				type : 'POST',
-				url : '/falltypus',
-				data : JSON.stringify({"name": type}),
-				contentType : "application/json; charset=utf-8",
-				success : function(data) {
-					$("#modalContent").empty().append("案件类型添加成功")
-					$("#notificationModal").modal("show")
-				},
-				error : function(error) {
-					$("#modalContent").empty().append("案件类型添加失败")
-					$("#notificationModal").modal("show")
-				}
-			});
-		})
-		
-		$('#notificationModal').on('hidden.bs.modal', function () {
-			$("#parentType").val("")
-		})
-	}); */
-	</script>
 </body>
 </html>

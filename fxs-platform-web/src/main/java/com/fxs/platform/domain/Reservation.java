@@ -3,7 +3,6 @@ package com.fxs.platform.domain;
 import javax.persistence.*;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,8 +20,6 @@ public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GenericGenerator(name="idGenerator", strategy="uuid")
-    @GeneratedValue(generator="idGenerator")
 	private String id;
 
 	/**

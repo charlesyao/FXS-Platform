@@ -64,11 +64,11 @@ public class QuestionController {
 	@SuppressWarnings("unchecked")
 	public ResponseMessage<?> otherSelection(@Valid @RequestBody Answer answer) {
 		//问题-答案对集合
-		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		Map<String, Object[]> mapping = (HashMap<String, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
 		List<Answer> selectedAnswer = new ArrayList<Answer>();
 		
 		if(ObjectUtils.isEmpty(mapping)) {
-			mapping = new HashMap<Integer, Object[]>();
+			mapping = new HashMap<String, Object[]>();
 		}
 		
 		//二维数组
@@ -76,7 +76,7 @@ public class QuestionController {
 		//[1]: 选择的答案的集合
 		Object[] qaArray = new Object[2];
 
-		Question currentQuestion = questionService.getByQuestionId(Integer.parseInt(answer.getQuestionId()));
+		Question currentQuestion = questionService.getByQuestionId(answer.getQuestionId());
 		
 		
 		if (! ObjectUtils.isEmpty(currentQuestion)) {
@@ -97,13 +97,13 @@ public class QuestionController {
 	@GetMapping("/optional/single/answer/{answerId}")
 	@ResponseBody
 	@SuppressWarnings("unchecked")
-	public ResponseMessage<?> optionalSingleQuestion(@PathVariable int answerId, ModelMap map) {
+	public ResponseMessage<?> optionalSingleQuestion(@PathVariable String answerId, ModelMap map) {
 		//问题-答案对集合
-		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		Map<String, Object[]> mapping = (HashMap<String, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
 		List<Answer> selectedAnswer = new ArrayList<Answer>();
 		
 		if(ObjectUtils.isEmpty(mapping)) {
-			mapping = new HashMap<Integer, Object[]>();
+			mapping = new HashMap<String, Object[]>();
 		}
 		
 		//二维数组
@@ -134,13 +134,13 @@ public class QuestionController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("/optional/multi/answer/{answerId}")
 	@ResponseBody
-	public ResponseMessage<?> optionalMultiQuestion(@PathVariable int answerId, ModelMap map) {
+	public ResponseMessage<?> optionalMultiQuestion(@PathVariable String answerId, ModelMap map) {
 		//问题-答案对集合
-		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		Map<String, Object[]> mapping = (HashMap<String, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
 		List<Answer> selectedAnswer = (List<Answer>)httpSession.getAttribute("selectedAnswer");
 		
 		if(ObjectUtils.isEmpty(mapping)) {
-			mapping = new HashMap<Integer, Object[]>();
+			mapping = new HashMap<String, Object[]>();
 		}
 		
 		if(ObjectUtils.isEmpty(selectedAnswer)) {
@@ -189,9 +189,9 @@ public class QuestionController {
 	@GetMapping("/answer/{answerId}")
 	@ResponseBody
 	@SuppressWarnings("unchecked")
-	public ResponseMessage<String> getNextQuestion(@PathVariable int answerId, ModelMap map) {
+	public ResponseMessage<String> getNextQuestion(@PathVariable String answerId, ModelMap map) {
 		
-		Map<Integer, Object[]> mapping = (HashMap<Integer, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
+		Map<String, Object[]> mapping = (HashMap<String, Object[]>)httpSession.getAttribute(SystemConstants.QA_MAP);
 		List<Answer> selectedAnswer = new ArrayList<Answer>();
 		
 		Object[] qaArray = new Object[2];

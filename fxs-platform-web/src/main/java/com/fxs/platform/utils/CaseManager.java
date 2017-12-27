@@ -3,6 +3,7 @@ package com.fxs.platform.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -70,6 +71,8 @@ public class CaseManager {
 					
 					rel.setCaseId(cases.getId());
 					
+					rel.setId(String.valueOf(new Random().nextInt(99999999)));
+					
 					repository.saveAndFlush(rel);
 				}
 			}
@@ -112,6 +115,8 @@ public class CaseManager {
 		
 		cases.setIsRead(CaseStatus.UNREAD.getStatus());
 
+		cases.setId(String.valueOf(new Random().nextInt(99999999)));
+		
 		return repository.save(cases);
 	}
 	

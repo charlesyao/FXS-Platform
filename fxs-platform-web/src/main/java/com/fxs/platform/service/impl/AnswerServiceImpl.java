@@ -1,6 +1,7 @@
 package com.fxs.platform.service.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.repository.AnswerRepository;
-import com.fxs.platform.repository.QuestionRepository;
 import com.fxs.platform.service.AnswerService;
 
 @Service
@@ -18,12 +18,9 @@ public class AnswerServiceImpl implements AnswerService {
 	@Autowired
 	private AnswerRepository answerRepository;
 	
-	@Autowired
-	private QuestionRepository questionRepository;
-	
 	@Override
-	public Answer getByAnswerId(int answerId) {
-		return answerRepository.findOne(answerId);
+	public Answer getByAnswerId(String answerId) {
+		return answerRepository.findById(answerId);
 	}
 
 	@Override
@@ -34,6 +31,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public Answer save(Answer answer) {
+		answer.setId(String.valueOf(new Random().nextInt(99999999)));
 		return answerRepository.save(answer);
 	}
 
@@ -49,13 +47,13 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public void delete(int aId) {
+	public void delete(String aId) {
 		Answer s = getByAnswerId(aId);
 		answerRepository.delete(s);
 	}
 
 	@Override
-	public List<Answer> getAllAnswerByQuestionId(int qId) {
+	public List<Answer> getAllAnswerByQuestionId(String qId) {
 		return answerRepository.getAllAnswerByQuestionId(qId);
 	}
 

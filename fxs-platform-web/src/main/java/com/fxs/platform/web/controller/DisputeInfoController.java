@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,15 +18,12 @@ import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.DisputeInfo;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.service.AnswerService;
-import com.fxs.platform.service.DisputeInfoService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
 
 @Controller
 @RequestMapping("/disputeInfo")
 public class DisputeInfoController {
-	@Autowired
-	private DisputeInfoService disputeInfoService;
 
 	@Autowired
 	private AnswerService answerService;
@@ -59,8 +57,7 @@ public class DisputeInfoController {
 	@PostMapping(value = "/createDisputeInfo")
 	public String create(DisputeInfo disputeInfo, BindingResult result,
 			SessionStatus status) {
-		disputeInfoService.save(disputeInfo);
-
+		
 		List<String> questions = disputeInfo.getQuestion();
 
 		Question ques = null;
@@ -80,25 +77,27 @@ public class DisputeInfoController {
 
 				if (answers != null) {
 					for (int i = 0; i < answers.size(); i++) {
-						answer = new Answer();
-						answer.setDescription(answers.get(i));
-						answer.setQuestion(ques);
-						answerService.save(answer);
+						
+						if(!ObjectUtils.isEmpty(answers.get(i))) {
+							answer = new Answer();
+							answer.setDescription(answers.get(i));
+							answer.setQuestion(ques);
+							answerService.save(answer);
+						}
 					}
 				}
 			}
 		}
 
-		status.setComplete();
 		return "redirect:/disputeInfo/getAllDisputeInfo";
 	}
 
 	@GetMapping(value = "/viewDisputeInfo/{id}")
-	public String view(@PathVariable("id") int id, ModelMap map) {
+	public String view(@PathVariable("id") String id, ModelMap map) {
 		
 		Question question = questionService.getByQuestionId(id);
 		
-		map.addAttribute("availableQuestions", falltypusService.findAll());
+		map.addAttribute("availableFalltypus", falltypusService.findAll());
 		map.addAttribute("availableQuestions", questionService.getAllQuestion());
 		map.addAttribute("mappedQuestionAnswers", answerService.getAllAnswerByQuestionId(question.getId()));
 		map.addAttribute("question", question);

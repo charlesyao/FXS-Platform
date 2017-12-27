@@ -3,11 +3,9 @@ package com.fxs.platform.domain;
 
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 案件领域模型 免费法律咨询、打官司
@@ -16,8 +14,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Cases {
 	@Id
-	@GenericGenerator(name = "idGenerator", strategy = "uuid")
-	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
 	private String parentLocation;

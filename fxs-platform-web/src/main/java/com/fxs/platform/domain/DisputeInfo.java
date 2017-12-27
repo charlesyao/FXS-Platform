@@ -4,10 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -20,9 +17,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class DisputeInfo {
 
 	@Id
-	@SequenceGenerator(name = "seq_contacts", sequenceName = "seq_contacts")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_contacts")
-	private int id;
+	private String id;
 
 	private String description;
 
@@ -45,7 +40,7 @@ public class DisputeInfo {
 	public DisputeInfo() {
 	}
 
-	public DisputeInfo(int id, String description, String status, Date createAt) {
+	public DisputeInfo(String id, String description, String status, Date createAt) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -58,11 +53,11 @@ public class DisputeInfo {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

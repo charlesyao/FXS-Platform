@@ -72,7 +72,7 @@
 										<input th:attr="readonly='readonly'" type="text" th:value="${answer.description}"/>
 									</td>
 									<td>
-										<select th:id="${answer.id}+_selectParent" th:attr="disabled=${#strings.isEmpty(answer.description) or answer.nextQuestionId ne 0} ? 'disabled' : 'false'">
+										<select th:id="${answer.id}+_selectParent" th:attr="disabled=${#strings.isEmpty(answer.description) or answer.nextQuestionId ne null} ? 'disabled' : 'false'">
 											<option th:value="-1">选择下级问题</option>
 											<option th:each="nextQuestion : ${availableQuestions}" 
 													th:id="${nextQuestion.id}" 
@@ -84,7 +84,7 @@
 									<td>
 										<button type="button" 
 												th:id="${answer.id}+_currentBind" 
-												th:attr="disabled=${#strings.isEmpty(answer.description) or (answer.nextQuestionId ne 0)} ? 'disabled' : 'false'" 
+												th:attr="disabled=${#strings.isEmpty(answer.description) or (answer.nextQuestionId ne null)} ? 'disabled' : 'false'" 
 												class="btn btn-primary addQAMapping">保存</button>
 									</td>
 								</tr>

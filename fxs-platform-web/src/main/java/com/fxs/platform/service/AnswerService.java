@@ -5,11 +5,11 @@ import java.util.List;
 import com.fxs.platform.domain.Answer;
 
 public interface AnswerService {
-	Answer getByAnswerId(int answerId);
+	Answer getByAnswerId(String answerId);
 
 	List<Answer> getAllAnswer();
 	
-	List<Answer> getAllAnswerByQuestionId(int qId);
+	List<Answer> getAllAnswerByQuestionId(String qId);
 
 	Answer save(Answer answer);
 
@@ -17,7 +17,7 @@ public interface AnswerService {
 
 	void view(Answer answer);
 
-	void delete(int answerId);
+	void delete(String answerId);
 	
 	void updateNextQuestion(Answer answer);
 }

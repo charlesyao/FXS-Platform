@@ -13,9 +13,12 @@ import com.fxs.platform.domain.Answer;
 public interface AnswerRepository extends FxsRepository<Answer> {
 	
 	@Query("SELECT o FROM Answer o WHERE o.question.id=?1")
-	List<Answer> getAllAnswerByQuestionId(int qId);
+	List<Answer> getAllAnswerByQuestionId(String qId);
 
 	@Query("UPDATE Answer o SET o.nextQuestionId =?1 where o.id=?2")
 	@Modifying
-	void updateNextQuestion(int nextQuestionId, int answerId);
+	void updateNextQuestion(String nextQuestionId, String answerId);
+	
+	@Query("SELECT o FROM Answer o WHERE o.id=?1")
+	Answer findById(String aId);
 }

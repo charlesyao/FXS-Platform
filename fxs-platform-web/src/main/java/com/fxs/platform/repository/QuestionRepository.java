@@ -10,6 +10,10 @@ import com.fxs.platform.domain.Question;
 
 @Repository
 public interface QuestionRepository extends FxsRepository<Question> {
+	
+	@Query("SELECT o FROM Question o WHERE o.id=?1")
+	public Question findById(String qId);
+	
 	@Query("SELECT o FROM Question o WHERE o.isRootQuestion='Y'")
 	public Question findRootQuestion();
 	
@@ -21,7 +25,7 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	
 	@Query("UPDATE Question o SET o.belongsToFalltypus =?1 where o.id=?2")
 	@Modifying
-	void updateQuestion(String belongsToFalltypus, int questionId);
+	void updateQuestion(String belongsToFalltypus, String questionId);
 	
 	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL AND o.belongsToFalltypus=?1")
 	List<Question> findQuestionsByFalltypus(String fId);

@@ -17,7 +17,10 @@
 						<div class="form-group">
 							<label>选择父类型</label>
 							<select class="form-control" id="selectParent">
-								<option th:each="falltypus : ${falltypusList}" th:id="${falltypus.id}" th:value="${falltypus.name}" th:text="${falltypus.name}"></option>
+								<option th:each="falltypus : ${falltypusList}" 
+										th:id="${falltypus.id}" 
+										th:value="${falltypus.name}" 
+										th:text="${falltypus.name}"></option>
 							</select>
 						</div>
 						<div class="form-group">

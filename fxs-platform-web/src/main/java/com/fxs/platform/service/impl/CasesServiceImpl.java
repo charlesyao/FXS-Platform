@@ -3,6 +3,7 @@ package com.fxs.platform.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -62,7 +63,7 @@ public class CasesServiceImpl implements CasesService {
 	
 	@Override
 	public Reservation create(Reservation reservation) {
-		
+		reservation.setId(String.valueOf(new Random().nextInt(99999999)));
 		reservation.setUserId(UserManager.getSessionUser(httpSession));
 
 		return reservationRepository.save(reservation);
@@ -71,6 +72,7 @@ public class CasesServiceImpl implements CasesService {
 	@Override
 	public Cases create(Cases cases) {
 
+		//cases.setId(String.valueOf(new Random().nextInt(99999999)));
 		return caseRepository.save(cases);
 	}
 
@@ -120,6 +122,7 @@ public class CasesServiceImpl implements CasesService {
 		}
 		
 		if (UserManager.isLawyer(roles)) {
+			cases.setId(String.valueOf(new Random().nextInt(99999999)));
 			cases.setCaseId(caseId);
 			cases.setLawyerName(UserManager.getPrincipal());
 			cases.setLawyerId(UserManager.getSessionUser(httpSession));

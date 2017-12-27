@@ -1,10 +1,7 @@
 package com.fxs.platform.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  *案件追加信息领域模型 
@@ -13,8 +10,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class DetailedInquiry {
 	@Id
-	@GenericGenerator(name = "idGenerator", strategy = "uuid")
-	@GeneratedValue(generator = "idGenerator")
 	private String id;
 
 	private String firstComments;

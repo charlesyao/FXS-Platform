@@ -6,7 +6,7 @@ import com.fxs.platform.domain.DisputeInfo;
 
 public interface DisputeInfoService {
 
-	DisputeInfo getByDisputeInfoId(int disputeInfoId);
+	DisputeInfo getByDisputeInfoId(String disputeInfoId);
 
 	List<DisputeInfo> getAllDisputeInfo();
 
@@ -16,5 +16,5 @@ public interface DisputeInfoService {
 
 	void view(DisputeInfo disputeInfo);
 
-	void delete(int disputeInfoId);
+	void delete(String disputeInfoId);
 }

@@ -1,6 +1,7 @@
 package com.fxs.platform.service.impl;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class QuestionServiceImpl implements QuestionService {
 	private QuestionRepository questionRepository;
 
 	@Override
-	public Question getByQuestionId(int qId) {
+	public Question getByQuestionId(String qId) {
 		
-		return questionRepository.findOne(qId);
+		return questionRepository.findById(qId);
 	}
 
 	@Override
@@ -35,6 +36,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public Question save(Question question) {
+		question.setId(String.valueOf(new Random().nextInt(99999999)));
 		return questionRepository.save(question);
 	}
 
@@ -49,7 +51,7 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public void delete(int qId) {
+	public void delete(String qId) {
 		Question question = getByQuestionId(qId);
 		questionRepository.delete(question);
 	}
