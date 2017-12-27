@@ -62,7 +62,7 @@ public class DisputeInfoController {
 
 		Question ques = null;
 
-		if (questions != null) {
+		if (!ObjectUtils.isEmpty(questions)) {
 			for (String question : questions) {
 				ques = new Question();
 				ques.setDescription(question);
@@ -99,8 +99,16 @@ public class DisputeInfoController {
 		
 		map.addAttribute("availableFalltypus", falltypusService.findAll());
 		map.addAttribute("availableQuestions", questionService.getAllQuestion());
-		map.addAttribute("mappedQuestionAnswers", answerService.getAllAnswerByQuestionId(question.getId()));
-		map.addAttribute("question", question);
+		
+		if(!ObjectUtils.isEmpty(question)) {
+			map.addAttribute("mappedQuestionAnswers", answerService.getAllAnswerByQuestionId(question.getId()));
+			map.addAttribute("question", question);
+		} else {
+			map.addAttribute("mappedQuestionAnswers", null);
+			map.addAttribute("question", null);
+		}
+		
+		
 		
 		return "public_view_dispute_info";
 	}

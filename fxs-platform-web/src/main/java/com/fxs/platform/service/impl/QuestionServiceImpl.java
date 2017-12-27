@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.repository.QuestionRepository;
@@ -53,7 +54,10 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	public void delete(String qId) {
 		Question question = getByQuestionId(qId);
-		questionRepository.delete(question);
+		
+		if(!ObjectUtils.isEmpty(question)) {
+			questionRepository.delete(question);
+		}
 	}
 
 	@Override

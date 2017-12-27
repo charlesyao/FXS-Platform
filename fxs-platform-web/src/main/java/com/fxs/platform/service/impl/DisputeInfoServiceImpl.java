@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.DisputeInfo;
 import com.fxs.platform.repository.DisputeInfoRepository;
@@ -40,7 +41,10 @@ public class DisputeInfoServiceImpl implements DisputeInfoService {
 
 	public void delete(String dId) {
 		DisputeInfo dispute = getByDisputeInfoId(dId);
-		disputeInfoRepository.delete(dispute);
+		
+		if(!ObjectUtils.isEmpty(dispute)) {
+			disputeInfoRepository.delete(dispute);
+		}
 	}
 
 }

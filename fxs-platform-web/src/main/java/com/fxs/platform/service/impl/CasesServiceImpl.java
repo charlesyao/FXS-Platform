@@ -93,7 +93,11 @@ public class CasesServiceImpl implements CasesService {
 	public List<CasesDto> findByType(String caseType) {
 		List<Cases> cases = caseRepository.findByType(UserManager.getSessionUser(httpSession), caseType.equals(SystemConstants.CASE_TYPE_CONSULTING) ? "0" : "1");
 		
-		return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
+		if(!ObjectUtils.isEmpty(cases)) {
+			return CaseManager.caseWrapper(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository);
+		}
+		
+		return new ArrayList<CasesDto>();
 	}
 	
 	@Override
