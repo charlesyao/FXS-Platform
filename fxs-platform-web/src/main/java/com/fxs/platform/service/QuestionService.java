@@ -2,6 +2,7 @@ package com.fxs.platform.service;
 
 import java.util.List;
 
+import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
 
 public interface QuestionService {
@@ -22,4 +23,6 @@ public interface QuestionService {
 	Question findRootQuestion();
 	
 	List<Question> findOptionalQuestions();
+	
+	void updateQFMapping(Question question);
 }

@@ -18,6 +18,7 @@ import com.fxs.platform.domain.DisputeInfo;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.DisputeInfoService;
+import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
 
 @Controller
@@ -32,6 +33,9 @@ public class DisputeInfoController {
 	@Autowired
 	private QuestionService questionService;
 
+	@Autowired
+	FalltypusService falltypusService;
+	
 	/**
 	 * 获取所有的纷争信息
 	 * 
@@ -94,6 +98,7 @@ public class DisputeInfoController {
 		
 		Question question = questionService.getByQuestionId(id);
 		
+		map.addAttribute("secondLevelFalltypus", falltypusService.findSubFalltypus());
 		map.addAttribute("availableQuestions", questionService.getAllQuestion());
 		map.addAttribute("mappedQuestionAnswers", answerService.getAllAnswerByQuestionId(question.getId()));
 		map.addAttribute("question", question);

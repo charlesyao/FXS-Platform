@@ -22,7 +22,7 @@
 								</tr>
 								<tr>
 									<td width="150">
-										<input th:attr="readonly='readonly'" type="text" th:value="${question.id}" />
+										<input th:attr="readonly='readonly'" type="text" th:value="${question.id}" id="currentQuestion"/>
 									</td>
 									<td>
 										<input th:attr="readonly='readonly'" type="text" th:value="${question.description}" />	
@@ -32,8 +32,31 @@
 									</td>
 								</tr>
 							</table>
-							<form th:action="@{/disputeInfo/updateAnswer}" th:method="POST">
-							<table width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+							<table th:width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+								<tr bgcolor="lightblue">
+									<th>绑定案件类型</th>
+									<th>绑定</th>
+								</tr>
+								<tr>
+									<td>
+										<select th:id="selectFalltypus" th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'">
+											<option th:value="-1">选择从属案件类型</option>
+											<option th:each="belongsToFalltypus : ${secondLevelFalltypus}" 
+													th:id="${belongsToFalltypus.id}" 
+													th:value="${belongsToFalltypus.id}" 
+													th:text="${belongsToFalltypus.name}"
+													th:selected="(${question.belongsToFalltypus} == ${belongsToFalltypus.id})"></option>
+										</select>
+									</td>
+									<td>
+										<button type="button" 
+												th:id="${question.id}+_currentBind" 
+												th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'" 
+												class="btn btn-primary addQFMapping">保存</button>
+									</td>
+								</tr>
+							</table>
+							<table th:width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
 								<tr bgcolor="lightblue">
 									<th>答案编号</th>
 									<th>答案名称</th>
@@ -51,19 +74,22 @@
 									<td>
 										<select th:id="${answer.id}+_selectParent" th:attr="disabled=${#strings.isEmpty(answer.description) or answer.nextQuestionId ne 0} ? 'disabled' : 'false'">
 											<option th:value="-1">选择下级问题</option>
-											<option th:each="nextQuestion : ${availableQuestions}" th:id="${nextQuestion.id}" th:value="${nextQuestion.id}" th:text="${nextQuestion.description}"></option>
+											<option th:each="nextQuestion : ${availableQuestions}" 
+													th:id="${nextQuestion.id}" 
+													th:value="${nextQuestion.id}" 
+													th:text="${nextQuestion.description}"
+													th:selected="(${answer.nextQuestionId} == ${nextQuestion.id})" ></option>
 										</select>
 									</td>
 									<td>
 										<button type="button" 
 												th:id="${answer.id}+_currentBind" 
-												th:attr="disabled=${answer.nextQuestionId ne 0} ? 'disabled' : 'false'" 
+												th:attr="disabled=${#strings.isEmpty(answer.description) or (answer.nextQuestionId ne 0)} ? 'disabled' : 'false'" 
 												class="btn btn-primary addQAMapping">保存</button>
 									</td>
 								</tr>
 							</table>
 							<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
-							</form>
 					</td>
 				</tr>
 			</table>
@@ -86,13 +112,36 @@
 	<div th:replace="fragments/public_footer :: public-footer"></div>
 	<script type="text/javascript">
 	$(document).ready(function() {
+		
+		$(".addQFMapping").on("click", function() {
+			$.ajax({
+				type : 'PUT',
+				url : '/public/question/updateQFMapping',
+				data : JSON.stringify({
+					"id": $("#currentQuestion").val(),
+					"belongsToFalltypus": $("#selectFalltypus").find("option:selected").attr("id")
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					$(".addQFMapping").attr("disabled", "disabled")
+					$("#selectFalltypus").attr("disabled", "disabled")
+					$("#modalContent").empty().append("绑定成功")
+					$("#notificationModal").modal("show")
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("绑定失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+		
 		$(".addQAMapping").on("click", function() {
 			var index = $(this).attr("id").split("_")[0];
 			var currentAnswerId = index;
 			var questionContainerId = index + "_selectParent";
 			var buttonId = index + "_currentBind"
 			var selectedQuestionId = $("#"+questionContainerId+"").find("option:selected").attr("id")
-
+			
 			$.ajax({
 				type : 'PUT',
 				url : '/admin/answer',

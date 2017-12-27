@@ -45,4 +45,10 @@ public class FalltypusServiceImpl implements FalltypusService {
 		falltypus.setId(String.valueOf(new Random().nextInt(99999999)));
 		return falltypusRepository.save(falltypus);
 	}
+
+	@Override
+	public List<FalltypusDto> findSubFalltypus() {
+		// TODO Auto-generated method stub
+		return QueryResultConverter.convert(falltypusRepository.findSubFalltypus(), FalltypusDto.class);
+	}
 }

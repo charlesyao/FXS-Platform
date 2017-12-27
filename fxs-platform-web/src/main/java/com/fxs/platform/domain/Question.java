@@ -32,6 +32,8 @@ public class Question {
 	
 	private String questionType;
 
+	private String belongsToFalltypus;
+	
 	@Transient
 	private List<String> answers;
 
@@ -90,5 +92,13 @@ public class Question {
 
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
+	}
+	
+	public String getBelongsToFalltypus() {
+		return belongsToFalltypus;
+	}
+
+	public void setBelongsToFalltypus(String belongsToFalltypus) {
+		this.belongsToFalltypus = belongsToFalltypus;
 	}
 }

@@ -16,6 +16,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -259,5 +260,18 @@ public class QuestionController {
 		}
 		
 		return Result.success(questionId, questionSection + startDiv + answerSection + endDiv);
+	}
+	
+	/**
+	 * 更新案件类型问题关联信息
+	 * 
+	 * @param caseId
+	 * @param cases
+	 * @return
+	 */
+	@PutMapping("/updateQFMapping")
+	@ResponseBody
+	public void update(@Valid @RequestBody Question question) {
+		questionService.updateQFMapping(question);
 	}
 }

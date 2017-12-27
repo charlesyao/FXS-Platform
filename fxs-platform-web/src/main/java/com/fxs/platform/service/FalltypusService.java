@@ -9,6 +9,8 @@ public interface FalltypusService {
 	Falltypus create(Falltypus falltypus);
 	
 	List<FalltypusDto> findFirstLevelFalltypus();
+	
+	List<FalltypusDto> findSubFalltypus();
 
 	List<FalltypusDto> findSubFalltypusByParentId(String falltypusId);
 }

@@ -39,6 +39,6 @@ public class AnswerController {
 	@PutMapping
 	@ResponseBody
 	public void update(@Valid @RequestBody Answer answer) {
-		answerService.updateNextQuestion(answer.getNextQuestionId(), answer.getId());
+		answerService.updateNextQuestion(answer);
 	}
 }

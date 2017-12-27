@@ -64,4 +64,10 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionRepository.findOptionalQuestions();
 	}
 
+	@Override
+	public void updateQFMapping(Question question) {
+		// TODO Auto-generated method stub
+		questionRepository.updateQuestion(question.getBelongsToFalltypus(), question.getId());
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.repository.AnswerRepository;
+import com.fxs.platform.repository.QuestionRepository;
 import com.fxs.platform.service.AnswerService;
 
 @Service
@@ -16,6 +17,9 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Autowired
 	private AnswerRepository answerRepository;
+	
+	@Autowired
+	private QuestionRepository questionRepository;
 	
 	@Override
 	public Answer getByAnswerId(int answerId) {
@@ -56,8 +60,8 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public void updateNextQuestion(int nextQuestionId, int answerId) {
+	public void updateNextQuestion(Answer answer) {
 		// TODO Auto-generated method stub
-		answerRepository.updateNextQuestion(nextQuestionId, answerId);
+		answerRepository.updateNextQuestion(answer.getNextQuestionId(), answer.getId());
 	}
 }

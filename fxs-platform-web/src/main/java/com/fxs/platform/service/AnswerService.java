@@ -19,5 +19,5 @@ public interface AnswerService {
 
 	void delete(int answerId);
 	
-	void updateNextQuestion(int nextQuestionId, int answerId);
+	void updateNextQuestion(Answer answer);
 }
