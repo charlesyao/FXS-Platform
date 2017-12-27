@@ -135,7 +135,11 @@ public class CasesServiceImpl implements CasesService {
 				return caseRepository.saveAndFlush(c);
 			}
 		} else {
-			c.setAcceptedLawyerFeedback(cases.getAcceptedLawyerFeedback());
+			
+			if(ObjectUtils.isEmpty(c.getAcceptedLawyerFeedback())) {
+				c.setAcceptedLawyerFeedback(cases.getAcceptedLawyerFeedback());
+			}
+			
 			return caseRepository.saveAndFlush(c);
 		}
 		
