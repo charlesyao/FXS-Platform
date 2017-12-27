@@ -20,7 +20,7 @@
 									<th>问题描述</th>
 									<th>是否根问题</th>
 								</tr>
-								<tr>
+								<tr th:if="${question ne null}">
 									<td width="150">
 										<input th:attr="readonly='readonly'" type="text" th:value="${question.id}" id="currentQuestion"/>
 									</td>
@@ -30,6 +30,9 @@
 									<td>
 										<input th:attr="readonly='readonly'" type="text" th:value="${question.isRootQuestion}" />	
 									</td>
+								</tr>
+								<tr th:if="${question eq null}">
+									<td width="150" th:text="没有数据" th:colspan="3"></td>
 								</tr>
 							</table>
 							<table th:width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
@@ -63,7 +66,7 @@
 									<th>匹配下级问题</th>
 									<th>绑定</th>
 								</tr>
-								<tr th:each="answer : ${mappedQuestionAnswers}">
+								<tr th:if="${mappedQuestionAnswers ne null}" th:each="answer : ${mappedQuestionAnswers}">
 									<td width="150">
 										<input th:id="${answer.id}+_currentAnswer" th:attr="readonly='readonly'" type="text" th:value="${answer.id}"/>
 									</td>
@@ -87,6 +90,9 @@
 												th:attr="disabled=${#strings.isEmpty(answer.description) or (answer.nextQuestionId ne null)} ? 'disabled' : 'false'" 
 												class="btn btn-primary addQAMapping">保存</button>
 									</td>
+								</tr>
+								<tr th:if="${mappedQuestionAnswers eq null}">
+									<td width="150" th:text="没有数据" th:colspan="3"></td>
 								</tr>
 							</table>
 							<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
