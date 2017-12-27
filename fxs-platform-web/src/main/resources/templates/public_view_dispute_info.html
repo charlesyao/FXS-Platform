@@ -41,7 +41,7 @@
 									<td>
 										<select th:id="selectFalltypus" th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'">
 											<option th:value="-1">选择从属案件类型</option>
-											<option th:each="belongsToFalltypus : ${secondLevelFalltypus}" 
+											<option th:each="belongsToFalltypus : ${availableFalltypus}" 
 													th:id="${belongsToFalltypus.id}" 
 													th:value="${belongsToFalltypus.id}" 
 													th:text="${belongsToFalltypus.name}"

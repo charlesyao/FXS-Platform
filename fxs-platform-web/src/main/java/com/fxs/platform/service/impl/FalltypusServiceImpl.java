@@ -51,4 +51,10 @@ public class FalltypusServiceImpl implements FalltypusService {
 		// TODO Auto-generated method stub
 		return QueryResultConverter.convert(falltypusRepository.findSubFalltypus(), FalltypusDto.class);
 	}
+
+	@Override
+	public List<FalltypusDto> findAll() {
+		// TODO Auto-generated method stub
+		return QueryResultConverter.convert(falltypusRepository.findAll(), FalltypusDto.class);
+	}
 }

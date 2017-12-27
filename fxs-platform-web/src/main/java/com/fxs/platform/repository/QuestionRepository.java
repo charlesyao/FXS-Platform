@@ -22,4 +22,7 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	@Query("UPDATE Question o SET o.belongsToFalltypus =?1 where o.id=?2")
 	@Modifying
 	void updateQuestion(String belongsToFalltypus, int questionId);
+	
+	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL AND o.belongsToFalltypus=?1")
+	List<Question> findQuestionsByFalltypus(String fId);
 }

@@ -70,4 +70,10 @@ public class QuestionServiceImpl implements QuestionService {
 		questionRepository.updateQuestion(question.getBelongsToFalltypus(), question.getId());
 	}
 
+	@Override
+	public List<Question> findQuestionsByFalltypus(String fId) {
+		// TODO Auto-generated method stub
+		return questionRepository.findQuestionsByFalltypus(fId);
+	}
+
 }

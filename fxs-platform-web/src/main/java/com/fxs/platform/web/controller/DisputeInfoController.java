@@ -98,7 +98,7 @@ public class DisputeInfoController {
 		
 		Question question = questionService.getByQuestionId(id);
 		
-		map.addAttribute("secondLevelFalltypus", falltypusService.findSubFalltypus());
+		map.addAttribute("availableQuestions", falltypusService.findAll());
 		map.addAttribute("availableQuestions", questionService.getAllQuestion());
 		map.addAttribute("mappedQuestionAnswers", answerService.getAllAnswerByQuestionId(question.getId()));
 		map.addAttribute("question", question);

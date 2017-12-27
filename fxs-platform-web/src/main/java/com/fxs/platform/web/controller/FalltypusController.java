@@ -90,6 +90,9 @@ public class FalltypusController {
 		} else if (level.equals("level2")) {
 			
 			session.setAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE, id);
+			
+			//查询当前案件类型下属的问题
+			session.setAttribute("nextAllQuestions", questionService.findQuestionsByFalltypus(id));
 		}
 		
 		String target = "";

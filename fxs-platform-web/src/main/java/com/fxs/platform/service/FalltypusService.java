@@ -11,6 +11,8 @@ public interface FalltypusService {
 	List<FalltypusDto> findFirstLevelFalltypus();
 	
 	List<FalltypusDto> findSubFalltypus();
+	
+	List<FalltypusDto> findAll();
 
 	List<FalltypusDto> findSubFalltypusByParentId(String falltypusId);
 }
