@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fxs.platform.domain.Answer;
@@ -25,6 +27,8 @@ import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.dto.QuestionDto;
 import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.security.core.support.ResponseMessage;
+import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
@@ -229,5 +233,40 @@ public class RouterController {
 	public String createQuestionnaire(@ModelAttribute(value = "question") Question question,
 			BindingResult bindingResult) {
 		return "addQuestion";
+	}
+	
+	/**
+	 * 获取案件类型
+	 * 
+	 * @return
+	 */
+	@GetMapping("/admin/falltypus/getLevelOneData")
+	public String getFirstLevelFalltypus(ModelMap map) {
+		map.addAttribute("levelOneFalltypusList", falltypusService.findFirstLevelFalltypus());
+		return "levelOneFalltypusList";
+	}
+
+	/**
+	 * 获取案件类型
+	 * 
+	 * @return
+	 */
+	@GetMapping("/admin/falltypus/getLevelTwoData/{fId}")
+	public String getSecondLevelFalltypus(@PathVariable String fId, ModelMap map) {
+		map.addAttribute("levelTwoFalltypusList", falltypusService.findSubFalltypusByParentId(fId));
+		return "levelTwoFalltypusList";
+	}
+	
+	/**
+	 * 删除案件类型
+	 * 
+	 * @param fId
+	 * @return
+	 */
+	@DeleteMapping("/admin/falltypus/delete/{fId}")
+	@ResponseBody
+	public ResponseMessage<String>  delete(@PathVariable String fId) {
+		falltypusService.delete(fId);
+		return Result.success("success");
 	}
 }

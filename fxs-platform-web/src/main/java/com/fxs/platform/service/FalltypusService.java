@@ -15,4 +15,6 @@ public interface FalltypusService {
 	List<FalltypusDto> findAll();
 
 	List<FalltypusDto> findSubFalltypusByParentId(String falltypusId);
+	
+	void delete(String falltypusId);
 }

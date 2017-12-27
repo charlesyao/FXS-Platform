@@ -7,6 +7,7 @@
 	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
 	<div class="mainPart">
 		<div class="container" style="margin-top: 100px">
+			<a th:href="@{/admin/falltypus/getLevelOneData}" type="button" class="btn btn-primary btn-lg btn-block">获取一级案件类型</a>
 			<a th:href="@{/falltypus/create/parent}" type="button" class="btn btn-primary btn-lg btn-block">创建案件类型</a>
 			<a th:href="@{/falltypus/create/sub}" type="button" class="btn btn-primary btn-lg btn-block">创建案件子类型</a>
 			<a th:href="@{/disputeInfo/getAllDisputeInfo}" type="button" class="btn btn-primary btn-lg btn-block">获取所有纷争信息</a>
