@@ -77,4 +77,24 @@ $(function() {
 		$("#level1City").empty();
 		$("#level2City").empty();
 	})
+
+    $(".deleteQuestionLink").on("click", function(e) {
+        e.preventDefault()
+        var questionInfoId = $(this).attr("id");
+		alert("dd");
+        $.ajax({
+            type : 'DELETE',
+            url : '/disputeInfo/delete/' + questionInfoId,
+            contentType : "application/json; charset=utf-8",
+            success : function(data) {
+                $("#modalContent").empty().append("删除成功")
+                $("#notificationModal").modal("show")
+                //later need to add js to remove the parent <tr> element
+            },
+            error : function(error) {
+                $("#modalContent").empty().append("删除失败")
+                $("#notificationModal").modal("show")
+            }
+        });
+    })
 })

@@ -22,6 +22,7 @@
 					<td th:text="${question.questionType}"></td>
 					<td>
 						<a th:href="@{/disputeInfo/viewDisputeInfo/{id}(id=${question.id})}">查看</a>
+						<a href="" th:class="deleteQuestionLink"  th:id="${question.id}">删除</a>
 				 	</td>
 				</tr>
 			</table>
@@ -29,5 +30,6 @@
 		<a th:href="@{/disputeInfo/createDisputeInfo}" type="button" class="btn btn-primary btn-lg btn-block">新建</a>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer" ></div>
+    <script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
 </body>
 </html>

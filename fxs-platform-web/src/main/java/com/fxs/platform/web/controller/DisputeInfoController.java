@@ -2,16 +2,14 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
+import com.fxs.platform.security.core.support.ResponseMessage;
+import com.fxs.platform.security.core.support.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.fxs.platform.domain.Answer;
@@ -111,6 +109,14 @@ public class DisputeInfoController {
 		
 		
 		return "public_view_dispute_info";
+	}
+
+	@DeleteMapping(value = "/delete/{id}")
+    @ResponseBody
+	public ResponseMessage<String> delete(@PathVariable("id") String id) {
+
+		questionService.delete(id);
+        return Result.success("success");
 	}
 	
 	@PostMapping(value = "/updateAnswer")
