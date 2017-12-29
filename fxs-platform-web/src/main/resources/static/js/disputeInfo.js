@@ -81,7 +81,6 @@ $(function() {
     $(".deleteQuestionLink").on("click", function(e) {
         e.preventDefault()
         var questionInfoId = $(this).attr("id");
-		alert("dd");
         $.ajax({
             type : 'DELETE',
             url : '/disputeInfo/delete/' + questionInfoId,
