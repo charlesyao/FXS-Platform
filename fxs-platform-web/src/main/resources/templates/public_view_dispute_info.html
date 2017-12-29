@@ -210,7 +210,12 @@
 				}),
 				contentType : "application/json; charset=utf-8",
 				success : function(data) {
-					location.reload()
+					if(data.code == "-1") {
+						$("#modalContent").empty().append("修改失败:" + data.message)
+						$("#notificationModal").modal("show")
+					} else {
+						location.reload()
+					}
 				},
 				error : function(error) {
 					$("#modalContent").empty().append("修改失败")

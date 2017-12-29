@@ -18,6 +18,7 @@ import com.fxs.platform.domain.Question;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
+import com.fxs.platform.utils.ResponseCodeEnum;
 
 @Controller
 @RequestMapping("/disputeInfo")
@@ -145,6 +146,11 @@ public class DisputeInfoController {
 	@PutMapping(value = "/update/question/basic")
 	@ResponseBody
 	public ResponseMessage<String> updateQuestionBasicInfo(@RequestBody Question question) {
+		Question rootQuestion = questionService.findRootQuestion();
+		
+		if(!ObjectUtils.isEmpty(rootQuestion)) {
+			return Result.error(String.valueOf(ResponseCodeEnum.ERROR.getCode()), "不能有多个根问题存在");
+		}
 		Question qInfo = questionService.getByQuestionId(question.getId());
 		
 		if(!ObjectUtils.isEmpty(qInfo)) {
