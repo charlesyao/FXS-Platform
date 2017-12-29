@@ -32,7 +32,11 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public Answer save(Answer answer) {
-		answer.setId(String.valueOf(new Random().nextInt(99999999)));
+		
+		if(ObjectUtils.isEmpty(answer.getId())) {
+			answer.setId(String.valueOf(new Random().nextInt(99999999)));
+		}
+		
 		return answerRepository.save(answer);
 	}
 

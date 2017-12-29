@@ -184,4 +184,54 @@ public class DisputeInfoController {
 	}
 	
 	
+	/**
+	 * 更新问题信息
+	 * 
+	 * @param question
+	 * @return
+	 */
+	@PutMapping(value = "/update/answer/basic")
+	@ResponseBody
+	public ResponseMessage<String> updateAnswerBasicInfo(@RequestBody Answer answer) {
+		
+		Answer answerInfo = answerService.getByAnswerId(answer.getId());
+		
+		if(!ObjectUtils.isEmpty(answerInfo)) {
+			
+			//如果当前选择的待绑定的案件类型与原数据不一致，则重新绑定,
+			if(!answer.getNextQuestionId().equals(answerInfo.getNextQuestionId())) {
+				answerService.updateNextQuestion(answer);
+			}
+			
+			//更新问题的基本信息
+			answer.getQuestion().setId(answerInfo.getQuestion().getId());
+			answer.setOther(answerInfo.getOther());
+			answerService.update(answer);
+		}
+		
+
+		return Result.success("success");
+	}
+	
+	/**
+	 * 解除答案和案件类型的绑定关系
+	 * 
+	 * @param question
+	 * @return
+	 */
+	@PutMapping(value = "/update/answer/qaMapping")
+	@ResponseBody
+	public ResponseMessage<String> updateAnswerFalltypusMapping(@RequestBody Answer answer) {
+		Answer answerInfo = answerService.getByAnswerId(answer.getId());
+		
+		if(!ObjectUtils.isEmpty(answerInfo)) {
+			
+			//如果当前选择的待绑定的案件类型与原数据不一致，则重新绑定,
+			if(!answerInfo.getNextQuestionId().equals(answer.getNextQuestionId())) {
+				answerService.updateNextQuestion(answer);
+			}
+		}
+		
+		return Result.success("success");
+	}
 }
