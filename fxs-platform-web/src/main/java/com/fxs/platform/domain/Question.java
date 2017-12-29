@@ -31,10 +31,6 @@ public class Question {
 	@Transient
 	private List<String> answers;
 
-	@ManyToOne
-	@JoinColumn(name = "cases_id")
-	private Cases cases;
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
@@ -70,14 +66,6 @@ public class Question {
 
 	public void setIsRootQuestion(String isRootQuestion) {
 		this.isRootQuestion = isRootQuestion;
-	}
-
-	public Cases getCases() {
-		return cases;
-	}
-
-	public void setCases(Cases cases) {
-		this.cases = cases;
 	}
 
 	public String getQuestionType() {

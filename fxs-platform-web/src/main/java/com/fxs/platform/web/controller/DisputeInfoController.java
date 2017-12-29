@@ -135,4 +135,53 @@ public class DisputeInfoController {
 		status.setComplete();
 		return "redirect:/disputeInfo/getAllDisputeInfo";
 	}
+	
+	/**
+	 * 更新问题信息
+	 * 
+	 * @param question
+	 * @return
+	 */
+	@PutMapping(value = "/update/question/basic")
+	@ResponseBody
+	public ResponseMessage<String> updateQuestionBasicInfo(@RequestBody Question question) {
+		Question qInfo = questionService.getByQuestionId(question.getId());
+		
+		if(!ObjectUtils.isEmpty(qInfo)) {
+			
+			//如果当前选择的待绑定的案件类型与原数据不一致，则重新绑定
+			if(! question.getBelongsToFalltypus().equals(qInfo.getBelongsToFalltypus())) {
+				questionService.updateQFMapping(question);
+			}
+			
+			//更新问题的基本信息
+			questionService.update(question);
+		}
+
+		return Result.success("success");
+	}
+	
+	/**
+	 * 解除问题和案件类型的绑定关系
+	 * 
+	 * @param question
+	 * @return
+	 */
+	@PutMapping(value = "/update/question/qfMapping")
+	@ResponseBody
+	public ResponseMessage<String> updateQuestionFalltypusMapping(@RequestBody Question question) {
+		Question qInfo = questionService.getByQuestionId(question.getId());
+		
+		if(!ObjectUtils.isEmpty(qInfo)) {
+			
+			//如果当前选择的待绑定的案件类型与原数据不一致，则重新绑定,
+			if(!qInfo.getBelongsToFalltypus().equals(question.getBelongsToFalltypus())) {
+				questionService.updateQFMapping(question);
+			}
+		}
+		
+		return Result.success("success");
+	}
+	
+	
 }

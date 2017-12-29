@@ -14,35 +14,49 @@
 				</tr>
 				<tr valign="top" align="center">
 					<td align="center">
-							<table width="500" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
-								<tr bgcolor="lightblue">
-									<th>问题编号</th>
-									<th>问题描述</th>
-									<th>是否根问题</th>
-								</tr>
-								<tr th:if="${question ne null}">
+							<form id="questionForm">
+							<table width="600" border="1" cellspacing="0" bordercolor="#000000" style="border-collapse:collapse;"> 
+								<tr >
 									<td width="150">
-										<input th:attr="readonly='readonly'" type="text" th:value="${question.id}" id="currentQuestion"/>
+										<span>问题编号</span>
 									</td>
-									<td>
-										<input th:attr="readonly='readonly'" type="text" th:value="${question.description}" />	
+									<td width="350" >
+										<input disabled="disabled" style=" width:100%" type="text" th:value="${question.id}" id="currentQuestion"/>
 									</td>
-									<td>
-										<input th:attr="readonly='readonly'" type="text" th:value="${question.isRootQuestion}" />	
-									</td>
-								</tr>
-								<tr th:if="${question eq null}">
-									<td width="150" th:text="没有数据" th:colspan="3"></td>
-								</tr>
-							</table>
-							<table th:width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
-								<tr bgcolor="lightblue">
-									<th>绑定案件类型</th>
-									<th>绑定</th>
 								</tr>
 								<tr>
-									<td>
-										<select th:id="selectFalltypus" th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'">
+									<td width="150">
+										<span>问题描述</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" style=" width:100%" type="text" th:value="${question.description}" id="currentQuestionDesc"/>
+									</td>
+								</tr>
+								<tr>
+									<td width="150">
+										<span>是否是根问题</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" type="radio" name="isRootQuestionRadios" value="Y" th:checked="${question.isRootQuestion == 'Y'}" /> 是
+										<input disabled="disabled" type="radio" name="isRootQuestionRadios" value="N" th:checked="${question.isRootQuestion == 'N'}" />否
+									</td>
+								</tr>
+								<tr>
+									<td width="150">
+										<span>问题类型</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" type="radio" name="questionTypeRadios" value="0" th:checked="${question.questionType == '0'}" />单选
+										<input disabled="disabled" type="radio" name="questionTypeRadios" value="1" th:checked="${question.questionType == '1'}" />多选
+										<input disabled="disabled" type="radio" name="questionTypeRadios" value="2" th:checked="${question.questionType == '2'}" />文本输入
+									</td>
+								</tr>
+								<tr >
+									<td width="150">
+										<span>所属案件类型</span>
+									</td>
+									<td width="350">
+										<select style=" width:100%" th:id="selectFalltypus" th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'">
 											<option th:value="-1">选择从属案件类型</option>
 											<option th:each="belongsToFalltypus : ${availableFalltypus}" 
 													th:id="${belongsToFalltypus.id}" 
@@ -50,29 +64,41 @@
 													th:text="${belongsToFalltypus.name}"
 													th:selected="(${question.belongsToFalltypus} == ${belongsToFalltypus.id})"></option>
 										</select>
+										
 									</td>
+								</tr>
+								<tr>
+									<td>操作</td>
 									<td>
-										<button type="button" 
+										<button type="button"
+												th:if="${question.belongsToFalltypus eq null}"
 												th:id="${question.id}+_currentBind" 
 												th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'" 
-												class="btn btn-primary addQFMapping">保存</button>
+												class="addQFMapping">绑定</button>
+										<button type="button" id="unbindQFMapping" th:if="${question.belongsToFalltypus ne null}">解绑</button>
+										<button type="button" id="editQuestionInfo">编辑</button>
+										<button type="button" style="display: none" id="saveEditQuestionInfo">保存</button>
+										<button type="button" style="display: none" id="cancelEditQuestionInfo">取消</button>
 									</td>
 								</tr>
 							</table>
-							<table th:width="600" style="border-collapse: collapse;" border="0" bordercolor="#006699" cellspacing="2" cellpadding="2">
+							</form>
+							<br/>
+							<br/>
+							<form id="answerForm">
+							<table width="600" border="1" cellspacing="0" bordercolor="#000000" style="border-collapse:collapse;"> 
 								<tr bgcolor="lightblue">
 									<th>答案编号</th>
-									<th>答案名称</th>
-									<th>匹配下级问题</th>
-									<th>绑定</th>
+									<th>答案描述</th>
+									<th colspan="2" >匹配下级问题</th>
 								</tr>
 								<tr th:if="${mappedQuestionAnswers ne null}" th:each="answer : ${mappedQuestionAnswers}">
 									<td width="150">
-										<input th:id="${answer.id}+_currentAnswer" th:attr="readonly='readonly'" type="text" th:value="${answer.id}"/>
+										<input th:id="${answer.id}+_currentAnswer" disabled="disabled" type="text" th:value="${answer.id}"/>
 									</td>
 									<td width="150">
 										<!-- th:attr="disabled=${#strings.isEmpty(answer.description)} ? 'disabled' : 'false'" -->
-										<input th:attr="readonly='readonly'" type="text" th:value="${answer.description}"/>
+										<input disabled="disabled" type="text" th:value="${answer.description}"/>
 									</td>
 									<td>
 										<select th:id="${answer.id}+_selectParent" th:attr="disabled=${#strings.isEmpty(answer.description) or answer.nextQuestionId ne null} ? 'disabled' : 'false'">
@@ -85,16 +111,17 @@
 										</select>
 									</td>
 									<td>
-										<button type="button" 
+										<button type="button" style="width: 50px"
 												th:id="${answer.id}+_currentBind" 
 												th:attr="disabled=${#strings.isEmpty(answer.description) or (answer.nextQuestionId ne null)} ? 'disabled' : 'false'" 
-												class="btn btn-primary addQAMapping">保存</button>
+												class="addQAMapping">绑定</button>
 									</td>
 								</tr>
 								<tr th:if="${mappedQuestionAnswers eq null}">
 									<td width="150" th:text="没有数据" th:colspan="3"></td>
 								</tr>
 							</table>
+							</form>
 							<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
 					</td>
 				</tr>
@@ -119,6 +146,74 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		
+		var questionId = $("#currentQuestion").val()
+		var bindQFMappingBtnId =questionId + "_currentBind"
+		
+		$("#editQuestionInfo").on("click", function() {
+			$(":input", "#questionForm")
+			.not(":button", ":submit", ":reset", ":hidden")
+			.removeAttr("disabled")
+			
+			$(this).css("display", "none")
+			$("#currentQuestion").attr("disabled", "disabled")
+			$("#" + bindQFMappingBtnId).css("display", "none")
+			$("#unbindQFMapping").css("display", "none")
+			$("#saveEditQuestionInfo").css("display", "inline-block")
+			$("#cancelEditQuestionInfo").css("display", "inline-block")
+		})
+		
+		$("#cancelEditQuestionInfo").on("click", function() {
+			$(":input", "#questionForm")
+			.not(":button", ":submit", ":reset", ":hidden")
+			.attr("disabled", "disabled");
+			
+			$(this).css("display", "none")
+			$("#unbindQFMapping").css("display", "inline-block")
+			$("#saveEditQuestionInfo").css("display", "none")
+			$("#editQuestionInfo").css("display", "inline-block")
+			$("#" + bindQFMappingBtnId).css("display", "inline-block")
+		})
+		
+		$("#unbindQFMapping").on("click", function() {
+			$.ajax({
+				type : 'PUT',
+				url : '/disputeInfo/update/question/qfMapping',
+				data : JSON.stringify({
+					"id":  $("#currentQuestion").val(),
+					"belongsToFalltypus": null
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("解绑失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+		
+		$("#saveEditQuestionInfo").on("click", function() {
+			$.ajax({
+				type : 'PUT',
+				url : '/disputeInfo/update/question/basic',
+				data : JSON.stringify({
+					"id":  $("#currentQuestion").val(),
+					"description": $("#currentQuestionDesc").val(),
+					"isRootQuestion": $("input:radio[name='isRootQuestionRadios']:checked").val(),
+					"questionType": $("input:radio[name='questionTypeRadios']:checked").val(),
+					"belongsToFalltypus": $("#selectFalltypus").find("option:selected").attr("id")
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("修改失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
 		$(".addQFMapping").on("click", function() {
 			$.ajax({
 				type : 'PUT',
@@ -129,10 +224,7 @@
 				}),
 				contentType : "application/json; charset=utf-8",
 				success : function(data) {
-					$(".addQFMapping").attr("disabled", "disabled")
-					$("#selectFalltypus").attr("disabled", "disabled")
-					$("#modalContent").empty().append("绑定成功")
-					$("#notificationModal").modal("show")
+					location.reload()
 				},
 				error : function(error) {
 					$("#modalContent").empty().append("绑定失败")

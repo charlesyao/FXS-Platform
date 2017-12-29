@@ -37,7 +37,11 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public Question save(Question question) {
-		question.setId(String.valueOf(new Random().nextInt(99999999)));
+		
+		if(ObjectUtils.isEmpty(question.getId())) {
+			question.setId(String.valueOf(new Random().nextInt(99999999)));
+		}
+		
 		return questionRepository.save(question);
 	}
 
