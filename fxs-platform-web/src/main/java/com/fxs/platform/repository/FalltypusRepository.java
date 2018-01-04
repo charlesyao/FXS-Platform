@@ -13,7 +13,6 @@ import com.fxs.platform.domain.Falltypus;
 public interface FalltypusRepository extends FxsRepository<Falltypus> {
 	
 	@Query("SELECT o FROM Falltypus o")
-	@Cacheable(value="__falltypus-data__") 
 	List<Falltypus> findAll();
 
 	@Query("SELECT o FROM Falltypus o WHERE o.parentTypeId=''")

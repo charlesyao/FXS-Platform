@@ -27,6 +27,10 @@
 				<div class="col-md-12 col-sm-12 btnNext">
 					<span id="selectedCity"></span>
 				</div>
+				<div th:if="${question.question eq null}">
+					<div>暂没有绑定问题</div>
+				</div>
+				<div th:if="${question.question ne null}">
 				<h3 th:text="${question.question.description}"></h3>
 				<div class="row">
 					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}" th:attr="isRoot=${question.question.isRootQuestion}">
@@ -34,6 +38,7 @@
 							<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
 						</li>
 					</ul>
+				</div>
 				</div>
 				<div id="nextQuestionContainer">
 				</div>
