@@ -20,7 +20,7 @@
 						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${session.pageableData}">
 							<li>案件类型 : <span th:text="${freeConsulting.falltypusType}"></span></li>
 							<li class="gray">
-								<span>地址 : <span th:text="${freeConsulting.location}"></span></span><br />
+								<span>案件发生地 : <span th:text="${freeConsulting.location}"></span></span><br />
 								<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span><br />
 								<span>案件提交时间: <span th:text="${freeConsulting.createAt}"></span></span>
 							</li>
