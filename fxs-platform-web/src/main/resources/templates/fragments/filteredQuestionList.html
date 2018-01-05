@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="questionList">
+	<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="800">
+		<tr bgcolor="lightblue">
+			<th>问题编号</th>
+			<th>问题描述</th>
+			<th>是否根问题</th>
+			<th>类型</th>
+			<th>操作</th>
+		</tr>
+		<tr th:each="question : ${questionList}">
+			<td th:text="${question.id}"></td>
+			<td th:text="${question.description}"></td>
+			<td th:text="${question.isRootQuestion eq 'Y' ? '是' : '否'}"></td>
+			<td th:text="${question.questionType eq null ? 'NA' : question.questionType eq '0' ? '单选题' : question.questionType eq '1' ? '多选题' : '用户输入'}"></td>
+			<td>
+				<a th:href="@{/disputeInfo/viewDisputeInfo/{id}(id=${question.id})}">查看</a>
+				<a href="" th:class="deleteQuestionLink"  th:id="${question.id}">删除</a>
+		 	</td>
+		</tr>
+	</table>
+</div>
+</html>

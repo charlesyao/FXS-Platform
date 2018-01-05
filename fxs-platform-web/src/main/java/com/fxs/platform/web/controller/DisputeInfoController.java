@@ -2,8 +2,6 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,19 +39,40 @@ public class DisputeInfoController {
 	 * @param map
 	 * @return
 	 */
-	@GetMapping("/getAllDisputeInfo/{filter}")
-	public String getAllDisputeInfo(@PathVariable("filter") String filter, ModelMap map) {
+	@GetMapping("/getAllDisputeInfo")
+	public String getAllDisputeInfo(ModelMap map) {
+		map.addAttribute("questionList", questionService.getAllQuestion());
+		map.addAttribute("availableFalltypus", falltypusService.findAll());
+		return "public_list_dispute_info";
+	}
+	
+	/**
+	 * 根据案件类型过滤已绑定的问题
+	 * 
+	 * @param filter
+	 * @param map
+	 * @return
+	 */
+	@GetMapping("/filterDisputeInfo/{filter}")
+	public String getDisputeInfoWithFilter(@PathVariable("filter") String filter, ModelMap map) {
 		
-		if (! ObjectUtils.isEmpty(filter) && !filter.equals("ALL")) {
+		if (! ObjectUtils.isEmpty(filter) && !filter.equals("-1")) {
 			map.addAttribute("questionList", questionService.filterAllQuestionsByFalltypus(filter));
 		} else {
 			map.addAttribute("questionList", questionService.getAllQuestion());
 		}
 		
 		map.addAttribute("availableFalltypus", falltypusService.findAll());
-		return "public_list_dispute_info";
+		return "/fragments/filteredQuestionList :: questionList";
 	}
 
+	/**
+	 * 创建问题
+	 * @param disputeInfo
+	 * @param bindingResult
+	 * @param map
+	 * @return
+	 */
 	@GetMapping(value = "/createDisputeInfo")
 	public String newDisputeInfoForm(@ModelAttribute(value = "disputeInfo") DisputeInfo disputeInfo,
 			BindingResult bindingResult, ModelMap map) {
