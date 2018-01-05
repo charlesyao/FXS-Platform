@@ -19,7 +19,7 @@
 				</select>
 			</div>
 			<br />
-			<div id="questionBlock">
+			<div id="questionBlock" th:fragment="questionBlock-fragment">
 				<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="800">
 					<tr bgcolor="lightblue">
 						<th>问题编号</th>
@@ -28,7 +28,7 @@
 						<th>类型</th>
 						<th>操作</th>
 					</tr>
-					<tr th:each="question : ${questionList}">
+					<tr th:if="${not #lists.isEmpty(questionList)}" th:each="question : ${questionList}">
 						<td th:text="${question.id}"></td>
 						<td th:text="${question.description}"></td>
 						<td th:text="${question.isRootQuestion eq 'Y' ? '是' : '否'}"></td>
@@ -38,6 +38,9 @@
 							<a href="" th:class="deleteQuestionLink"  th:id="${question.id}">删除</a>
 					 	</td>
 					</tr>
+					<tr th:if="${#lists.isEmpty(questionList)}">
+						<td colspan="5" style="text-align: center">没有数据</td>
+					</tr>
 				</table>
 			</div>
 			</form>
@@ -46,13 +49,30 @@
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer" ></div>
     <script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
     function retrieveQuestions(self) {
-    	console.log(self.value)
-        var url = '/disputeInfo/filterDisputeInfo/' + self.value;
+    	var fId = self.value
+        // var url = '/disputeInfo/filterDisputeInfo/' + self.value;
 
-        $("#questionBlock").empty().load(url);
+        // $("#questionBlock").empty().load(url);
+        
+        $.ajax({
+			type : 'GET',
+			//url : [[ @{/disputeInfo/filterDisputeInfo/{id}(id=fId)} ]],
+			url: '/disputeInfo/filterDisputeInfo/' + self.value,
+			contentType : "application/json; charset=utf-8",
+			success : function(data) {
+				console.log(data)
+				$('#questionBlock').html(data);
+			},
+			error : function(error) {
+				$("#modalContent").empty().append("解绑失败")
+				$("#notificationModal").modal("show")
+			}
+		});
     }
+    /*]]>*/
     </script>
 </body>
 </html>

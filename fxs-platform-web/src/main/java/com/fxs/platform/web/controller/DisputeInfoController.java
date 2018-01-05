@@ -63,7 +63,7 @@ public class DisputeInfoController {
 		}
 		
 		map.addAttribute("availableFalltypus", falltypusService.findAll());
-		return "/fragments/filteredQuestionList :: questionList";
+		return "public_list_dispute_info :: questionBlock-fragment";
 	}
 
 	/**
