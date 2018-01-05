@@ -2,6 +2,8 @@ package com.fxs.platform.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
 import com.fxs.platform.utils.ResponseCodeEnum;
 
+
 @Controller
 @RequestMapping("/disputeInfo")
 public class DisputeInfoController {
@@ -32,17 +35,22 @@ public class DisputeInfoController {
 
 	@Autowired
 	FalltypusService falltypusService;
-	
 	/**
 	 * 获取所有的纷争信息
 	 * 
 	 * @param map
 	 * @return
 	 */
-	@GetMapping("/getAllDisputeInfo")
-	public String getAllDisputeInfo(ModelMap map) {
-		map.addAttribute("questionList", questionService.getAllQuestion());
-
+	@GetMapping("/getAllDisputeInfo/{filter}")
+	public String getAllDisputeInfo(@PathVariable("filter") String filter, ModelMap map) {
+		
+		if (! ObjectUtils.isEmpty(filter) && !filter.equals("ALL")) {
+			map.addAttribute("questionList", questionService.filterAllQuestionsByFalltypus(filter));
+		} else {
+			map.addAttribute("questionList", questionService.getAllQuestion());
+		}
+		
+		map.addAttribute("availableFalltypus", falltypusService.findAll());
 		return "public_list_dispute_info";
 	}
 

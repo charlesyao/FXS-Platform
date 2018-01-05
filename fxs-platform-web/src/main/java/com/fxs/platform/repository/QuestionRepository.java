@@ -32,4 +32,7 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	
 	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL AND o.belongsToFalltypus=?1")
 	List<Question> findQuestionsByFalltypus(String fId);
+	
+	@Query("SELECT o FROM Question o WHERE o.belongsToFalltypus=?1")
+	List<Question> filterAllQuestionsByFalltypus(String fId);
 }

@@ -91,4 +91,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionRepository.findCurrentRootQuestion(belongsToFalltypus);
 	}
 
+	@Override
+	public List<Question> filterAllQuestionsByFalltypus(String fId) {
+		return questionRepository.filterAllQuestionsByFalltypus(fId);
+	}
+
 }

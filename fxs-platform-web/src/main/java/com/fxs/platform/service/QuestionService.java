@@ -27,5 +27,7 @@ public interface QuestionService {
 	
 	List<Question> findQuestionsByFalltypus(String fId);
 	
+	List<Question> filterAllQuestionsByFalltypus(String fId);
+	
 	void updateQFMapping(Question question);
 }

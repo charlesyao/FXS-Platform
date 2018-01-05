@@ -7,6 +7,17 @@
 	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
 	<div class="mainPart">
 		<div class="container-fluid">
+			<div>
+				<span>所属案件类型： </span>
+				<select onchange="self.location=self.location.href.substring(0, self.location.href.lastIndexOf('/'))+'/'+this.options[this.selectedIndex].value">
+					<option th:value="-1">选择从属案件类型</option>
+					<option th:each="belongsToFalltypus : ${availableFalltypus}" 
+							th:id="${belongsToFalltypus.id}" 
+							th:value="${belongsToFalltypus.id}" 
+							th:text="${belongsToFalltypus.name}"></option>
+				</select>
+			</div>
+			<br />
 			<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="800">
 				<tr bgcolor="lightblue">
 					<th>问题编号</th>
