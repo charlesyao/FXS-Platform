@@ -92,10 +92,10 @@
 		})
 		
 		$("input[type='radio'][name='isBasicQuestion']").on("click", function() {
-			if($(this).val() === 'N') {
-				$("input[type='radio'][name='questionType']").attr("disabled", "disabled")
+			if($(this).val() === 'Y') {
+				$("input[name='questionType']").prop("checked", false).attr("disabled", "disabled")
 			} else {
-				$("input[type='radio'][name='questionType']").removeAttr("disabled", "disabled")
+				$("input[name='questionType']").removeAttr("disabled")
 			}
 		})
 	})
