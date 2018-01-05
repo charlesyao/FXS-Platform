@@ -53,7 +53,7 @@
 									<li th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}">尚未有律师回复</li>
 								</li>
 								<li class="line"></li>
-								<li class="orange">您的问卷调查信息</li>
+								<li class="orange">您的案件描述如下</li>
 								<ul th:each="qa : ${caseDetailInfo.qaMapping}">
 									<li>问题: <span th:text="${qa.questionDesc}"></span></li>
 									<li>答案: <span th:text="${qa.answerDesc}"></span></li>
