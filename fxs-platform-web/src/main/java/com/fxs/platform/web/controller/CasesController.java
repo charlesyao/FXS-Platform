@@ -114,8 +114,7 @@ public class CasesController {
 	 * @return
 	 */
 	@GetMapping("/user/case")
-	@ResponseBody
-	public ResponseMessage<Page<CasesDto>> query(
+	public String query(
 						CasesCondition condition,
 						ModelMap map,
 						@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -132,7 +131,7 @@ public class CasesController {
 	    	session.setAttribute(SystemConstants.SEARCH_FROM_KEY, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
 	    }
 	    
-		return Result.success(cases);
+	    return "lawyer_dashboard :: lawsuitsBlock-fragment";
 	}
 
 

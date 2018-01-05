@@ -53,7 +53,7 @@
 									</div>
 								</div>
 							</ul>
-							<div id="lawsuits">
+							<div id="lawsuitsBlock" th:fragment="lawsuitsBlock-fragment">
 								<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${session.pageableData}">
 									<li class="listTitle">案件类型 : <b th:text="${myBidCase.parentType}"></b> 
 										<span>案件编号 : <span th:text="${myBidCase.id}"></span></span>
@@ -68,8 +68,8 @@
 										</div>
 									</div>
 								</ul>
+								<div th:include="fragments/page :: pager" th:remove="tag"></div>
 							</div>
-							<div th:include="fragments/page :: pager" th:remove="tag"></div>
 						</div>
 					</div>
 				</section>
@@ -106,7 +106,7 @@
 					url : "/user/case?parentType="+ids+"&caseType=1&"+(viewUnRead=='N' ? "isRead=N" : "")+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD",
 					success : function(data) {
 						console.log(data)
-						location.reload();
+						$('#lawsuitsBlock').html(data);
 					},
 					error : function(error) {
 						console.log(error)
