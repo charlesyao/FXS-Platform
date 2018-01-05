@@ -24,6 +24,10 @@
 												问题 #1 :
 												<input type="text" size="50" th:field="*{question}" />
 												<br /><br />
+												是否是基本问题？
+												<input type="radio" th:name="isBasicQuestion" th:value="Y" th:text="是" cols="29" rows="3" />
+												<input type="radio" th:name="isBasicQuestion" th:value="N" th:text="否" cols="29" rows="3" />
+												<br /><br />
 												是否选为根问题？
 												<input type="radio" th:value="Y" th:text="是" cols="29" rows="3" th:field="*{isRootQuestion}" />
 												<input type="radio" th:value="N" th:text="否" cols="29" rows="3" th:field="*{isRootQuestion}" />
@@ -85,6 +89,14 @@
 	$(function() {
 		$("#addButton").on("click", () => {
 			$("#TextBoxesGroups").append($("#TextBoxesGroup").html())
+		})
+		
+		$("input[type='radio'][name='isBasicQuestion']").on("click", function() {
+			if($(this).val() === 'N') {
+				$("input[type='radio'][name='questionType']").attr("disabled", "disabled")
+			} else {
+				$("input[type='radio'][name='questionType']").removeAttr("disabled", "disabled")
+			}
 		})
 	})
 	</script>

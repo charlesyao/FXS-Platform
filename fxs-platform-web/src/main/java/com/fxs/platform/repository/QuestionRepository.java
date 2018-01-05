@@ -17,6 +17,9 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	@Query("SELECT o FROM Question o WHERE o.isRootQuestion='Y'")
 	public Question findRootQuestion();
 	
+	@Query("SELECT o FROM Question o WHERE o.isRootQuestion='Y' AND o.belongsToFalltypus=?1")
+	public Question findCurrentRootQuestion(String belongsToFalltypus);
+	
 	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL")
 	public List<Question> findOptionalQuestions();
 	

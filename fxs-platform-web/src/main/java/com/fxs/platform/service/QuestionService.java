@@ -21,6 +21,8 @@ public interface QuestionService {
 	
 	Question findRootQuestion();
 	
+	Question findCurrentRootQuestion(String belongsToFalltypus);
+	
 	List<Question> findOptionalQuestions();
 	
 	List<Question> findQuestionsByFalltypus(String fId);

@@ -106,7 +106,8 @@ public class FalltypusController {
 			QuestionDto qDto = new QuestionDto();
 			List<Answer> answerList = new ArrayList<Answer>();
 			
-			Question rootQuestion = questionService.findRootQuestion();
+			//查找与当前案件类型关联的跟问题
+			Question rootQuestion = questionService.findCurrentRootQuestion(id);
 			
 			if (! ObjectUtils.isEmpty(rootQuestion)) {
 				answerList = answerService.getAllAnswerByQuestionId(rootQuestion.getId());

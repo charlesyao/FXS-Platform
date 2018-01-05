@@ -86,4 +86,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionRepository.findQuestionsByFalltypus(fId);
 	}
 
+	@Override
+	public Question findCurrentRootQuestion(String belongsToFalltypus) {
+		return questionRepository.findCurrentRootQuestion(belongsToFalltypus);
+	}
+
 }
