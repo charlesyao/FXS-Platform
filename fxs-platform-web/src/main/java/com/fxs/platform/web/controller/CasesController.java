@@ -129,9 +129,11 @@ public class CasesController {
 	    		&& condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
 	    	
 	    	session.setAttribute(SystemConstants.SEARCH_FROM_KEY, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
+	    	
+	    	return "lawyer_dashboard :: lawsuitsBlock-fragment";
 	    }
 	    
-	    return "lawyer_dashboard :: lawsuitsBlock-fragment";
+	    return "lawyer_case_pool :: consultingBlock-fragment";
 	}
 
 

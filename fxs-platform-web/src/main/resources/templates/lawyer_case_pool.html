@@ -45,29 +45,31 @@
 									</div>
 								</div>
 								<div class="row mycaseCheckBox">
-									<label><input type="checkbox" /> 只看未读的竞标</label>
+									<label><input type="checkbox" id="viewUnRead"/> 只看未读的竞标</label>
 								</div>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
-										<button type="button" class="btn btn-primary btn-lg">查询</button>
+										<button type="button" id="searchConsultingWithFilter" class="btn btn-primary btn-lg">查询</button>
 									</div>
 								</div>
 							</ul>
-							<ul th:if="${not #lists.isEmpty(session.pageableData)}" class="writeInfoText ulCell myCell centerLi" th:each="freeConsulting : ${session.pageableData}">
-								<li class="listTitle">案件类型 : <b th:text="${freeConsulting.falltypusType}"></b> 
-									<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span>
-								</li>
-								<li>咨询发布时间 : <span th:text="${freeConsulting.createAt}"></span></li>
-								<div class="row">
-									<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-										<a th:href="@{/user/case/lawyer/consulting/viewDetail/{id}(id=${freeConsulting.id})}" type="button" class="btn btn-primary btn-lg">查看详情</a>
+							<div id="consultingBlock" th:fragment="consultingBlock-fragment">
+								<ul th:if="${not #lists.isEmpty(session.pageableData)}" class="writeInfoText ulCell myCell centerLi" th:each="freeConsulting : ${session.pageableData}">
+									<li class="listTitle">案件类型 : <b th:text="${freeConsulting.falltypusType}"></b> 
+										<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span>
+									</li>
+									<li>咨询发布时间 : <span th:text="${freeConsulting.createAt}"></span></li>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+											<a th:href="@{/user/case/lawyer/consulting/viewDetail/{id}(id=${freeConsulting.id})}" type="button" class="btn btn-primary btn-lg">查看详情</a>
+										</div>
 									</div>
+								</ul>
+								<div th:if="${not #lists.isEmpty(session.pageableData)}">
+									<div th:include="fragments/page :: pager" th:remove="tag"></div>
 								</div>
-							</ul>
-							<div th:if="${not #lists.isEmpty(session.pageableData)}">
-								<div th:include="fragments/page :: pager" th:remove="tag"></div>
+								<ul th:if="${#lists.isEmpty(session.pageableData)}" class="writeInfoText ulCell myCell">未找到相关记录</ul>
 							</div>
-							<ul th:if="${#lists.isEmpty(session.pageableData)}" class="writeInfoText ulCell myCell">未找到相关记录</ul>
 						</div>
 					</div>
 				</section>
@@ -75,5 +77,35 @@
 		</div>
 	</div>
 	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(function() {
+			var ids= new Array()
+			var viewUnRead = "Y"
+			
+			$("#viewUnRead").on("click", function() {
+				if($(this).is(":checked")) {
+					viewUnRead = "N"
+				} else {
+					viewUnRead = "Y"
+				}
+			})
+			
+			$("#searchConsultingWithFilter").on("click", function() {
+				$.ajax({
+					type : 'GET',
+					url : "/user/case?caseType=0&"+(viewUnRead=='N' ? "isRead=N" : "isRead=Y")+"&searchFrom=SEARCH_FROM_LAWYER_CASEPOLL",
+					success : function(data) {
+						console.log(data)
+						$('#consultingBlock').html(data);
+					},
+					error : function(error) {
+						console.log(error)
+					}
+				});
+			})
+		})
+		/*]]>*/
+	</script>
 </body>
 </html>

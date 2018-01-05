@@ -103,7 +103,7 @@
 			$("#searchCases").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?parentType="+ids+"&caseType=1&"+(viewUnRead=='N' ? "isRead=N" : "")+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD",
+					url : "/user/case?parentType="+ids+"&caseType=1&"+(viewUnRead=='N' ? "isRead=N" : "isRead=Y")+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD",
 					success : function(data) {
 						console.log(data)
 						$('#lawsuitsBlock').html(data);
