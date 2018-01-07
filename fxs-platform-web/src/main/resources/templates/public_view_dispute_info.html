@@ -93,7 +93,7 @@
 									<th colspan="2" >匹配下级问题</th>
 								</tr>
 								<tr th:if="${mappedQuestionAnswers ne null}" th:each="answer : ${mappedQuestionAnswers}">
-									<td width="150">
+									<td width="100">
 										<input th:id="${answer.id}+_currentAnswer" disabled="disabled" type="text" th:value="${answer.id}"/>
 									</td>
 									<td width="150">
@@ -117,6 +117,7 @@
 												class="addQAMapping">绑定</button>
 										<button type="button" th:class="unbindQAMapping" th:id="${answer.id}+_currentUnbind" th:if="${answer.nextQuestionId ne null}">解绑</button>
 										<button type="button" th:class="editAnswerInfo" th:id="${answer.id}+_editAnswerInfoBtn">编辑</button>
+										<button type="button" th:class="deleteAnswerInfo" th:id="${answer.id}+_deleteAnswerInfoBtn">删除</button>
 										<button type="button" th:class="saveEditAnswerInfoBtn" style="display: none" th:id="${answer.id}+_saveEditAnswerInfoBtn">保存</button>
 										<button type="button" th:class="cancelEditAnswerInfo" style="display: none" th:id="${answer.id}+_cancelEditAnswerInfoBtn">取消</button>
 									</td>
@@ -311,6 +312,23 @@
 				}
 			});
 		})
+
+        $(".deleteAnswerInfo").on("click", function() {
+            var answerId = $(this).attr("id").split("_")[0]
+
+            $.ajax({
+                type : 'DELETE',
+                url : '/disputeInfo/answer/delete/' + answerId,
+                contentType : "application/json; charset=utf-8",
+                success : function(data) {
+                    location.reload();
+                },
+                error : function(error) {
+                    $("#modalContent").empty().append("修改失败")
+                    $("#notificationModal").modal("show")
+                }
+            });
+        })
 		
 		$(".unbindQAMapping").on("click", function() {
 			var _this = this

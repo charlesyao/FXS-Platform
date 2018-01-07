@@ -83,12 +83,10 @@ $(function() {
         var questionInfoId = $(this).attr("id");
         $.ajax({
             type : 'DELETE',
-            url : '/disputeInfo/delete/' + questionInfoId,
+            url : '/disputeInfo/question/delete/' + questionInfoId,
             contentType : "application/json; charset=utf-8",
             success : function(data) {
-                $("#modalContent").empty().append("删除成功")
-                $("#notificationModal").modal("show")
-                //later need to add js to remove the parent <tr> element
+                location.reload();
             },
             error : function(error) {
                 $("#modalContent").empty().append("删除失败")

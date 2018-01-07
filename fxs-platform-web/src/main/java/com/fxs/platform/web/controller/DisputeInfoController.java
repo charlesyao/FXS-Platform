@@ -139,12 +139,20 @@ public class DisputeInfoController {
 		return "public_view_dispute_info";
 	}
 
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/question/delete/{id}")
     @ResponseBody
-	public ResponseMessage<String> delete(@PathVariable("id") String id) {
+	public ResponseMessage<String> deleteQuestion(@PathVariable("id") String id) {
 
 		questionService.delete(id);
         return Result.success("success");
+	}
+
+	@DeleteMapping(value = "/answer/delete/{id}")
+	@ResponseBody
+	public ResponseMessage<String> deleteAnswer(@PathVariable("id") String id) {
+
+		answerService.delete(id);
+		return Result.success("success");
 	}
 	
 	@PostMapping(value = "/updateAnswer")
@@ -220,7 +228,7 @@ public class DisputeInfoController {
 	/**
 	 * 更新问题信息
 	 * 
-	 * @param question
+	 * @param answer
 	 * @return
 	 */
 	@PutMapping(value = "/update/answer/basic")
@@ -249,7 +257,7 @@ public class DisputeInfoController {
 	/**
 	 * 解除答案和案件类型的绑定关系
 	 * 
-	 * @param question
+	 * @param answer
 	 * @return
 	 */
 	@PutMapping(value = "/update/answer/qaMapping")
