@@ -173,12 +173,20 @@ public class DisputeInfoController {
 	@PutMapping(value = "/update/question/basic")
 	@ResponseBody
 	public ResponseMessage<String> updateQuestionBasicInfo(@RequestBody Question question) {
-		Question rootQuestion = questionService.findRootQuestion();
 		
-		if(!ObjectUtils.isEmpty(rootQuestion)) {
-			return Result.error(String.valueOf(ResponseCodeEnum.ERROR.getCode()), "不能有多个根问题存在");
-		}
 		Question qInfo = questionService.getByQuestionId(question.getId());
+		
+		Question rootQuestion = null;
+		
+		//在编辑问题的时候，如果将当前问题设置为根问题，则需要判断当前选择的带绑定的案件类型下是否已经有绑定根问题，如有则不能重复绑定
+		if ("Y".equals(question.getIsRootQuestion())) {
+			rootQuestion = questionService.findCurrentRootQuestion(question.getBelongsToFalltypus());
+		}
+		
+		if(!ObjectUtils.isEmpty(rootQuestion) && !rootQuestion.getBelongsToFalltypus().equals(qInfo.getBelongsToFalltypus())) {
+			return Result.error(String.valueOf(ResponseCodeEnum.ERROR.getCode()), "同一个案件类型不能绑定多个根问题");
+		}
+		
 		
 		if(!ObjectUtils.isEmpty(qInfo)) {
 			
