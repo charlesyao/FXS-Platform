@@ -94,7 +94,7 @@
 			$("#searchConsultingWithFilter").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?caseType=0&"+(viewUnRead=='N' ? "isRead=N" : "isRead=Y")+"&searchFrom=SEARCH_FROM_LAWYER&requestFrom="+location.pathname,
+					url : "/user/case?caseType=0&"+(viewUnRead=='N' ? "isRead=N" : "isRead=Y")+"&searchFrom=SEARCH_FROM_LAWYER_CASEPOOL&requestFrom="+location.pathname,
 					success : function(data) {
 						console.log(data)
 						$('#consultingBlock').html(data);

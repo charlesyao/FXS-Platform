@@ -112,8 +112,8 @@ public class DashboardController {
 		    map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
 		    
 		    CasesCondition originalCondition = (CasesCondition)session.getAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION);
-		    if(!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.SEARCH_FROM_KEY)) 
-		    		&& session.getAttribute(SystemConstants.SEARCH_FROM_KEY).equals(SystemConstants.SEARCH_FROM_LAWYER)) {
+		    if(!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) 
+		    		&& session.getAttribute(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD).equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
 		    	Page<CasesDto> cases = casesService.query(originalCondition, pageable);
 		    	pageWrapper = new PageWrapper<CasesDto>(cases, originalCondition.getRequestFrom());
 
