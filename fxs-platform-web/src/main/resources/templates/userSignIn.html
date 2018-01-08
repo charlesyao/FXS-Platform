@@ -34,8 +34,8 @@
 	                                        <div class="form-group" style="position: relative;">
 	                                            <input th:name="imageCode" type="text" class="form-control" th:id="imageCode" placeholder="输入验证码" />
 	                                            <span id="image_code">
-													<img th:src="@{/code/image}" style="height: 44px;" />
-													<a href="#" onclick="javascript:window.location.reload(); event.preventDefault();">点击刷新</a>
+													<img th:id="imageVerificationCode" th:src="@{/code/image}" style="height: 44px;" />
+													<a href="javascript:refreshImageCode()">点击刷新</a>
 												</span>
 	                                        </div>
 	                                        <label class="custom-control custom-checkbox mt-2">
@@ -65,5 +65,10 @@
 	        </section>
 		</div>
 		<div th:replace="fragments/public_footer :: public-footer" ></div>
+		<script type="text/javascript">
+			function refreshImageCode() {
+	            $("#imageVerificationCode").attr("src", "/code/image");
+	        }
+		</script>
     </body>
 </html>
