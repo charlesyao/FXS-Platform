@@ -17,7 +17,7 @@
 			<section class="col-md-12 col-sm-12 writeInfo space20">
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
-						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${session.pageableData}">
+						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${pageableData}">
 							<li>案件类型 : <span th:text="${freeConsulting.falltypusType}"></span></li>
 							<li class="gray">
 								<span>案件发生地 : <span th:text="${freeConsulting.location}"></span></span><br />
@@ -27,7 +27,7 @@
 							<br />
 							<a th:href="@{/user/case/litigant/consulting/viewDetail/{id}(id=${freeConsulting.id})}">查看详情</a>
 						</ul>
-						<div th:include="fragments/page :: pager" th:remove="tag"></div>
+						<div th:include="fragments/page :: paginationbar" th:remove="tag"></div>
 					</div>
 					<div class="col-md-4 col-sm-4">
 						<div class="writeInfoRight ulCell">

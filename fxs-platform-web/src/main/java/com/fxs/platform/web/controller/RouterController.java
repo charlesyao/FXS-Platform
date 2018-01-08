@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
+import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
 import com.fxs.platform.dto.CasesDto;
@@ -118,11 +119,12 @@ public class RouterController {
 	 * @param size
 	 * @return
 	 */
-	@GetMapping("/{userRole}/case/{caseType}/{action}")
+	@GetMapping("/{userRole}/case/{type}/{action}")
 	public String router(@PathVariable String userRole, 
-							 @PathVariable String caseType, 
+							 @PathVariable String type, 
 							 @PathVariable String action, 
 							 CasesCondition condition,
+							 HttpServletRequest request,
 							 ModelMap map,
 							 @RequestParam(value = "page", defaultValue = "0") Integer page,
 				             @RequestParam(value = "size", defaultValue = "5") Integer size) {
@@ -130,7 +132,7 @@ public class RouterController {
 		String target = "";
 		
 		if(userRole.equals("public")) {//公共打官司法律咨询路由
-			if (caseType.equals("consulting")) {//法律咨询总路由
+			if (type.equals("consulting")) {//法律咨询总路由
 				if (action.equals("free")) {//免费法律咨询路由
 					
 					//map.addAttribute("firstLevelFalltypus", falltypusList);
@@ -145,7 +147,7 @@ public class RouterController {
 					target = "public_consulting_free_step3";
 				}
 				
-			} else if (caseType.equals("lawsuit")) {
+			} else if (type.equals("lawsuit")) {
 				if (action.equals("lawyer")) {//找律师路由
 
 					target = "public_lawsuit_lawyer";
@@ -178,28 +180,37 @@ public class RouterController {
 				}
 			}
 		} else if (userRole.equals("litigant")) {//当事人页面路由
-			if(caseType.equals("consulting")) {
+			if(type.equals("consulting")) {
 				if (action.equals("free")) {
 					//获取免费咨询信息列表
 					Sort sort = new Sort(Sort.Direction.DESC, "id");
 				    Pageable pageable = new PageRequest(page, size, sort);
-				    session.setAttribute("pageableData", casesService.query(condition, pageable));
-					
+				    condition.setCaseType("0");
+				    PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(casesService.query(condition, pageable), request.getRequestURI());
+				    map.addAttribute("pageableData", pageWrapper.getContent());
+			        map.addAttribute("page", pageWrapper);
+			        
 					target = "litigant_consulting_free";
 				} else if (action.equals("phone")) {
 					//获取所有电话咨询信息列表
 					Sort sort = new Sort(Sort.Direction.DESC, "id");
 				    Pageable pageable = new PageRequest(page, size, sort);
-				    session.setAttribute("pageableData", casesService.findAllReservation(pageable));
 					
+				    PageWrapper<Reservation> pageWrapper = new PageWrapper<Reservation>(casesService.findAllReservation(pageable), request.getRequestURI());
+				    map.addAttribute("pageableData", pageWrapper.getContent());
+			        map.addAttribute("page", pageWrapper);
+			        
 					target = "litigant_consulting_phone";
 				}
-			} else if (caseType.equals("lawsuit")) {
+			} else if (type.equals("lawsuit")) {
 				//获取当事人的打官司信息列表
 				Sort sort = new Sort(Sort.Direction.DESC, "id");
 			    Pageable pageable = new PageRequest(page, size, sort);
-			    session.setAttribute("pageableData", casesService.query(condition, pageable));
-				
+			    condition.setCaseType("1");
+			    PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(casesService.query(condition, pageable), request.getRequestURI());
+			    map.addAttribute("pageableData", pageWrapper.getContent());
+		        map.addAttribute("page", pageWrapper);
+		        
 				target = "litigant_lawsuit";
 			}
 		} else if (userRole.equals("lawyer")) {//律师页面路由
