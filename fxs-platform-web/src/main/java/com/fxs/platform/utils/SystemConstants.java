@@ -18,4 +18,6 @@ public class SystemConstants {
 	public static final String SEARCH_FROM_FALLTYPUS = "SEARCH_FROM_FALLTYPUS";
 	public static final String SEARCH_FROM_KEY = "SEARCH_FROM_KEY";
 	public static final String SEARCH_FROM_LAWYER_DASHBOARD = "SEARCH_FROM_LAWYER_DASHBOARD";
+	public static final String CASE_DATASET_WITH_FILTER_CONDITION = "CASE_DATASET_WITH_FILTER_CONDITION";
+	public static final String REQUEST_FROM_LAWYER_USER_CENTER = "REQUEST_FROM_LAWYER_USER_CENTER";
 }

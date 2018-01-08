@@ -4,40 +4,32 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="page">
 <body>
-<div th:fragment="pager">
-    <div class="text-right" th:with="baseUrl=${#httpServletRequest.getRequestURL().toString()},pars=${#httpServletRequest.getQueryString() eq null ? '' : new String(#httpServletRequest.getQueryString().getBytes('iso8859-1'), 'UTF-8')}">
-        <ul style="margin:0px;" class="pagination" th:with="newPar=${new java.lang.String(pars eq null ? '' : pars).replace('page='+(session.pageableData.number), '')},
-                                                pageTmpUrl=${baseUrl+'?'+newPar},
-                                                pageUrl=${pageTmpUrl.endsWith('&amp;') ? pageTmpUrl.substring(0, pageTmpUrl.length()-1):pageTmpUrl}" >
-
-            <li><a href="#" th:href="@{${pageUrl}(page=0)}">首页</a></li>
-            <li th:if="${session.pageableData.hasPrevious()}"><a href="#" th:href="@{${pageUrl}(page=${session.pageableData.number-1})}">上一页</a></li>
-
-            <!--总页数小于等于10-->
-            <div th:if="${(session.pageableData.totalPages le 10) and (session.pageableData.totalPages gt 0)}" th:remove="tag">
-                <div th:each="pg : ${#numbers.sequence(0, session.pageableData.totalPages - 1)}" th:remove="tag">
-                        <span th:if="${pg eq session.pageableData.getNumber()}" th:remove="tag">
-                            <li class="active"><span class="current_page line_height" th:text="${pg+1}">${pageNumber}</span></li>
-                        </span>
-                    <span th:unless="${pg eq session.pageableData.getNumber()}" th:remove="tag">
-                            <li><a href="#" th:href="@{${pageUrl}(page=${pg})}" th:text="${pg+1}"></a></li>
-                        </span>
-                </div>
-            </div>
-
-            <!-- 总数数大于10时 -->
-            <div th:if="${session.pageableData.totalPages gt 10}" th:remove="tag">
-                <li th:if="${session.pageableData.number-2 ge 0}"><a href="#" th:href="@{${pageUrl}(page=${session.pageableData.number}-2)}" th:text="${session.pageableData.number-1}"></a></li>
-                <li th:if="${session.pageableData.number-1 ge 0}"><a href="#" th:href="@{${pageUrl}(page=${session.pageableData.number}-1)}" th:text="${session.pageableData.number}"></a></li>
-                <li class="active"><span class="current_page line_height" th:text="${session.pageableData.number+1}"></span></li>
-                <li th:if="${session.pageableData.number+1 lt session.pageableData.totalPages}"><a href="#" th:href="@{${pageUrl}(page=${session.pageableData.number}+1)}" th:text="${session.pageableData.number+2}"></a></li>
-                <li th:if="${session.pageableData.number+2 lt session.pageableData.totalPages}"><a href="#" th:href="@{${pageUrl}(page=${session.pageableData.number}+2)}" th:text="${session.pageableData.number+3}"></a></li>
-            </div>
-            <li th:if="${session.pageableData.hasNext()}"><a href="#" th:href="@{${pageUrl}(page=${session.pageableData.number+1})}">下一页</a></li>
-            <li><a href="#" th:href="${session.pageableData.totalPages le 0 ? pageUrl+'page=0':pageUrl+'&amp;page='+(session.pageableData.totalPages-1)}">尾页</a></li>
-            <li><span th:utext="'共'+${session.pageableData.totalPages}+'页 / '+${session.pageableData.totalElements}+' 条'"></span></li>
-        </ul>
+<!-- Pagination Bar -->
+    <div th:fragment='paginationbar'>
+        <div>
+            <ul class='pagination pagination-centered'>
+                <li th:class="${page.firstPage}?'disabled':''">
+                <span th:if='${page.firstPage}'>← First</span>
+                <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>← First</a>
+                </li>
+                <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                <span th:if='${not page.hasPreviousPage}'>«</span>
+                <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}' title='Go to previous page'>«</a>
+                </li>
+                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+                <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span th:text='${item.number}'>1</span></a>
+                </li>
+                <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                <span th:if='${not page.hasNextPage}'>»</span>
+                <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}' title='Go to next page'>»</a>
+                </li>
+                <li th:class="${page.lastPage}? 'disabled' : ''">
+                <span th:if='${page.lastPage}'>Last →</span>
+                <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last →</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </body>
 </html>

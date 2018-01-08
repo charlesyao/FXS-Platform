@@ -20,6 +20,8 @@ public class CasesCondition {
 	private String isRead;
 	
 	private String searchFrom;
+	
+	private String requestFrom;
 
 	public String getIsRead() {
 		return isRead;
@@ -75,5 +77,13 @@ public class CasesCondition {
 
 	public void setSearchFrom(String searchFrom) {
 		this.searchFrom = searchFrom;
+	}
+
+	public String getRequestFrom() {
+		return requestFrom;
+	}
+
+	public void setRequestFrom(String requestFrom) {
+		this.requestFrom = requestFrom;
 	}
 }

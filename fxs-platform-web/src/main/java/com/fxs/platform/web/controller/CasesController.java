@@ -38,6 +38,7 @@ import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.DetailedInquiryService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.CaseStatus;
+import com.fxs.platform.utils.PageWrapper;
 import com.fxs.platform.utils.ResponseCodeEnum;
 import com.fxs.platform.utils.SystemConstants;
 
@@ -123,12 +124,19 @@ public class CasesController {
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
 	    Page<CasesDto> cases = casesService.query(condition, pageable);
-	    session.setAttribute("pageableData", cases);
+	    
+	    
+	    PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(cases, condition.getRequestFrom());
+	    map.addAttribute("pageableData", pageWrapper.getContent());
+        map.addAttribute("page", pageWrapper);
+        
+        
 	    
 	    if(!ObjectUtils.isEmpty(condition.getSearchFrom())
 	    		&& condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
 	    	
 	    	session.setAttribute(SystemConstants.SEARCH_FROM_KEY, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
+	    	session.setAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION, condition);
 	    	
 	    	return "lawyer_dashboard :: lawsuitsBlock-fragment";
 	    }

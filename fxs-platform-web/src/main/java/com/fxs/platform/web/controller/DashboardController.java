@@ -1,5 +1,6 @@
 package com.fxs.platform.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,16 @@ import com.fxs.platform.domain.Cases;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
+import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.CaseType;
+import com.fxs.platform.utils.PageWrapper;
 import com.fxs.platform.utils.SessionVariableManager;
 import com.fxs.platform.utils.SystemConstants;
 import com.fxs.platform.utils.UserManager;
+
 
 @Controller
 @RequestMapping("/user")
@@ -61,8 +65,9 @@ public class DashboardController {
 	@GetMapping("/dashboard")
 	public String dashboard(
 				Authentication authentication, 
+				CasesCondition condition,
 				ModelMap map, 
-				ServletWebRequest request,
+				HttpServletRequest request,
 				@RequestParam(value = "page", defaultValue = "0") Integer page,
                 @RequestParam(value = "size", defaultValue = "5") Integer size) throws Exception {
 		
@@ -94,18 +99,32 @@ public class DashboardController {
 		}*/
 
 		if (UserManager.isLawyer(UserManager.getRoles())) {
+		    
+			if (SystemConstants.REQUEST_FROM_LAWYER_USER_CENTER.equals(condition.getRequestFrom())) {
+				SessionVariableManager.clearSession(session);
+			}
+			
 			Sort sort = new Sort(Sort.Direction.DESC, "id");
 		    Pageable pageable = new PageRequest(page, size, sort);
-		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
+		    
+		    PageWrapper<CasesDto> pageWrapper;
 		    
 		    map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
 		    
+		    CasesCondition originalCondition = (CasesCondition)session.getAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION);
 		    if(!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.SEARCH_FROM_KEY)) 
 		    		&& session.getAttribute(SystemConstants.SEARCH_FROM_KEY).equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
+		    	Page<CasesDto> cases = casesService.query(originalCondition, pageable);
+		    	pageWrapper = new PageWrapper<CasesDto>(cases, originalCondition.getRequestFrom());
+
 		    } else {
-		    	session.setAttribute("pageableData", myBidCases);
+			    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
+			    pageWrapper = new PageWrapper<CasesDto>(myBidCases, request.getRequestURI());
 		    }
 		    
+		    map.addAttribute("pageableData", pageWrapper.getContent());
+	        map.addAttribute("page", pageWrapper);
+	        
 			target = "lawyer_dashboard";
 		} else if (UserManager.isAdmin(UserManager.getRoles())) {
 			
@@ -117,8 +136,6 @@ public class DashboardController {
 			
 			target = "/accessDenied";
 		}
-		
-		SessionVariableManager.clearSession(session);
 		
 		return target;
 	}
