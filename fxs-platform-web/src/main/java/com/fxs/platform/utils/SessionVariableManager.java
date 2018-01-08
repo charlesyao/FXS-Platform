@@ -14,6 +14,7 @@ public class SessionVariableManager {
 		session.removeAttribute(SystemConstants.SEARCH_FROM_FALLTYPUS);
 		session.removeAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION);
 		session.removeAttribute(SystemConstants.REQUEST_FROM_LAWYER_USER_CENTER);
+		session.removeAttribute(SystemConstants.SEARCH_FROM_LAWYER);
 		session.setAttribute(SystemConstants.QA_MAP, new HashMap<Integer, Object[]>());
 	}
 }

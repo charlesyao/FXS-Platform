@@ -3,9 +3,11 @@ package com.fxs.platform.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,6 +27,7 @@ import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.domain.User;
 import com.fxs.platform.domain.UserProfile;
+import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.dto.QuestionDto;
 import com.fxs.platform.repository.condition.CasesCondition;
 import com.fxs.platform.security.core.support.ResponseMessage;
@@ -35,6 +38,7 @@ import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
 import com.fxs.platform.service.RoleService;
 import com.fxs.platform.utils.CaseType;
+import com.fxs.platform.utils.PageWrapper;
 import com.fxs.platform.utils.SystemConstants;
 
 @Controller
@@ -207,14 +211,29 @@ public class RouterController {
 	@GetMapping("/lawyer/case_pool")
 	public String casePool(
 				ModelMap map,
+				HttpServletRequest request,
 				@RequestParam(value = "page", defaultValue = "0") Integer page,
-                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+                @RequestParam(value = "size", defaultValue = "2") Integer size) {
 		
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
+	    PageWrapper<CasesDto>  pageWrapper;
 	    
-	    session.setAttribute("pageableData", casesService.findAll(CaseType.CONSULTING.getType(), pageable));
-		
+	    CasesCondition originalCondition = (CasesCondition)session.getAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION);
+	    if(!ObjectUtils.isEmpty(session.getAttribute(SystemConstants.SEARCH_FROM_KEY)) 
+	    		&& session.getAttribute(SystemConstants.SEARCH_FROM_KEY).equals(SystemConstants.SEARCH_FROM_LAWYER)) {
+	    	Page<CasesDto> cases = casesService.query(originalCondition, pageable);
+	    	pageWrapper = new PageWrapper<CasesDto>(cases, originalCondition.getRequestFrom());
+
+	    } else {
+		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
+		    pageWrapper = new PageWrapper<CasesDto>(myBidCases, request.getRequestURI());
+	    }
+	    
+	    map.addAttribute("pageableData", pageWrapper.getContent());
+        map.addAttribute("page", pageWrapper);
+        
+        
 		return "lawyer_case_pool";
 	}
 

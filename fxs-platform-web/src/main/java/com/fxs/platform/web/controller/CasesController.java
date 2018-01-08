@@ -119,7 +119,7 @@ public class CasesController {
 						CasesCondition condition,
 						ModelMap map,
 						@RequestParam(value = "page", defaultValue = "0") Integer page,
-		                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+		                @RequestParam(value = "size", defaultValue = "2") Integer size) {
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
@@ -133,9 +133,9 @@ public class CasesController {
         
 	    
 	    if(!ObjectUtils.isEmpty(condition.getSearchFrom())
-	    		&& condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)) {
+	    		&& condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER)) {
 	    	
-	    	session.setAttribute(SystemConstants.SEARCH_FROM_KEY, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
+	    	session.setAttribute(SystemConstants.SEARCH_FROM_KEY, SystemConstants.SEARCH_FROM_LAWYER);
 	    	session.setAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION, condition);
 	    	
 	    	return "lawyer_dashboard :: lawsuitsBlock-fragment";
