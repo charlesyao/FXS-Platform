@@ -2,10 +2,10 @@ package com.fxs.platform.domain;
 
 import javax.persistence.*;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
+import com.fxs.platform.utils.CaseStatus;
+import com.fxs.platform.utils.DateUtil;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 电话咨询
@@ -25,14 +25,14 @@ public class Reservation implements Serializable {
 	/**
 	 * 预约状态
 	 */
-	private String status;
+	private String status = CaseStatus.NEW.getStatus();
 
 	/**
 	 * 当事人和律师预约电话联系的日期+时间
 	 */
-	private Date researvationDatetime;
+	private String researvationDatetime;
 
-	private Date expiredDate;
+	private String expiredDate;
 	
 	/**
 	 * 当事人的联系方式
@@ -66,10 +66,10 @@ public class Reservation implements Serializable {
 	}
 
 	public String getResearvationDatetime() {
-		return DateFormatUtils.format(researvationDatetime, "yyyy-MM-dd HH:MM:SS");
+		return researvationDatetime;
 	}
 
-	public void setResearvationDatetime(Date researvationDatetime) {
+	public void setResearvationDatetime(String researvationDatetime) {
 		this.researvationDatetime = researvationDatetime;
 	}
 
@@ -97,11 +97,12 @@ public class Reservation implements Serializable {
 		this.lawyerId = lawyerId;
 	}
 
-	public Date getExpiredDate() {
+	public String getExpiredDate() {
 		return expiredDate;
 	}
 
-	public void setExpiredDate(Date expiredDate) {
-		this.expiredDate = expiredDate;
+	public void setExpiredDate() {
+		//默認一周過期
+		DateUtil.getFetureDate(this.getResearvationDatetime(), 7);
 	}
 }

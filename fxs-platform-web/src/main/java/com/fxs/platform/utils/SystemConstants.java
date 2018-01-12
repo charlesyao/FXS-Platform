@@ -6,6 +6,7 @@ public class SystemConstants {
 	public static final String QA_MAP = "QA_MAP";
 	public static final String ANSWER_MAP = "ANSWER_MAP";
 	public static final String GEN_CASES = "GEN_CASES";
+	public static final String GEN_RESERVATION = "GEN_RESERVATION";
 	public static final String USER_INFO = "USER_INFO";
 	public static final String CASE_TYPE_CONSULTING = "consulting";
 	public static final String CASE_TYPE_LAWSUIT = "lawsuit";

@@ -6,51 +6,6 @@
 	<div class="topBar col-md-12">
 		<div th:replace="fragments/header :: header"></div>
 	</div>
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="myLargeModalLabel">提交电话咨询</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="usr">电话:</label>
-							<input type="text" class="form-control" id="contactPhone" />
-						</div>
-						<div class="form-group">
-							<label for="pwd">预约日期:</label> 
-							<input type="date" class="form-control" id="researvationDatetime" />
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-law" id="savePhoneConsulting">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="notificationModal" tabindex="-1"
-		role="dialog" aria-labelledby="notificationModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">提示信息</h4>
-				</div>
-				<div class="modal-body" id="modalContent"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="mainPart">
 		<div class="container">
 			<div class="text-center">
@@ -95,6 +50,48 @@
 			</section>
 		</div>
 	</div>
+	<div class="modal fade bs-example-modal-lg" id="buyConsulting" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myLargeModalLabel">提交电话咨询</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="usr">电话:</label>
+							<input type="text" class="form-control" id="contactPhone" />
+						</div>
+						<div class="form-group">
+							<label for="pwd">预约日期:</label> 
+							<input type="date" class="form-control" id="researvationDatetime" />
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-law" id="savePhoneConsulting">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">提示信息</h4>
+				</div>
+				<div class="modal-body" id="modalContent"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div th:replace="fragments/footer :: footer"></div>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -108,10 +105,15 @@
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
-						$("#modalContent").empty().append("电话咨询提交成功")
-						$("#contactPhone").val('');
-						$("#buyConsulting").modal('hide');
-						$("#notificationModal").modal("show")
+						if ("/user/signIn" === data.data) {
+							window.location.assign(data.data);
+						} else {
+							$("#buyConsulting").modal('hide');
+							$("#modalContent").empty().append("电话咨询提交成功")
+							$("#contactPhone").val('');
+							$("#researvationDatetime").val('');
+							$("#notificationModal").modal("show")
+						}
 					},
 					error : function(error) {
 						$("#modalContent").empty().append("电话咨询提交失败")

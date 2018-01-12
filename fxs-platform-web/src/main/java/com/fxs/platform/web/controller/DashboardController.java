@@ -15,9 +15,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fxs.platform.domain.Cases;
+import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
@@ -74,6 +74,7 @@ public class DashboardController {
 		String target = "";
 		
 		Object caseInSession = session.getAttribute(SystemConstants.GEN_CASES);
+		Object reservationInSession = session.getAttribute(SystemConstants.GEN_RESERVATION);
 		
 		/**
 		 * 针对未登录的用户提交的案件信息特殊处理
@@ -84,6 +85,10 @@ public class DashboardController {
 			
 			Cases newCase = CaseManager.saveCase((Cases)caseInSession, session, caseRepository);
 			CaseManager.saveCaseQuestionRel(newCase, session, caseQuestionAnswerRelRepository);
+		}
+		
+		if (! ObjectUtils.isEmpty(reservationInSession)) {
+			casesService.create((Reservation)reservationInSession);
 		}
 		
 		if(ObjectUtils.isEmpty(authentication)) {

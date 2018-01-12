@@ -112,9 +112,10 @@
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
+						$("#buyConsulting").modal('hide');
 						$("#modalContent").empty().append("电话咨询提交成功")
 						$("#contactPhone").val('');
-						$("#buyConsulting").modal('hide');
+						$("#researvationDatetime").val('');
 						$("#notificationModal").modal("show")
 					},
 					error : function(error) {

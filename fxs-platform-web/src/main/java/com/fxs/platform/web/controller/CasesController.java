@@ -81,9 +81,18 @@ public class CasesController {
 	 */
 	@PostMapping("/public/case/reservation")
 	@ResponseBody
-	public ResponseMessage<Reservation> create(@Valid @RequestBody Reservation reservation) {
+	public ResponseMessage<String> create(@Valid @RequestBody Reservation reservation) {
+		String target = null;
 		
-		return Result.success(casesService.create(reservation));
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			session.setAttribute(SystemConstants.GEN_RESERVATION, reservation);
+			target ="/user/signIn";
+		} else {
+			
+			casesService.create(reservation);
+		}
+		
+		return Result.success(target);
 	}
 
 	/**
