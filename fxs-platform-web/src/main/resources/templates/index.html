@@ -1,26 +1,27 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/public_header :: public-header-css" ></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css" ></head>
 <body>
 	<div class="img-responsive">
 		<div th:replace="fragments/public_header :: public-header" ></div>
 		<div class="container">
-			<div class="container tab-content homeInner">
-				<div class="mainBannerTitle">
-					<h1><span class="cur">案例</span> <a href="#" >大数据分析</a></h1>
-				</div>
-				<div class="row searchBox">
-					<div class="col-xs-12 col-md-9">
-						<input value="" placeholder="搜索案例..." class="form-control square-select margin-top-2"></input>
-						<button type="submit" class="btn btn-default searchNow">开始搜索</button>
-					</div>
-				</div>
-			</div>
-			<div class="empty"><br/></div>
-		</div>
+	      <div class="container tab-content homeInner">
+	        <div class="mainBannerTitle">
+	          <h1>
+	            <span class="cur">案例</span>
+	            <a href="#" >大数据分析</a>
+	          </h1>
+	        </div>
+	        <div class="row searchBox">
+	          <div class="col-xs-12 col-md-5">
+	            <input value="" placeholder="搜索案例..." class="form-control homepage-search square-select margin-top-2" />
+	            <button type="submit" class="btn btn-default searchNow">开始搜索</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<div th:replace="fragments/footer :: footer" ></div>
 </body>
 </html>

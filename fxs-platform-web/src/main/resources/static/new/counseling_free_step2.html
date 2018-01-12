@@ -1,0 +1,307 @@
+<html>
+<head>
+  <title>上海小帅信息科技有限公司</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- 引入 Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/css.css">
+  <link href="css/ui-choose.css" rel="stylesheet" />
+
+  <script src="bootstrap/js/jquery3.2.1.min.js"></script>
+  <script src="bootstrap/js/popper.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/ui-choose.js"></script>
+
+</head>
+<body>
+  <div class="topBar col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <p class="logoLine">
+              <img src="img/logo.png">
+              <span class="mapId">上海</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-8 headerRight">
+          <ul class="nav justify-content-end loginBox">
+            <li class="nav-item">
+              <a class="nav-link" href="login_login.html" target="_self">登录</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login_sign.html" target="_self">注册</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" target="_self">关于我们</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="laywer_sign.html" target="_self">律师入口</a>
+            </li>
+          </ul>
+          <ul class="nav justify-content-end mainNav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">首页</a>
+            </li>
+            <li class="dropdown">
+              <a href="counseling_free.html" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">法律咨询</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="counseling_free.html">免费法律咨询</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="counseling.html">电话咨询</a>
+              </div>
+
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">打官司</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="lawsuit.html">找律师打官司</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="selfhelplawsuit.html">自助打官司</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">其他法律业务</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">投诉</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="mainPart step2Inner">
+    <div class="container">
+      <div class="containerWapper">
+        <ol class="breadcrumb">
+          <li>
+            <a href="counseling_free.html">免费法律咨询</a>
+          </li>
+          <li class="active">填写纠纷基本信息</li>
+        </ol>
+        <h1 class="blue step1">填写纠纷基本信息</h1>
+        <section class="step2Step introcouPhone marginTop30 sBtn">
+          <h3>您是代表谁找律师？</h3>
+          <div class="row col-md-12 col-sm-12">
+
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_03">
+              <li class="introcoupCell btnSquare col-md-2">
+                <a class="step2Line1">本人</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-2">
+                <a class="step2Line1">家人</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-2">
+                <a class="step2Line1">朋友</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-2">
+                <a class="step2Line1">企业</a>
+              </li>
+            </ul>
+          </div>
+          <h3 class="space10">请问您本次咨询的主要目的是？</h3>
+          <div class="row col-md-12 col-sm-8">
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_04">
+              <li class="introcoupCell btnSquare col-md-6">
+                <a class="step2Line1">纠纷已经发生，想咨询如何解决该纠纷</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-6">
+                <a class="step2Line1">纠纷尚未发生，想咨询法律程序、风险等问题</a>
+              </li>
+            </ul>
+          </div>
+          <h3 class="space10">您家人的纠纷对象住所地在哪里？</h3>
+          <h4 class="gray">
+            提示：如纠纷对象为个人，请填写纠纷对象的长期住所地，如纠纷对象为企业，请填写企业经营地点或者注册地点。如以上地点均无法获知，请填写纠纷发生地点。
+          </h4>
+          <div class="row">
+            <div class="form-group col-md-4 col-sm-12">
+              <!-- <select class="form-control">
+                <option value="">选择您的所在地</option>
+              </select> -->
+              <button type="button" class="btn btn-dark btn-law" data-toggle="modal" data-target="#yourLocation">
+                选择您的所在地
+              </button>
+            </div>
+          </div>
+          <h3 class="space10">纠纷是否已由法院判决或裁定？</h3>
+
+          <div class="row col-md-12 col-sm-12">
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_04" >
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">是 - 已收到一审判决书或驳回起诉裁定书</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">是 - 已收到二审判决书或驳回起诉裁定书</a>
+              </li>
+            </ul>
+
+          </div>
+          <h3 class="space10">请输入时间</h3>
+          <div class="row">
+            <div class="form-group col-md-3 col-sm-3">
+              <select class="form-control">
+
+                <option value="">请选择</option>
+                <option value="">2017</option>
+                <option value="">2016</option>
+                <option value="">2015</option>
+                <option value="">2014</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-1 col-sm-1 sLabel">
+              <label>年</label>
+            </div>
+            <div class="form-group col-md-3 col-sm-3">
+              <select class="form-control">
+                <option value="">请选择</option>
+                <option value="">12</option>
+                <option value="">11</option>
+                <option value="">10</option>
+                <option value="">9</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-1 col-sm-1 sLabel">
+              <label>月</label>
+            </div>
+          </div>
+          <h3 class="space10">您家人对法院判决或仲裁裁决的态度？</h3>
+          <div class="row col-md-12 col-sm-12">
+
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_05" >
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">不满意法院判决或仲裁裁决</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">满意法院判决或仲裁裁决，但对方不满意</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">双方均不满意法院判决或仲裁裁决</a>
+              </li>
+            </ul>
+
+          </div>
+          <h3 class="space10">您希望委托律师处理什么问题？</h3>
+          <div class="row col-md-12 col-sm-12">
+
+            <ul class="ui-choose col-md-12 col-sm-12" multiple="multiple" id="uc_06" >
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">准备上诉</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">准备对方上诉时应诉</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-5">
+                <a class="step2Line1">想找律师代理强制执行</a>
+              </li>
+            </ul>
+          </div>
+
+          <h3 class="space10">您家人在原案件中是？</h3>
+          <div class="row col-md-12 col-sm-12">
+
+            <ul class="ui-choose col-md-12 col-sm-12" id="uc_07">
+              <li class="introcoupCell btnSquare col-md-2">
+                <a class="step2Line1">原告</a>
+              </li>
+              <li class="introcoupCell btnSquare col-md-2">
+                <a class="step2Line1">被告</a>
+              </li>
+            </ul>
+
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 btnNext text-center">
+              <button type="button" class="btn btn-dark btn-lg btn-law" onclick="window.location.href='counseling_free_step3.html'">下一步</button>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="modal fade" id="yourLocation">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">选择您的所在地</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="select-city-section">
+            <p class="mb-0 title">选择省份</p>
+            <div class="select-provinces">
+              <ul class="ui-choose">
+                <li class="select-province">北京</li>
+                <li class="select-province">天津</li>
+                <li class="select-province">河北</li>
+                <li class="select-province">山西</li>
+                <li class="select-province">内蒙古</li>
+                <li class="select-province">辽宁</li>
+                <li class="select-province">吉林</li>
+                <li class="select-province">黑龙江</li>
+              </ul>
+            </div>
+          </div>
+          <div class="select-city-section">
+            <p class="mb-0 title">选择城市</p>
+            <div class="select-cities">
+              <ul class="ui-choose">
+                <li class="select-city">长春市</li>
+                <li class="select-city">吉林市</li>
+                <li class="select-city">四平市</li>
+                <li class="select-city">辽源市</li>
+                <li class="select-city">通化市</li>
+                <li class="select-city">白山市</li>
+                <li class="select-city">白城市</li>
+                <li class="select-city">松原市</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal">退出</button>
+          <button type="button" class="btn btn-law" data-dismiss="modal">确认</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="fixed-bottom">
+    <ul class="list-group">
+      <li>
+        © 2013-2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2
+      </li>
+      <li>地址：上海市静安区XXXXXXXXX</li>
+      <li></li>
+      <li>沪公网安备 31011002000396号</li>
+    </ul>
+  </footer>
+  <script>
+ $('.ui-choose').ui_choose();   
+ var uc_03 = $('#uc_03').data('ui-choose');
+uc_03.click = function(index, item) {
+    console.log('click', index);
+};
+uc_03.change = function(index, item) {
+    console.log('change', index);
+};    
+ </script>
+
+</body>
+
+</html>

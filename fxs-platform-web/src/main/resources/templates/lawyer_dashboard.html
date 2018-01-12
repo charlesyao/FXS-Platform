@@ -1,35 +1,25 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/lawyer_header :: lawyer-header-css"></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/lawyer_header :: lawyer-header"></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart mycasePart">
 		<div class="container">
 			<div class="containerWapper">
 				<h1 class="blue">我的竞标案件</h1>
 				<p>正在进行的案件竞标赢积分榜单周期</p>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
-					<div class="row">
-						<div class="col-md-4 col-sm-4">
-							<div class="ulCell laywer_right">
-								<ul>
-									<li class="cur">待加入的竞标</li>
-									<li><a href="#">进行中的竞标</a></li>
-									<li><a href="#">评审中的竞标</a></li>
-									<li><a href="#">已评审的竞标</a></li>
-									<li><a href="#">可申请复核的竞标</a></li>
-									<li class="lastItem"><a href="#">已复核的竞标</a></li>
-								</ul>
+					<div class="bid-header row mx-0 mb-3">
+						<div class="col-md-4 text-center d-flex align-items-center justify-content-center">
+							<div>
+								<p>当前已加入竞标</p>
+								<h4>1个</h4>
 							</div>
 						</div>
-						<div class="col-md-8 col-sm-8 mybox">
-							<ul class="writeInfoText ulCell myCell">
-								<li>当前已加入竞标
-									<h4>1个</h4>
-								</li>
-							</ul>
+						<div class="col-md-8">
 							<ul class="writeInfoText ulCell myCell">
 								<div class="row">
 									<div class="form-group col-md-3 col-sm-3 sLabelOne">
@@ -44,31 +34,77 @@
 										<div class="clearboth"></div>
 									</ul>
 								</div>
+								<div class="row"></div>
 								<div class="row">
-									<label><input type="checkbox" id="viewUnRead"/> 只看未读的竞标</label>
+									<label> 
+										<input type="checkbox" id="viewUnRead" />只看未读的竞标
+									</label>
 								</div>
-								<div class="row">
-									<div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
-										<button id="searchCases" type="button" class="btn btn-primary btn-lg">查询</button>
-									</div>
+								<div class="text-center">
+									<button type="button" class="btn btn-law" id="searchCases">查询</button>
 								</div>
 							</ul>
-							<div id="lawsuitsBlock" th:fragment="lawsuitsBlock-fragment">
-								<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${pageableData}">
-									<li class="listTitle">案件类型 : <b th:text="${myBidCase.parentType}"></b> 
-										<span>案件编号 : <span th:text="${myBidCase.id}"></span></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+							<div class="ulCell laywer_right">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active">
+										<a href="#lineOne" role="tab" data-toggle="tab">待加入的竞标</a>
 									</li>
-									<li><a href="">赢积分 : </a> <span class="orange">20</span></li>
-									<li>竞标发布时间 : <span th:text="${myBidCase.createAt}"></span></li>
-									<li>法律意见提交截止时间： 2017.11.09 10:25</li>
-									<li>加入竞标人数： 较少</li>
+									<li role="presentation" class="">
+										<a href="#lineTwo" role="tab" data-toggle="tab">进行中的竞标</a>
+									</li>
+									<li role="presentation" class="">
+										<a href="#lineThree" role="tab" data-toggle="tab">评审中的竞标</a>
+									</li>
+									<li role="presentation" class="">
+										<a href="#lineFour" role="tab" data-toggle="tab">已评审的竞标</a>
+									</li>
+									<li role="presentation" class="">
+										<a href="#lineFive" role="tab" data-toggle="tab">可申请复核的竞标</a>
+									</li>
+									<li role="presentation" class="lastItem">
+										<a href="#lineSix" role="tab" data-toggle="tab">已复核的竞标</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-8 col-sm-8 mybox tab-content" id="caseListFragment">
+							<div class="tab-pane active" role="tabpanel" id="lawsuitsBlock" th:fragment="lawsuitsBlock-fragment">
+								<ul class="writeInfoText ulCell myCell centerLi" th:if="${#lists.isEmpty(pageableData)}">
+									<span th:text="没有查询结果"></span>
+								</ul>
+								<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${pageableData}" th:if="${not #lists.isEmpty(pageableData)}">
+									<li class="listTitle">
+										<span>案件编号</span>
+										<span th:text="${myBidCase.id}"></span>
+									</li>
+									<li>
+										<span>案件类型：</span>
+										<span th:text="${myBidCase.parentType}"></span>
+									</li>
+									<li>
+										<span>竞标发布时间</span>
+										<span th:text="${myBidCase.createAt}"></span>
+									</li>
+									<li>
+										<span>法律意见提交截止时间</span>
+										<span th:text="2018-01-19"></span>
+									</li>
+									<li>
+										<span>加入竞标人数：</span>
+										<span th:text="较少"></span>
+									</li>
 									<div class="row">
 										<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-											<a th:href="@{/user/case/lawyer/lawsuit/viewDetail/{id}(id=${myBidCase.id})}" type="button" class="btn btn-primary btn-lg">查看详情</a>
+											<a type="button" class="btn btn-law btn-lg"
+												th:href="@{/user/case/lawyer/lawsuit/viewDetail/{id}(id=${myBidCase.id})}">查看详情</a>
 										</div>
 									</div>
 								</ul>
-								<div th:include="fragments/page :: paginationbar" th:remove="tag"></div>
+								<div th:if="${not #lists.isEmpty(pageableData)}" th:include="fragments/page :: paginationbar" th:remove="tag"></div>
 							</div>
 						</div>
 					</div>
@@ -76,26 +112,26 @@
 			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {
-			var ids= new Array()
+			var ids = new Array()
 			var viewUnRead = "Y"
 			
 			$("#viewUnRead").on("click", function() {
-				if($(this).is(":checked")) {
+				if ($(this).is(":checked")) {
 					viewUnRead = "N"
 				} else {
 					viewUnRead = "Y"
 				}
 			})
 			$("#searchByFalltypus").on('click', 'input', function() {
-				if($(this).is(':checked')) {
+				if ($(this).is(':checked')) {
 					ids.push($(this).attr("id"))
 				} else {
 					var i = ids.indexOf($(this).attr("id"));
-					if(i != -1) {
+					if (i != -1) {
 						ids.splice(i, 1);
 					}
 				}
@@ -103,7 +139,7 @@
 			$("#searchCases").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?parentType="+ids+"&caseType=1&"+(viewUnRead=='N' ? "isRead=N" : "")+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&requestFrom=" +location.pathname,
+					url : "/user/case?parentType=" + ids + "&caseType=1&" + (viewUnRead == 'N' ? "isRead=N" : "") + "&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&requestFrom=" + location.pathname,
 					success : function(data) {
 						console.log(data)
 						$('#lawsuitsBlock').html(data);

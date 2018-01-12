@@ -1,10 +1,11 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/lawyer_header :: lawyer-header-css"></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/lawyer_header :: lawyer-header"></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart mycasePart">
 		<div class="container">
 			<div class="containerWapper">
@@ -45,30 +46,41 @@
 									</div>
 								</div>
 								<div class="row mycaseCheckBox">
-									<label><input type="checkbox" id="viewUnRead"/> 只看未读的竞标</label>
+									<label>
+										<input type="checkbox" id="viewUnRead" />只看未读的竞标
+									</label>
 								</div>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
-										<button type="button" id="searchConsultingWithFilter" class="btn btn-primary btn-lg">查询</button>
+										<button type="button" class="btn btn-law btn-lg" id="searchConsultingWithFilter">查询</button>
 									</div>
 								</div>
 							</ul>
 							<div id="consultingBlock" th:fragment="consultingBlock-fragment">
-								<ul th:if="${not #lists.isEmpty(pageableData)}" class="writeInfoText ulCell myCell centerLi" th:each="freeConsulting : ${pageableData}">
-									<li class="listTitle">案件类型 : <b th:text="${freeConsulting.falltypusType}"></b> 
-										<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span>
-									</li>
-									<li>咨询发布时间 : <span th:text="${freeConsulting.createAt}"></span></li>
-									<div class="row">
-										<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
-											<a th:href="@{/user/case/lawyer/consulting/viewDetail/{id}(id=${freeConsulting.id})}" type="button" class="btn btn-primary btn-lg">查看详情</a>
-										</div>
-									</div>
-								</ul>
-								<div th:if="${not #lists.isEmpty(pageableData)}">
-									<div th:include="fragments/page :: paginationbar" th:remove="tag"></div>
-								</div>
+								<a  th:if="${not #lists.isEmpty(pageableData)}"
+									th:each="freeConsulting : ${pageableData}"
+									th:href="@{/user/case/lawyer/consulting/viewDetail/{id}(id=${freeConsulting.id})}">
+									<ul class="writeInfoText ulCell myCell mb-2">
+										<li>
+											<span>案件编号 :</span>
+											<span th:text="${freeConsulting.id}"></span>
+										</li>
+										<li>
+											<span>起诉地点 :</span>
+											<span th:text="${freeConsulting.location}"></span>
+										</li>
+										<li>
+											<span>案件提交时间 :</span>
+											<span th:text="${freeConsulting.createAt}"></span>
+										</li>
+										<li>
+											<span>案件类型 :</span>
+											<span th:text="${freeConsulting.falltypusType}"></span>
+										</li>
+									</ul>
+								</a>
 								<ul th:if="${#lists.isEmpty(pageableData)}" class="writeInfoText ulCell myCell">未找到相关记录</ul>
+								<div th:if="${not #lists.isEmpty(pageableData)}" th:include="fragments/page :: paginationbar" th:remove="tag"></div>
 							</div>
 						</div>
 					</div>
@@ -76,25 +88,26 @@
 			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {
-			var ids= new Array()
+			var ids = new Array()
 			var viewUnRead = "Y"
-			
+
 			$("#viewUnRead").on("click", function() {
-				if($(this).is(":checked")) {
+				if ($(this).is(":checked")) {
 					viewUnRead = "N"
 				} else {
 					viewUnRead = "Y"
 				}
 			})
-			
+
 			$("#searchConsultingWithFilter").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?caseType=0&"+(viewUnRead=='N' ? "isRead=N" : "isRead=Y")+"&searchFrom=SEARCH_FROM_LAWYER_CASEPOOL&requestFrom="+location.pathname,
+					url : "/user/case?caseType=0&" + (viewUnRead == 'N' ? "isRead=N" : "isRead=Y")
+							+ "&searchFrom=SEARCH_FROM_LAWYER_CASEPOOL&requestFrom=" + location.pathname,
 					success : function(data) {
 						console.log(data)
 						$('#consultingBlock').html(data);

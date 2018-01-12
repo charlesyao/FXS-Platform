@@ -1,0 +1,373 @@
+<html>
+<head>
+  <title>上海小帅信息科技有限公司</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- 引入 Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/header.css">
+  <link rel="stylesheet" type="text/css" href="css/footer.css">
+  <link rel="stylesheet" type="text/css" href="css/customer.css">
+  <link rel="stylesheet" type="text/css" href="css/css.css">
+  <script src="bootstrap/js/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+            @CHARSET "UTF-8";
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .feed {
+                font-family: "微软雅黑";
+                width: 720px;
+                margin: 8px 0 ;
+
+            }
+
+            .avatar {
+                width: 50px;
+                float: left;
+                margin: 0 8px 0 0;
+                box-shadow: 0 0 3px #e0e0e0;
+                border-radius: 5px;
+                border: 1px solid #e0e0e0;
+                height: 50px;
+            }
+
+            .feed .avatar img {
+                width: 50px;
+                height: 50px;
+            }
+
+            
+
+            .feed .box1 .current {
+                font-size: 14px;
+                margin: 8px;
+        text-align:left
+            }
+      
+      .feed .box1 .fabu {
+                font-size: 8px;
+                margin: 8px;
+        text-align:left
+            }
+      
+      .feed .box1 .fabu_ls {
+                font-size: 8px;
+                margin: 8px;
+        text-align:right
+            }
+      
+
+            .feed .box1 .info {
+                margin: 0 8px;
+            }
+
+            .feed .box1 .info span {
+                float: right;
+            }
+
+            .feed .box1 .line {
+                padding: 8px 0 0 0;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .feed .box1 .box2 {
+                margin: 8px;
+                padding: 0 0 8px 0;
+            }
+
+            .feed .box1 .box2_comments {
+                width: 650px;
+                overflow: hidden;
+                float: left;
+            }
+
+            .feed .box1 .say {
+                margin: 0 0 8px;
+            }
+
+            .clear {
+                clear: both;
+            }
+
+            .feed .box1 .box2_comments .box3 {
+                margin: 8px 0;
+            }
+
+            .feed .box1 .box2_comments .box3_comments {
+                float: left;
+                width: 500px;
+            }
+
+            .reply_area {
+                border: 1px solid #e0e0e0;
+                height: 30px;
+                line-height: 30px;
+                width: 620px;
+                margin: 8px;
+                color: #666;
+                font-size: 12px;
+                font-family: "微软雅黑";
+                clear: both;
+            }
+            @media screen and (max-width: 425px) {
+              .feed{
+                  margin: 20px 0 0;
+              }
+            }
+        </style>
+
+</head>
+<body>
+
+  <script>
+var number=2; //定义条目数
+
+//function LMYC() {
+//var lbmc;
+//    for (i=1;i<=number;i++) {
+//        lbmc = eval('LM' + i);
+//        lbmc.style.display = 'none';
+//    }
+//}
+ 
+function ShowFLT(i) {
+    lbmc = eval('LM' + i);
+  a = eval('A' + i);
+    if (lbmc.style.display == 'none') {
+ //       LMYC();
+        lbmc.style.display = '';
+    a.innerHTML='收起'
+    }
+    else {
+        lbmc.style.display = 'none';
+    a.innerHTML='展开'
+    }
+}
+</script>
+
+  <div class="topBar col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <p class="logoLine">
+              <img src="img/logo.png">
+              <span class="mapId">上海</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-8 headerRight">
+          <div class="headerline">
+            <div class="loginBox">
+              <ul class="nav loginBox">
+                <li>
+                  <a href="login_login.html" target="_self">登录</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="login_sign.html" target="_self">注册</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="#" target="_self">关于我们</a>
+                  <span>|</span>
+                </li>
+                <li>
+                  <a href="laywer_sign.html" target="_self">律师入口</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="headerline">
+            <div class="loginBox">
+              <nav class="navbar-default" role="navigation">
+                <ul class="nav mainNav" >
+                  <li class="active">
+                    <a href="index.html">首页</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="counseling_free.html" class="dropdown-toggle" data-toggle="dropdown">法律咨询</a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="counseling_free.html">免费法律咨询</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <a href="counseling.html">电话咨询</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">打官司</a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="lawsuit.html">找律师打官司</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li>
+                        <a href="selfhelplawsuit.html">自助打官司</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">其他法律业务</a>
+                  </li>
+                  <li class="lastItem">
+                    <a href="#">投诉</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="mainPart">
+    <div class="container">
+      <div class="containerWapper">
+        <ol class="breadcrumb">
+          <li>
+            <a href="my.html">个人中心</a>
+          </li>
+          <li>
+            <a href="my_freelist.html">我的免费咨询</a>
+          </li>
+          <li class="active">查看评论</li>
+        </ol>
+
+        <section class="col-md-12 col-sm-12 writeInfo space20">
+          <div class="row">
+            <div class="col-md-10 col-sm-10">
+              <ul class="row">
+                <li class="feed col-md-12 col-sm-12">
+                  <div class="avatar">
+                    <img src="img/icon_counseling4.png" alt="" />
+                  </div>
+                  <div class="box1">
+                    <p class='current'>
+                      <a href="">用户1：</a>
+                      <a>
+                        资讯了房间打开附件三发快递饭卡房间爱恋的积分卡的房间乐山大佛就是垃圾对方是否是否流设计饭卡时代峻峰宽带积分酸辣粉就速度看了积分是
+                      </a>
+                    </p>
+                    <p class='info'>
+                      <span onClick=javascript:ShowFLT(1) href="javascript:void(null)">
+                        <a id=A1 href="javascript:;">展开</a>
+                      </span>
+                      <p class='fabu' >发布于 2017-1-11</p>
+                    </p>
+                    <p class="line"></p>
+                    <dd id=LM1 style="DISPLAY:none">
+                      <div class="box2">
+                        <div class="anwerGroup row">
+                          <div class="avatar">
+                            <img src="img/icon_counseling4.png" alt="" />
+                          </div>
+                          <div class="box2_comments">
+                            <p class='current'>
+                              <a href="">律师1：</a>
+                              说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容
+                            </p>
+                            <div class="answerBTN row">
+                              <div class="col-md-6 col-sm-12 dateAnswer">
+                                <p class='fabu_ls' >发布于 2017-1-11</p>
+                              </div>
+                              <div class="col-md-6 col-sm-12 btnNext">
+                                <button type="button" class="btn btn-primary">采纳</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="anwerGroup row">
+                          <div class="avatar">
+                            <img src="img/icon_counseling4.png" alt="" />
+                          </div>
+                          <div class="box2_comments">
+                            <p class='current'>
+                              <a href="">律师2：</a>
+                              说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容
+                            </p>
+                            <div class="answerBTN row">
+                              <div class="col-md-6 col-sm-12 dateAnswer">
+                                <p class='fabu_ls' >发布于 2017-1-11</p>
+                              </div>
+                              <div class="col-md-6 col-sm-12 btnNext">
+                                <button type="button" class="btn btn-primary">采纳</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="anwerGroup row">
+                          <div class="avatar">
+                            <img src="img/icon_counseling4.png" alt="" />
+                          </div>
+                          <div class="box2_comments">
+                            <p class='current'>
+                              <a href="">律师3：</a>
+                              说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容说说内容
+                            </p>
+                            <div class="answerBTN row">
+                              <div class="col-md-6 col-sm-12 dateAnswer">
+                                <p class='fabu_ls' >发布于 2017-1-11</p>
+                              </div>
+                              <div class="col-md-6 col-sm-12 btnNext">
+                                <button type="button" class="btn btn-primary">采纳</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="clear"></div>
+                      </div>
+                    </dd>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-2 col-sm-2">
+              <div class="writeInfoRight ulCell">
+                <ul class="writeInfoRightTitle">
+                  <li>电话咨询</li>
+                </ul>
+
+                <ul class="writeInfoRightItem">
+                  <li>立即响应</li>
+                  <li>专业</li>
+                  <li>高性价比</li>
+                  <li>服务细节到位</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <ul class="list-group">
+      <li>
+        © 2013-2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2
+      </li>
+      <li>地址：上海市静安区XXXXXXXXX</li>
+      <li></li>
+      <li>沪公网安备 31011002000396号</li>
+    </ul>
+  </footer>
+
+</body>
+
+</html>

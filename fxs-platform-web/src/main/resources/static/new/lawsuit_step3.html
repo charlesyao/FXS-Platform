@@ -1,0 +1,207 @@
+<html>
+<head>
+  <title>上海小帅信息科技有限公司</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- 引入 Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/css.css">
+  <link href="css/ui-choose.css" rel="stylesheet" />
+  <link href="bootstrap/css/font-awesome.min.css" rel="stylesheet" />
+
+  <script src="bootstrap/js/jquery3.2.1.min.js"></script>
+  <script src="bootstrap/js/popper.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/ui-choose.js"></script>
+</head>
+</head>
+<body>
+  <div class="topBar col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <p class="logoLine">
+              <img src="img/logo.png">
+              <span class="mapId">上海</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-8 headerRight">
+          <ul class="nav justify-content-end loginBox">
+            <li class="nav-item">
+              <a class="nav-link" href="login_login.html" target="_self">登录</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login_sign.html" target="_self">注册</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" target="_self">关于我们</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="laywer_sign.html" target="_self">律师入口</a>
+            </li>
+          </ul>
+          <ul class="nav justify-content-end mainNav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">首页</a>
+            </li>
+            <li class="dropdown">
+              <a href="counseling_free.html" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">法律咨询</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="counseling_free.html">免费法律咨询</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="counseling.html">电话咨询</a>
+              </div>
+
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">打官司</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="lawsuit.html">找律师打官司</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="selfhelplawsuit.html">自助打官司</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">其他法律业务</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">投诉</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="mainPart">
+    <div class="container">
+      <div class="containerWapper d-flex justify-content-center align-items-center">
+        <div class="answer-quiz">
+          <div class="quiz-wrap introcouPhone">
+            <div class="quiz one">
+              <p class="title">
+                请问您本次咨询的主要目的是？
+              </p>
+              <ul class="ui-choose" id="uc_04">
+                <li class="introcoupCell btnSquare">
+                  <a class="step2Line1">纠纷已经发生，想咨询如何解决该纠纷</a>
+                </li>
+                <li class="introcoupCell btnSquare">
+                  <a class="step2Line1">纠纷尚未发生，想咨询法律程序、风险等问题</a>
+                </li>
+              </ul>
+            </div>
+            <div class="quiz two" style="display: none">
+              <p class="title">
+                您家人对法院判决或仲裁裁决的态度？
+              </p>
+              <ul class="ui-choose" multiple="multiple" id="uc_05">
+                <li class="introcoupCell btnSquare">
+                  <a class="step2Line1">不满意法院判决或仲裁裁决</a>
+                </li>
+                <li class="introcoupCell btnSquare">
+                  <a class="step2Line1">满意法院判决或仲裁裁决，但对方不满意</a>
+                </li>
+                <li class="introcoupCell btnSquare">
+                  <a class="step2Line1">双方均不满意法院判决或仲裁裁决</a>
+                </li>
+              </ul>
+            </div>
+            <div class="quiz three" style="display: none">
+              <p class="title">
+                您有什么想问的？
+              </p>
+              <textarea class="form-control" rows="4" cols="50"></textarea>
+              <div class="justify-content-end">
+                
+              </div>
+            </div>
+          </div>
+          <i class="fa fa-angle-left to-left disabled" aria-hidden="true"></i>
+          <i class="fa fa-angle-right to-right" aria-hidden="true"></i>
+          <div class="button-wrap mt-3">
+            <button type="button" class="btn btn-law will-answer">确认后补充</button>
+            <button type="button" class="btn btn-law cannot-answer">暂不能回答</button>
+            <button type="button" class="btn btn-law submit pull-right" style="display: none">立即提交</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="fixed-bottom">
+    <ul class="list-group">
+      <li>
+        © 2013-2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2
+      </li>
+      <li>地址：上海市静安区XXXXXXXXX</li>
+      <li></li>
+      <li>沪公网安备 31011002000396号</li>
+    </ul>
+  </footer>
+
+ <script type="text/javascript">
+   $(document).ready(function(){
+        $('.ui-choose').ui_choose();   
+       //  var uc_03 = $('#uc_03').data('ui-choose');
+       // uc_03.click = function(index, item) {
+       //     console.log('click', index);
+       // };
+       // uc_03.change = function(index, item) {
+       //     console.log('change', index);
+       // };
+     
+       $(".answer-quiz").on("click",".will-answer,.cannot-answer", function () {
+        var showQuiz = $(".quiz-wrap .quiz:visible");
+        showQuiz.find("li").removeClass("selected");
+        toNext();
+       });
+    
+       $(".answer-quiz .to-right").on("click",function () {
+        var showQuiz = $(".quiz-wrap .quiz:visible");
+          if ($(this).hasClass("disabled") || showQuiz.find("li.selected").length == 0) {
+            return
+          }
+         toNext();
+         
+       })
+       function toNext() {
+        var showQuiz = $(".quiz-wrap .quiz:visible");
+         if (showQuiz.next(".quiz").length > 0) {
+          showQuiz.next(".quiz").show();
+          $(".answer-quiz .to-left").removeClass("disabled");
+          showQuiz.hide();
+         }
+         if (showQuiz.next(".quiz").next(".quiz").length == 0) {
+          $(".answer-quiz .to-right").addClass("disabled");
+          $(".answer-quiz .submit").show();
+         }else{
+          $(".answer-quiz .to-right").removeClass("disabled");
+         }
+       }
+       $(".answer-quiz .to-left").on("click",function () {
+        var showQuiz = $(".quiz-wrap .quiz:visible");
+          if ($(this).hasClass("disabled")) {
+            return
+          }
+         if (showQuiz.prev(".quiz").length > 0) {
+          showQuiz.prev(".quiz").show();
+          $(".answer-quiz .submit").hide();
+          $(".answer-quiz .to-right").removeClass("disabled");
+          showQuiz.hide();
+         }
+         
+         if (showQuiz.prev(".quiz").prev(".quiz").length == 0) {
+          $(".answer-quiz .to-left").addClass("disabled");
+         }else{
+          $(".answer-quiz .to-left").removeClass("disabled");
+         }
+       })
+   });
+ </script>
+
+</body>
+
+</html>

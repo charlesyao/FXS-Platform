@@ -120,6 +120,7 @@ public class CasesController {
 						ModelMap map,
 						@RequestParam(value = "page", defaultValue = "0") Integer page,
 		                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+		String target = "";
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
@@ -139,11 +140,19 @@ public class CasesController {
 	    	session.setAttribute(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
 	    	session.setAttribute(SystemConstants.SEARCH_FROM_LAWYER_CASEPOOL, SystemConstants.SEARCH_FROM_LAWYER_CASEPOOL);
 	    	session.setAttribute(SystemConstants.CASE_DATASET_WITH_FILTER_CONDITION, condition);
-	    	
-	    	return "lawyer_dashboard :: lawsuitsBlock-fragment";
 	    }
 	    
-	    return "lawyer_case_pool :: consultingBlock-fragment";
+	    if (!ObjectUtils.isEmpty(condition.getRequestFrom())) {
+	    	if ("/lawyer/case_pool".equals(condition.getRequestFrom())) {
+	    		target = "lawyer_case_pool :: consultingBlock-fragment";
+	    	}
+	    	
+	    	if ("/user/dashboard".equals(condition.getRequestFrom())) {
+	    		target = "lawyer_dashboard :: lawsuitsBlock-fragment";
+	    	} 
+	    }
+	    
+	   return target;
 	}
 
 

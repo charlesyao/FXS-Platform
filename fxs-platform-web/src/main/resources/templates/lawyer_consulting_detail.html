@@ -1,18 +1,25 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/lawyer_header :: lawyer-header-css"></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/lawyer_header :: lawyer-header"></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart mycasePart">
 		<div class="container">
 			<div class="containerWapper">
 				<ol class="breadcrumb">
 					<li><a href="laywer_center.html">待加入竞标</a></li>
-					<li class="active">案件 <span th:text="${caseDetailInfo.id}"></span></li>
+					<li class="active">
+						<span>案件</span>
+						<span th:text="${caseDetailInfo.id}"></span>
+					</li>
 				</ol>
-				<h1 class="blue">案件 <span th:text="${caseDetailInfo.id}"></span></h1>
+				<h1 class="blue">
+					<span>案件</span>
+					<span th:text="${caseDetailInfo.id}"></span>
+				</h1>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
 					<div class="row">
 						<div class="col-md-12 mybox">
@@ -22,22 +29,27 @@
 										<tbody>
 											<tr class="listTitle">
 												<td colspan="2">
-													<b th:text="${caseDetailInfo.falltypusType}"></b>
-													<span>案件编号 : <span th:text="${caseDetailInfo.id}"></span></span>
+													<span>案件编号</span>
+													<span th:text="${caseDetailInfo.id}"></span>
 												</td>
 											</tr>
 											<tr>
-												<td colspan="2"><a href="">赢积分：</a> <span
-													class="orange">20</span></td>
+												<td colspan="2">
+													<span>竞标发布时间: </span>
+													<span th:text="${caseDetailInfo.createAt}"></span>
+												</td>
 											</tr>
 											<tr>
-												<td colspan="2">竞标发布时间： <span th:text="${caseDetailInfo.createAt}"></span></td>
+												<td colspan="2">
+													<span>法律意见提交截止时间：</span>
+													<span th:text="${caseDetailInfo.createAt}"></span>
+												</td>
 											</tr>
 											<tr>
-												<td colspan="2">法律意见提交截止时间： 2017.11.09 10:25 还剩(22天15小时5分30秒)</td>
-											</tr>
-											<tr>
-												<td colspan="2">加入竞标人数： 较少</td>
+												<td colspan="2">
+													<span>加入竞标人数： </span>
+													<span th:text="较少"></span>
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -48,20 +60,34 @@
 									<table class="table tableBox">
 										<tbody>
 											<tr>
-												<td>案件类型： <span th:text="${caseDetailInfo.parentType}"></span></td>
-												<td>案件阶段：尚未有判决或裁决</td>
+												<td>案件类型： 劳动纠纷
+													<span>案件类型： </span>
+													<span th:text="${caseDetailInfo.parentType}"></span>
+												</td>
+												<td>
+													<span>案件阶段： </span>
+													<span th:text="尚未有判决或裁决"></span>
+												</td>
 											</tr>
 											<tr>
-												<td>当事人角色： 原告</td>
-												<td>对法院判决态度： -</td>
+												<td>
+													<span>当事人角色：  </span>
+													<span th:text="原告"></span>
+												</td>
+												<td>
+													<span>对法院判决态度： </span>
+													<span th:text="'-'"></span>
+												</td>
 											</tr>
 											<tr>
-												<td>您是代表谁找律师： 本人</td>
-												<td>起诉地点：上海</td>
-											</tr>
-											<tr>
-												<td>律师所在地：上海</td>
-												<td></td>
+												<td>
+													<span>您是代表谁找律师: </span>
+													<span th:text="本人"></span>
+												</td>
+												<td>
+													<span>起诉地点：</span>
+													 <span th:text="${caseDetailInfo.location}"></span>
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -69,60 +95,114 @@
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
+									<h4>案件事实</h4>
+								</div>
+								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}">
 									<ul>
-										<li><h4>案件事实</h4></li>
+										<li><span th:text="暂无信息"></span></li>
 									</ul>
 								</div>
-								<div class="row" th:each="qaMapping : ${caseDetailInfo.qaMapping}">
+								<div class="row" 
+									th:if="${not #list.isEmpty(caseDetailInfo.qaMapping)}"
+									th:each="qaMapping : ${caseDetailInfo.qaMapping}">
 									<ul>
-										<li><b>问题： <span th:text="${qaMapping.questionDesc}"></span></b></li>
-										<li><b>选项： <span th:text="${qaMapping.answerDesc}"></span></b></li>
-										<li class="gray">未选项：已取得营业执照的企业包工头其他</li>
-									</ul>
-								</div>
-							</ul>
-							<ul class="writeInfoText ulCell myCell caseBox">
-								<div class="row">
-									<ul>
-										<li><h4>您的期望与理由</h4></li>
-										<li class="gray" th:text="${caseDetailInfo.comments}"></li>
+										<li>问题： <span th:text="${qaMapping.questionDesc}"></span></li>
+										<li>选项： <span th:text="${qaMapping.answerDesc}"></span></li>
 									</ul>
 								</div>
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
+									<h4>当事人的期望与理由</h4>
+								</div>
+								<div class="row">
 									<ul>
-										<li><h4>证据材料</h4></li>
+										<li>
+											<span th:text="${caseDetailInfo.comments eq '' ? '暂无信息' : caseDetailInfo.comments}"></span>
+										</li>
 									</ul>
 								</div>
-								<div class="row" th:each="qaMapping : ${caseDetailInfo.qaMapping}">
-									<ul>
-										<li><b>问题：<span th:text="${qaMapping.questionDesc}"></span></b></li>
-										<li><b>问题：<span th:text="${qaMapping.answerDesc}"></span></b></li>
-										<li class="gray">未选项：已取得营业执照的企业包工头其他</li>
-									</ul>
-								</div>
-							</ul>
-							<ul class="writeInfoText ulCell myCell caseBox">
-								<li class="orange">当事人的追问信息:</li>
-								<li th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">您对此案件还没有追问信息</li>
-								<li th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}" 
-									th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}" 
-									th:text="'第'+ ${iterState.count} + '次追问: ' + ${inquiry}"></li>
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
+									<h4>证据材料</h4>
+								</div>
+								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}">
 									<ul>
-										<li><h4>已采取的行动与结果</h4></li>
-										<li class="gray">无</li>
+										<li><span th:text="暂无信息"></span></li>
+									</ul>
+								</div>
+								<div class="row" 
+									th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}"
+									th:each="qaMapping : ${caseDetailInfo.qaMapping}">
+									<ul>
+										<li>问题：<span th:text="${qaMapping.questionDesc}"></span></li>
+										<li>问题：<span th:text="${qaMapping.answerDesc}"></span></li>
 									</ul>
 								</div>
 							</ul>
-							<ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<h4>当事人的追问信息:</h4>
+								</div>
+								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">
+									<ul>
+										<li>
+											<span th:text="暂无信息"></span>
+										</li>
+									</ul>
+								</div>
+								<div class="row"
+									th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}" 
+									th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}" >
+									<ul>
+										<li>
+											<span th:text="'第'+ ${iterState.count} + '次追问: '"></span>
+											<span th:text="${inquiry}"></span>
+										</li>
+									</ul>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<h4>我的反馈:</h4>
+								</div>
+								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}">
+									<ul>
+										<li>
+											<span th:text="暂无反馈信息"></span>
+										</li>
+									</ul>
+								</div>
+								<div class="row"
+									th:if="${not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}" 
+									th:each="feedbackInfo : ${caseDetailInfo.caseFeedbackInfo}" >
+									<ul>
+										<li>
+											<span th:text="我的反馈信息： "></span>
+											<span th:text="${feedbackInfo.lawyerComments}"></span>
+										</li>
+									</ul>
+								</div>
+							</ul>
+							<ul class="writeInfoText ulCell myCell caseBox">
+								<div class="row">
+									<h4>已采取的行动与结果</h4>
+								</div>
+								<div class="row">
+									<ul>
+										<li>
+											<span th:text="暂无信息"></span>
+										</li>
+									</ul>
+								</div>
+							</ul>
+							<ul class="lawyer2button">
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch caseTwoBtn">
 										<button th:attr="disabled=${caseDetailInfo.disableFeedback} ? 'disabled' : 'false'" 
-												type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addFeedbackModal">律师反馈</button>
+												type="button" class="btn btn-law btn-lg"
+												data-toggle="modal" data-target="#addFeedbackModal">律师反馈</button>
 									</div>
 								</div>
 							</ul>
@@ -131,44 +211,47 @@
 				</section>
 			</div>
 		</div>
-		<div class="modal fade" id="addFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addFeedbackModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        <form>
-			          <div class="form-group">
-			            <label for="recipient-name" class="form-control-label">律师意见:</label>
-			            <input type="text" class="form-control" id="lawyerComments" />
-			          </div>
-			        </form>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary" id="addFeedback">保存</button>
-			      </div>
-			    </div>
-			  </div>
-		</div>
-		<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">提示信息</h4>
-		            </div>
-		            <div class="modal-body" id="modalContent"></div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		            </div>
-		        </div>
-		    </div>
+	</div>
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="addFeedbackModal" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myLargeModalLabel">加入竞标</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label>律师意见:</label>
+							<input type="text" class="form-control" id="lawyerComments" />
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-law" id="addFeedback">保存</button>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">提示信息</h4>
+	            </div>
+	            <div class="modal-body" id="modalContent"></div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {

@@ -118,6 +118,7 @@ public class DashboardController {
 		    	pageWrapper = new PageWrapper<CasesDto>(cases, originalCondition.getRequestFrom());
 
 		    } else {
+		    	//第一次加载
 			    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
 			    pageWrapper = new PageWrapper<CasesDto>(myBidCases, request.getRequestURI());
 		    }

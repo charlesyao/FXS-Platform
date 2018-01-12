@@ -1,55 +1,58 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart">
 		<div class="container">
-			<h1>个人中心</h1>
-			<section class="col-md-12 col-sm-12 introcouPhone">
-				<div class="row">
-					<div class="col-md-4 col-sm-4">
-						<ul class="introcoupCell mycenterCell">
-							<li>
-								<a th:href="@{/litigant/case/consulting/free}">
-									<img th:src="@{/img/mycenter_free.png}" />
-								</a>
-							</li>
-							<li>
-								<a th:href="@{/litigant/case/consulting/free}"><span>我的免费咨询</span></a>
-							</li>
-						</ul>
+			<div class="containerWapper">
+				<h1>个人中心</h1>
+				<section class="col-md-12 col-sm-12 introcouPhone">
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+							<ul class="introcoupCell mycenterCell">
+								<li>
+									<a th:href="@{/litigant/case/consulting/free}">
+										<img th:src="@{/img/mycenter_free.png}" />
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/litigant/case/consulting/free}"> <span>我的免费咨询</span></a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<ul class="introcoupCell mycenterCell">
+								<li>
+									<a th:href="@{/litigant/case/consulting/phone}">
+										<img th:src="@{/img/mycenter_phone.png}" />
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/litigant/case/consulting/phone}"> <span>我的电话咨询</span></a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<ul class="introcoupCell mycenterCell">
+								<li>
+									<a th:href="@{/litigant/case/lawsuit/biddingCase}">
+										<img th:src="@{/img/mycenter_aj.png}" />
+									</a>
+								</li>
+								<li>
+									<a th:href="@{/litigant/case/lawsuit/biddingCase}"><span>我的竞标案件</span></a>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<div class="col-md-4 col-sm-4">
-						<ul class="introcoupCell mycenterCell">
-							<li>
-								<a th:href="@{/litigant/case/consulting/phone}">
-									<img th:src="@{/img/mycenter_phone.png}" />
-								</a>
-							</li>
-							<li>
-								<a th:href="@{/litigant/case/consulting/phone}"><span>我的电话咨询</span></a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4 col-sm-4">
-						<ul class="introcoupCell mycenterCell">
-							<li>
-								<a th:href="@{/litigant/case/lawsuit/biddingCase}">
-									<img th:src="@{/img/mycenter_aj.png}" />
-								</a>
-							</li>
-							<li>
-								<a th:href="@{/litigant/case/lawsuit/biddingCase}"><span>我的竞标案件</span></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</section>
+				</section>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

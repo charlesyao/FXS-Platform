@@ -42,10 +42,10 @@ public class CityController {
 		String level1CityListHTML = "";
 		
 		for (CityDto cityDto : cities) {
-			level1CityListHTML += "<li id='" + cityDto.getCityId() + "'><a href=''>" + cityDto.getName() + "</a></li>";
+			level1CityListHTML += "<li class='select-province' id='" + cityDto.getCityId() + "'>" + cityDto.getName() + "</li>";
 		}
 		
-		return Result.success(level1CityListHTML + "<div class='clearboth'></div>");
+		return Result.success(level1CityListHTML);
 	}
 
 	/**
@@ -64,10 +64,10 @@ public class CityController {
 	    String level2CityListHTML = "";
 		
 		for (CityDto cityDto : cities) {
-			level2CityListHTML += "<li id='" + cityDto.getCityId() + "'><a href=''>" + cityDto.getName() + "</a></li>";
+			level2CityListHTML += "<li class='select-city' id='" + cityDto.getCityId() + "'>" + cityDto.getName() + "</li>";
 		}
 		
-		return Result.success(level2CityListHTML + "<div class='clearboth'></div>");
+		return Result.success(level2CityListHTML);
 	}
 	
 	/**

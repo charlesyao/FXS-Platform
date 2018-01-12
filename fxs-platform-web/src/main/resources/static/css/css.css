@@ -1,32 +1,91 @@
+body{
+    background-color: #eee;
+    font-family: 'Helvetica Neue','Helvetica','Arial','Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft Yahei',sans-serif;
+}
+.topBar{ position: fixed; z-index: 10;
+    background-image: -moz-linear-gradient(left, #333F5F , #9D7961); 
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #333F5F ), color-stop(1,#9D7961)); 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333F5F ', endColorstr='#9D7961', GradientType='0');  
+    
+}
 h1 {
     font-size: 26px;
-        font-weight: 400;
+    font-weight: 400;
 }
-body{
-    background-color: #f7f7f7;
+
+a{
+    color: #721c24;
 }
-.containerWapper{
+.orange{
+    color: #ab1422
+}
+.img-responsive{
+    background: url(../img/mainBg.png) no-repeat fixed center center;
+    background-size: cover;
+    height: 100%;
+}
+
+.loginBox a.nav-link{
+    color:white;
+    font-size: 12px;
+    border-right: 1px solid #ac8873;
+    margin: 5px 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.loginBox .nav-item:last-child a{
+    border-right: none
+}
+.mainNav a{
+    color:white;
+    font-size: 14px;
+    padding: .5rem .5rem;
+}
+.loginBox a:hover,
+.mainNav a:hover{
+    text-decoration:none;
+    color: #CFB87E;
+}
+
+.mainNav li{
+    margin: 5px 5px 0;
+}
+
+.dropdown-menu .dropdown-item {
+    color: #856404;
+}
+.dropdown-item.active,
+.dropdown-item:active {
     background-color: #fff;
+}
+.topBar .dropdown-menu{box-shadow: 1px 3px 6px 0 #8E97AC;}
+
+.mapId{background: url(../img/map.png) no-repeat; color: #fff; font-size: 12px; padding-left: 18px;margin-top: 20px;}
+
+
+
+
+
+.containerWapper{
+    /*background-color: #fff;*/
     float: left;
     width: 100%;
     z-index: 1;
-    min-height: 550px;
-    padding: 0 5% 5%;
+    /*min-height: 550px;*/
+    padding: 0 5% 84px;
 }
 .form-control{
     font-size: 16px;
     font-weight: 100;
 }
 
-.mainPart{
-    min-height: 530px;
-    z-index: 1;
-}
+
 .marginTop30{
     margin-top: 50px;
 }
 .mainPart .container .containerWapper h1{
-    margin-top: 5%;
+    margin-top: 15px;
+    text-align: center;
 }
 footer{
     z-index: 999;
@@ -38,10 +97,6 @@ footer{
     float: left;
 }
 /*---counseling_free----*/
-.mainPart .container h1{
-    margin: 50px 0 10px 0;
-}
-
 .introcouPhone .btnSquare a{
     font-size: 16px;
     font-weight: 100;
@@ -49,31 +104,27 @@ footer{
 .counseling_free{
     margin-top: 40px;
 }
-.counseling_free .btnSquare a{
+.cat-big a{
     padding: 15px 0;
 }
-.btnNext button{
-    margin: 60px 0 80px;
-}
+
 .btnNext button.haveA{
     margin-bottom: 10px;
 }
-
-/*---counseling_free_step1----*/
-.introcouPhone .btnSquare a{
-    font-size: 16px;
-    padding: 15px 0;
+.select-city-section{
+    margin-bottom: 20px;
 }
-.mainPart .container .step1{
-    margin-top: 20px;
+.select-city-section .title{
+    color: #856404;
+    padding-left: 5px;
 }
-
 /*---counseling_free_step2----*/
 .step2Step{
-    margin: 50px auto 0;
-}
-.introcouPhone .btnSquare a.step2Line1{
-    padding: 5px 0;
+    margin: 20px 150px 90px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
 }
 .sBtn h3{
     font-weight: 100;
@@ -105,7 +156,7 @@ label {
     background: none;
 }
 .btnNext a.seeMore{
-    margin: 0 auto 100px;
+    margin: 0 auto 10px;
 }
 
 
@@ -126,17 +177,16 @@ label {
     color: #fff;
     padding:.5rem 3rem;
 }
-.loginWapper{
-    margin-top: 12%;
-}
-.login-BG img{
-    width: 99%;
-}
+
 .signupBox{
     width: 70%;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #fff;
 }
-.loginInput .signupTitle button{
-    margin-top: 30px;
+.signupBox .form-group{
+    margin-bottom: .5rem;
 }
 .login-header{
     display: block;
@@ -167,23 +217,8 @@ label {
     background-color: #fff;
 }
 /*---index----*/
-.headerRight .loginBox{
-    float: right;
-    margin: 5px 0 0 ;
-}
-.headerline{
-    float: left;
-    width: 100%;
-}
-.loginBox .mainNav{
-    margin: 0;
-}
-.loginBox .mainNav li{
-    margin-top: 0;
-}
-.loginBox .mainNav li:first-child{
-    margin-top: 2px;
-}
+
+
 .mapId{
     margin-left: 20px;
 }
@@ -216,7 +251,9 @@ footer.indexFooter{
     font-size: 14px;
     padding: 0 30px;
 }
-
+.searchBox .homepage-search{
+    border-radius: 50px;
+}
 
 /*---lawsuit----*/
 .lawsuit-content h3.heading{
@@ -260,7 +297,6 @@ footer.indexFooter{
 .laybtnSearch button{
     padding-left: 25px;
     padding-right: 25px;
-    margin: 20px 0;
 }
 .writeInfoText .listTitle{
     border-top: none;
@@ -327,6 +363,11 @@ footer.indexFooter{
 
 
 /*----兼容性----*/
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1440px;
+    }
+}
 @media screen and (max-width: 768px) {
     .mainPart{
         padding-top: 60px;
@@ -451,6 +492,326 @@ footer.indexFooter{
     }
 }
 
+.fl{float: left;}
+.fr{float: right;}
+.clearboth{clear: both;}
+ul li{list-style:none;}
+.ft12{font-size:12px}
 
 
 
+
+/* ------------------------------------------------------------------------------------
+SEARCH       */
+
+.mainBannerTitle{text-align: center;}
+.mainBannerTitle .cur{color: #CFB87E}
+.mainBannerTitle a,.mainBannerTitle span{ color:#fff; margin: 0 25px;font-weight:200  }
+.mainBannerTitle a:hover{text-decoration:none;color: #CFB87E}
+.container-fluid{ margin: 6rem 0;}
+.form-inline .form-group{width:500px}
+.form-inline .form-control input.searchBox{width:300px；padding: .5rem 1rem;border:2px solid #CFB87E;}
+/*.tab-content{max-width: 700px;}*/
+.bid-header{
+    background-color: #fff;
+}
+.container-fluid .row{margin: 3em 0;}
+
+.searchBox .btn-default{
+    color: #fff;
+    background-color: #CFB87E;
+    border-color: #CFB87E; cursor: pointer;border-radius: 5rem;
+}
+.answer-quiz{
+    min-width: 650px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px 100px;
+    margin-top: 50px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.card{
+    margin-bottom: 10px;
+}
+.quiz-wrap .quiz ul{
+    height: 245px;
+    overflow-y: auto;
+}
+.answer-quiz .fa{
+    position: absolute;
+    font-size: 80px;
+    cursor: pointer;
+    color: #806961;
+    top: 60;
+}
+.answer-quiz .fa.disabled{
+    color: #bfaca6;
+}
+.answer-quiz .fa.to-left{
+    left: 15px;
+}
+.answer-quiz .fa.to-right{
+    right: 15px;
+}
+/* ------------------------------------------------------------------------------------
+neiyene */   
+.mainPart{padding-top: 75px;}
+
+/* -----.mainPart .container{ padding:3em 0;}--*/
+.mainPart .container h1{
+    color:#856404;
+    margin-top: 30px;
+}
+
+.introcouPhone .introcoupCell,
+.writeInfo .row .ulCell{ 
+    background-color: #fff;
+    padding:20px;
+    margin:2em 0.2em;  
+    box-shadow: 0px 1px 3px rgba(191,188,188,0.50);
+    min-height: 220px;
+}
+.writeInfoRight.ulCell{
+    border-radius: 15px;
+}
+.introcoupCell{ text-align:center; color:#58627C}   
+.introcoupCell span{margin:0.3em 0;display:block;}
+.topBar ul li span{color: #ac8873;}
+.btnSquare{}
+.introcouPhone .btnSquare{
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #856404;
+    box-shadow: 0 1px 3px 0 rgba(191,188,188,0.50);
+    margin:0.5em 0;
+    padding:0px;
+    min-height:auto;
+    float: none;
+}
+.introcouPhone .btnSquare a{
+    display: block;
+    font-size: 20px;
+    color: #856404; 
+}
+.login-sign-jump{
+    /*padding-top: 15px;
+    margin-top: 20px;
+    float: right;*/
+}
+
+.introcouPhone .btnSquare:hover{ 
+    background: rgba(207,184,126,0.80); 
+    color: #fff;
+}
+.introcouPhone .btnSquare:hover a{ 
+    text-decoration: none;
+    color: #721c24;
+    font-weight: bold;
+}
+
+/*breadcrumb*/
+.breadcrumb{background: none;}
+.breadcrumb li{
+    font-size: 12px; 
+    color: #898f95;
+}
+.breadcrumb li a{color:#856404;background: url(../img/icon_next.png) no-repeat 94% 50%; padding-right: 20px;}
+
+
+.space20{ margin: 3em 0}
+.mainPart .container h1.blue{
+    color: #721c24;
+    text-align: center;
+}
+.sBtn h3{font-size: 16px;color: #58627C; font-weight: 400;}
+.sBtn .btnSquare a{font-size: 16px;}
+.space10{margin-top: 2em}
+h4.gray{font-size: 12px;color: #9B9B9B;}
+.introcouPhone  .cur a{ color: #fff}
+
+.btnNext button{
+    cursor: pointer;
+}
+.btnNext{
+    text-align: center;
+}
+
+.introcouPhone .form-control,.myCell .form-control{border: 1px solid #CFB87E; color: #CFB87E;box-shadow: 0 1px 3px 0 rgba(191,188,188,0.50); margin: 0.5em 0 0;}
+
+.writeInfo .row .writeInfoText{ margin:0px 0 10px;padding:20px 40px}
+.writeInfoText{ font-size: 14px;color: #9B9B9B}
+
+.writeInfoText .orange{margin-bottom: 10px}
+.writeInfoText span{ color: #58627C }
+.writeInfo .row .writeInfoRight{ margin: 0em 0.2em; padding: 0px;position: relative;z-index:5}
+.exp{padding:30px 0px;border-bottom: 1px solid #EDEDED;}
+.exp li{ display: block;}
+.exp .fl{ width: 15%;border: 1px solid #806961;border-radius: 18px; text-align: center;font-size: 14px;
+    color: #806961; padding: 5px 10px}
+.exp .fr{width: 80%}
+.writeInfoText .clr-blue{cursor: help; color: #689CE5}
+.expLast{border-bottom: none;}
+
+.submit_counter{text-align: right;border-top: 1px solid #EDEDED; color: #ccc; padding: 10px 0}
+.submit_counter span{color: #689CE5;font-size: 12px;}
+.btnNext a{margin-left: 20px;font-size: 12px}
+.writeInfoRightTitle{background-color: #826a60;border-radius: 0.8rem 0.8rem 0 0; padding-left:0px;    margin-bottom: 0px;}
+.writeInfoRightTitle li{font-size: 28px;color: #FFFFFF; text-align: center; margin-left: 0px; font-weight:200; padding:30px 0;}
+.phoneIcon{background: url(../img/phone.png) no-repeat; z-index:59999; display:block; height:60px; width:60px; 
+    position: absolute; top: 25%;left: 42%;}
+.writeInfoRightItem{padding: 2em 1em;}
+.writeInfoRightItem li{background: url(../img/icon_ok.png) no-repeat center left; padding-left:30px;color:#58627C;margin:0.5em 0 }  
+.sLabel{ padding: 15px 0}
+/* ------------------------------------------------------------------------------------
+lawsuit      */
+.img-lawsuit{
+    background: url(../img/lawsuit.png) no-repeat fixed center center;
+    background-size: cover;
+}
+.lawsuit-content{text-align: center;}
+.lawsuit-content .heading{font-size: 40px;color: #CFB87E;padding: 1em 0 0.5em;font-weight: 200;}
+.lawsuit-content p{font-size: 30px;color: #FFFFFF;padding: 0em 0 0.5em;font-weight: 200;}
+.lawsuit-content a{color: #fff;
+    background-color: #CFB87E;
+    border-color: #CFB87E;
+    border-radius: 5rem;font-size:16px;color: #FFFFFF; padding: 10px 20px;}
+.lawsuit-content a:hover{ text-decoration: none;}
+
+/* ------------------------------------------------------------------------------------
+login      */
+.bgBlack{background:rgba(0,0,0,0.50);;position: absolute;z-index:666; width: 100%;height:500%;overflow: hidden;}
+
+.validate-code{
+    width: calc(100% - 25px)
+}
+#validate-code-refresh{
+    cursor: pointer;
+}
+.signupBox .form-group input{border:none;border-bottom: 1px solid #ccc; border-radius: 0em}
+.signupBox h3{ font-weight: 200; ; color: #CFB87E;}
+.signupTitle{text-align: center;display: block; margin: 0.5em 0 1em;}
+.signupBox .control-label{    border: 1px solid #CFB87E;
+    border-radius: 18px;
+    text-align: center;color: #CFB87E; font-size: 12px; padding:8px 10px;}
+.signupBox .control-label:hover{ text-decoration: none;}
+.signupBox button{background-color: #CFB87E;
+    border-color: #CFB87E;
+    border-radius: 5rem;
+    font-size: 16px;
+    color: #FFFFFF;  cursor: pointer;}
+ .signupBox .btn_cancel{ margin-right: 40px; background: #ccc; border:1px solid #ccc;}   
+.signupBox .fpw{ font-size: 12px;color: #999}
+.signupBox .fpw a{text-align: right;    display: block;}
+.chooseAds{width: 60%}
+.chooseAds ul li{ float: left; display: block;margin-right:10px; padding: 5px 10px}
+.chooseAds ul li a,.chooseAdsItem ul li label{ color: #999}
+.chooseAds ul .cur{background-color: #CFB87E;
+    border-radius: 5rem; }
+    .chooseAds ul .cur a:hover{ text-decoration: none}
+ .chooseAds ul .cur a{color: #fff}
+.chooseAdsItem h4{ font-size: 14px}
+.chooseAdsItem ul { padding-left: 0px  }
+.chooseAdsItem h4{color: #58627C;}
+.chooseAdsItem{ margin-bottom: 40px}
+
+
+.video{text-align: center; margin: 2em 0}
+.pop_close{background: url(../img/pop_close.png) no-repeat; display: block;;width: 46px; height: 44px; position: absolute;    left: 420px;
+    top: -5px;}
+
+/* ------------------------------------------------------------------------------------
+laywer login      */
+.img-lawywerSign{background: url(../img/laywer_bg.png) no-repeat top center;background-size:100% auto;}
+.img-lawywerSign  .lawsuit-content a{ margin: 10px 30px;}
+
+/* ------------------------------------------------------------------------------------
+
+my          */
+.introcouPhone .mycenterCell{ min-height: auto;}
+.introcouPhone .mycenterCell li img{ margin-bottom: 20px}
+.introcouPhone .mycenterCell li a{color: #58627C}
+.introcouPhone .mycenterCell li a:hover,.mybox a:hover{ text-decoration: none}
+.mybox a:hover{background-color: #689CE5}
+.mybox .card a:hover {
+    background-color: #fff;
+}
+.mybox a .writeInfoText{color: #58627C}
+.writeInfo .row .writeInfoText .gray{ color: #ccc; padding-top: 20px}
+.writeInfo .row .writeInfoText .gray span{ padding-right: 20px}
+.writeInfo .row .myCell{min-height: auto}
+
+/* ------------------------------------------------------------------------------------
+
+laywer center          */
+.writeInfo .row .laywer_right{min-height: auto;margin: 0em 0.2em;padding: 0px;}
+.laywer_right li{ padding: 20px 0; border-bottom: 1px solid #f1f1f1;}
+.laywer_right li.lastItem{ border-bottom: none}
+.laywer_right .cur{ color:#CFB87E}
+.laywer_right li:hover{  background-color: #F0F4FD}
+.laywer_right .cur:hover{  background-color: #fff}
+.laywer_right li a{color: #9B9B9B}
+.laywer_right li a:hover{text-decoration: none;}
+.myCell h4{ display: inline;color: #689CE5}
+.myCell .form-control{border: 1px solid #CFB87E; }
+.mybox .btnSearch button{ width: auto;height: auto; font-size: 14px}
+.myCell .line{border-bottom: 1px solid #ededed; margin: 20px 0}
+.writeInfoText .listTitle{border:1px solid #CFB87E; border-left: none; border-right:none;
+    background: #FFFBF6; text-align: center;color: #C08E61;padding: 5px 20px; margin-bottom: 10px;
+}
+.writeInfoText .listTitle a{color: #C08E61}
+.writeInfoText .listTitle a:hover{ background-color: #fff;}
+.listTitle b,.writeInfoText .listTitle span{ padding: 0 10px;}
+.writeInfoText .listTitle span,.tableBox b{color: #C08E61;}
+.tableBox td,.tableBox th{ border: none; color: #666; font-size: 14px; padding: 0.4em}
+.caseBox ul{ margin-bottom: 15px;}
+.caseBox h4{font-size: 18px;}
+.caseBox ul li,.writeInfo .row .caseBox .gray{ color: #000; padding: 5px 0;}
+.writeInfo .row .caseBox .gray{ color: #999;}
+.tableBox{}
+
+/*pagination component*/
+.page-link{
+    color: #716160;
+}
+.page-link:focus,
+.page-link:hover {
+    color: #716160;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #ddd;
+}
+/*button component*/
+.btn-law {
+    color: #fff;
+    background-color: #806961;
+    border-color: #806961;
+}
+.btn-law:hover {
+    color: #fff;
+    background-color: #5b5560;
+    border-color: #5b5560;
+}
+
+/*modal component*/
+.modal-title {
+    font-size: 1.1rem;
+}
+
+/*input component*/
+.form-group .form-control{
+    border-radius: 4px;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+.form-control:focus {
+  border-color: #806961;
+  box-shadow: none;
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);*/
+}
+
+/*footer*/
+footer{background-color: #14152D; text-align: center; color: #7C93AD; font-size: 12px;padding: 1em 0;}
+footer .list-group li{ line-height:20px;}

@@ -1,24 +1,20 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/public_header :: public-header-css" ></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css" ></head>
 <body>
-	<div class="img-responsive">
+	<div class="img-responsive img-lawywerSign col-md-12">
 		<div th:replace="fragments/public_header :: public-header" ></div>
-		<div class="col-md-12 lawsuit-content" >
-          <h3 class="heading">海量免费资源 不成功委托不收费</h3>
-          <p >用专业势力赢得案例</p>
-          <a th:href="@{/user/signIn}" class="create-an-account" >律师登录</a>
-          &nbsp;&nbsp;
-          <a th:href="@{/user/register}" class="create-an-account" >律师注册</a>
-      	</div>
+		<div class="container">
+			<div class="col-md-12 lawsuit-content" >
+				<h3 class="heading">海量免费资源 不成功委托不收费</h3>
+				<p >用专业势力赢得案例</p>
+				<a href="laywer_login.html" class="create-an-account" >律师登录</a>
+				&nbsp;&nbsp;
+				<a href="laywer_sign_page.html" class="create-an-account" >律师注册</a>
+			</div>
+		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".img-responsive").addClass("img-lawywerSign").addClass("col-md-12");
-		})
-	</script>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

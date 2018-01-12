@@ -1,74 +1,77 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <div th:replace="fragments/user_center_header :: user-center-header-css" ></div>
-    </head>
-    <body>
-       <div class="img-responsive">
-    		<div th:replace="fragments/user_center_header :: user-center-header" ></div>
-	        <section class="hero">
-	            <div class="container">
-	                <div class="row">
-	                    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
-	                        <div class="card border-none">
-	                            <div class="card-block">
-	                                <div class="mt-2 text-center">
-	                                    <h2>用户注册</h2>
-	                                </div>
-	                                <div class="mt-4">
-	                                	<div th:if="${DUPLICATE_USER}">
-								            <div class="alert alert-danger">
-								               <div th:text="${DUPLICATE_USER}"></div>
-								            </div>
-								        </div>
-	                                    <form th:action="@{/user}" th:method="POST" th:object="${user}">
-	                                        <div class="form-group">
-	                                            <input type="text" class="form-control" th:field="*{username}" th:id="username" placeholder="输入用户名" />
-	                                        	<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-	                                        </div>
-	                                        <div class="form-group">
-	                                            <input type="email" class="form-control" th:field="*{email}" th:id="email" placeholder="输入邮箱" />
-	                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-	                                        </div>
-	                                        <div class="form-group">
-	                                            <input type="text" class="form-control" th:field="*{mobile}" th:id="mobile" placeholder="输入电话号码" />
-	                                        </div>
-	                                        <div class="form-group">
-	                                            <input type="password" class="form-control" th:field="*{password}" th:id="password" placeholder="输入密码" />
-	                                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-	                                        </div>
-	                                        <div class="form-group">
-	                                            <input type="password" class="form-control" th:id="confirm-password" placeholder="确认密码" />
-	                                        </div>
-	                                        <div class="form-group">
-												<select class="form-control" th:id="userProfiles" th:field="*{userProfiles}" style="background-color: black;">
-													<option th:selected="true" th:value="-1">请选择角色</option>
-													<option th:each="role : ${session.roles}" th:id="${role.id}" th:value="${role.id}" th:text="${role.type}"></option>
-												</select>
-											</div>
-	                                        <button type="submit" id="userRegister" class="btn btn-primary btn-block">创建账户</button>
-	                                    </form>
-	                                    <div class="clearfix"></div>
-	                                    <p class="content-divider center mt-4"><span>OR</span></p>
-	                                </div>
-	                                <p class="text-center">
-	                                                                              已经有账号? <a th:href="@{/user/signIn}">点击登录</a>
-	                                </p>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="clearfix"></div>
-	                    <div class="col-sm-12 mt-5 footer">
-	                        <p class="text-white small text-center">
-	                            &copy; 2017, shuai.com, Inc. All Rights Reserved. 上海小帅信息科技有限公司 沪ICP备14006851号-2
-	                        </p>
-	                    </div>
-	                </div>
-	            </div>
-	        </section>
-        </div>
-        <script type="text/javascript" src="/webjars/jquery/3.0.0/jquery.min.js"></script>
-		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/bootstrap/dist/js/bootstrap.min.js}"></script>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
+<body class="loginBGWhite">
+	<div class="img-responsive">
+		<div class="topBar col-md-12" style="background-image: none">
+			<div th:replace="fragments/public_header :: public-header"></div>
+		</div>
+		<div class="container">
+			<div class="row loginWapper d-flex align-items-center"
+				style="height: 100%">
+				<div class="col-md-7"></div>
+				<div class="col-md-5">
+					<div class="signupBox loginInput">
+						<div class="row signupTitle">
+							<h3>用户注册</h3>
+						</div>
+						<div th:if="${DUPLICATE_USER}">
+							<div class="alert alert-danger">
+								<div th:text="${DUPLICATE_USER}"></div>
+							</div>
+						</div>
+						<form th:action="@{/user}" th:method="POST" th:object="${user}">
+							<div class="form-group row">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" placeholder="请输入用户名" th:field="*{username}" th:id="username"></input>
+								</div>
+								<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" placeholder="请输入邮箱" th:field="*{email}" th:id="email"></input>
+								</div>
+								<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" placeholder="请输入手机号" th:field="*{mobile}" th:id="mobile"></input>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12">
+									<input type="password" class="form-control" placeholder="请设置密码" th:field="*{password}" th:id="password"></input>
+								</div>
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12">
+									<input type="password" class="form-control" placeholder="确认密码" th:id="confirm-password"></input>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12">
+									<select class="form-control" th:id="userProfiles" th:field="*{userProfiles}">
+										<option th:selected="true" th:value="-1">请选择角色</option>
+										<option th:each="role : ${session.roles}" th:id="${role.id}" th:value="${role.id}" th:text="${role.type}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row signupTitle row">
+								<div class="col-sm-offset-12 col-sm-12">
+									<button type="submit" id="userRegister" class="btn btn-default login-loginBTN">注册</button>
+								</div>
+								<p class="text-center mt-2">
+									<span>已经有账号?</span> <a class="login-sign-jump" th:href="@{/user/signIn}">点击登录</a>
+								</p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
 </html>

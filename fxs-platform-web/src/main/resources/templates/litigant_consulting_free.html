@@ -1,52 +1,67 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart">
 		<div class="container">
-			<ol class="breadcrumb">
-				<li>
-					<a href="my.html">个人中心</a>
-				</li>
-				<li class="active">我的免费咨询</li>
-			</ol>
-			<h1 class="blue">我的免费咨询 (2)</h1>
-			<section class="col-md-12 col-sm-12 writeInfo space20">
-				<div class="row">
-					<div class="col-md-8 col-sm-8">
-						<ul class="writeInfoText ulCell myCell" th:each="freeConsulting : ${pageableData}">
-							<li>案件类型 : <span th:text="${freeConsulting.falltypusType}"></span></li>
-							<li class="gray">
-								<span>案件发生地 : <span th:text="${freeConsulting.location}"></span></span><br />
-								<span>案件编号 : <span th:text="${freeConsulting.id}"></span></span><br />
-								<span>案件提交时间: <span th:text="${freeConsulting.createAt}"></span></span>
-							</li>
-							<br />
-							<a th:href="@{/user/case/litigant/consulting/viewDetail/{id}(id=${freeConsulting.id})}">查看详情</a>
-						</ul>
-						<div th:include="fragments/page :: paginationbar" th:remove="tag"></div>
-					</div>
-					<div class="col-md-4 col-sm-4">
-						<div class="writeInfoRight ulCell">
-							<ul class="writeInfoRightTitle">
-								<li>电话咨询</li>
+			<div class="containerWapper">
+				<ol class="breadcrumb">
+					<li><a href="my.html">个人中心</a></li>
+					<li class="active">我的免费咨询</li>
+				</ol>
+				<h1 class="blue">我的免费咨询 (2)</h1>
+				<section class="col-md-12 col-sm-12 writeInfo space20">
+					<div class="row">
+						<div class="col-md-10 col-sm-10">
+							<div class="no-consult" th:if="${#lists.isEmpty(pageableData)}">
+								<ul class="writeInfoText ulCell myCell mb-2">
+									<li class="orange">暂时没有咨询</li>
+								</ul>
+							</div>
+							<ul class="writeInfoText ulCell myCell mb-2"
+								th:if="${not #lists.isEmpty(pageableData)}"
+								th:each="freeConsulting : ${pageableData}">
+								<li>
+									<span th:text="案件编号： "></span>
+									<span th:text="${freeConsulting.id}"></span>
+								</li>
+								<li>
+									<span th:text="案件类型： "></span>
+									<span th:text="${freeConsulting.falltypusType}"></span>
+								</li>
+								<li>
+									<span th:text="案发地点： "></span>
+									<span th:text="${freeConsulting.location eq 'null' ? '无' : freeConsulting.location}"></span>
+								</li>
+								<li class="gray">
+									<span th:text="${freeConsulting.createAt}"></span>
+									<a th:href="@{/user/case/litigant/consulting/viewDetail/{id}(id=${freeConsulting.id})}" th:text="查看详情"></a>
+								</li>
 							</ul>
-							<div class="phoneIcon"></div>
-							<ul class="writeInfoRightItem">
-								<li>立即响应</li>
-								<li>专业</li>
-								<li>高性价比</li>
-								<li>服务细节到位</li>
-							</ul>
+							<div th:if="${not #lists.isEmpty(pageableData)}" th:include="fragments/page :: paginationbar" th:remove="tag"></div>
+						</div>
+						<div class="col-md-2 col-sm-2">
+							<div class="writeInfoRight ulCell">
+								<ul class="writeInfoRightTitle">
+									<li>电话咨询</li>
+								</ul>
+								<ul class="writeInfoRightItem">
+									<li>立即响应</li>
+									<li>专业</li>
+									<li>高性价比</li>
+									<li>服务细节到位</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

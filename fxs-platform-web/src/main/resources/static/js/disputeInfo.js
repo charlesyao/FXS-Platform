@@ -1,5 +1,7 @@
 $(function() {
+	$('.ui-choose').ui_choose();
 	var selectedCity = ''
+	var selectedProvince = ''
 	//加载问题-答案
 	$("#disputeInfo").on("click", 'ul', function(e) {
 		e.preventDefault()
@@ -42,15 +44,12 @@ $(function() {
 	//选择一级城市时加载对应的二级城市列表
 	$("#level1City").on("click", 'li', function(e) {
 		e.preventDefault()
-		selectedCity = $(this).children()[0].innerText
-		$(this).parent().children().removeClass("cur")
-		$(this).addClass("cur")
+		selectedCity = $(this)[0].innerText
 		$.ajax({
 			type : 'GET',
 			url : '/city/' + $(this).attr("id"),
 			success : function(res) {
 				$("#level2City").empty().append(res.data)
-				$("#selectedCity").empty().append(selectedCity)
 			},
 			error : function(error) {
 			}
@@ -59,18 +58,19 @@ $(function() {
 	//选择二级城市并保存到当前的session中以便在保存案件的时候一起保存
 	$("#level2City").on("click", 'li', function(e) {
 		e.preventDefault()
-		selectedCity += $(this).children()[0].innerText
-		$(this).parent().children().removeClass("cur")
-		$(this).addClass("cur")
+		selectedProvince = $(this)[0].innerText
 		$.ajax({
 			type : 'GET',
 			url : '/city/autosave/' + $(this).attr("id"),
 			success : function(res) {
-				$("#selectedCity").empty().append(selectedCity)
 			},
 			error : function(error) {
 			}
 		});
+	})
+	$("#confirmSelectedCity").on("click", function() {
+		$("#selectedCity").empty().text(selectedCity + "-" +selectedProvince)
+		$('#selectCity').modal("hide")
 	})
 	//清空城市列表
 	$('#selectCity').on('hidden.bs.modal', function() {

@@ -1,277 +1,148 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
-<style type="text/css">
-            @CHARSET "UTF-8";
-            * {
-                margin: 0;
-                padding: 0;
-            }
-
-            .feed {
-                font-family: "微软雅黑";
-                width: 720px;
-                margin: 8px 0 ;
-
-            }
-
-			.answerBTN .btnNext button {
-		    	width: auto;
-		    	height: auto;
-		    	margin: 0;
-		    	text-align: right;
-		    }
-            .avatar {
-                width: 50px;
-                float: left;
-                margin: 0 8px 0 0;
-                box-shadow: 0 0 3px #e0e0e0;
-                border-radius: 5px;
-                border: 1px solid #e0e0e0;
-                height: 50px;
-            }
-
-            .feed .avatar img {
-                width: 50px;
-                height: 50px;
-            }
-
-            
-
-            .feed .box1 .current {
-                font-size: 14px;
-                margin: 8px;
-				text-align:left
-            }
-			
-			.feed .box1 .fabu {
-                font-size: 8px;
-                margin: 8px;
-				text-align:left
-            }
-			
-			.feed .box1 .fabu_ls {
-                font-size: 8px;
-                margin: 8px;
-				text-align:right
-            }
-			
-
-            .feed .box1 .info {
-                margin: 0 8px;
-            }
-
-            .feed .box1 .info span {
-                float: right;
-            }
-
-            .feed .box1 .line {
-                padding: 8px 0 0 0;
-                border-bottom: 1px solid #e0e0e0;
-            }
-
-            .feed .box1 .box2 {
-                margin: 8px;
-                padding: 0 0 8px 0;
-            }
-
-            .feed .box1 .box2_comments {
-                width: 650px;
-                overflow: hidden;
-                float: left;
-            }
-
-            .feed .box1 .say {
-                margin: 0 0 8px;
-            }
-
-            .clear {
-                clear: both;
-            }
-
-            .feed .box1 .box2_comments .box3 {
-                margin: 8px 0;
-            }
-
-            .feed .box1 .box2_comments .box3_comments {
-                float: left;
-                width: 500px;
-            }
-
-			.feed .box1 .current {
-			    font-size: 14px;
-			    margin: 8px;
-			    text-align: left;
-			 }
-			 .feed .box1 .dateAnswer .fabu_ls {
-			    text-align: left;
-			}
-			.feed .box1 .fabu_ls {
-			    font-size: 8px;
-			    margin: 8px;
-			    text-align: right;
-			 }
-            .reply_area {
-                border: 1px solid #e0e0e0;
-                height: 30px;
-                line-height: 30px;
-                width: 620px;
-                margin: 8px;
-                color: #666;
-                font-size: 12px;
-                font-family: "微软雅黑";
-                clear: both;
-            }
-            @media screen and (max-width: 425px) {
-              .feed{
-                  margin: 20px 0 0;
-              }
-            }
-        </style>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart">
 		<div class="container">
 			<div class="containerWapper">
 				<ol class="breadcrumb">
 					<li><a href="my.html">个人中心</a></li>
-					<li><a href="my_freelist.html">我的免费咨询</a></li>
-					<li class="active">问题详情</li>
+					<li class="active">我的竞标案件</li>
 				</ol>
-				<h1 class="blue">我的官司</h1>
+				<h1 class="blue">诉讼案件详情</h1>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
 					<div class="row">
-						<div class="col-md-10 col-sm-10">
-							<ul class="row">
-								<li class="feed col-md-12 col-sm-12">
-									<div class="avatar">
-										<img th:src="@{/img/icon_counseling4.png}" alt="" />
-									</div>
-									<div class="box1">
-										<p class="current">
-											<a href="">用户1：</a>
-											<a>资讯了房间打开附件三发快递饭卡房间爱恋的积分卡的房间乐山大佛就是垃圾对方是否是否流设计饭卡时代峻峰宽带积分酸辣粉就速度看了积分是</a>
-										</p>
-										<p class='info'>
-											<span th:onclick="'ShowFLT()'">
-												<a id="A1" href="">展开</a>
-											</span>
-										</p>
-										<p class='fabu' style="text-align: left">发布于 2017-1-11</p>
-										<p class="line"></p>
-										<div id="LM1" style="display: none">
-											<div class="box2" id="lawyerFeedbacks">
-												<div  
-												th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}" class="anwerGroup row" >
-													<div>
-														<span>尚未有律师回复</span>
-													</div>
-												</div>
-												<div
-												th:if="${ not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}"
-												class="anwerGroup row" 
-												th:each="feedbackInfo, iterationStatus : ${caseDetailInfo.caseFeedbackInfo}">
-													<div th:style="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? 'background-color: green;' : 'background-color:'">
-<!-- 													<div th:style="'background-color: ' + ${caseDetailInfo.bgColor}"> -->
-														<div class="avatar">
-															<img th:src="@{/img/icon_counseling4.png}" alt="" />
-														</div>
-														<div class="box2_comments">
-															<p class='current'>
-																<a href="" th:text="${'律师' + iterationStatus.count}"></a>
-																<div>
-																	<p><b>律师姓名： <span th:text="${feedbackInfo.lawyerName}"></span></b></p>
-																	<p><b>报价： <span th:text="${feedbackInfo.counselFee}"></span></b></p>
-																	<p><b>意见： <span th:text="${feedbackInfo.lawyerComments}"></span></b></p>
-																</div>
-															</p>
-															<div class="answerBTN row">
-																<div class="col-md-6 col-sm-12 dateAnswer" >
-																	<p class='fabu_ls'>发布于 2017-1-11</p>
-																</div>
-																<div class="col-md-6 col-sm-12 btnNext">
-																	<button 
-																	th:attr="disabled=(${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
-																	type="button" class="btn btn-primary" th:id="${feedbackInfo.id}">采纳</button>
-																</div>
+						<div class="col-md-10 col-sm-10 mybox">
+							<ul class="writeInfoText ulCell myCell mb-2">
+								<div id="accordion">
+									<div class="card">
+										<div class="card-header">
+											<a class="card-link" data-toggle="collapse"
+												data-parent="#accordion" href="#collapseBasicInfo"> 案件详情
+											</a>
+										</div>
+										<div id="collapseBasicInfo" class="collapse">
+											<div class="card-body">
+												<div class="layer-feedback">
+													<ul class="writeInfoText ulCell myCell mb-2">
+														<li>
+															<span>案件类型</span>
+															<span th:text="${caseDetailInfo.falltypusType}"></span>
+														</li>
+														<li>
+															<span>案发地点</span>
+															<span th:text="${caseDetailInfo.location eq 'null' ? '无' : caseDetailInfo.location}"></span>
+														</li>
+														<li>
+															<span>提交日期</span>
+															<span th:text="${caseDetailInfo.createAt}"></span>
+														</li>
+													</ul>
+													<ul class="writeInfoText ulCell myCell mb-2">
+														<div class="row">
+															<div class="col-sm-12">
+																<h6>附加信息</h6>
+																<span th:text="${caseDetailInfo.comments}"></span>
 															</div>
 														</div>
-													</div>
+													</ul>
+													<ul class="writeInfoText ulCell myCell mb-2">
+														<div class="row">
+															<div class="col-sm-12">
+																	<h6>案件明细</h6>
+																	<ul class="writeInfoText ulCell myCell mb-2" th:each="qa : ${caseDetailInfo.qaMapping}">
+														                <li>问题: <span th:text="${qa.questionDesc}"></span></li>
+																		<li>答案: <span th:text="${qa.answerDesc}"></span></li>
+														            </ul>
+															</div>
+														</div>
+													</ul>
+													<ul class="writeInfoText ulCell myCell mb-2">
+														<div class="row">
+															<div class="col-sm-12">
+																<h6>追问详情</h6>
+																<span th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">您对此案件还没有追问信息</span>
+																<ul th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}"
+																	th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}">
+																	<li>
+																		<span th:text="'第'+ ${iterState.count} + '次追问: '"></span>
+																		<span th:text="${inquiry}"></span>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</ul>
 												</div>
-												<div class="clear"></div>
 											</div>
 										</div>
 									</div>
-								</li>
-							</ul>
-							<ul class="writeInfoText ulCell myCell caseBox">
-								<div class="row">
-									<ul>
-										<li><h4>律师反馈信息</h4></li>
-									</ul>
+									<div class="card">
+										<div class="card-header">
+											<a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseLawyerFeedback">律师反馈 </a>
+										</div>
+										<div id="collapseLawyerFeedback" class="collapse">
+											<div class="card-body">
+												<div class="layer-feedback" id="lawyerFeedbacks">
+													<ul class="writeInfoText ulCell myCell mb-2"
+														th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}">
+														<div class="row">
+															<div class="col-sm-12">
+																<span class="orange">律师正在查看中，预计在24小时内为您提供解答。</span>
+															</div>
+														</div>
+													</ul>
+													<ul class="writeInfoText ulCell myCell mb-2"
+														th:if="${not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}"
+														th:each="feedbackInfo, iterationStatus : ${caseDetailInfo.caseFeedbackInfo}">
+														<div class="row">
+															<div class="col-sm-2">
+																<span th:text="${feedbackInfo.lawyerName + '律师'}"></span>
+																<p>
+																	<i class="fa fa-user-o" aria-hidden="true"></i>
+																</p>
+															</div>
+															<div class="col-sm-8">
+																<ul>
+																	<li>
+																		<span>报价:</span> 
+																		<span th:text="${feedbackInfo.counselFee}"></span>
+																	</li>
+																	<li>
+																		<span>意见/建议:</span> 
+																		<span th:text="${feedbackInfo.lawyerComments}"></span>
+																	</li>
+																	<li>
+																		<span>回复日期</span> 
+																		<span th:text="2018-1-12"></span>
+																	</li>
+																</ul>
+															</div>
+															<div class="col-sm-2">
+																<button type="button" class="btn btn-law pull-right"
+																	th:attr="disabled=(${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
+																	th:id="${feedbackInfo.id}">采纳</button>
+															</div>
+														</div>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="row"  id="lawyerFeedback">
-									<ul th:each="feedbackInfo : ${caseDetailInfo.caseFeedbackInfo}">
-										<li>
-											<a href="" th:id="${feedbackInfo.id}">
-												<b>律师： <span th:text="${feedbackInfo.lawyerName}"></span></b>
-												<b>报价： <span th:text="${feedbackInfo.counselFee}"></span></b>
-												<b>意见： <span th:text="${feedbackInfo.lawyerComments}"></span></b>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</ul>
-							<ul class="writeInfoText ulCell myCell">
-								<li class="orange">律师正在查看中，预计在24小时内为您提供解答。</li>
-								<li th:text="${caseDetailInfo.comments}"></li>
-								<li class="gray" th:text="${caseDetailInfo.createAt}"> <!--您可以在23分43秒内 <a href="">修改问题</a>--></li>
-								<li class="line"></li>
-								<li class="orange">您的案件类型</li>
-								<li th:text="${caseDetailInfo.falltypusType}"></li>
-								<li class="line"></li>
-								<li class="orange">您的地址</li>
-								<li th:text="${caseDetailInfo.location}"></li>
-								<li class="line"></li>
-								<li class="orange">律师意见
-									<ul class="writeInfoText ulCell myCell" th:if="${ not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}" th:each="lawyerComments : ${caseDetailInfo.caseFeedbackInfo}">
-										<li class="orange">内容</li>
-										<li th:text="${lawyerComments.lawyerComments}"></li>
-										<li class="line"></li>
-										<li class="orange">案件律师费用</li>
-										<li th:text="${lawyerComments.counselFee}"></li>
-										<li class="line"></li>
-										<li class="orange">律师</li>
-										<li th:text="${lawyerComments.lawyerName}"></li>
-									</ul>
-									<li th:if="${#lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}">尚未有律师回复</li>
-								</li>
-								<li class="line"></li>
-								<li class="orange">您的问卷调查信息</li>
-								<ul th:each="qa : ${caseDetailInfo.qaMapping}">
-									<li>问题: <span th:text="${qa.questionDesc}"></span></li>
-									<li>答案: <span th:text="${qa.answerDesc}"></span></li>
-									<li class="line"></li>
-								</ul>
-								<li class="line"></li>
-								<li class="orange">您的追问信息:</li>
-								<li th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">您对此案件还没有追问信息</li>
-								<li th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}" th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}" th:text="'第'+ ${iterState.count} + '次追问: ' + ${inquiry}"></li>
-								<li class="line"></li>
-								<li class="orange">附加信息:</li>
-								<li th:text="${caseDetailInfo.comments}"></li>
-								<li class="line"></li>
-								<li><h5>法律分析</h5></li>
-								<li>对于问题描述，可以作如下分析：</li>
-								<li>尊敬的用户您好，您咨询的内容无有效信息，律师难以从法律的专业角度做出分析和判断。您可以参考提问示例，重新提交法律咨询，以便律师为您提供可靠的解答。</li>
-								<li class="gray">2017.11.06 10:57</li>
 								<div class="row mybox">
 									<div class="col-md-12 btnSearch solutionTwoBtn">
-										<button th:attr="disabled=(${#lists.size(caseDetailInfo.detailedInquiries) eq 3} or ${caseDetailInfo.status eq '5'}) ? 'disabled' : 'false'" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addDetailedInquiry">追问</button>
+										<button
+											th:attr="disabled=(${#lists.size(caseDetailInfo.detailedInquiries) eq 3} or ${caseDetailInfo.status eq '5'}) ? 'disabled' : 'false'"
+											type="button" class="btn btn-law btn-lg"
+											data-toggle="modal" data-target="#addDetailedInquiry">追问</button>
 										&nbsp;&nbsp;
-										<button th:attr="disabled=${caseDetailInfo.status eq '5'} ? 'disabled' : 'false'" type="button" id="resolveDispute" class="btn btn-primary btn-lg">解决纠纷</button>
+										<button th:attr="disabled=${caseDetailInfo.status eq '5'} ? 'disabled' : 'false'"
+											    type="button" class="btn btn-law btn-lg" 
+											    id="resolveDispute">解决纠纷</button>
 									</div>
 								</div>
 							</ul>
@@ -281,7 +152,6 @@
 								<ul class="writeInfoRightTitle">
 									<li>电话咨询</li>
 								</ul>
-
 								<ul class="writeInfoRightItem">
 									<li>立即响应</li>
 									<li>专业</li>
@@ -294,74 +164,51 @@
 				</section>
 			</div>
 		</div>
-		<div class="modal fade" id="addDetailedInquiry" tabindex="-1" role="dialog" aria-labelledby="addDetailedInquiryModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        <form>
-			          <div class="form-group">
-			            <label for="recipient-name" class="form-control-label">追问问题:</label>
-			            <input type="text" class="form-control" id="detailedInquiryContent" />
-			          </div>
-			        </form>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary" id="saveDetailedInquiry">保存</button>
-			      </div>
-			    </div>
-			  </div>
-		</div>
-		<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">提示信息</h4>
-		            </div>
-		            <div class="modal-body" id="modalContent"></div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		            </div>
-		        </div>
-		    </div>
+	</div>
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" id="addDetailedInquiry" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">追问</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="usr"></label>
+							<textarea class="form-control" id="detailedInquiryContent"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-law" id="saveDetailedInquiry">保存</button>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer" ></div>
-	<script type="text/javascript">
-		function ShowFLT() {
-		    if ($('#LM1').css('display') == 'none') {
-		    	$("#LM1").css("display", "")
-				$("#A1").innerHTML='收起'
-		    } else {
-		    	$("#LM1").css("display", "none")
-		        $("#A1").innerHTML='展开'
-		    }
-		}
-	</script>
+	<div class="modal fade" id="notificationModal" tabindex="-1"
+		role="dialog" aria-labelledby="notificationModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">提示信息</h4>
+				</div>
+				<div class="modal-body" id="modalContent"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {
-			$("#A1").on("click", function(e) {
-				e.preventDefault()
-			})
-			var acceptedFeddback = '';
-			/* $("#lawyerFeedback").on("click", 'li', function(e) {
-				e.preventDefault()
-
-				var sections = $(this).parent().parent().children();
-		
-				for (var index = 0; index < sections.length; index ++) {
-					$($(sections.get(index)).children().get(0)).attr("style","")
-				}
-		
-				$(this).css("background-color", "green")
-				acceptedFeddback = $(this).attr("id")
-			}) */
 			$("#lawyerFeedbacks").on("click", "button", function() {
 				console.log($(this).attr("id"))
 				$.ajax({

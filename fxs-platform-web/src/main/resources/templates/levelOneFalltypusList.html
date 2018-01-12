@@ -1,10 +1,11 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/litigant_header :: litigant-header-css" ></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/litigant_header :: litigant-header" ></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart">
 		<div class="container-fluid">
 			<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="500">
@@ -41,7 +42,7 @@
 		    </div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer" ></div>
+	<div th:replace="fragments/footer :: footer" ></div>
 	<script type="text/javascript" th:inline="javascript" th:src="@{/js/falltypusOps.js}"></script>
 </body>
 </html>

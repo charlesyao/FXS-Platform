@@ -30,7 +30,7 @@ public class Reservation implements Serializable {
 	/**
 	 * 当事人和律师预约电话联系的日期+时间
 	 */
-	private Date researvationDatetime = new Date();
+	private Date researvationDatetime;
 
 	private Date expiredDate;
 	
@@ -70,7 +70,7 @@ public class Reservation implements Serializable {
 	}
 
 	public void setResearvationDatetime(Date researvationDatetime) {
-		this.researvationDatetime = new Date();
+		this.researvationDatetime = researvationDatetime;
 	}
 
 	public String getContactPhone() {

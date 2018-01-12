@@ -1,191 +1,147 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/public_header_style_2 :: public-header-2-css"></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/public_header_style_2 :: public-header-2"></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart">
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a href="counseling_free.html">免费法律咨询</a></li>
-				<li class="active">请描述您的问题</li>
-			</ol>
-			<h1 class="blue">请描述您的问题</h1>
-			<section class="col-md-12 col-sm-12 writeInfo space20">
-				<div class="row">
-					<div class="col-md-8 col-sm-8">
-						<ul class="writeInfoText ulCell">
-							<li class="orange">请清晰描述事件，再提出法律问题，以便于我们提供优质解答。</li>
-							<li>请详细描述事件的时间、地点、人物、过程、结果、争议的焦点等重要信息，并明确提出您的需求，如“怎么办”、“如何维权”、“怎么处理”、“是否可以要求赔偿”等
-								—— <span>提示：请将鼠标移动到蓝色文字上查看解读</span>
-							</li>
-							<li>
-								<ul class="exp">
-									<li class="fl">婚姻示例</li>
-									<li class="fr">我们结婚四年多，<span class="clr-blue">结婚后
-											，我的父母</span>几乎全款买的房子 。150万的房子，<span class="clr-blue">女方</span>承担12万
-										。产证上只写<span class="clr-blue">我和妻子</span>的名字 。<span
-										class="clr-blue">现在要离婚，女方要求要我一半的房产，能分到吗？</span></li>
-									<li class="clearboth"></li>
-								</ul>
-								<ul class="exp expLast">
-									<li class="fl">劳动示例</li>
-									<li class="fr">我在<span class="clr-blue">东莞市一个小电子厂</span>上班，<span
-										class="clr-blue">上个月自动离职了，还有差不多一个月半工资没结，</span>老板说自动离职一毛钱都没有，<span
-										class="clr-blue">请问自动离职是不是没有工资？</span></li>
-									<li class="clearboth"></li>
-								</ul>
-							</li>
-						</ul>
-						<ul class="writeInfoText ulCell">
-							<form role="form">
-								<div class="form-group">
-									<textarea class="form-control" rows="10" id="freeComments"
-										placeholder="请至少输入20个字，详细描述问题有助于我们更好地帮助您"></textarea>
-								</div>
-							</form>
-							<div class="submit_counter">
-								还可以输入<span>1000</span>字
-							</div>
-						</ul>
-						<ul class="writeInfoText ulCell">
-							<form class="form-horizontal signupBox chooseAds" role="form" style="top:900px" id="optionalQAForm">
-							  <div class="chooseAdsItem" th:each="qa : ${optionalQuestions}">
-							   	<h3 th:text="${qa.question.description}" th:id="${qa.question.id}"></h3>
-							   	<ul>
-							   		<!-- 文本输入框 -->
-							   		<div th:if="${qa.question.questionType eq '2'}">
-										<textarea class="form-control" rows="3" id="freeComments" placeholder="请至少输入20个字，详细描述问题有助于我们更好地帮助您"></textarea>
-									</div>
-									<!-- 多选项 -->
-							   		<div class="optionalMultiQA" th:if="${qa.question.questionType eq '1'}">
-								   		<li th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="multi">
-								   			<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
-								   		</li>
-							   		</div>
-							   		<!-- 单选项 -->
-							   		<div class="optionalSingleQA" th:if="${qa.question.questionType eq '0'}">
-								   		<li th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="single">
-								   			<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
-								   		</li>
-							   		</div>
-							   		<div>
-							   			<li id="addAfterConfirm"><a href="">确认后补充</a></li>
-							   			<li id="noAnswer"><a href="">不能回答</a></li>
-								   	</div>
-							   	</ul>
-							  </div>
-							</form>
-						</ul>
-						<div class="row">
-							<div class="col-md-12 col-sm-12 btnNext">
-								<a href="" type="button" id="submitLawsuit" class="btn btn-primary btn-lg">提交咨询</a>
-								<a href="#">[查看解答示例]</a>
-							</div>
+			<div
+				class="containerWapper d-flex justify-content-center align-items-center">
+				<div class="answer-quiz">
+					<div class="quiz-wrap introcouPhone" id="optionalQAForm">
+						<div class="quiz" style="display: none" th:each="qa : ${optionalQuestions}">
+							<p class="title" th:text="${qa.question.description}" th:id="${qa.question.id}"></p>
+							<!-- 单选题 -->
+							<ul class="ui-choose" id="uc_05" th:if="${qa.question.questionType eq '0'}">
+								<li class="introcoupCell btnSquare" th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="single" th:text="${answer.description}">
+								</li>
+							</ul>
+							<!-- 多选题 -->
+							<ul class="ui-choose" id="uc_05" multiple="multiple" th:if="${qa.question.questionType eq '1'}">
+								<li class="introcoupCell btnSquare" th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="multi" th:text="${answer.description}">
+								</li>
+							</ul>
+							<!-- 文本输入框 -->
+							<textarea class="form-control" rows="4" cols="50" th:if="${qa.question.questionType eq '2'}" id="freeComments"></textarea>
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-4">
-						<div class="writeInfoRight ulCell">
-							<ul class="writeInfoRightTitle">
-								<li>电话咨询</li>
-							</ul>
-							<div class="phoneIcon"></div>
-							<ul class="writeInfoRightItem">
-								<li>立即响应</li>
-								<li>专业</li>
-								<li>高性价比</li>
-								<li>服务细节到位</li>
-							</ul>
-						</div>
+					<i class="fa fa-angle-left to-left disabled" aria-hidden="true"></i>
+					<i class="fa fa-angle-right to-right" aria-hidden="true"></i>
+					<div class="button-wrap mt-3">
+						<button type="button" class="btn btn-law will-answer withoutSpecificAnswer">确认后补充</button>
+						<button type="button" class="btn btn-law cannot-answer withoutSpecificAnswer">暂不能回答</button>
+						<button type="button" class="btn btn-law submit pull-right" style="display: none" id="submitLawsuit">立即提交</button>
 					</div>
 				</div>
-			</section>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script type="text/javascript">
-		$(function() {
-			$("#optionalQAForm").on("click", 'li', function(e) {
-				e.preventDefault()
-				
-				if ($(this).hasClass("cur")) {
-					return;
-				}
-				if ($(this).attr("data-type") == 'single') {
-					$(this).parent().children().removeClass("cur")
-					$(this).addClass("cur")
-				} else if ($(this).attr("data-type") == 'multi') {
-					$(this).addClass("cur")
-				}
-				
-				if ($(this).attr('id') === 'addAfterConfirm') {
-					e.preventDefault()
-					$(this).parent().prev().children().removeClass("cur")
-					$(this).parent().children().removeClass("cur")
-					$(this).addClass("cur")
-					$.ajax({
-						type : 'POST',
-						url : '/public/question/optional/other/answer',
-						data : JSON.stringify({
-							"other": "确认后补充",
-							"questionId": $(this).parent().parent().prev().attr("id")
-						}),
-						contentType : "application/json; charset=utf-8",
-						success : function(res) {
-						},
-						error : function(error) {
-						}
-					});
-				} else if ($(this).attr('id') === 'noAnswer') {
-					e.preventDefault()
-					$(this).parent().prev().children().removeClass("cur")
-					$(this).parent().children().removeClass("cur")
-					$(this).addClass("cur")
-					$.ajax({
-						type : 'POST',
-						url : '/public/question/optional/other/answer',
-						data : JSON.stringify({
-							"other": "无法回答",
-							"questionId": $(this).parent().parent().prev().attr("id")
-						}),
-						contentType : "application/json; charset=utf-8",
-						success : function(res) {
-						},
-						error : function(error) {
-						}
-					});
-				} else {
-					$.ajax({
-						type : 'GET',
-						url : '/public/question/optional/' + $(this).attr("data-type") + '/answer/' + $(this).attr("id"),
-						success : function(res) {
-							
-						},
-						error : function(error) {
-						}
-					});
-				}
-			})
-			
-			$("#submitLawsuit").on("click", (e) => {
-				e.preventDefault()
-				$.ajax({
-					type : 'POST',
-					url : '/public/case',
-					data : JSON.stringify({
-						"caseType": "1",
-						"comments": $("#freeComments").val()
-					}),
-					contentType : "application/json; charset=utf-8",
-					success : function(res) {
-						window.location.assign(res.data);
-					},
-					error : function(error) {
-					}
-				});
-			})
-		})
+	$(function () {
+		$('.ui-choose').ui_choose();
+	    $("#optionalQAForm div").first().css('display', 'block');
+
+	    $(".answer-quiz").on("click", ".will-answer,.cannot-answer", function () {
+	        var showQuiz = $(".quiz-wrap .quiz:visible");
+	        showQuiz.find("li").removeClass("selected");
+	        toNext();
+	    });
+
+	    $(".answer-quiz .to-right").on("click", function () {
+	        var showQuiz = $(".quiz-wrap .quiz:visible");
+	        if ($(this).hasClass("disabled") || showQuiz.find("li.selected").length == 0) {
+	            return
+	        }
+	        toNext();
+	    })
+	    
+	    $(".answer-quiz .to-left").on("click", function () {
+	        var showQuiz = $(".quiz-wrap .quiz:visible");
+	        if ($(this).hasClass("disabled")) {
+	            return
+	        }
+	        if (showQuiz.prev(".quiz").length > 0) {
+	            showQuiz.prev(".quiz").show();
+	            $(".answer-quiz .submit").hide();
+	            $(".answer-quiz .to-right").removeClass("disabled");
+	            showQuiz.hide();
+	        }
+
+	        if (showQuiz.prev(".quiz").prev(".quiz").length == 0) {
+	            $(".answer-quiz .to-left").addClass("disabled");
+	        } else {
+	            $(".answer-quiz .to-left").removeClass("disabled");
+	        }
+	    })
+	    
+	    function toNext() {
+	        var showQuiz = $(".quiz-wrap .quiz:visible");
+	        if (showQuiz.next(".quiz").length > 0) {
+	            showQuiz.next(".quiz").show();
+	            $(".answer-quiz .to-left").removeClass("disabled");
+	            showQuiz.hide();
+	        }
+	        if (showQuiz.next(".quiz").next(".quiz").length == 0) {
+	            $(".answer-quiz .to-right").addClass("disabled");
+	            $(".answer-quiz .submit").show();
+	        } else {
+	            $(".answer-quiz .to-right").removeClass("disabled");
+	        }
+	    }
+	    
+	    $(".withoutSpecificAnswer").on("click", function() {
+	    	var currentQuestionId = $(this).parent().prevAll("#optionalQAForm").children('div[style*="display: block"]').children('p').attr('id');
+	    	var selectedAnswer = $(this)[0].innerText
+	    	$.ajax({
+                type: 'POST',
+                url: '/public/question/optional/other/answer',
+                data: JSON.stringify({
+                    "other": selectedAnswer,
+                    "questionId": currentQuestionId
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                },
+                error: function (error) {
+                }
+            });
+	    })
+	    
+	    $("#optionalQAForm").on("click", 'li', function () {
+	        $.ajax({
+                type: 'GET',
+                url: '/public/question/optional/' + $(this).attr("data-type") + '/answer/' + $(this).attr("id"),
+                success: function (res) {
+
+                },
+                error: function (error) {
+                }
+            });
+	    })
+
+	    $("#submitLawsuit").on("click", (e) => {
+	        e.preventDefault()
+	        $.ajax({
+	            type: 'POST',
+	            url: '/public/case',
+	            data: JSON.stringify({
+	                "caseType": "1",
+	                "comments": $("#freeComments").val()
+	            }),
+	            contentType: "application/json; charset=utf-8",
+	            success: function (res) {
+	            	//relocate to login page or user dashboard
+	                window.location.assign(res.data);
+	            },
+	            error: function (error) {
+	            }
+	        });
+	    })
+	})
 	</script>
 </body>
 </html>

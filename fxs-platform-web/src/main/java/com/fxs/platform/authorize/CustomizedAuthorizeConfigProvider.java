@@ -32,7 +32,8 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/user",
 					"/disputeInfo/**",
 					"/public/**")
-			.permitAll().anyRequest().authenticated();
+			.permitAll().anyRequest().authenticated()
+			.antMatchers("/bootstrap/**").permitAll();
 		
 		return true;
 	}

@@ -1,105 +1,101 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/public_header_style_2 :: public-header-2-css"></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/public_header_style_2 :: public-header-2"></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+		aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myLargeModalLabel">提交电话咨询</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="usr">电话:</label>
+							<input type="text" class="form-control" id="contactPhone" />
+						</div>
+						<div class="form-group">
+							<label for="pwd">预约日期:</label> 
+							<input type="date" class="form-control" id="researvationDatetime" />
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-law" id="savePhoneConsulting">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="notificationModal" tabindex="-1"
+		role="dialog" aria-labelledby="notificationModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">提示信息</h4>
+				</div>
+				<div class="modal-body" id="modalContent"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="mainPart">
 		<div class="container">
-			<h1>电话咨询</h1>
-			<p>优选专家律师与您电话沟通，为您深度分析法律问题，提供权威解决方案，排疑解惑。</p>
+			<div class="text-center">
+				<h1>电话咨询</h1>
+				<p>优选专家律师与您电话沟通，为您深度分析法律问题，提供权威解决方案，排疑解惑。</p>
+			</div>
 			<section class="col-md-12 col-sm-12 introcouPhone">
 				<div class="row">
 					<div class="col-md-3 col-sm-6">
 						<ul class="introcoupCell">
-							<li>
-								<img th:src="@{/img/icon_counseling1.png}" />
-							</li>
-							<li>
-								<span>立即响应</span>
-							</li>
+							<li><img th:src="@{/img/icon_counseling1.png}" /></li>
+							<li><span>立即响应</span></li>
 							<li class="ft12">专属律师，一打就通，立即获取法律服务</li>
 						</ul>
 					</div>
 					<div class="col-md-3 col-sm-6">
 						<ul class="introcoupCell">
-							<li>
-								<img th:src="@{/img/icon_counseling2.png}" />
-							</li>
-							<li>
-								<span>专业</span>
-							</li>
+							<li><img th:src="@{/img/icon_counseling2.png}" /></li>
+							<li><span>专业</span></li>
 							<li class="ft12">优选律师，为您提供透彻的分析、有价值的纠纷解决方案</li>
 						</ul>
 					</div>
 					<div class="col-md-3 col-sm-6">
 						<ul class="introcoupCell">
-							<li>
-								<img th:src="@{/img/icon_counseling3.png}" />
-							</li>
-							<li>
-								<span>高性价比</span>
-							</li>
+							<li><img th:src="@{/img/icon_counseling3.png}" /></li>
+							<li><span>高性价比</span></li>
 							<li class="ft12">24小时内不限次数、不限时长咨询，比线下500元/小时的咨询更高效更划算。</li>
 						</ul>
 					</div>
 					<div class="col-md-3 col-sm-6">
 						<ul class="introcoupCell">
-							<li>
-								<img th:src="@{/img/icon_counseling4.png}" />
-							</li>
-							<li>
-								<span>服务细节到位</span>
-							</li>
+							<li><img th:src="@{/img/icon_counseling4.png}" /></li>
+							<li><span>服务细节到位</span></li>
 							<li class="ft12">全程通话录音、服务结束为您提供纠纷解决方案，帮您理顺思路，服务不满意，立即退费</li>
+
 						</ul>
 					</div>
 				</div>
-				<div class="row">
-					<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#buyConsulting">立即购买</button>
+				<div class="row buttonPop btnNext">
+					<button type="button" class="btn btn-law mx-auto" data-toggle="modal" data-target=".bs-example-modal-lg">立即提交</button>
 				</div>
-				<div class="modal fade" id="buyConsulting" tabindex="-1" role="dialog" aria-labelledby="buyConsultingeModalLabel" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="buyConsultingeModalLabel">还差最后一步</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				        <form>
-				          <div class="form-group">
-				            <label for="recipient-name" class="form-control-label">电话号码:</label>
-				            <input type="text" class="form-control" id="contactPhone" />
-				          </div>
-				        </form>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-primary" id="savePhoneConsulting">保存</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			                <h4 class="modal-title">提示信息</h4>
-			            </div>
-			            <div class="modal-body" id="modalContent"></div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			            </div>
-			        </div>
-			    </div>
-			</div>
 			</section>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#savePhoneConsulting").on("click", function() {
@@ -107,8 +103,8 @@
 					type : 'POST',
 					url : '/public/case/reservation',
 					data : JSON.stringify({
-						"contactPhone": $("#contactPhone").val(),
-						"expiredDate": "2017-12-19"
+						"contactPhone" : $("#contactPhone").val(),
+						"researvationDatetime" : $("#researvationDatetime").val()
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {

@@ -1,84 +1,101 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="fragments/public_header_style_2 :: public-header-2-css"></div>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/public_header :: public-header-css"></head>
 <body>
-	<div th:replace="fragments/public_header_style_2 :: public-header-2"></div>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/public_header :: public-header"></div>
+	</div>
 	<div class="mainPart">
 		<div class="container">
-			<ol class="breadcrumb">
-				<li><a href="lawsuit_step1.html">选择类型</a></li>
-				<li><a href="lawsuit_step1.html">房屋买卖、房屋租赁、动拆迁</a></li>
-				<li class="active">填写信息</li>
-			</ol>
-			<h1>提交您的案情 - 填写基本信息</h1>
-			<p>
-				不知道如何填写？拨打客服热线 <span class="orange">400-850-8650</span> 获得帮助
-			</p>
-			<p>
-				<span class="orange">9406</span> 名用户正在通过 小帅网竞标模式 找律师 <a href="#">[
-					查看经典案例 ]</a>
-			</p>
-			<section class="col-md-12 col-sm-12 introcouPhone space20 sBtn" id="disputeInfo">
-				<div class="col-md-12 col-sm-12 btnNext">
-					<button id="getCity" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#selectCity">选择城市</button>
+			<div class="containerWapper">
+				<ol class="breadcrumb">
+					<li><a href="lawsuit_step1.html">选择类型</a></li>
+					<li><a href="lawsuit_step1.html">房屋买卖、房屋租赁、动拆迁</a></li>
+					<li class="active">填写信息</li>
+				</ol>
+				<div style="margin-left: 150px; margin-right: 150px">
+					<h1 class="step1">提交您的案情 - 填写基本信息</h1>
+					<p style="">
+						不知道如何填写？拨打客服热线 <span class="orange">400-850-8650</span> 获得帮助
+					</p>
+					<p>
+						<span class="orange">9406</span> 名用户正在通过 小帅网竞标模式 找律师 <a href="#">[
+							查看经典案例 ]</a>
+					</p>
 				</div>
-				<div class="col-md-12 col-sm-12 btnNext">
-					<span id="selectedCity"></span>
-				</div>
-				<div th:if="${question.question eq null}">
-					<div>暂没有绑定问题</div>
-				</div>
-				<div th:if="${question.question ne null}">
-				<h3 th:text="${question.question.description}"></h3>
-				<div class="row">
-					<ul class="col-md-2 col-sm-2" th:each="answer : ${question.answers}" th:id="${answer.id}" th:attr="isRoot=${question.question.isRootQuestion}">
-						<li class="introcoupCell btnSquare">
-							<a href="" class="answerLink" th:id="${answer.id}" th:text="${answer.description}"></a>
-						</li>
-					</ul>
-				</div>
-				</div>
-				<div id="nextQuestionContainer">
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 btnNext">
-						<a type="button" class="btn btn-primary btn-lg" th:href="@{/public/case/lawsuit/next}">下一步</a>
+				<section class="step2Step introcouPhone sBtn" id="disputeInfo">
+					<div th:if="${question.question ne null}">
+						<h3 class="space10" th:text="${question.question.description}"></h3>
+						<div class="row col-md-12 col-sm-8">
+							<ul class="ui-choose col-md-12 col-sm-12" id="uc_04">
+								<li class="introcoupCell btnSquare col-md-5"
+									th:each="answer : ${question.answers}" 
+									th:id="${answer.id}"
+									th:attr="isRoot=${question.question.isRootQuestion}">
+									<a
+										class="step2Line1" 
+										th:id="${answer.id}"
+										th:text="${answer.description}">
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-			</section>
-			<div class="modal fade" id="selectCity" tabindex="-1" role="dialog" aria-labelledby="buyConsultingeModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body" id="location">
-					        <form class="form-horizontal signupBox chooseAds" role="form" style="top:900px">
-							  <div class="pop_close" style="left:730px"><a href="#"></a></div>
-							  <div class="row signupTitle"><h3>请选择纷对象住所地／纠纷发生地</h3></div>
-							  <div class="chooseAdsItem">
-							   <h4>选择省份</h4>
-							   <ul id="level1City"></ul>
-							  </div>
-							  <div class="chooseAdsItem">
-							   <h4>选择城市</h4>
-							   <ul id="level2City"> </ul>
-							  </div>
-							</form>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-					      </div>
-					    </div>
-					  </div>
-				</div>
+					<h3 class="space10">您家人的纠纷对象住所地在哪里？</h3>
+					<h4 class="gray">
+						提示：如纠纷对象为个人，请填写纠纷对象的长期住所地，如纠纷对象为企业，请填写企业经营地点或者注册地点。如以上地点均无法获知，请填写纠纷发生地点。
+					</h4>
+					<div class="row">
+						<div class="form-group col-md-4 col-sm-12">
+							<button id="getCity" type="button" class="btn btn-dark btn-law" data-toggle="modal" data-target="#selectCity">选择您的所在地</button>
+						</div>
+						<span class="form-group col-md-2 col-sm-12" id="selectedCity" />
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 btnNext">
+							<a type="button" class="btn btn-law btn-lg" th:href="@{/public/case/lawsuit/next}">下一步</a>
+						</div>
+					</div>
+				</section>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/public_footer :: public-footer"></div>
-	<script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
+	<div class="modal fade" id="selectCity">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">选择您的所在地</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="select-city-section">
+						<p class="mb-0 title">选择省份</p>
+						<div class="select-provinces">
+							<ul class="ui-choose" id="level1City"></ul>
+						</div>
+					</div>
+					<div class="select-city-section">
+						<p class="mb-0 title">选择城市</p>
+						<div class="select-cities">
+							<ul class="ui-choose" id="level2City">
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark"
+						data-dismiss="modal">退出</button>
+					<button type="button" class="btn btn-law" id="confirmSelectedCity">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	<script type="text/javascript" th:inline="javascript"
+		th:src="@{/js/disputeInfo.js}"></script>
 </body>
 </html>
