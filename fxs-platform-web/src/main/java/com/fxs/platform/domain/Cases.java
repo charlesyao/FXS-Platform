@@ -1,10 +1,10 @@
 package com.fxs.platform.domain;
 
-
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+
+import com.fxs.platform.utils.DateUtil;
 
 
 /**
@@ -45,9 +45,11 @@ public class Cases {
 	@Transient
 	private String detailedInquirys;
 	
-	private Date createAt = new Date();
+	private String createAt = DateUtil.getCurrentDate();
 	
-	private Date expiredDate;
+	private String updateAt = DateUtil.getCurrentDate();
+	
+	private String expiredDate;
 	
 	private String acceptedLawyerFeedback;
 	
@@ -109,11 +111,11 @@ public class Cases {
 		this.comments = comments;
 	}
 
-	public Date getCreateAt() {
+	public String getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
 
@@ -157,11 +159,11 @@ public class Cases {
 		this.subLocation = subLocation;
 	}
 
-	public Date getExpiredDate() {
+	public String getExpiredDate() {
 		return expiredDate;
 	}
 
-	public void setExpiredDate(Date expiredDate) {
+	public void setExpiredDate(String expiredDate) {
 		this.expiredDate = expiredDate;
 	}
 
@@ -171,5 +173,13 @@ public class Cases {
 
 	public void setAcceptedLawyerFeedback(String acceptedLawyerFeedback) {
 		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
 	}
 }

@@ -1,6 +1,5 @@
 package com.fxs.platform.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.fxs.platform.utils.DateUtil;
 
 /**
  *纷争信息领域模型 
@@ -23,7 +24,9 @@ public class DisputeInfo {
 
 	private String status;
 
-	private Date createAt;
+	private String createAt = DateUtil.getCurrentDate();
+	
+	private String updateAt = DateUtil.getCurrentDate();
 
 	@Transient
 	private List<String> question;
@@ -40,7 +43,7 @@ public class DisputeInfo {
 	public DisputeInfo() {
 	}
 
-	public DisputeInfo(String id, String description, String status, Date createAt) {
+	public DisputeInfo(String id, String description, String status, String createAt) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -93,11 +96,11 @@ public class DisputeInfo {
 		this.answer = answer;
 	}
 
-	public Date getCreateAt() {
+	public String getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
 
@@ -115,5 +118,13 @@ public class DisputeInfo {
 
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
 	}
 }

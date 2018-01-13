@@ -1,9 +1,7 @@
 package com.fxs.platform.dto;
 
-import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.util.ObjectUtils;
 
 /**
@@ -29,9 +27,11 @@ public class CasesDto {
 	// 免费法律咨询额外信息
 	private String comments;
 
-	private Date createAt;
+	private String createAt;
 	
-	private Date expiredDate;
+	private String updateAt;
+	
+	private String expiredDate;
 
 	private String userId;
 
@@ -115,10 +115,10 @@ public class CasesDto {
 	}
 
 	public String getCreateAt() {
-		return DateFormatUtils.format(createAt, "yyyy-MM-dd HH:MM:SS");
+		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
 
@@ -186,11 +186,11 @@ public class CasesDto {
 		this.disableFeedback = disableFeedback;
 	}
 
-	public Date getExpiredDate() {
+	public String getExpiredDate() {
 		return expiredDate;
 	}
 
-	public void setExpiredDate(Date expiredDate) {
+	public void setExpiredDate(String expiredDate) {
 		this.expiredDate = expiredDate;
 	}
 
@@ -200,5 +200,13 @@ public class CasesDto {
 
 	public void setAcceptedLawyerFeedback(String acceptedLawyerFeedback) {
 		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
 	}
 }

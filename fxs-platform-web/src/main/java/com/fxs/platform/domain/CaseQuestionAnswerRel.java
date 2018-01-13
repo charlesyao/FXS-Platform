@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fxs.platform.utils.DateUtil;
+
 /**
  * 案件-问题-答案 对应关系表
  *
@@ -25,6 +27,26 @@ public class CaseQuestionAnswerRel implements Serializable {
 	private String answerId;
 
 	private String answerDesc;
+
+	private String createAt = DateUtil.getCurrentDate();
+	
+	private String updateAt = DateUtil.getCurrentDate();
+	
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
 
 	public String getId() {
 		return id;

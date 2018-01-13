@@ -65,7 +65,6 @@ public class CasesServiceImpl implements CasesService {
 	public Reservation create(Reservation reservation) {
 		reservation.setId(String.valueOf(new Random().nextInt(99999999)));
 		reservation.setUserId(UserManager.getSessionUser(httpSession));
-		reservation.setExpiredDate();
 
 		return reservationRepository.save(reservation);
 	}

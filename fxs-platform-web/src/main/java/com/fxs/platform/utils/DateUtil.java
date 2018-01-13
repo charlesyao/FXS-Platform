@@ -5,11 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DateUtils;
-import org.joda.time.DateTime;
-
 public class DateUtil {
 
+	public static String getCurrentDate() {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		return sdf.format(new Date());
+	}
+	
 	public static String getFetureDate(String source, int past) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

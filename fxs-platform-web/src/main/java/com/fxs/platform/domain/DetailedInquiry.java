@@ -3,8 +3,10 @@ package com.fxs.platform.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fxs.platform.utils.DateUtil;
+
 /**
- *案件追加信息领域模型 
+ * 案件追加信息领域模型
  *
  */
 @Entity
@@ -19,6 +21,26 @@ public class DetailedInquiry {
 	private String thirdComments;
 
 	private String caseId;
+
+	private String createAt = DateUtil.getCurrentDate();
+
+	private String updateAt = DateUtil.getCurrentDate();
+	
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
 
 	public String getId() {
 		return id;

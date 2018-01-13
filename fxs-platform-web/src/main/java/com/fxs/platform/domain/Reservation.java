@@ -34,6 +34,10 @@ public class Reservation implements Serializable {
 
 	private String expiredDate;
 	
+	private String createAt = DateUtil.getCurrentDate();
+	
+	private String updateAt = DateUtil.getCurrentDate();
+	
 	/**
 	 * 当事人的联系方式
 	 */
@@ -48,6 +52,22 @@ public class Reservation implements Serializable {
 	 * 响应律师
 	 */
 	private String lawyerId;
+	
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
 
 	public String getId() {
 		return id;
@@ -103,6 +123,6 @@ public class Reservation implements Serializable {
 
 	public void setExpiredDate() {
 		//默認一周過期
-		DateUtil.getFetureDate(this.getResearvationDatetime(), 7);
+		this.expiredDate = DateUtil.getFetureDate(this.getResearvationDatetime(), 7);
 	}
 }

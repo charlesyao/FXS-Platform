@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.fxs.platform.utils.DateUtil;
 
 /**
  *问题领域模型 
@@ -28,6 +28,10 @@ public class Question {
 
 	private String belongsToFalltypus;
 	
+	private String createAt = DateUtil.getCurrentDate();
+	
+	private String updateAt = DateUtil.getCurrentDate();
+	
 	@Transient
 	private List<String> answers;
 
@@ -35,6 +39,26 @@ public class Question {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+	
+	public String getCreateAt() {
+		return createAt;
+	}
+
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
+
 
 	public String getId() {
 		return id;

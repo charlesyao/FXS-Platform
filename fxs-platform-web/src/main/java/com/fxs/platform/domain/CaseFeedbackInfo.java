@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import com.fxs.platform.utils.DateUtil;
+
 /**
  *案件反馈领域模型 
  *
@@ -27,6 +29,10 @@ public class CaseFeedbackInfo {
 	private String lawyerComments;
 	
 	private String status;
+	
+	private String createAt = DateUtil.getCurrentDate();
+	
+	private String updateAt = DateUtil.getCurrentDate();
 	
 	@Transient
 	private String acceptedLawyerFeedback;
@@ -93,5 +99,21 @@ public class CaseFeedbackInfo {
 
 	public void setAcceptedLawyerFeedback(String acceptedLawyerFeedback) {
 		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
+	}
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
 	}
 }

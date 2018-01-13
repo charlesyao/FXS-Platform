@@ -1,9 +1,9 @@
 package com.fxs.platform.domain;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import com.fxs.platform.utils.DateUtil;
 
 /**
  * 律师领域类
@@ -21,7 +21,9 @@ public class Lawyer {
 
 	private String mobile;
 
-	private Date createdTime;
+	private String createAt = DateUtil.getCurrentDate();
+	
+	private String updateAt = DateUtil.getCurrentDate();
 
 	private String state = State.ACTIVE.getState();
 	
@@ -30,6 +32,22 @@ public class Lawyer {
     private String location = "";
 
     private String businessDomain = "";
+    
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
 
 	public String getId() {
 		return id;
@@ -69,14 +87,6 @@ public class Lawyer {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
 	}
 
 	public String getState() {

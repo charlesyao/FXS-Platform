@@ -5,6 +5,8 @@ import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fxs.platform.utils.DateUtil;
+
 /**
  * 案件类型领域模型
  * 
@@ -19,6 +21,26 @@ public class Falltypus {
 	private String name;
 
 	private String parentTypeId = "";
+
+	private String createAt = DateUtil.getCurrentDate();
+
+	private String updateAt = DateUtil.getCurrentDate();
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
 
 	public String getId() {
 		return id;

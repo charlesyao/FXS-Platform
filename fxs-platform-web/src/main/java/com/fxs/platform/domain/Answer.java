@@ -6,8 +6,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.fxs.platform.utils.DateUtil;
+
 /**
- * 答案领域模型 
+ * 答案领域模型
  *
  */
 @Entity
@@ -17,15 +19,19 @@ public class Answer {
 	private String id;
 
 	private String description;
-	
+
 	private String other;
 
 	@ManyToOne
 	@JoinColumn(name = "question_id")
 	private Question question;
-	
+
 	private String nextQuestionId;
-	
+
+	private String createAt = DateUtil.getCurrentDate();
+
+	private String updateAt = DateUtil.getCurrentDate();
+
 	@Transient
 	private String questionId;
 
@@ -76,4 +82,21 @@ public class Answer {
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
+
 }

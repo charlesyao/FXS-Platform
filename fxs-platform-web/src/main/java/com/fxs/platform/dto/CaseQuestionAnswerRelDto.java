@@ -16,6 +16,26 @@ public class CaseQuestionAnswerRelDto {
 
 	private String answerDesc;
 
+	private String createAt;
+	
+	private String updateAt;
+	
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
+	}
+
+	public String getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(String updateAt) {
+		this.updateAt = updateAt;
+	}
+
 	public String getCaseId() {
 		return caseId;
 	}
