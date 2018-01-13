@@ -14,19 +14,22 @@
 					<li class="active">填写纠纷基本信息</li>
 				</ol>
 				<h1 class="blue step1">填写纠纷基本信息</h1>
-				<section class="step2Step introcouPhone marginTop30 sBtn"
-					id="disputeInfo">
+				<section class="step2Step introcouPhone sBtn" id="disputeInfo">
 					<div th:if="${question.question ne null}">
-						<h3 th:text="${question.question.description}"></h3>
-						<div class="row col-md-12 col-sm-12">
-							<ul class="ui-choose col-md-12 col-sm-12" id="uc_03">
-								<li class="introcoupCell btnSquare col-md-2"
-									th:each="answer : ${question.answers}" th:id="${answer.id}"
-									th:attr="isRoot=${question.question.isRootQuestion}"><a
-									class="step2Line1" th:id="${answer.id}"
-									th:text="${answer.description}"></a></li>
+						<h3 class="space10" th:text="${question.question.description}"></h3>
+						<div class="row col-md-12 col-sm-8">
+							<ul class="ui-choose col-md-12 col-sm-12" id="uc_04">
+								<li class="introcoupCell btnSquare col-md-5"
+									th:each="answer : ${question.answers}" 
+									th:id="${answer.id}"
+									th:attr="isRoot=${question.question.isRootQuestion}"
+									th:text="${answer.description}">
+								</li>
 							</ul>
 						</div>
+					</div>
+					<div id="nextQuestionContainer">
+					
 					</div>
 					<h3 class="space10">您家人的纠纷对象住所地在哪里？</h3>
 					<h4 class="gray">
@@ -86,7 +89,9 @@
 		</div>
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
-	<script type="text/javascript" th:inline="javascript"
-		th:src="@{/js/disputeInfo.js}"></script>
+	<script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
+	<script type="text/javascript">
+		$('.ui-choose').ui_choose();
+	</script>
 </body>
 </html>

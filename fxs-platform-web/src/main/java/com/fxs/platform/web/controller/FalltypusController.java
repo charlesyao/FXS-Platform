@@ -122,13 +122,15 @@ public class FalltypusController {
 			//获取当前案件类型下属的root optional question
 			Question optionalRootQuestion = questionService.findQuestionsByFalltypus(id);
 			
-			QuestionDto questionDto = new QuestionDto();
-			List<Answer> optionalAnswerList = answerService.getAllAnswerByQuestionId(optionalRootQuestion.getId());
-			
-			questionDto.setQuestion(optionalRootQuestion);
-			questionDto.setAnswers(optionalAnswerList);
-			
-			session.setAttribute("optionalQuestion", questionDto);
+			if (!ObjectUtils.isEmpty(optionalRootQuestion)) {
+				QuestionDto questionDto = new QuestionDto();
+				List<Answer> optionalAnswerList = answerService.getAllAnswerByQuestionId(optionalRootQuestion.getId());
+				
+				questionDto.setQuestion(optionalRootQuestion);
+				questionDto.setAnswers(optionalAnswerList);
+				
+				session.setAttribute("optionalQuestion", questionDto);
+			}
 
 			if (caseType.equals("consulting")) {// 咨询跳转路由
 

@@ -34,8 +34,12 @@
 									<span th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}">无</span>
 									<ul th:each="qa : ${caseDetailInfo.qaMapping}">
 										<li>
-											问题: <span th:text="${qa.questionDesc}"></span>
-											答案: <span th:text="${qa.answerDesc}"></span>
+											<span>问题: </span>
+											<span th:text="${qa.questionDesc}"></span>
+										</li>
+										<li>
+											<span>答案: </span>
+											<span th:text="${qa.answerDesc}"></span>
 										</li>
 										<li class="line"></li>
 									</ul>
@@ -125,8 +129,7 @@
 				</div>
 				<div class="modal-body" id="modalContent"></div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-law" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
 		</div>
@@ -144,7 +147,7 @@
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
-						$("#modalContent").empty().append("更新成功")
+						$("#modalContent").empty().append("当前案件已标记为结束")
 						$("#notificationModal").modal("show")
 					},
 					error : function(error) {

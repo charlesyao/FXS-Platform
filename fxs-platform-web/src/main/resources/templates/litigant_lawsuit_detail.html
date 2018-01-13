@@ -96,6 +96,7 @@
 														</div>
 													</ul>
 													<ul class="writeInfoText ulCell myCell mb-2"
+														th:style="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? 'background: rgba(0,0,0,.03);' : ''"
 														th:if="${not #lists.isEmpty(caseDetailInfo.caseFeedbackInfo)}"
 														th:each="feedbackInfo, iterationStatus : ${caseDetailInfo.caseFeedbackInfo}">
 														<div class="row">
@@ -124,7 +125,9 @@
 															<div class="col-sm-2">
 																<button type="button" class="btn btn-law pull-right"
 																	th:attr="disabled=(${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
-																	th:id="${feedbackInfo.id}">采纳</button>
+																	th:id="${feedbackInfo.id}"
+																	th:text="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? '已采纳' : '采纳'"
+																	></button>
 															</div>
 														</div>
 													</ul>
@@ -136,7 +139,7 @@
 								<div class="row mybox">
 									<div class="col-md-12 btnSearch solutionTwoBtn">
 										<button
-											th:attr="disabled=(${#lists.size(caseDetailInfo.detailedInquiries) eq 3} or ${caseDetailInfo.status eq '5'}) ? 'disabled' : 'false'"
+											th:attr="disabled=(${#lists.size(caseDetailInfo.detailedInquiries) eq 3} or ${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
 											type="button" class="btn btn-law btn-lg"
 											data-toggle="modal" data-target="#addDetailedInquiry">追问</button>
 										&nbsp;&nbsp;
