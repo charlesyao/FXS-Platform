@@ -22,6 +22,16 @@ public class CasesCondition {
 	private String searchFrom;
 	
 	private String requestFrom;
+	
+	private int feedbackCount;
+
+	public int getFeedbackCount() {
+		return feedbackCount;
+	}
+
+	public void setFeedbackCount(int feedbackCount) {
+		this.feedbackCount = feedbackCount;
+	}
 
 	public String getIsRead() {
 		return isRead;

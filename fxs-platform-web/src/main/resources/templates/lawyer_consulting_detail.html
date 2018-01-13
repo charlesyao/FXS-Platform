@@ -103,7 +103,7 @@
 									</ul>
 								</div>
 								<div class="row" 
-									th:if="${not #list.isEmpty(caseDetailInfo.qaMapping)}"
+									th:if="${not #lists.isEmpty(caseDetailInfo.qaMapping)}"
 									th:each="qaMapping : ${caseDetailInfo.qaMapping}">
 									<ul>
 										<li>问题： <span th:text="${qaMapping.questionDesc}"></span></li>

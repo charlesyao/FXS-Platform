@@ -227,10 +227,11 @@ public class RouterController {
 	    	pageWrapper = new PageWrapper<CasesDto>(cases, originalCondition.getRequestFrom());
 
 	    } else {
-		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
+		    Page<CasesDto> myBidCases=casesService.findAll(CaseType.CONSULTING.getType(), pageable);
 		    pageWrapper = new PageWrapper<CasesDto>(myBidCases, request.getRequestURI());
 	    }
 	    
+	    map.addAttribute("firstLevelFalltypus", falltypusService.findFirstLevelFalltypus());
 	    map.addAttribute("pageableData", pageWrapper.getContent());
         map.addAttribute("page", pageWrapper);
         
