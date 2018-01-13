@@ -3,16 +3,10 @@ $(function() {
 	var selectedCity = ''
 	var selectedProvince = ''
 	//加载问题-答案
-	$("#disputeInfo").on("click", 'ul', function(e) {
+	$("#disputeInfo").on("click", 'li', function(e) {
 		e.preventDefault()
 		var _this = this
-		var sections = $(this).parent().children();
-		
-		for (var index = 0; index < sections.length; index ++) {
-			$($(sections.get(index)).children().get(0)).attr("style","")
-		}
-		
-		$(_this).children().css("background-color", "green")
+
 		$.ajax({
 			type : 'GET',
 			url : '/public/question/answer/' + $(_this).attr("id"),
@@ -21,13 +15,21 @@ $(function() {
 				if ($(_this).attr("isroot") === 'Y') {
 					$("#nextQuestionContainer").empty()
 				} else {
-					$(_this).parent().parent().nextAll().remove()
+					$(_this).parent().parent().parent().nextAll().remove()
 				}
+				
+				console.log(res.data)
 				$("#nextQuestionContainer").append(res.data)
 			},
 			error : function(error) {
 			}
 		});
+	})
+	
+	$("#nextQuestionContainer").on("click", "li", function() {
+		var _this = this
+		$(this).parent().find("li").removeClass("selected")
+		$(this).addClass("selected")
 	})
 	//加载城市列表
 	$("#getCity").on("click", function(e) {

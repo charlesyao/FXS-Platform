@@ -1,9 +1,12 @@
 package com.fxs.platform.web.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -248,14 +251,16 @@ public class DisputeInfoController {
 		if(!ObjectUtils.isEmpty(answerInfo)) {
 			
 			//如果当前选择的待绑定的案件类型与原数据不一致，则重新绑定,
-			if(!answer.getNextQuestionId().equals(answerInfo.getNextQuestionId())) {
+			if(!ObjectUtils.isEmpty(answer.getNextQuestionId()) && !answer.getNextQuestionId().equals(answerInfo.getNextQuestionId())) {
 				answerService.updateNextQuestion(answer);
 			}
 			
 			//更新问题的基本信息
-			answer.getQuestion().setId(answerInfo.getQuestion().getId());
-			answer.setOther(answerInfo.getOther());
-			answerService.update(answer);
+			if (!ObjectUtils.isEmpty(answer.getDescription()) && !answer.getDescription().equals(answerInfo.getDescription())) {
+				answerInfo.setDescription(answer.getDescription());
+			}
+			
+			answerService.update(answerInfo);
 		}
 		
 

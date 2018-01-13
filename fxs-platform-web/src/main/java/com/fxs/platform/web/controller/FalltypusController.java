@@ -94,8 +94,9 @@ public class FalltypusController {
 			session.setAttribute(SystemConstants.FALLTYPUS_LEVEL2_TYPE, id);
 			
 			//查询当前案件类型下属的问题
-			session.setAttribute("nextAllQuestions", questionService.findQuestionsByFalltypus(id));
+			//session.setAttribute("nextAllQuestions", questionService.findQuestionsByFalltypus(id));
 		}
+		
 		
 		String target = "";
 		List<FalltypusDto> subFalltypusList = falltypusService.findSubFalltypusByParentId(id);
@@ -117,6 +118,17 @@ public class FalltypusController {
 			qDto.setAnswers(answerList);
 			
 			map.addAttribute("question", qDto);
+			
+			//获取当前案件类型下属的root optional question
+			Question optionalRootQuestion = questionService.findQuestionsByFalltypus(id);
+			
+			QuestionDto questionDto = new QuestionDto();
+			List<Answer> optionalAnswerList = answerService.getAllAnswerByQuestionId(optionalRootQuestion.getId());
+			
+			questionDto.setQuestion(optionalRootQuestion);
+			questionDto.setAnswers(optionalAnswerList);
+			
+			session.setAttribute("optionalQuestion", questionDto);
 
 			if (caseType.equals("consulting")) {// 咨询跳转路由
 

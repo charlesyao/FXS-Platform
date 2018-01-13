@@ -17,7 +17,7 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	@Query("SELECT o FROM Question o WHERE o.isRootQuestion='Y'")
 	public Question findRootQuestion();
 	
-	@Query("SELECT o FROM Question o WHERE o.isRootQuestion='Y' AND o.belongsToFalltypus=?1")
+	@Query("SELECT o FROM Question o WHERE o.isRootQuestion='Y' AND o.questionType IS NULL AND o.belongsToFalltypus=?1")
 	public Question findCurrentRootQuestion(String belongsToFalltypus);
 	
 	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL")
@@ -30,8 +30,8 @@ public interface QuestionRepository extends FxsRepository<Question> {
 	@Modifying
 	void updateQuestion(String belongsToFalltypus, String questionId);
 	
-	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL AND o.belongsToFalltypus=?1")
-	List<Question> findQuestionsByFalltypus(String fId);
+	@Query("SELECT o FROM Question o WHERE o.questionType IS NOT NULL AND o.isRootQuestion='Y' AND o.belongsToFalltypus=?1")
+	Question findQuestionsByFalltypus(String fId);
 	
 	@Query("SELECT o FROM Question o WHERE o.belongsToFalltypus=?1")
 	List<Question> filterAllQuestionsByFalltypus(String fId);

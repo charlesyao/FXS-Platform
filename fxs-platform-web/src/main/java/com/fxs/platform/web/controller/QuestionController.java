@@ -8,7 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fxs.platform.domain.Answer;
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.dto.QuestionDto;
+import com.fxs.platform.repository.condition.AnswerCondition;
 import com.fxs.platform.security.core.i18n.LocaleMessageSourceService;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
@@ -166,8 +169,12 @@ public class QuestionController {
 				List<Answer> al = (List<Answer>)obj[1];
 				selectedAnswer = al;
 			}
-
-			selectedAnswer.add(currentAnswer);
+			
+			//如果当前选中的答案之前已经选择过，则不重复缓存
+			if(selectedAnswer.isEmpty() || !ArrayUtils.contains(selectedAnswer.toArray(), currentAnswer)) {
+				selectedAnswer.add(currentAnswer);
+			}
+			
 			qaArray[0] = currentQuestion;
 			qaArray[1] = selectedAnswer;
 			
@@ -239,20 +246,19 @@ public class QuestionController {
 			
 			//map.addAttribute("questionItem", qDto);
 			
-			questionSection = "<div id='question_" + qDto.getQuestion().getId() + "'><h3>" + qDto.getQuestion().getDescription() + "</h3>";
-			startDiv = "<div class='row'>";
-			endDiv = "</div></div>";
+			questionSection = "<div id='question_" + qDto.getQuestion().getId() + "'><h3 class='space10'>" + qDto.getQuestion().getDescription() + "</h3>";
+			startDiv = "<div class='row col-md-12 col-sm-8'><ul class='ui-choose col-md-12 col-sm-12 choose-type-right'>";
+			endDiv = "</ul></div></div>";
 			questionId = String.valueOf(qDto.getQuestion().getId());
 			
 			for (int index = 0; index < qDto.getAnswers().size(); index ++ ) {
 				String singleAnswer = "";
 				
 				if (StringUtils.isNotBlank(qDto.getAnswers().get(index).getDescription())) {
-					singleAnswer += "<ul class='col-md-2 col-sm-2' isroot='" + qDto.getQuestion().getIsRootQuestion() + "' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
-							  "<li class='introcoupCell btnSquare'>" + 
-							  "<a class='answerLink' href='' id='" + qDto.getAnswers().get(index).getId() + "'>" + qDto.getAnswers().get(index).getDescription() + "</a>" + 
-							  "</li>" + 
-							  "</ul>";
+					singleAnswer += 
+							  "<li class='introcoupCell btnSquare col-md-5' isroot='" + qDto.getQuestion().getIsRootQuestion() + "' id='" + qDto.getAnswers().get(index).getId() + "'>" + 
+							  ""+qDto.getAnswers().get(index).getDescription()+""
+							  + "</li>";
 				}
 				 
 				answerSection += singleAnswer;
@@ -273,5 +279,31 @@ public class QuestionController {
 	@ResponseBody
 	public void update(@Valid @RequestBody Question question) {
 		questionService.updateQFMapping(question);
+	}
+	
+	
+	@GetMapping("/next/optional")
+	public String query(
+						AnswerCondition condition,
+						ModelMap map) {
+		
+		QuestionDto questionDto = new QuestionDto();
+		Answer currentAnswer = answerService.query(condition);
+		
+		if(!ObjectUtils.isEmpty(currentAnswer) && !ObjectUtils.isEmpty(currentAnswer.getNextQuestionId())) {
+			Question nextQuestion = questionService.getByQuestionId(currentAnswer.getNextQuestionId());
+			List<Answer> nextQuestionAnswerList = answerService.getAllAnswerByQuestionId(nextQuestion.getId());
+			
+			questionDto.setQuestion(nextQuestion);
+			questionDto.setAnswers(nextQuestionAnswerList);
+			
+			httpSession.setAttribute("optionalQuestion", questionDto);
+			
+		} else {
+			//最后一个问题
+			httpSession.setAttribute("lastOptionalQuestion", true);
+		}
+		
+		return "public_lawsuit_lawyer_step4 :: optionalQuestionBlock-fragment";
 	}
 }

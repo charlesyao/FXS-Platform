@@ -11,29 +11,34 @@
 			<div
 				class="containerWapper d-flex justify-content-center align-items-center">
 				<div class="answer-quiz">
-					<div class="quiz-wrap introcouPhone" id="optionalQAForm">
-						<div class="quiz" style="display: none" th:each="qa : ${optionalQuestions}">
-							<p class="title" th:text="${qa.question.description}" th:id="${qa.question.id}"></p>
+					<div class="quiz-wrap introcouPhone" id="optionalQuestionContainer">
+						<div class="quiz"  style="display: block"
+							th:id="optionalQAForm"
+							th:fragment="optionalQuestionBlock-fragment" >
+							<p class="title" th:text="${session.optionalQuestion.question.description}" 
+								th:id="${session.optionalQuestion.question.id}"></p>
 							<!-- 单选题 -->
-							<ul class="ui-choose" id="uc_05" th:if="${qa.question.questionType eq '0'}">
-								<li class="introcoupCell btnSquare" th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="single" th:text="${answer.description}">
+							<ul class="ui-choose" id="uc_05" th:if="${session.optionalQuestion.question.questionType eq '0'}">
+								<li class="introcoupCell btnSquare" th:each="answer : ${session.optionalQuestion.answers}" th:id="${answer.id}" data-type="single" th:text="${answer.description}">
 								</li>
 							</ul>
 							<!-- 多选题 -->
-							<ul class="ui-choose" id="uc_05" multiple="multiple" th:if="${qa.question.questionType eq '1'}">
-								<li class="introcoupCell btnSquare" th:each="answer : ${qa.answers}" th:id="${answer.id}" data-type="multi" th:text="${answer.description}">
+							<ul class="ui-choose" id="uc_05" multiple="multiple" th:if="${session.optionalQuestion.question.questionType eq '1'}">
+								<li class="introcoupCell btnSquare" th:each="answer : ${session.optionalQuestion.answers}" th:id="${answer.id}" data-type="multi" th:text="${answer.description}">
 								</li>
 							</ul>
 							<!-- 文本输入框 -->
-							<textarea class="form-control" rows="4" cols="50" th:if="${qa.question.questionType eq '2'}" id="freeComments"></textarea>
+							<textarea class="form-control" rows="4" cols="50" th:if="${session.optionalQuestion.question.questionType eq '2'}" id="freeComments"></textarea>
 						</div>
 					</div>
-					<i class="fa fa-angle-left to-left disabled" aria-hidden="true"></i>
+					<i class="fa fa-angle-left to-left" 
+						th:attr="disabled=${session.optionalQuestion.question.isRootQuestion eq 'Y'} ? 'disabled' : 'false'" 
+						aria-hidden="true"></i>
 					<i class="fa fa-angle-right to-right" aria-hidden="true"></i>
 					<div class="button-wrap mt-3">
 						<button type="button" class="btn btn-law will-answer withoutSpecificAnswer">确认后补充</button>
 						<button type="button" class="btn btn-law cannot-answer withoutSpecificAnswer">暂不能回答</button>
-						<button type="button" class="btn btn-law submit pull-right" style="display: none" id="submitLawsuit">立即提交</button>
+						<button type="button" class="btn btn-law submit pull-right" id="submitLawsuit">立即提交</button>
 					</div>
 				</div>
 			</div>
@@ -43,8 +48,10 @@
 	<script type="text/javascript">
 	$(function () {
 		$('.ui-choose').ui_choose();
-	    $("#optionalQAForm div").first().css('display', 'block');
-
+	    //$("#optionalQAForm div").first().css('display', 'block');
+		var selectedAnswerId = []
+		
+		
 	    $(".answer-quiz").on("click", ".will-answer,.cannot-answer", function () {
 	        var showQuiz = $(".quiz-wrap .quiz:visible");
 	        showQuiz.find("li").removeClass("selected");
@@ -52,49 +59,40 @@
 	    });
 
 	    $(".answer-quiz .to-right").on("click", function () {
+	        /* 
 	        var showQuiz = $(".quiz-wrap .quiz:visible");
 	        if ($(this).hasClass("disabled") || showQuiz.find("li.selected").length == 0) {
 	            return
+	        } 
+	        */
+	        
+	        //GET next question
+	        var id = -1;
+	        if (selectedAnswerId.length != 0) {
+	        	id = selectedAnswerId[0]
 	        }
-	        toNext();
+	        $.ajax({
+				type : 'GET',
+				url : "/public/question/next/optional?id=" + id,
+				success : function(data) {
+					console.log(data)
+					$('#optionalQAForm').html(data);
+					selectedAnswerId = []
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			});
 	    })
 	    
 	    $(".answer-quiz .to-left").on("click", function () {
-	        var showQuiz = $(".quiz-wrap .quiz:visible");
-	        if ($(this).hasClass("disabled")) {
-	            return
-	        }
-	        if (showQuiz.prev(".quiz").length > 0) {
-	            showQuiz.prev(".quiz").show();
-	            $(".answer-quiz .submit").hide();
-	            $(".answer-quiz .to-right").removeClass("disabled");
-	            showQuiz.hide();
-	        }
-
-	        if (showQuiz.prev(".quiz").prev(".quiz").length == 0) {
-	            $(".answer-quiz .to-left").addClass("disabled");
-	        } else {
-	            $(".answer-quiz .to-left").removeClass("disabled");
-	        }
+	        
 	    })
 	    
-	    function toNext() {
-	        var showQuiz = $(".quiz-wrap .quiz:visible");
-	        if (showQuiz.next(".quiz").length > 0) {
-	            showQuiz.next(".quiz").show();
-	            $(".answer-quiz .to-left").removeClass("disabled");
-	            showQuiz.hide();
-	        }
-	        if (showQuiz.next(".quiz").next(".quiz").length == 0) {
-	            $(".answer-quiz .to-right").addClass("disabled");
-	            $(".answer-quiz .submit").show();
-	        } else {
-	            $(".answer-quiz .to-right").removeClass("disabled");
-	        }
-	    }
+	    
 	    
 	    $(".withoutSpecificAnswer").on("click", function() {
-	    	var currentQuestionId = $(this).parent().prevAll("#optionalQAForm").children('div[style*="display: block"]').children('p').attr('id');
+	    	var currentQuestionId = $(this).parent().prevAll("#optionalQuestionContainer").children().children('p').attr('id');
 	    	var selectedAnswer = $(this)[0].innerText
 	    	$.ajax({
                 type: 'POST',
@@ -112,6 +110,19 @@
 	    })
 	    
 	    $("#optionalQAForm").on("click", 'li', function () {
+	    	selectedAnswerId = []
+	    	if ($(this).attr("data-type") == 'single') {
+	    		$(this).parent().find("li").removeClass("selected")
+	    		$(this).addClass("selected")
+	    		
+	    		selectedAnswerId.push($(this).attr("id"))
+	    	} else {
+	    		//multi select
+	    		$(this).addClass("selected")
+	    		selectedAnswerId.push($(this).attr("id"))
+	    	}
+	    	
+	    		
 	        $.ajax({
                 type: 'GET',
                 url: '/public/question/optional/' + $(this).attr("data-type") + '/answer/' + $(this).attr("id"),

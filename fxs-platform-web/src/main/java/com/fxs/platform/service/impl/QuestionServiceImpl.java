@@ -10,6 +10,8 @@ import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Question;
 import com.fxs.platform.repository.QuestionRepository;
+import com.fxs.platform.repository.condition.AnswerCondition;
+import com.fxs.platform.repository.specification.AnswerSpecification;
 import com.fxs.platform.service.QuestionService;
 
 @Service
@@ -81,7 +83,7 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public List<Question> findQuestionsByFalltypus(String fId) {
+	public Question findQuestionsByFalltypus(String fId) {
 		// TODO Auto-generated method stub
 		return questionRepository.findQuestionsByFalltypus(fId);
 	}

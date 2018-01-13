@@ -2,7 +2,9 @@ package com.fxs.platform.service;
 
 import java.util.List;
 
+
 import com.fxs.platform.domain.Question;
+import com.fxs.platform.repository.condition.AnswerCondition;
 
 public interface QuestionService {
 	Question getByQuestionId(String qId);
@@ -25,7 +27,7 @@ public interface QuestionService {
 	
 	List<Question> findOptionalQuestions();
 	
-	List<Question> findQuestionsByFalltypus(String fId);
+	Question findQuestionsByFalltypus(String fId);
 	
 	List<Question> filterAllQuestionsByFalltypus(String fId);
 	

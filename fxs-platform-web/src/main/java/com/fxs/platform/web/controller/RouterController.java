@@ -157,22 +157,6 @@ public class RouterController {
 					target = "public_lawsuit_lawyer_step1";
 				} else if (action.equals("next")) {
 					
-					List<QuestionDto> questionDtoList = new ArrayList<QuestionDto>();
-					
-					List<Question> optionalQuestionList = questionService.findOptionalQuestions();
-					
-					for (Question question : optionalQuestionList) {
-						QuestionDto questionDto = new QuestionDto();
-						List<Answer> answerList = answerService.getAllAnswerByQuestionId(question.getId());
-						
-						questionDto.setQuestion(question);
-						questionDto.setAnswers(answerList);
-						
-						questionDtoList.add(questionDto);
-					}
-					
-					map.addAttribute("optionalQuestions", questionDtoList);
-					
 					target = "public_lawsuit_lawyer_step4";
 				} else if (action.equals("self_service")) {//自助打官司
 

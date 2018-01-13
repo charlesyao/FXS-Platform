@@ -32,25 +32,26 @@
 								<li class="introcoupCell btnSquare col-md-5"
 									th:each="answer : ${question.answers}" 
 									th:id="${answer.id}"
-									th:attr="isRoot=${question.question.isRootQuestion}">
-									<a
-										class="step2Line1" 
-										th:id="${answer.id}"
-										th:text="${answer.description}">
-									</a>
+									th:attr="isRoot=${question.question.isRootQuestion}"
+									th:text="${answer.description}">
 								</li>
 							</ul>
 						</div>
 					</div>
-					<h3 class="space10">您家人的纠纷对象住所地在哪里？</h3>
-					<h4 class="gray">
-						提示：如纠纷对象为个人，请填写纠纷对象的长期住所地，如纠纷对象为企业，请填写企业经营地点或者注册地点。如以上地点均无法获知，请填写纠纷发生地点。
-					</h4>
-					<div class="row">
-						<div class="form-group col-md-4 col-sm-12">
-							<button id="getCity" type="button" class="btn btn-dark btn-law" data-toggle="modal" data-target="#selectCity">选择您的所在地</button>
+					<div id="nextQuestionContainer">
+					
+					</div>
+					<div>
+						<h3 class="space10">纠纷对象住所地在哪里？</h3>
+						<h4 class="gray">
+							提示：如纠纷对象为个人，请填写纠纷对象的长期住所地，如纠纷对象为企业，请填写企业经营地点或者注册地点。如以上地点均无法获知，请填写纠纷发生地点。
+						</h4>
+						<div class="row">
+							<div class="form-group col-md-4 col-sm-12">
+								<button id="getCity" type="button" class="btn btn-dark btn-law" data-toggle="modal" data-target="#selectCity">选择您的所在地</button>
+							</div>
+							<span class="form-group col-md-2 col-sm-12" id="selectedCity" />
 						</div>
-						<span class="form-group col-md-2 col-sm-12" id="selectedCity" />
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 btnNext">
@@ -95,7 +96,9 @@
 		</div>
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
-	<script type="text/javascript" th:inline="javascript"
-		th:src="@{/js/disputeInfo.js}"></script>
+	<script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
+	<script type="text/javascript">
+		$('.ui-choose').ui_choose();
+	</script>
 </body>
 </html>

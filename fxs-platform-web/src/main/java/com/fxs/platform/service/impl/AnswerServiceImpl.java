@@ -9,7 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import com.fxs.platform.domain.Answer;
+import com.fxs.platform.domain.Question;
 import com.fxs.platform.repository.AnswerRepository;
+import com.fxs.platform.repository.condition.AnswerCondition;
+import com.fxs.platform.repository.specification.AnswerSpecification;
 import com.fxs.platform.service.AnswerService;
 
 @Service
@@ -69,5 +72,11 @@ public class AnswerServiceImpl implements AnswerService {
 	public void updateNextQuestion(Answer answer) {
 		// TODO Auto-generated method stub
 		answerRepository.updateNextQuestion(answer.getNextQuestionId(), answer.getId());
+	}
+	
+	@Override
+	public Answer query(AnswerCondition condition) {
+		
+		return answerRepository.findOne(new AnswerSpecification(condition));
 	}
 }
