@@ -23,7 +23,7 @@ public class CasesCondition {
 	
 	private String requestFrom;
 	
-	private int feedbackCount;
+	private int feedbackCount = 11;
 	
 	private String createAt;
 
