@@ -1,0 +1,26 @@
+<aside class="main-sidebar" style="" th:fragment="admin-nav-bar">
+	<section class="sidebar" style="height: auto;">
+		<ul class="sidebar-menu tree" data-widget="tree">
+			<li class="treeview">
+				<a th:href="@{/disputeInfo/getAllDisputeInfo}">
+					<span>纷争信息</span>
+				</a>
+			</li>
+			<li class="treeview">
+				<a th:href="@{/admin/falltypus/getLevelOneData}">
+					<span>一级类型</span>
+				</a>
+			</li>
+			<li class="treeview">
+				<a th:href="@{/falltypus/create/parent}">
+					<span>创建一级类型</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/falltypus/create/sub}">
+					<span>创建二级类型</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+</aside>

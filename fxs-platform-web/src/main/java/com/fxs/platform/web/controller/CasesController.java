@@ -133,8 +133,13 @@ public class CasesController {
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
-	    Page<CasesDto> cases = casesService.query(condition, pageable);
-	    
+	    Page<CasesDto> cases = null;
+	    //如果过滤条件中有‘最近几天’，则重新封装查询条件，因为当前的queryCondition无法实现
+	    if (!ObjectUtils.isEmpty(condition.getCreateAt())) {
+	    	cases = casesService.findAllWithDays(null, pageable);
+	    } else {
+	    	cases = casesService.query(condition, pageable);
+	    }
 	    
 	    PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(cases, condition.getRequestFrom());
 	    map.addAttribute("pageableData", pageWrapper.getContent());

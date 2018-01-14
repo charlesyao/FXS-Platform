@@ -1,0 +1,32 @@
+<head th:fragment="admin-header-css">
+	<title>上海小帅信息科技有限公司</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"></link>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"></link>
+	<script th:src="@{/bootstrap/js/jquery3.2.1.min.js}"></script>
+	<script th:src="@{/bootstrap/js/popper.min.js}"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<header class="admin-header fixed-top d-flex align-items-center" th:fragment="admin-header">
+	<a href="admin.html" class="logo mr-auto">
+		<span class="logo-lg"><b>管理后台</b></span>
+	</a>
+	<ul class="nav justify-content-end admin-right">
+		<li class="nav-item">
+			<a class="nav-link" href="#">
+				<span class="mr-1">欢迎</span>
+				<span class="userRole">Admin</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/user/dashboard">个人中心</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#" target="_self">关于我们</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/signOut">登出</a>
+		</li>
+	</ul>
+</header>

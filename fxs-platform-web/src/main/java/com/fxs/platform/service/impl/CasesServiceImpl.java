@@ -175,4 +175,11 @@ public class CasesServiceImpl implements CasesService {
 		
 		return CaseManager.caseWrapperPageable(pageableCases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository, pageable);
 	}
+
+	@Override
+	public Page<CasesDto> findAllWithDays(String type, Pageable pageable) {
+		Page<Cases> cases = caseRepository.findAllWithDays(type, pageable);
+		
+		return CaseManager.caseWrapperPageable(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository, pageable);
+	}
 }

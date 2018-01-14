@@ -32,4 +32,7 @@ public interface CasesRepository extends FxsRepository<Cases> {
 	
 	@Query("SELECT o FROM Cases o where o.status != '5' AND o.expiredDate=CURDATE()")
 	List<Cases> findByStatus();
+	
+	@Query("SELECT o FROM Cases o where o.caseType=?1  AND o.feedbackCount<10 AND o.status != '5' ORDER BY o.createAt DESC")
+	Page<Cases> findAllWithDays(String type, Pageable pageable);
 }

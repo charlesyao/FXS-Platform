@@ -24,6 +24,8 @@ public class CasesCondition {
 	private String requestFrom;
 	
 	private int feedbackCount;
+	
+	private String createAt;
 
 	public int getFeedbackCount() {
 		return feedbackCount;
@@ -95,5 +97,13 @@ public class CasesCondition {
 
 	public void setRequestFrom(String requestFrom) {
 		this.requestFrom = requestFrom;
+	}
+
+	public String getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(String createAt) {
+		this.createAt = createAt;
 	}
 }

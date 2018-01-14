@@ -35,4 +35,6 @@ public interface CasesService {
 	Page<Reservation> findAllReservation(Pageable pageable);
 	
 	Page<CasesDto> query(CasesCondition condition, Pageable pageable);
+	
+	Page<CasesDto> findAllWithDays(String type, Pageable pageable);
 }

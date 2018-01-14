@@ -1,0 +1,363 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/admin-header :: admin-header-css"></head>
+<body>
+	<div class="skin-blu skin-admin">
+		<header th:replace="fragments/admin-header :: admin-header"></header>
+		<aside th:replace="fragments/admin-nav-bar :: admin-nav-bar"></aside>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	
+	
+	
+	<div class="mainPart">
+		<div class="container-fluid">
+			<table bgcolor="lightblue" width="750" height="500" align="center"
+				style="border-collapse: collapse;" border="1" bordercolor="#006699">
+				<tr>
+					<td align="center"><h3>详细信息</h3></td>
+				</tr>
+				<tr valign="top" align="center">
+					<td align="center">
+							<form id="questionForm">
+							<table width="600" border="1" cellspacing="0" bordercolor="#000000" style="border-collapse:collapse;"> 
+								<tr >
+									<td width="150">
+										<span>问题编号</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" style=" width:100%" type="text" th:value="${question.id}" id="currentQuestion"/>
+									</td>
+								</tr>
+								<tr>
+									<td width="150">
+										<span>问题描述</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" style=" width:100%" type="text" th:value="${question.description}" id="currentQuestionDesc"/>
+									</td>
+								</tr>
+								<tr>
+									<td width="150">
+										<span>是否是根问题</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" type="radio" name="isRootQuestionRadios" value="Y" th:checked="${question.isRootQuestion == 'Y'}" /> 是
+										<input disabled="disabled" type="radio" name="isRootQuestionRadios" value="N" th:checked="${question.isRootQuestion == 'N'}" />否
+									</td>
+								</tr>
+								<tr>
+									<td width="150">
+										<span>问题类型</span>
+									</td>
+									<td width="350" >
+										<input disabled="disabled" type="radio" name="questionTypeRadios" value="0" th:checked="${question.questionType == '0'}" />单选
+										<input disabled="disabled" type="radio" name="questionTypeRadios" value="1" th:checked="${question.questionType == '1'}" />多选
+										<input disabled="disabled" type="radio" name="questionTypeRadios" value="2" th:checked="${question.questionType == '2'}" />文本输入
+									</td>
+								</tr>
+								<tr >
+									<td width="150">
+										<span>所属案件类型</span>
+									</td>
+									<td width="350">
+										<select style=" width:100%" th:id="selectFalltypus" th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'">
+											<option th:value="-1">选择从属案件类型</option>
+											<option th:each="belongsToFalltypus : ${availableFalltypus}" 
+													th:id="${belongsToFalltypus.id}" 
+													th:value="${belongsToFalltypus.id}" 
+													th:text="${belongsToFalltypus.name}"
+													th:selected="(${question.belongsToFalltypus} == ${belongsToFalltypus.id})"></option>
+										</select>
+										
+									</td>
+								</tr>
+								<tr>
+									<td>操作</td>
+									<td>
+										<button type="button"
+												th:if="${question.belongsToFalltypus eq null}"
+												th:id="${question.id}+_currentBind" 
+												th:attr="disabled=${question.belongsToFalltypus ne null} ? 'disabled' : 'false'" 
+												class="addQFMapping">绑定</button>
+										<button type="button" id="unbindQFMapping" th:if="${question.belongsToFalltypus ne null}">解绑</button>
+										<button type="button" id="editQuestionInfo">编辑</button>
+										<button type="button" style="display: none" id="saveEditQuestionInfo">保存</button>
+										<button type="button" style="display: none" id="cancelEditQuestionInfo">取消</button>
+									</td>
+								</tr>
+							</table>
+							</form>
+							<br/>
+							<br/>
+							
+							<table th:width="600" border="1" cellspacing="0" bordercolor="#000000" style="border-collapse:collapse;"> 
+								<tr bgcolor="lightblue">
+									<th>答案编号</th>
+									<th>答案描述</th>
+									<th colspan="2" >匹配下级问题</th>
+								</tr>
+								<tr th:if="${mappedQuestionAnswers ne null}" th:each="answer : ${mappedQuestionAnswers}">
+									<td width="100">
+										<input th:id="${answer.id}+_currentAnswer" disabled="disabled" type="text" th:value="${answer.id}"/>
+									</td>
+									<td width="150">
+										<input disabled="disabled" th:id="${answer.id}+_currentAnswerDesc" type="text" th:value="${answer.description}"/>
+									</td>
+									<td>
+										<select th:id="${answer.id}+_selectParent" th:attr="disabled=${#strings.isEmpty(answer.description) or answer.nextQuestionId ne null} ? 'disabled' : 'false'">
+											<option th:value="-1">选择下级问题</option>
+											<option th:each="nextQuestion : ${availableQuestions}" 
+													th:id="${nextQuestion.id}" 
+													th:value="${nextQuestion.id}" 
+													th:text="${nextQuestion.description}"
+													th:selected="(${answer.nextQuestionId} == ${nextQuestion.id})" ></option>
+										</select>
+									</td>
+									<td>
+										<button type="button"
+												th:if="${answer.nextQuestionId eq null}"
+												th:id="${answer.id}+_currentBind" 
+												th:attr="disabled=${#strings.isEmpty(answer.description) or (answer.nextQuestionId ne null)} ? 'disabled' : 'false'" 
+												class="addQAMapping">绑定</button>
+										<button type="button" th:class="unbindQAMapping" th:id="${answer.id}+_currentUnbind" th:if="${answer.nextQuestionId ne null}">解绑</button>
+										<button type="button" th:class="editAnswerInfo" th:id="${answer.id}+_editAnswerInfoBtn">编辑</button>
+										<button type="button" th:class="deleteAnswerInfo" th:id="${answer.id}+_deleteAnswerInfoBtn">删除</button>
+										<button type="button" th:class="saveEditAnswerInfoBtn" style="display: none" th:id="${answer.id}+_saveEditAnswerInfoBtn">保存</button>
+										<button type="button" th:class="cancelEditAnswerInfo" style="display: none" th:id="${answer.id}+_cancelEditAnswerInfoBtn">取消</button>
+									</td>
+								</tr>
+								<tr th:if="${mappedQuestionAnswers eq null}">
+									<td width="150" th:text="没有数据" th:colspan="3"></td>
+								</tr>
+							</table>
+							
+							<button type="button" onclick="history.go(-1)">返回</button>
+					</td>
+				</tr>
+			</table>
+			<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">提示信息</h4>
+		            </div>
+		            <div class="modal-body" id="modalContent"></div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		
+		var questionId = $("#currentQuestion").val()
+		var bindQFMappingBtnId =questionId + "_currentBind"
+		
+		$("#editQuestionInfo").on("click", function() {
+			$(":input", "#questionForm")
+			.not(":button", ":submit", ":reset", ":hidden")
+			.removeAttr("disabled")
+			
+			$(this).css("display", "none")
+			$("#currentQuestion").attr("disabled", "disabled")
+			$("#" + bindQFMappingBtnId).css("display", "none")
+			$("#unbindQFMapping").css("display", "none")
+			$("#saveEditQuestionInfo").css("display", "inline-block")
+			$("#cancelEditQuestionInfo").css("display", "inline-block")
+		})
+		
+		$("#cancelEditQuestionInfo").on("click", function() {
+			$(":input", "#questionForm")
+			.not(":button", ":submit", ":reset", ":hidden")
+			.attr("disabled", "disabled");
+			
+			$(this).css("display", "none")
+			$("#unbindQFMapping").css("display", "inline-block")
+			$("#saveEditQuestionInfo").css("display", "none")
+			$("#editQuestionInfo").css("display", "inline-block")
+			$("#" + bindQFMappingBtnId).css("display", "inline-block")
+		})
+		
+		$("#unbindQFMapping").on("click", function() {
+			$.ajax({
+				type : 'PUT',
+				url : '/disputeInfo/update/question/qfMapping',
+				data : JSON.stringify({
+					"id":  $("#currentQuestion").val(),
+					"belongsToFalltypus": null
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("解绑失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+		
+		$("#saveEditQuestionInfo").on("click", function() {
+			$.ajax({
+				type : 'PUT',
+				url : '/disputeInfo/update/question/basic',
+				data : JSON.stringify({
+					"id":  $("#currentQuestion").val(),
+					"description": $("#currentQuestionDesc").val(),
+					"isRootQuestion": $("input:radio[name='isRootQuestionRadios']:checked").val(),
+					"questionType": $("input:radio[name='questionTypeRadios']:checked").val(),
+					"belongsToFalltypus": $("#selectFalltypus").find("option:selected").attr("id")
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					if(data.code == "-1") {
+						$("#modalContent").empty().append("修改失败:" + data.message)
+						$("#notificationModal").modal("show")
+					} else {
+						location.reload()
+					}
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("修改失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+		$(".addQFMapping").on("click", function() {
+			$.ajax({
+				type : 'PUT',
+				url : '/public/question/updateQFMapping',
+				data : JSON.stringify({
+					"id": $("#currentQuestion").val(),
+					"belongsToFalltypus": $("#selectFalltypus").find("option:selected").attr("id")
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("绑定失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+		
+		$(".addQAMapping").on("click", function() {
+			var index = $(this).attr("id").split("_")[0];
+			var currentAnswerId = index;
+			var questionContainerId = index + "_selectParent";
+			//var buttonId = index + "_currentBind"
+			var selectedQuestionId = $("#"+questionContainerId+"").find("option:selected").attr("id")
+			
+			$.ajax({
+				type : 'PUT',
+				url : '/admin/answer',
+				data : JSON.stringify({
+					"id": currentAnswerId,
+					"nextQuestionId": selectedQuestionId
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					//$("#"+questionContainerId+" option[value='"+selectedQuestionId+"']").remove()
+					/* $("#"+buttonId+"").attr("disabled", "disabled")
+					$("#"+questionContainerId+"").attr("disabled", "disabled")
+					$("#modalContent").empty().append("绑定成功")
+					$("#notificationModal").modal("show") */
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("绑定失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+		
+		
+		$(".editAnswerInfo").on("click", function() {
+			var answerId = $(this).attr("id").split("_")[0]
+			
+			$("#" + answerId + "_currentAnswerDesc").removeAttr("disabled")
+			$("#" + answerId + "_selectParent").removeAttr("disabled")
+			
+			$(this).css("display", "none")
+			$("#" + answerId + "_currentBind").css("display", "none")
+			$("#" + answerId + "_currentUnbind").css("display", "none")
+			$("#" + answerId + "_saveEditAnswerInfoBtn").css("display", "inline-block")
+			$("#" + answerId + "_cancelEditAnswerInfoBtn").css("display", "inline-block")
+		})
+		
+		$(".cancelEditAnswerInfo").on("click", function() {
+			location.reload()
+		})
+		
+		$(".saveEditAnswerInfoBtn").on("click", function() {
+			var index = $(this).attr("id").split("_")[0]
+			
+			$.ajax({
+				type : 'PUT',
+				url : '/disputeInfo/update/answer/basic',
+				data : JSON.stringify({
+					"id":  index,
+					"description": $("#" + index + "_currentAnswerDesc").val(),
+					"nextQuestionId": $("#" + index + "_selectParent").find("option:selected").attr("id")
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("修改失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+
+        $(".deleteAnswerInfo").on("click", function() {
+            var answerId = $(this).attr("id").split("_")[0]
+
+            $.ajax({
+                type : 'DELETE',
+                url : '/disputeInfo/answer/delete/' + answerId,
+                contentType : "application/json; charset=utf-8",
+                success : function(data) {
+                    location.reload();
+                },
+                error : function(error) {
+                    $("#modalContent").empty().append("修改失败")
+                    $("#notificationModal").modal("show")
+                }
+            });
+        })
+		
+		$(".unbindQAMapping").on("click", function() {
+			var _this = this
+			
+			$.ajax({
+				type : 'PUT',
+				url : '/disputeInfo/update/answer/qaMapping',
+				data : JSON.stringify({
+					"id":  $(_this).attr("id").split("_")[0],
+					"nextQuestionId": null
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					location.reload()
+				},
+				error : function(error) {
+					$("#modalContent").empty().append("解绑失败")
+					$("#notificationModal").modal("show")
+				}
+			});
+		})
+	});
+	</script>
+</body>
+</html>
+

@@ -1,78 +1,95 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/header :: header-css"></head>
+<head th:replace="fragments/admin-header :: admin-header-css"></head>
 <body>
-	<div class="topBar col-md-12">
-		<div th:replace="fragments/header :: header"></div>
-	</div>
-	<div class="mainPart">
-		<div class="container-fluid">
-			<form>
-			<div>
-				<span>所属案件类型： </span>
-				<select onchange="retrieveQuestions(this)">
-					<option th:value="-1">选择从属案件类型</option>
-					<option th:each="belongsToFalltypus : ${availableFalltypus}" 
-							th:id="${belongsToFalltypus.id}" 
-							th:value="${belongsToFalltypus.id}" 
-							th:text="${belongsToFalltypus.name}"></option>
-				</select>
+	<div class="skin-blu skin-admin">
+		<header th:replace="fragments/admin-header :: admin-header"></header>
+		<aside th:replace="fragments/admin-nav-bar :: admin-nav-bar"></aside>
+		<div class="content-wrapper" style="padding-top: 5%">
+			<div class="menu-content" style="overflow-y: auto; max-width: 860px; margin: 0 auto;">
+				<div class="box box-primary p-3" style="min-height: 300px;">
+					<div class="all-case-info" style="">
+						<div class="row mx-0">
+							<div class="col-md-8">
+								<form>
+									<div class="form-group row">
+										<label for="caseType" class="pl-0 col-sm-4 col-form-label">所属案件类型：</label>
+										<div class="col-sm-8">
+											<select class="form-control" onchange="retrieveQuestions(this)">
+												<option value="-1">选择从属案件类型</option>
+												<option th:each="belongsToFalltypus : ${availableFalltypus}"
+													th:id="${belongsToFalltypus.id}"
+													th:value="${belongsToFalltypus.id}"
+													th:text="${belongsToFalltypus.name}"></option>
+											</select>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-md-4 pr-0">
+								<a role="button" class="btn btn-law btn-sm float-right" th:href="@{/disputeInfo/createDisputeInfo}">新建</a>
+							</div>
+						</div>
+						<div class="row mx-0">
+							<div class="table-wrap w-100 scroll-y scroll-y-400" id="questionBlock" th:fragment="questionBlock-fragment">
+								<table class="table table-sm table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">问题编号</th>
+											<th scope="col">问题描述</th>
+											<th scope="col">是否根问题</th>
+											<th scope="col">类型</th>
+											<th scope="col">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${#lists.isEmpty(questionList)}">
+											<td colspan="5" style="text-align: center">没有数据</td>
+										</tr>
+										<tr th:if="${not #lists.isEmpty(questionList)}"
+											th:each="question : ${questionList}">
+											<th scope="row" th:text="${question.id}"></th>
+											<td th:text="${question.description}"></td>
+											<td th:text="${question.isRootQuestion eq 'Y' ? '是' : '否'}"></td>
+											<td th:text="${question.questionType eq null ? 'NA' : question.questionType eq '0' ? '单选题' : question.questionType eq '1' ? '多选题' : '用户输入'}"></td>
+											<td>
+												<a role="button" class="btn btn-law btn-sm mr-1" th:href="@{/disputeInfo/viewDisputeInfo/{id}(id=${question.id})}">查看</a>
+												<a role="button" href="" class="deleteQuestionLink btn btn-outline-dark btn-sm" th:id="${question.id}">删除</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<br />
-			<div id="questionBlock" th:fragment="questionBlock-fragment">
-				<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="800">
-					<tr bgcolor="lightblue">
-						<th>问题编号</th>
-						<th>问题描述</th>
-						<th>是否根问题</th>
-						<th>类型</th>
-						<th>操作</th>
-					</tr>
-					<tr th:if="${not #lists.isEmpty(questionList)}" th:each="question : ${questionList}">
-						<td th:text="${question.id}"></td>
-						<td th:text="${question.description}"></td>
-						<td th:text="${question.isRootQuestion eq 'Y' ? '是' : '否'}"></td>
-						<td th:text="${question.questionType eq null ? 'NA' : question.questionType eq '0' ? '单选题' : question.questionType eq '1' ? '多选题' : '用户输入'}"></td>
-						<td>
-							<a th:href="@{/disputeInfo/viewDisputeInfo/{id}(id=${question.id})}">查看</a>
-							<a href="" th:class="deleteQuestionLink"  th:id="${question.id}">删除</a>
-					 	</td>
-					</tr>
-					<tr th:if="${#lists.isEmpty(questionList)}">
-						<td colspan="5" style="text-align: center">没有数据</td>
-					</tr>
-				</table>
-			</div>
-			</form>
 		</div>
-		<a th:href="@{/disputeInfo/createDisputeInfo}" type="button" class="btn btn-primary btn-lg btn-block">新建</a>
 	</div>
-	<div th:replace="fragments/footer :: footer" ></div>
-    <script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
-    <script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-    function retrieveQuestions(self) {
-    	var fId = self.value
-        // var url = '/disputeInfo/filterDisputeInfo/' + self.value;
+	<div th:replace="fragments/footer :: footer"></div>
+	<script type="text/javascript" th:inline="javascript" th:src="@{/js/disputeInfo.js}"></script>
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		function retrieveQuestions(self) {
+			var fId = self.value
+			// var url = '/disputeInfo/filterDisputeInfo/' + self.value;
+			// $("#questionBlock").empty().load(url);
+			$.ajax({
+				type : 'GET',
+				//url : [[ @{/disputeInfo/filterDisputeInfo/{id}(id=fId)} ]],
+				url : '/disputeInfo/filterDisputeInfo/' + self.value,
+				contentType : "application/json; charset=utf-8",
+				success : function(data) {
+					console.log(data)
+					$('#questionBlock').html(data);
+				},
+				error : function(error) {
 
-        // $("#questionBlock").empty().load(url);
-        
-        $.ajax({
-			type : 'GET',
-			//url : [[ @{/disputeInfo/filterDisputeInfo/{id}(id=fId)} ]],
-			url: '/disputeInfo/filterDisputeInfo/' + self.value,
-			contentType : "application/json; charset=utf-8",
-			success : function(data) {
-				console.log(data)
-				$('#questionBlock').html(data);
-			},
-			error : function(error) {
-				
-			}
-		});
-    }
-    /*]]>*/
-    </script>
+				}
+			});
+		}
+		/*]]>*/
+	</script>
 </body>
 </html>

@@ -1,48 +1,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/header :: header-css"></head>
+<head th:replace="fragments/admin-header :: admin-header-css"></head>
 <body>
-	<div class="topBar col-md-12">
-		<div th:replace="fragments/header :: header"></div>
-	</div>
-	<div class="mainPart">
-		<div class="container-fluid">
-			<table style="border-collapse: collapse;" border="1" bordercolor="#006699" width="500">
-				<tr bgcolor="lightblue">
-					<th>案件编号</th>
-					<th>案件描述</th>
-					<th>操作</th>
-				</tr>
-				<tr th:if="${not #lists.isEmpty(levelOneFalltypusList)}" th:each="levelOneFalltypus : ${levelOneFalltypusList}">
-					<td th:text="${levelOneFalltypus.id}"></td>
-					<td th:text="${levelOneFalltypus.name}"></td>
-					<td>
-						<a th:href="@{/admin/falltypus/getLevelTwoData/{id}(id=${levelOneFalltypus.id})}">查看</a>
-						<a href="" th:class="deleteFalltypusLink" th:id="${levelOneFalltypus.id}+_deleteFalltypus">删除</a>
-				 	</td>
-				</tr>
-				<tr th:if="${#lists.isEmpty(levelOneFalltypusList)}">
-					<td th:colspan="3" th:text="没有数据"></td>
-				</tr>
-			</table>
+	<div class="skin-blu skin-admin">
+		<header th:replace="fragments/admin-header :: admin-header"></header>
+		<aside th:replace="fragments/admin-nav-bar :: admin-nav-bar"></aside>
+		<div class="content-wrapper" style="padding-top: 5%">
+			<div class="menu-content" style="overflow-y: auto; max-width: 860px; margin: 0 auto;">
+				<div class="box box-primary p-3" style="min-height: 300px;">
+					<div class="level-one-data" style="">
+						<div class="row mx-0">
+							<div class="table-wrap w-100 scroll-y scroll-y-400">
+								<span><b>一级案件类型</b></span>
+								<table class="table table-sm table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">问题编号</th>
+											<th scope="col">问题描述</th>
+											<th scope="col">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${#lists.isEmpty(levelOneFalltypusList)}">
+											<td th:colspan="3" th:text="没有数据"></td>
+										</tr>
+										<tr th:if="${not #lists.isEmpty(levelOneFalltypusList)}"
+											th:each="levelOneFalltypus : ${levelOneFalltypusList}">
+											<th scope="row" th:text="${levelOneFalltypus.id}"></th>
+											<td th:text="${levelOneFalltypus.name}"></td>
+											<td>
+												<a role="button"
+													class="btn btn-law btn-sm mr-1"
+													th:href="@{/admin/falltypus/getLevelTwoData/{id}(id=${levelOneFalltypus.id})}">查看</a>
+												<a role="button" 
+													class="deleteFalltypusLink btn btn-outline-dark btn-sm"
+													th:id="${levelOneFalltypus.id}+_deleteFalltypus">删除</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">提示信息</h4>
-		            </div>
-		            <div class="modal-body" id="modalContent"></div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		            </div>
-		        </div>
-		    </div>
+		<div class="modal fade" id="notificationModal" tabindex="-1"
+			role="dialog" aria-labelledby="notificationModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">提示信息</h4>
+					</div>
+					<div class="modal-body" id="modalContent"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer" ></div>
+	<div th:replace="fragments/footer :: footer"></div>
 	<script type="text/javascript" th:inline="javascript" th:src="@{/js/falltypusOps.js}"></script>
 </body>
 </html>

@@ -1,19 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/header :: header-css"></head>
+<head th:replace="fragments/admin-header :: admin-header-css"></head>
 <body>
-	<div class="topBar col-md-12">
-		<div th:replace="fragments/header :: header"></div>
-	</div>
-	<div class="mainPart">
-		<div class="container" style="margin-top: 100px">
-			<a th:href="@{/admin/falltypus/getLevelOneData}" type="button" class="btn btn-primary btn-lg btn-block">获取一级案件类型</a>
-			<a th:href="@{/falltypus/create/parent}" type="button" class="btn btn-primary btn-lg btn-block">创建案件类型</a>
-			<a th:href="@{/falltypus/create/sub}" type="button" class="btn btn-primary btn-lg btn-block">创建案件子类型</a>
-			<a th:href="@{/disputeInfo/getAllDisputeInfo}" type="button" class="btn btn-primary btn-lg btn-block">获取所有纷争信息</a>
+	<div class="skin-blu skin-admin">
+		<header th:replace="fragments/admin-header :: admin-header"></header>
+		<aside th:replace="fragments/admin-nav-bar :: admin-nav-bar"></aside>
+		<div class="content-wrapper" style="padding-top: 5%">
+			<div class="menu-content" style="overflow-y: auto; max-width: 860px; margin: 0 auto;">
+				<div class="box box-primary p-3" style="min-height: 300px;">
+					<div class="admin-home"></div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/footer :: footer" ></div>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

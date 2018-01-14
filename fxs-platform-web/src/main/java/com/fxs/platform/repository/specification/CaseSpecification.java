@@ -21,5 +21,6 @@ public class CaseSpecification extends FxsSpecification<Cases, CasesCondition> {
 		
 		addLessThanCondition(queryWraper, "feedbackCount");
 		addNotEqualsCondition(queryWraper, "status");
+		
 	}
 }

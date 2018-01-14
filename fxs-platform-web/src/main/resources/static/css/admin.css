@@ -121,7 +121,13 @@ a:hover, a:active, a:focus {
 }
 .box.box-primary {
     border-top-color: #826a61;
-    margin-bottom: 80px
+    margin-bottom: 80px;
+    font-size: 14px;
+}
+.admin-home{
+  background: url(../img/admin-law-b.jpg) no-repeat fixed center center;
+  height: 380px;
+  background-size: auto;
 }
 footer {
   margin-left: 230px;

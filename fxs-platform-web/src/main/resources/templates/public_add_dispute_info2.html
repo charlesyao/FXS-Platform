@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+	<div class="topBar col-md-12">
+		<div th:replace="fragments/header :: header"></div>
+	</div>
+	<div class="mainPart">
+		<div class="container-fluid">
+			<table  bgcolor="#F1D4B8" width="1000" height="600" align="center" 
+					style="border-collapse: collapse;" border="1" bordercolor="#006699" >
+				<tr>
+					<td align="center"><h3>创建基本纷争信息</h3></td>
+				</tr>
+				<tr valign="top" align="center">
+    				<td align="center">
+ 						<form th:action="@{/disputeInfo/createDisputeInfo}" th:method="post" th:object="${disputeInfo}">
+							<table width="700" style="border-collapse: collapse;" border="0" bordercolor="#006699" 
+								cellspacing="2" cellpadding="2">				
+								<tr id='TextBoxesGroups'>			
+									<td id='TextBoxesGroup'>				
+										<div >
+											<div id="TextBoxDiv1">
+												问题 #1 :
+												<input type="text" size="50" th:field="*{question}" />
+												<br /><br />
+												是否是基本问题？
+												<input type="radio" th:name="isBasicQuestion" th:value="Y" th:text="是" cols="29" rows="3" />
+												<input type="radio" th:name="isBasicQuestion" th:value="N" th:text="否" cols="29" rows="3" />
+												<br /><br />
+												是否选为根问题？
+												<input type="radio" th:value="Y" th:text="是" cols="29" rows="3" th:field="*{isRootQuestion}" />
+												<input type="radio" th:value="N" th:text="否" cols="29" rows="3" th:field="*{isRootQuestion}" />
+												<br /><br />
+												问题类型？
+												<input type="radio" th:value="0" th:text="单选" cols="29" rows="3" th:field="*{questionType}" />
+												<input type="radio" th:value="1" th:text="多选" cols="29" rows="3" th:field="*{questionType}" />
+												<input type="radio" th:value="2" th:text="文本输入" cols="29" rows="3" th:field="*{questionType}" />
+												<br /><br />
+												答案 #1 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer1' size="50"/>
+												<br /><br />
+												答案 #2 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer2' size="50"/>
+												<br /><br />
+												答案 #3 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer3' size="50"/>
+												<br /><br />
+												答案 #4 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer4' size="50"/>
+												<br /><br />
+												答案 #5 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer5' size="50"/>
+												<br /><br />
+												答案 #6 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer6' size="50"/>
+												<br /><br />
+												答案 #7 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer7' size="50"/>
+												<br /><br />
+												答案 #8 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer8' size="50"/>
+												<br /><br />
+												答案 #9 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer9' size="50"/>
+												<br /><br />
+												答案 #10 : &nbsp; 
+												<input type="text" th:field="*{answer}" id='answer10' size="50"/>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" align="center">
+										<input type="submit" name="" value="保存" />&nbsp;&nbsp;
+										<input type="reset" name="" value="重置" />&nbsp;&nbsp;
+										<a type="button" th:href="@{/disputeInfo/getAllDisputeInfo}">返回</a>
+									</td>
+								</tr>					
+							</table>			
+						</form>
+    				</td>    
+  				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer" ></div>
+	<script type="text/javascript">
+	$(function() {
+		$("#addButton").on("click", () => {
+			$("#TextBoxesGroups").append($("#TextBoxesGroup").html())
+		})
+		
+		$("input[type='radio'][name='isBasicQuestion']").on("click", function() {
+			if($(this).val() === 'Y') {
+				$("input[name='questionType']").prop("checked", false).attr("disabled", "disabled")
+			} else {
+				$("input[name='questionType']").removeAttr("disabled")
+			}
+		})
+	})
+	</script>
+</body>
+</html>
+
