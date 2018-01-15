@@ -17,11 +17,13 @@
 								<ul class="nav nav-tabs" role="tablist" id="tablist">
 									<li role="presentation" th:class="((${session.CASE_DATASET_WITH_FILTER_CONDITION eq null}) or (${session.CASE_DATASET_WITH_FILTER_CONDITION ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status[0] eq '0'})) ? 'active' : ''">
 										<a th:href="@{/user/dashboard(requestFrom='REQUEST_FROM_LAWYER_USER_CENTER')}" role="tab">待加入的竞标 
-											<span>(</span><span class="value">4</span><span>)</span>
+											<span>(</span><span class="value" th:text="${totalNonBiddingCases}"></span><span>)</span>
 										</a>
 									</li>
 									<li role="presentation" th:class="((${session.CASE_DATASET_WITH_FILTER_CONDITION ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status[0] eq '4'})) ? 'active' : ''">
-										<a href="#" role="tab" id="getBiddingCases">已加入的竞标</a>
+										<a href="#" role="tab" id="getBiddingCases">已加入的竞标
+										<span>(</span><span class="value" th:text="${totalBiddingCases}"></span><span>)</span>
+										</a>
 									</li>
 								</ul>
 							</div>

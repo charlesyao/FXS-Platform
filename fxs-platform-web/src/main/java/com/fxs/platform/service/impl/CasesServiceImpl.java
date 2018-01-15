@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.hibernate.engine.jdbc.spi.ResultSetWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.dto.ReservationDto;
 import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CasesRepository;
@@ -27,7 +29,10 @@ import com.fxs.platform.repository.CityRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.ReservationRepository;
 import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.repository.condition.ReservationCondition;
 import com.fxs.platform.repository.specification.CaseSpecification;
+import com.fxs.platform.repository.specification.ReservationSpecification;
+import com.fxs.platform.repository.support.QueryResultConverter;
 import com.fxs.platform.service.CasesService;
 import com.fxs.platform.utils.CaseManager;
 import com.fxs.platform.utils.SystemConstants;
@@ -181,5 +186,10 @@ public class CasesServiceImpl implements CasesService {
 		Page<Cases> cases = caseRepository.findAllWithDays(type, pageable);
 		
 		return CaseManager.caseWrapperPageable(cases, caseQuestionAnswerRelRepository, falltypusRepository, cityRepository, pageable);
+	}
+
+	@Override
+	public Page<ReservationDto> findAllReservationForLawyer(ReservationCondition condition, Pageable pageable) {
+		return QueryResultConverter.convert(reservationRepository.findAll(new ReservationSpecification(condition), pageable), ReservationDto.class, pageable);
 	}
 }

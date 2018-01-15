@@ -9,7 +9,9 @@ import com.fxs.platform.domain.CaseFeedbackInfo;
 import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.dto.ReservationDto;
 import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.repository.condition.ReservationCondition;
 
 public interface CasesService {
 	
@@ -33,6 +35,8 @@ public interface CasesService {
 	List<CasesDto> findByType(String caseType);
 	
 	Page<Reservation> findAllReservation(Pageable pageable);
+	
+	Page<ReservationDto> findAllReservationForLawyer(ReservationCondition condition, Pageable pageable);
 	
 	Page<CasesDto> query(CasesCondition condition, Pageable pageable);
 	

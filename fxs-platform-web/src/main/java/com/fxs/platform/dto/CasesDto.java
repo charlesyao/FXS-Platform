@@ -49,6 +49,16 @@ public class CasesDto {
 	private boolean disableFeedback;
 	
 	private String acceptedLawyerFeedback;
+	
+	private String contactPhone;
+	
+	public String getContactPhone() {
+		return contactPhone;
+	}
+
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
+	}
 
 	public String getId() {
 		return id;

@@ -126,6 +126,7 @@ public class DashboardController {
 		    	//第一次加载
 			    Page<CasesDto> myBidCases=casesService.findAll(CaseType.LAWSUIT.getType(), pageable);
 			    pageWrapper = new PageWrapper<CasesDto>(myBidCases, request.getRequestURI());
+			    map.addAttribute("totalNonBiddingCases", myBidCases.getTotalElements());
 		    }
 		    
 		    map.addAttribute("pageableData", pageWrapper.getContent());

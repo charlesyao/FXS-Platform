@@ -27,6 +27,7 @@ import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.DetailedInquiry;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.dto.CasesDto;
+import com.fxs.platform.dto.ReservationDto;
 import com.fxs.platform.repository.CaseFeedbackInfoRepository;
 import com.fxs.platform.repository.CaseQuestionAnswerRelRepository;
 import com.fxs.platform.repository.CityRepository;
@@ -34,6 +35,7 @@ import com.fxs.platform.repository.DetailedInquiryRepository;
 import com.fxs.platform.repository.FalltypusRepository;
 import com.fxs.platform.repository.UserRepository;
 import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.repository.condition.ReservationCondition;
 import com.fxs.platform.security.core.support.ResponseMessage;
 import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.CasesService;
@@ -152,7 +154,7 @@ public class CasesController {
 	    		condition.setId(caseIdArray);
 	    		
 	    		cases = casesService.query(condition, pageable);
-	    		map.addAttribute("totalElements", cases.getTotalElements());
+	    		map.addAttribute("totalBiddingCases", cases.getTotalElements());
 	    	}
 	    } else {
 	    	//如果过滤条件中有‘最近几天’，则重新封装查询条件，因为当前的queryCondition无法实现
@@ -192,6 +194,43 @@ public class CasesController {
 	}
 
 
+	@GetMapping("/user/reservation")
+	public String queryReservation(
+						ReservationCondition condition,
+						ModelMap map,
+						@RequestParam(value = "page", defaultValue = "0") Integer page,
+		                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+		String target = "";
+		Sort sort = new Sort(Sort.Direction.DESC, "id");
+	    Pageable pageable = new PageRequest(page, size, sort);
+	    
+    	//如果过滤条件中有‘最近几天’，则重新封装查询条件，因为当前的queryCondition无法实现
+	     Page<ReservationDto> reserrvation = casesService.findAllReservationForLawyer(condition, pageable);
+	    
+	    PageWrapper<ReservationDto> pageWrapper = new PageWrapper<ReservationDto>(reserrvation, condition.getRequestFrom());
+	    map.addAttribute("pageableData", pageWrapper.getContent());
+        map.addAttribute("page", pageWrapper);
+        
+        
+	    
+	    if(!ObjectUtils.isEmpty(condition.getSearchFrom())
+	    		&& (condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)
+	    				|| condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_CASEPOOL))) {
+	    	
+	    	//session.setAttribute(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD, SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
+	    	session.setAttribute(SystemConstants.SEARCH_FROM_LAWYER_CASEPOOL, SystemConstants.SEARCH_FROM_LAWYER_CASEPOOL);
+	    	session.setAttribute(SystemConstants.RESERVATION_DATASET_WITH_FILTER_CONDITION, condition);
+	    }
+	    
+	    if (!ObjectUtils.isEmpty(condition.getRequestFrom())) {
+	    	if ("/lawyer/case_pool".equals(condition.getRequestFrom())) {
+	    		target = "lawyer_case_pool :: consultingBlock-fragment";
+	    	}
+	    }
+	    
+	   return target;
+	}
+	
 	/**
 	 * 查看case详细信息
 	 * 

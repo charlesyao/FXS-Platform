@@ -15,6 +15,9 @@ public interface ReservationRepository extends FxsRepository<Reservation> {
 	@Query("SELECT o FROM Reservation o where o.userId=?1 ORDER BY researvationDatetime DESC")
 	Page<Reservation> queryAll(String userId, Pageable pageable);
 	
+	@Query("SELECT o FROM Reservation o where o.status='0' ORDER BY researvationDatetime DESC")
+	Page<Reservation> queryAll(Pageable pageable);
+	
 	
 	@Query("SELECT o FROM Reservation o where o.status != '5' AND o.expiredDate=CURDATE()")
 	List<Reservation> findByStatus();

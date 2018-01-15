@@ -19,6 +19,7 @@ public class SessionVariableManager {
 		session.removeAttribute(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD);
 		session.removeAttribute(SystemConstants.FROM_NAV);
 		session.removeAttribute(SystemConstants.CURRENT_SELECTED_FALLTYPUS);
+		session.removeAttribute(SystemConstants.RESERVATION_DATASET_WITH_FILTER_CONDITION);
 		session.setAttribute(SystemConstants.QA_MAP, new HashMap<Integer, Object[]>());
 	}
 }
