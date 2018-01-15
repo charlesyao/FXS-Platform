@@ -50,11 +50,12 @@ a{
 .mainNav li{
     margin: 10px 5px 0;
 }
-
 .headerRight .mainNav li{
     margin: 5px 0;
 }
-
+.page-404-error{
+    color: #665b60;
+}
 .dropdown-menu .dropdown-item {
     color: #856404;
 }
@@ -66,7 +67,12 @@ a{
 
 .mapId{background: url(../img/map.png) no-repeat; color: #fff; font-size: 12px; padding-left: 18px;margin-top: 20px;}
 
-
+.scroll-y{
+  overflow-y: auto
+}
+.scroll-y-80{
+  max-height: 80px;
+}
 
 
 
@@ -556,10 +562,6 @@ SEARCH       */
 .answer-quiz .fa.to-left{
     left: 15px;
 }
-.answer-quiz .introcouPhone .btnSquare a{
-    font-size: 16px;
-    padding: 0 10px;
- }
 .answer-quiz .fa.to-right{
     right: 15px;
 }
@@ -602,6 +604,10 @@ neiyene */
     display: block;
     font-size: 20px;
     color: #856404; 
+}
+.answer-quiz .introcouPhone .btnSquare a{
+    font-size: 16px;
+    padding: 0 10px;
 }
 .login-sign-jump{
     /*padding-top: 15px;

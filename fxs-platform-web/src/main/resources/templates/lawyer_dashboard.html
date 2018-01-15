@@ -10,48 +10,15 @@
 		<div class="container">
 			<div class="containerWapper">
 				<h1 class="blue">我的竞标案件</h1>
-				<p>正在进行的案件竞标赢积分榜单周期</p>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
-					<div class="bid-header row mx-0 mb-3">
-						<div class="col-md-4 text-center d-flex align-items-center justify-content-center">
-							<div>
-								<p>当前已加入竞标</p>
-								<h4>1个</h4>
-							</div>
-						</div>
-						<div class="col-md-8">
-							<ul class="writeInfoText ulCell myCell">
-								<div class="row">
-									<div class="form-group col-md-3 col-sm-3 sLabelOne">
-										<label>业务领域:</label>
-									</div>
-									<ul class="form-group col-md-9 col-sm-8 sLabelOneUl">
-										<li id="searchByFalltypus">
-											<label th:each="falltypus : ${firstLevelFalltypus}">
-												<input type="checkbox" th:id="${falltypus.id}" th:text="${falltypus.name}" />
-											</label>
-										</li>
-										<div class="clearboth"></div>
-									</ul>
-								</div>
-								<div class="row"></div>
-								<div class="row">
-									<label> 
-										<input type="checkbox" id="viewUnRead" />只看未读的竞标
-									</label>
-								</div>
-								<div class="text-center">
-									<button type="button" class="btn btn-law" id="searchCases">查询</button>
-								</div>
-							</ul>
-						</div>
-					</div>
 					<div class="row">
-						<div class="col-md-4 col-sm-4">
+						<div class="col-md-3 col-sm-3">
 							<div class="ulCell laywer_right">
 								<ul class="nav nav-tabs" role="tablist" id="tablist">
 									<li role="presentation" th:class="((${session.CASE_DATASET_WITH_FILTER_CONDITION eq null}) or (${session.CASE_DATASET_WITH_FILTER_CONDITION ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status[0] eq '0'})) ? 'active' : ''">
-										<a th:href="@{/user/dashboard(requestFrom='REQUEST_FROM_LAWYER_USER_CENTER')}" role="tab">待加入的竞标</a>
+										<a th:href="@{/user/dashboard(requestFrom='REQUEST_FROM_LAWYER_USER_CENTER')}" role="tab">待加入的竞标 
+											<span>(</span><span class="value">4</span><span>)</span>
+										</a>
 									</li>
 									<li role="presentation" th:class="((${session.CASE_DATASET_WITH_FILTER_CONDITION ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status[0] eq '4'})) ? 'active' : ''">
 										<a href="#" role="tab" id="getBiddingCases">已加入的竞标</a>
@@ -59,12 +26,42 @@
 								</ul>
 							</div>
 						</div>
-						<div class="col-md-8 col-sm-8 mybox tab-content" id="caseListFragment">
+						<div class="col-md-9 col-sm-9 mybox tab-content">
+							<div class="">
+								<ul class="writeInfoText ulCell myCell">
+									<div class="row">
+										<div class="form-group col-md-3 col-sm-3 sLabelOne">
+											<label>业务领域:</label>
+										</div>
+										<div class="scroll-y scroll-y-80">
+											<ul class="form-group sLabelOneUl">
+												<li id="searchByFalltypus">
+													<label th:each="falltypus : ${firstLevelFalltypus}">
+														<input type="checkbox" th:id="${falltypus.id}" th:text="${falltypus.name}" />
+													</label>
+												</li>
+												<div class="clearboth"></div>
+											</ul>
+										</div>
+									</div>
+									<div class="row"></div>
+									<div class="row">
+										<label>
+											<input type="checkbox" id="viewUnRead" />只看未读的竞标
+										</label>
+									</div>
+									<div class="text-center">
+										<button type="button" class="btn btn-law" id="searchCases">查询</button>
+									</div>
+								</ul>
+							</div>
 							<div class="tab-pane active" role="tabpanel" id="lawsuitsBlock" th:fragment="lawsuitsBlock-fragment">
 								<ul class="writeInfoText ulCell myCell centerLi" th:if="${#lists.isEmpty(pageableData)}">
 									<span th:text="没有查询结果"></span>
 								</ul>
-								<ul class="writeInfoText ulCell myCell centerLi" th:each="myBidCase : ${pageableData}" th:if="${not #lists.isEmpty(pageableData)}">
+								<ul class="writeInfoText ulCell myCell centerLi"
+									th:each="myBidCase : ${pageableData}"
+									th:if="${not #lists.isEmpty(pageableData)}">
 									<li class="listTitle">
 										<span>案件编号</span>
 										<span th:text="${myBidCase.id}"></span>
@@ -108,18 +105,18 @@
 			var viewUnRead = "Y"
 			var status5 = new Array()//新建的case
 			var status4 = new Array("4")//已加入竞标的案件
-			
-			var searchCondition = /*[[${session.CASE_DATASET_WITH_FILTER_CONDITION}]]*/ null;
+
+			var searchCondition = /*[[${session.CASE_DATASET_WITH_FILTER_CONDITION}]]*/null;
 
 			console.log(/*[[${session.CASE_DATASET_WITH_FILTER_CONDITION}]]*/)
-			if(searchCondition === null) {
+			if (searchCondition === null) {
 				status5 = []
 				status5.push("0")
 			} else {
 				status5 = []
 				status5.push(searchCondition.status)
 			}
-			
+
 			$("#tablist").on("click", "a", function(e) {
 				$(this).parent().parent().find("li").removeClass("active")
 				$(this).parent().addClass("active")
@@ -131,12 +128,15 @@
 					viewUnRead = "Y"
 				}
 			})
-			
-			$("#getBiddingCases").on("click", function(e) {
+
+			$("#getBiddingCases").on("click",function(e) {
 				e.preventDefault()
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?caseType=1&feedbackCount=10&status="+status4+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&fromNav=LAWYER_JOINED_BIDDING_CASES&requestFrom=" + location.pathname,
+					url : "/user/case?caseType=1&feedbackCount=10&status="
+							+ status4
+							+ "&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&fromNav=LAWYER_JOINED_BIDDING_CASES&requestFrom="
+							+ location.pathname,
 					success : function(data) {
 						console.log(data)
 						$('#lawsuitsBlock').html(data);
@@ -156,10 +156,18 @@
 					}
 				}
 			})
-			$("#searchCases").on("click", function() {
+			$("#searchCases").on("click",function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?parentType=" + ids + "&caseType=1&feedbackCount=10&status="+status5+"&" + (viewUnRead == 'N' ? "isRead=N" : "") + "&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&requestFrom=" + location.pathname,
+					url : "/user/case?parentType="
+							+ ids
+							+ "&caseType=1&feedbackCount=10&status="
+							+ status5
+							+ "&"
+							+ (viewUnRead == 'N' ? "isRead=N"
+									: "")
+							+ "&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&requestFrom="
+							+ location.pathname,
 					success : function(data) {
 						console.log(data)
 						$('#lawsuitsBlock').html(data);
