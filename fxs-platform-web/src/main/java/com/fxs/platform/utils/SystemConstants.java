@@ -23,4 +23,5 @@ public class SystemConstants {
 	public static final String CASE_DATASET_WITH_FILTER_CONDITION = "CASE_DATASET_WITH_FILTER_CONDITION";
 	public static final String REQUEST_FROM_LAWYER_USER_CENTER = "REQUEST_FROM_LAWYER_USER_CENTER";
 	public static final String FROM_NAV = "LAWYER_JOINED_BIDDING_CASES";
+	public static final String CURRENT_SELECTED_FALLTYPUS = "CURRENT_SELECTED_FALLTYPUS";
 }

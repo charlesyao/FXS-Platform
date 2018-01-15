@@ -29,7 +29,7 @@ a{
     color:white;
     font-size: 12px;
     border-right: 1px solid #ac8873;
-    margin: 5px 0;
+    margin: 10px 0 5px;
     padding-top: 0;
     padding-bottom: 0;
 }
@@ -48,7 +48,11 @@ a{
 }
 
 .mainNav li{
-    margin: 5px 5px 0;
+    margin: 10px 5px 0;
+}
+
+.headerRight .mainNav li{
+    margin: 5px 0;
 }
 
 .dropdown-menu .dropdown-item {
@@ -527,7 +531,7 @@ SEARCH       */
     height: 400px;
     background-color: #fff;
     border-radius: 5px;
-    padding: 20px 100px;
+    padding: 20px 30px;
     margin-top: 50px;
     position: relative;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -552,6 +556,10 @@ SEARCH       */
 .answer-quiz .fa.to-left{
     left: 15px;
 }
+.answer-quiz .introcouPhone .btnSquare a{
+    font-size: 16px;
+    padding: 0 10px;
+ }
 .answer-quiz .fa.to-right{
     right: 15px;
 }

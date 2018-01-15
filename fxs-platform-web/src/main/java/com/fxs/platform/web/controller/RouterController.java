@@ -157,6 +157,22 @@ public class RouterController {
 					target = "public_lawsuit_lawyer_step1";
 				} else if (action.equals("next")) {
 					
+					Object selectedFalltypusId = session.getAttribute(SystemConstants.CURRENT_SELECTED_FALLTYPUS);
+					
+					if(!ObjectUtils.isEmpty(selectedFalltypusId)) {
+						Question optionalRootQuestion = questionService.findQuestionsByFalltypus(selectedFalltypusId.toString());
+						
+						if (!ObjectUtils.isEmpty(optionalRootQuestion)) {
+							QuestionDto questionDto = new QuestionDto();
+							List<Answer> optionalAnswerList = answerService.getAllAnswerByQuestionId(optionalRootQuestion.getId());
+							
+							questionDto.setQuestion(optionalRootQuestion);
+							questionDto.setAnswers(optionalAnswerList);
+							
+							map.addAttribute("optionalQuestion", questionDto);
+						}
+					}
+					
 					target = "public_lawsuit_lawyer_step4";
 				} else if (action.equals("self_service")) {//自助打官司
 

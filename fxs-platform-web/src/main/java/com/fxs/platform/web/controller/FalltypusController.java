@@ -30,6 +30,7 @@ import com.fxs.platform.security.core.support.Result;
 import com.fxs.platform.service.AnswerService;
 import com.fxs.platform.service.FalltypusService;
 import com.fxs.platform.service.QuestionService;
+import com.fxs.platform.utils.SessionVariableManager;
 import com.fxs.platform.utils.SystemConstants;
 
 /**
@@ -120,7 +121,7 @@ public class FalltypusController {
 			map.addAttribute("question", qDto);
 			
 			//获取当前案件类型下属的root optional question
-			Question optionalRootQuestion = questionService.findQuestionsByFalltypus(id);
+			/*Question optionalRootQuestion = questionService.findQuestionsByFalltypus(id);
 			
 			if (!ObjectUtils.isEmpty(optionalRootQuestion)) {
 				QuestionDto questionDto = new QuestionDto();
@@ -130,7 +131,9 @@ public class FalltypusController {
 				questionDto.setAnswers(optionalAnswerList);
 				
 				session.setAttribute("optionalQuestion", questionDto);
-			}
+			}*/
+			
+			session.setAttribute(SystemConstants.CURRENT_SELECTED_FALLTYPUS, id);
 
 			if (caseType.equals("consulting")) {// 咨询跳转路由
 

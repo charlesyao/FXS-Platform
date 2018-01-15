@@ -14,43 +14,58 @@
 					<div class="quiz-wrap introcouPhone" id="optionalQuestionContainer">
 						<div class="quiz"  style="display: block"
 							th:id="optionalQAForm"
-							th:fragment="optionalQuestionBlock-fragment" >
-							<p class="title" th:text="${session.optionalQuestion.question.description}" 
-								th:id="${session.optionalQuestion.question.id}"></p>
+							th:fragment="optionalQuestionBlock-fragment" th:if="${optionalQuestion ne null}" >
+							<div class="form-group" th:if="${optionalQuestion.question.questionType eq '2'}">
+			                  	<label for="endTime">截止日期:</label>
+			                  	<input type="date" class="form-control" id="expiredDate" />
+			              	</div>
+							<p class="title" th:text="${optionalQuestion.question.description}" 
+								th:id="${optionalQuestion.question.id}"></p>
 							<!-- 单选题 -->
-							<ul class="ui-choose" id="uc_05" th:if="${session.optionalQuestion.question.questionType eq '0'}">
-								<li class="introcoupCell btnSquare" th:each="answer : ${session.optionalQuestion.answers}" th:id="${answer.id}" data-type="single" th:text="${answer.description}">
+							<ul class="ui-choose" id="uc_05" th:if="${optionalQuestion.question.questionType eq '0'}">
+								<li class="introcoupCell btnSquare" th:each="answer : ${optionalQuestion.answers}" th:id="${answer.id}" data-type="single" th:text="${answer.description}">
 								</li>
 							</ul>
 							<!-- 多选题 -->
-							<ul class="ui-choose" id="uc_05" multiple="multiple" th:if="${session.optionalQuestion.question.questionType eq '1'}">
-								<li class="introcoupCell btnSquare" th:each="answer : ${session.optionalQuestion.answers}" th:id="${answer.id}" data-type="multi" th:text="${answer.description}">
+							<ul class="ui-choose" id="uc_05" multiple="multiple" th:if="${optionalQuestion.question.questionType eq '1'}">
+								<li class="introcoupCell btnSquare" th:each="answer : ${optionalQuestion.answers}" th:id="${answer.id}" data-type="multi" th:text="${answer.description}">
 								</li>
 							</ul>
 							<!-- 文本输入框 -->
-							<textarea class="form-control" rows="4" cols="50" th:if="${session.optionalQuestion.question.questionType eq '2'}" id="freeComments"></textarea>
+							<textarea class="form-control" rows="4" cols="50" th:if="${optionalQuestion.question.questionType eq '2'}" id="freeComments"></textarea>
+							
+							<div class="button-wrap mt-3">
+								<button type="button" class="btn btn-law will-answer withoutSpecificAnswer">确认后补充</button>
+								<button type="button" class="btn btn-law cannot-answer withoutSpecificAnswer">暂不能回答</button>
+								<button type="button" 
+										class="btn btn-law float-right next-one" 
+										id="getNextOptionalQuestion"
+										disabled="disabled"
+										th:if="${optionalQuestion.question.questionType ne '2'}">下一题</button>
+								<button type="button" 
+										class="btn btn-law submit pull-right" 
+										id="submitLawsuit"
+										th:if="${optionalQuestion.question.questionType eq '2'}">立即提交</button>
+		            			<button type="button" 
+		            					class="btn float-right mr-1 btn-outline-dark"
+		            					id="resetOptionalQuestionSelection"
+		            					>重置</button>
+							</div>
 						</div>
-					</div>
-					<i class="fa fa-angle-left to-left" 
-						th:attr="disabled=${session.optionalQuestion.question.isRootQuestion eq 'Y'} ? 'disabled' : 'false'" 
-						aria-hidden="true"></i>
-					<i class="fa fa-angle-right to-right" aria-hidden="true"></i>
-					<div class="button-wrap mt-3">
-						<button type="button" class="btn btn-law will-answer withoutSpecificAnswer">确认后补充</button>
-						<button type="button" class="btn btn-law cannot-answer withoutSpecificAnswer">暂不能回答</button>
-						<button type="button" class="btn btn-law submit pull-right" id="submitLawsuit">立即提交</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	/*<![CDATA[*/
 	$(function () {
 		$('.ui-choose').ui_choose();
 	    //$("#optionalQAForm div").first().css('display', 'block');
 		var selectedAnswerId = []
 		
+		var currentSelectedFalltypus = /*[[${session.CURRENT_SELECTED_FALLTYPUS}]]*/ null;
 		
 	    $(".answer-quiz").on("click", ".will-answer,.cannot-answer", function () {
 	        var showQuiz = $(".quiz-wrap .quiz:visible");
@@ -58,19 +73,29 @@
 	        toNext();
 	    });
 
-	    $(".answer-quiz .to-right").on("click", function () {
-	        /* 
-	        var showQuiz = $(".quiz-wrap .quiz:visible");
-	        if ($(this).hasClass("disabled") || showQuiz.find("li.selected").length == 0) {
-	            return
-	        } 
-	        */
+	    $("#optionalQAForm").on("click", "button[id='resetOptionalQuestionSelection']", function () {
+	    	$.ajax({
+				type : 'GET',
+				url : "/public/question/reset/optional",
+				success : function(data) {
+					console.log(data)
+					$('#optionalQAForm').html(data);
+					selectedAnswerId = []
+				},
+				error : function(error) {
+					console.log(error)
+				}
+			});
+	    })
+	    
+	    $("#optionalQAForm").on("click", "button[id='getNextOptionalQuestion']", function () {
 	        
 	        //GET next question
 	        var id = -1;
 	        if (selectedAnswerId.length != 0) {
 	        	id = selectedAnswerId[0]
 	        }
+	        
 	        $.ajax({
 				type : 'GET',
 				url : "/public/question/next/optional?id=" + id,
@@ -84,12 +109,6 @@
 				}
 			});
 	    })
-	    
-	    $(".answer-quiz .to-left").on("click", function () {
-	        
-	    })
-	    
-	    
 	    
 	    $(".withoutSpecificAnswer").on("click", function() {
 	    	var currentQuestionId = $(this).parent().prevAll("#optionalQuestionContainer").children().children('p').attr('id');
@@ -111,6 +130,9 @@
 	    
 	    $("#optionalQAForm").on("click", 'li', function () {
 	    	selectedAnswerId = []
+	    	
+	    	$("#getNextOptionalQuestion").attr("disabled", false)
+	    	
 	    	if ($(this).attr("data-type") == 'single') {
 	    		$(this).parent().find("li").removeClass("selected")
 	    		$(this).addClass("selected")
@@ -141,6 +163,7 @@
 	            url: '/public/case',
 	            data: JSON.stringify({
 	                "caseType": "1",
+	                "expiredDate": $("#expiredDate").val(),
 	                "comments": $("#freeComments").val()
 	            }),
 	            contentType: "application/json; charset=utf-8",
@@ -153,6 +176,7 @@
 	        });
 	    })
 	})
+	/*]]>*/
 	</script>
 </body>
 </html>

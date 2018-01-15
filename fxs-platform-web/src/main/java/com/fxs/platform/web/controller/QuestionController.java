@@ -297,11 +297,33 @@ public class QuestionController {
 			questionDto.setQuestion(nextQuestion);
 			questionDto.setAnswers(nextQuestionAnswerList);
 			
-			httpSession.setAttribute("optionalQuestion", questionDto);
+			map.addAttribute("optionalQuestion", questionDto);
 			
 		} else {
 			//最后一个问题
 			httpSession.setAttribute("lastOptionalQuestion", true);
+		}
+		
+		return "public_lawsuit_lawyer_step4 :: optionalQuestionBlock-fragment";
+	}
+	
+	@GetMapping("/reset/optional")
+	public String reset(ModelMap map) {
+		
+		Object selectedFalltypusId = httpSession.getAttribute(SystemConstants.CURRENT_SELECTED_FALLTYPUS);
+		
+		if(!ObjectUtils.isEmpty(selectedFalltypusId)) {
+			Question optionalRootQuestion = questionService.findQuestionsByFalltypus(selectedFalltypusId.toString());
+			
+			if (!ObjectUtils.isEmpty(optionalRootQuestion)) {
+				QuestionDto questionDto = new QuestionDto();
+				List<Answer> optionalAnswerList = answerService.getAllAnswerByQuestionId(optionalRootQuestion.getId());
+				
+				questionDto.setQuestion(optionalRootQuestion);
+				questionDto.setAnswers(optionalAnswerList);
+				
+				map.addAttribute("optionalQuestion", questionDto);
+			}
 		}
 		
 		return "public_lawsuit_lawyer_step4 :: optionalQuestionBlock-fragment";
