@@ -29,7 +29,7 @@
 				<li class="nav-item" sec:authorize="isAnonymous()">
 					<a class="nav-link" th:href="@{/user/register}" >注册</a>
 				</li>
-				<li class="nav-item" sec:authorize="isAuthenticated()">
+				<li class="nav-item" sec:authorize="isAuthenticated() and hasAnyRole('ROLE_USER')">
 					<a class="nav-link" th:href="@{/user/dashboard}">个人中心</a>
 				</li>
 				<li class="nav-item" sec:authorize="${hasRole('ROLE_LAWYER')}">

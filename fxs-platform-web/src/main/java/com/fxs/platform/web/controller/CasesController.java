@@ -1,5 +1,7 @@
 package com.fxs.platform.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -41,6 +43,7 @@ import com.fxs.platform.utils.CaseStatus;
 import com.fxs.platform.utils.PageWrapper;
 import com.fxs.platform.utils.ResponseCodeEnum;
 import com.fxs.platform.utils.SystemConstants;
+import com.fxs.platform.utils.UserManager;
 
 @Controller
 public class CasesController {
@@ -134,11 +137,30 @@ public class CasesController {
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
 	    Page<CasesDto> cases = null;
-	    //如果过滤条件中有‘最近几天’，则重新封装查询条件，因为当前的queryCondition无法实现
-	    if (!ObjectUtils.isEmpty(condition.getCreateAt())) {
-	    	cases = casesService.findAllWithDays(null, pageable);
+	    if(!ObjectUtils.isEmpty(condition.getFromNav()) && condition.getFromNav().equals(SystemConstants.FROM_NAV)) {
+	    	//根据lawyerId和status在case_feedback_info中找到所有的caseId
+	    	String currentUserId = UserManager.getSessionUser(session);
+	    	List<String> caseIds = caseFeedbackInfoRepository.findCaseIdsByStatusAndUserId(condition.getStatus()[0], currentUserId);
+	    	
+	    	if(!ObjectUtils.isEmpty(caseIds)) {
+	    		
+	    		String[] caseIdArray = new String[caseIds.size()];
+
+	    		caseIds.toArray(caseIdArray);
+	    		
+	    		
+	    		condition.setId(caseIdArray);
+	    		
+	    		cases = casesService.query(condition, pageable);
+	    		map.addAttribute("totalElements", cases.getTotalElements());
+	    	}
 	    } else {
-	    	cases = casesService.query(condition, pageable);
+	    	//如果过滤条件中有‘最近几天’，则重新封装查询条件，因为当前的queryCondition无法实现
+		    if (!ObjectUtils.isEmpty(condition.getCreateAt())) {
+		    	cases = casesService.findAllWithDays(null, pageable);
+		    } else {
+		    	cases = casesService.query(condition, pageable);
+		    }
 	    }
 	    
 	    PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(cases, condition.getRequestFrom());

@@ -49,24 +49,12 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-4">
 							<div class="ulCell laywer_right">
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active">
-										<a href="#lineOne" role="tab" data-toggle="tab">待加入的竞标</a>
+								<ul class="nav nav-tabs" role="tablist" id="tablist">
+									<li role="presentation" th:class="((${session.CASE_DATASET_WITH_FILTER_CONDITION eq null}) or (${session.CASE_DATASET_WITH_FILTER_CONDITION ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status[0] eq '0'})) ? 'active' : ''">
+										<a th:href="@{/user/dashboard(requestFrom='REQUEST_FROM_LAWYER_USER_CENTER')}" role="tab">待加入的竞标</a>
 									</li>
-									<li role="presentation" class="">
-										<a href="#lineTwo" role="tab" data-toggle="tab">进行中的竞标</a>
-									</li>
-									<li role="presentation" class="">
-										<a href="#lineThree" role="tab" data-toggle="tab">评审中的竞标</a>
-									</li>
-									<li role="presentation" class="">
-										<a href="#lineFour" role="tab" data-toggle="tab">已评审的竞标</a>
-									</li>
-									<li role="presentation" class="">
-										<a href="#lineFive" role="tab" data-toggle="tab">可申请复核的竞标</a>
-									</li>
-									<li role="presentation" class="lastItem">
-										<a href="#lineSix" role="tab" data-toggle="tab">已复核的竞标</a>
+									<li role="presentation" th:class="((${session.CASE_DATASET_WITH_FILTER_CONDITION ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status ne null} and ${session.CASE_DATASET_WITH_FILTER_CONDITION.status[0] eq '4'})) ? 'active' : ''">
+										<a href="#" role="tab" id="getBiddingCases">已加入的竞标</a>
 									</li>
 								</ul>
 							</div>
@@ -118,13 +106,45 @@
 		$(function() {
 			var ids = new Array()
 			var viewUnRead = "Y"
+			var status5 = new Array()//新建的case
+			var status4 = new Array("4")//已加入竞标的案件
 			
+			var searchCondition = /*[[${session.CASE_DATASET_WITH_FILTER_CONDITION}]]*/ null;
+
+			console.log(/*[[${session.CASE_DATASET_WITH_FILTER_CONDITION}]]*/)
+			if(searchCondition === null) {
+				status5 = []
+				status5.push("0")
+			} else {
+				status5 = []
+				status5.push(searchCondition.status)
+			}
+			
+			$("#tablist").on("click", "a", function(e) {
+				$(this).parent().parent().find("li").removeClass("active")
+				$(this).parent().addClass("active")
+			})
 			$("#viewUnRead").on("click", function() {
 				if ($(this).is(":checked")) {
 					viewUnRead = "N"
 				} else {
 					viewUnRead = "Y"
 				}
+			})
+			
+			$("#getBiddingCases").on("click", function(e) {
+				e.preventDefault()
+				$.ajax({
+					type : 'GET',
+					url : "/user/case?caseType=1&feedbackCount=10&status="+status4+"&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&fromNav=LAWYER_JOINED_BIDDING_CASES&requestFrom=" + location.pathname,
+					success : function(data) {
+						console.log(data)
+						$('#lawsuitsBlock').html(data);
+					},
+					error : function(error) {
+						console.log(error)
+					}
+				});
 			})
 			$("#searchByFalltypus").on('click', 'input', function() {
 				if ($(this).is(':checked')) {
@@ -139,7 +159,7 @@
 			$("#searchCases").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?parentType=" + ids + "&caseType=1&feedbackCount=10&status=5&" + (viewUnRead == 'N' ? "isRead=N" : "") + "&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&requestFrom=" + location.pathname,
+					url : "/user/case?parentType=" + ids + "&caseType=1&feedbackCount=10&status="+status5+"&" + (viewUnRead == 'N' ? "isRead=N" : "") + "&searchFrom=SEARCH_FROM_LAWYER_DASHBOARD&requestFrom=" + location.pathname,
 					success : function(data) {
 						console.log(data)
 						$('#lawsuitsBlock').html(data);

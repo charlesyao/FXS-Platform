@@ -15,5 +15,8 @@ public interface CaseFeedbackInfoRepository extends FxsRepository<CaseFeedbackIn
 	
 	@Query("SELECT o FROM CaseFeedbackInfo o where o.caseId=?1")
 	List<CaseFeedbackInfo> findByCaseIdAndLawyerId(String caseId);
+	
+	@Query("SELECT o.caseId FROM CaseFeedbackInfo o where o.status=?1 AND o.lawyerId=?2")
+	List<String> findCaseIdsByStatusAndUserId(String caseStatus, String lawyerId);
 
 }

@@ -9,9 +9,9 @@ public class CasesCondition {
 
 	private String[] parentType;
 
-	private String id;
+	private String[] id;
 
-	private String status;
+	private String[] status;
 	
 	private String caseType;
 	
@@ -22,6 +22,8 @@ public class CasesCondition {
 	private String searchFrom;
 	
 	private String requestFrom;
+	
+	private String fromNav;
 	
 	private int feedbackCount = 11;
 	
@@ -59,20 +61,20 @@ public class CasesCondition {
 		this.caseType = caseType;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getId() {
+	public String[] getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String[] id) {
 		this.id = id;
+	}
+
+	public String[] getStatus() {
+		return status;
+	}
+
+	public void setStatus(String[] status) {
+		this.status = status;
 	}
 
 	public String[] getParentType() {
@@ -105,5 +107,13 @@ public class CasesCondition {
 
 	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
+	}
+
+	public String getFromNav() {
+		return fromNav;
+	}
+
+	public void setFromNav(String fromNav) {
+		this.fromNav = fromNav;
 	}
 }

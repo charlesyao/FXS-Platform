@@ -98,6 +98,7 @@
 		/*<![CDATA[*/
 		$(function() {
 			var ids = new Array()
+			var status5 = new Array("0")//新建的案件
 			var viewUnRead = "Y"
 
 			$("#viewUnRead").on("click", function() {
@@ -117,7 +118,7 @@
 			$("#searchConsultingWithFilter").on("click", function() {
 				$.ajax({
 					type : 'GET',
-					url : "/user/case?parentType=" + ids + "&caseType=0&feedbackCount=10&status=5&" + (viewUnRead == 'N' ? "isRead=N" : "")
+					url : "/user/case?parentType=" + ids + "&caseType=0&feedbackCount=10&status="+status5+"&" + (viewUnRead == 'N' ? "isRead=N" : "")
 							+ "&searchFrom=SEARCH_FROM_LAWYER_CASEPOOL&requestFrom=" + location.pathname,
 					success : function(data) {
 						console.log(data)
