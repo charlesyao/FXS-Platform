@@ -226,7 +226,7 @@ public class RouterController {
 				CasesCondition condition,
 				HttpServletRequest request,
 				@RequestParam(value = "page", defaultValue = "0") Integer page,
-                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+                @RequestParam(value = "size", defaultValue = "100") Integer size) {
 		
 		if (SystemConstants.REQUEST_FROM_LAWYER_USER_CENTER.equals(condition.getRequestFrom())) {
 			SessionVariableManager.clearSession(session);

@@ -156,9 +156,9 @@
             });
 	    })
 
-	    $("#submitLawsuit").on("click", (e) => {
-	        e.preventDefault()
-	        $.ajax({
+	    
+	    $("#optionalQAForm").on("click", "button[id='submitLawsuit']", function () {
+	    	$.ajax({
 	            type: 'POST',
 	            url: '/public/case',
 	            data: JSON.stringify({
