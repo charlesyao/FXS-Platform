@@ -42,7 +42,7 @@
 											<tr>
 												<td colspan="2">
 													<span>法律意见提交截止时间：</span>
-													<span th:text="${caseDetailInfo.createAt}"></span>
+													<span th:text="${caseDetailInfo.expiredDate eq null ? 'NA' : caseDetailInfo.expiredDate}"></span>
 												</td>
 											</tr>
 											<tr>

@@ -14,7 +14,7 @@ import com.fxs.platform.domain.Cases;
 public interface CasesRepository extends FxsRepository<Cases> {
 	//List<Cases> findByTypeAndSubType(String caseType, String subType);
 
-	@Query("SELECT o FROM Cases o where o.caseType=?1  AND o.feedbackCount<10 AND o.status = '0' ORDER BY o.createAt DESC")
+	@Query("SELECT o FROM Cases o where o.caseType=?1  AND o.feedbackCount<10 AND o.status != '5' ORDER BY o.createAt DESC")
 	Page<Cases> findAllCases(String type, Pageable pageable);
 	
 	@Query("SELECT o FROM Cases o where o.userId=?1 AND o.status=?2")

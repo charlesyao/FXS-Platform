@@ -306,4 +306,13 @@ public class RouterController {
 		falltypusService.delete(fId);
 		return Result.success("success");
 	}
+	
+	/**
+	 * 处理浏览器关闭事件请求
+	 * @return
+	 */
+	@GetMapping("/public/closeWindow")
+	public void closeWindow() {
+		SessionVariableManager.clearSession(session);
+	}
 }

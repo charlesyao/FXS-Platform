@@ -78,7 +78,7 @@
 									</li>
 									<li>
 										<span>法律意见提交截止时间</span>
-										<span th:text="2018-01-19"></span>
+										<span th:text="${myBidCase.expiredDate eq null ? 'NA' : myBidCase.expiredDate}"></span>
 									</li>
 									<li>
 										<span>加入竞标人数：</span>
