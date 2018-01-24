@@ -6,6 +6,8 @@ import com.fxs.platform.utils.CaseStatus;
 import com.fxs.platform.utils.DateUtil;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 电话咨询
@@ -30,13 +32,13 @@ public class Reservation implements Serializable {
 	/**
 	 * 当事人和律师预约电话联系的日期+时间
 	 */
-	private String researvationDatetime;
+	private LocalDateTime researvationDatetime;
 
-	private String expiredDate;
-	
-	private String createAt = DateUtil.getCurrentDate();
-	
-	private String updateAt = DateUtil.getCurrentDate();
+	private LocalDateTime expiredDate;
+
+	private LocalDateTime createAt = LocalDateTime.now();
+
+	private LocalDateTime updateAt =  LocalDateTime.now();
 	
 	/**
 	 * 当事人的联系方式
@@ -53,19 +55,19 @@ public class Reservation implements Serializable {
 	 */
 	private String lawyerId;
 	
-	public String getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(String createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
-	public String getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(String updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 
@@ -85,11 +87,11 @@ public class Reservation implements Serializable {
 		this.status = status;
 	}
 
-	public String getResearvationDatetime() {
+	public LocalDateTime getResearvationDatetime() {
 		return researvationDatetime;
 	}
 
-	public void setResearvationDatetime(String researvationDatetime) {
+	public void setResearvationDatetime(LocalDateTime researvationDatetime) {
 		this.researvationDatetime = researvationDatetime;
 	}
 
@@ -117,12 +119,12 @@ public class Reservation implements Serializable {
 		this.lawyerId = lawyerId;
 	}
 
-	public String getExpiredDate() {
+	public LocalDateTime getExpiredDate() {
 		return expiredDate;
 	}
 
 	public void setExpiredDate() {
 		//默認一周過期
-		this.expiredDate = DateUtil.getFetureDate(this.getResearvationDatetime(), 7);
+		this.expiredDate = DateUtil.getFetureDate(this.getResearvationDatetime());
 	}
 }

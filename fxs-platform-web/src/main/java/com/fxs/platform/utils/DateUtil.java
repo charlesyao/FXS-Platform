@@ -2,6 +2,8 @@ package com.fxs.platform.utils;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ public class DateUtil {
 		return sdf.format(new Date());
 	}
 	
-	public static String getFetureDate(String source, int past) {
+	public static String getFetureDateStr(String source, int past) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -25,5 +27,10 @@ public class DateUtil {
 		calendar.add(Calendar.DATE, past);
 		
 		return sdf.format(calendar.getTime());
+	}
+
+
+	public static LocalDateTime getFetureDate(LocalDateTime source) {
+   		return source.plusWeeks(1);
 	}
 }

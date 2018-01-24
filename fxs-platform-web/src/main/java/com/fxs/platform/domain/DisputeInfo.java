@@ -1,5 +1,7 @@
 package com.fxs.platform.domain;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,9 +26,9 @@ public class DisputeInfo {
 
 	private String status;
 
-	private String createAt = DateUtil.getCurrentDate();
-	
-	private String updateAt = DateUtil.getCurrentDate();
+	private LocalDateTime createAt = LocalDateTime.now();
+
+	private LocalDateTime updateAt =  LocalDateTime.now();
 
 	@Transient
 	private List<String> question;
@@ -43,7 +45,7 @@ public class DisputeInfo {
 	public DisputeInfo() {
 	}
 
-	public DisputeInfo(String id, String description, String status, String createAt) {
+	public DisputeInfo(String id, String description, String status, LocalDateTime createAt) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -96,11 +98,11 @@ public class DisputeInfo {
 		this.answer = answer;
 	}
 
-	public String getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(String createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
@@ -120,11 +122,11 @@ public class DisputeInfo {
 		this.questionType = questionType;
 	}
 
-	public String getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(String updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 }
