@@ -165,11 +165,11 @@ public class CasesController {
 		    }
 	    }
 	    
-	    PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(cases, condition.getRequestFrom());
-	    map.addAttribute("pageableData", pageWrapper.getContent());
-        map.addAttribute("page", pageWrapper);
-        
-        
+	    if(!ObjectUtils.isEmpty(cases)) {
+	    	PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(cases, condition.getRequestFrom());
+		    map.addAttribute("pageableData", pageWrapper.getContent());
+	        map.addAttribute("page", pageWrapper);
+	    }
 	    
 	    if(!ObjectUtils.isEmpty(condition.getSearchFrom())
 	    		&& (condition.getSearchFrom().equals(SystemConstants.SEARCH_FROM_LAWYER_DASHBOARD)

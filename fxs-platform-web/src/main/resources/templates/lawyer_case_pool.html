@@ -15,10 +15,10 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-12">
 							<div class="ulCell laywer_right">
-								<ul class="nav nav-tabs" role="tablist">
+								<ul class="nav nav-tabs" role="tablist" id="tablist">
 									<li role="presentation" class="active">
 										<a th:href="@{/lawyer/case_pool(requestFrom='REQUEST_FROM_LAWYER_USER_CENTER')}" role="tab">免费法律咨询 
-											<span>(</span><span class="value">4</span><span>)</span>
+											<span>(</span><span class="value"></span><span>)</span>
 										</a>
 									</li>
 									<li role="presentation" class="">
@@ -121,6 +121,10 @@
 			var status5 = new Array("0")//新建的案件
 			var viewUnRead = "Y"
 
+			$("#tablist").on("click", 'a', function() {
+				$(this).parent().parent().find("li").removeClass("active")
+				$(this).parent().addClass("active")
+			})
 			$("#viewUnRead").on("click", function() {
 				if ($(this).is(":checked")) {
 					viewUnRead = "N"
