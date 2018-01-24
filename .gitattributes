@@ -1,0 +1,4 @@
+*.css linguist-language=Css
+*.js linguist-language=Javascript
+*.html linguist-language=Thymeleaf
+*.java linguist-language=Java
