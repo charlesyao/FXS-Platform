@@ -6,6 +6,9 @@ import javax.persistence.Transient;
 
 import com.fxs.platform.utils.DateUtil;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 
 /**
  * 案件领域模型 免费法律咨询、打官司
@@ -44,12 +47,12 @@ public class Cases {
 	
 	@Transient
 	private String detailedInquirys;
+
+	private LocalDateTime createAt = LocalDateTime.now();
+
+	private LocalDateTime updateAt =  LocalDateTime.now();
 	
-	private String createAt = DateUtil.getCurrentDate();
-	
-	private String updateAt = DateUtil.getCurrentDate();
-	
-	private String expiredDate;
+	private LocalDateTime expiredDate;
 	
 	private String acceptedLawyerFeedback;
 	
@@ -111,11 +114,11 @@ public class Cases {
 		this.comments = comments;
 	}
 
-	public String getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(String createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
@@ -159,11 +162,11 @@ public class Cases {
 		this.subLocation = subLocation;
 	}
 
-	public String getExpiredDate() {
+	public LocalDateTime getExpiredDate() {
 		return expiredDate;
 	}
 
-	public void setExpiredDate(String expiredDate) {
+	public void setExpiredDate(LocalDateTime expiredDate) {
 		this.expiredDate = expiredDate;
 	}
 
@@ -175,11 +178,11 @@ public class Cases {
 		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
 	}
 
-	public String getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(String updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 }
