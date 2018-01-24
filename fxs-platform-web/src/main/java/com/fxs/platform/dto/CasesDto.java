@@ -44,7 +44,7 @@ public class CasesDto {
 
 	private List<CaseFeedbackInfoDto> caseFeedbackInfo;
 
-	private List<String> detailedInquiries;
+	private List<String[]> detailedInquiries;
 	
 	private boolean disableFeedback;
 	
@@ -132,11 +132,11 @@ public class CasesDto {
 		this.createAt = createAt;
 	}
 
-	public List<String> getDetailedInquiries() {
+	public List<String[]> getDetailedInquiries() {
 		return detailedInquiries;
 	}
 
-	public void setDetailedInquiries(List<String> detailedInquiries) {
+	public void setDetailedInquiries(List<String[]> detailedInquiries) {
 		this.detailedInquiries = detailedInquiries;
 	}
 

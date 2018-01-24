@@ -15,10 +15,16 @@ public class DetailedInquiry {
 	private String id;
 
 	private String firstComments;
+	
+	private String firstFeedback;
 
 	private String secondComments;
+	
+	private String secondFeedback;
 
 	private String thirdComments;
+	
+	private String thirdFeedback;
 
 	private String caseId;
 
@@ -80,5 +86,29 @@ public class DetailedInquiry {
 
 	public void setCaseId(String caseId) {
 		this.caseId = caseId;
+	}
+
+	public String getFirstFeedback() {
+		return firstFeedback;
+	}
+
+	public void setFirstFeedback(String firstFeedback) {
+		this.firstFeedback = firstFeedback;
+	}
+
+	public String getSecondFeedback() {
+		return secondFeedback;
+	}
+
+	public void setSecondFeedback(String secondFeedback) {
+		this.secondFeedback = secondFeedback;
+	}
+
+	public String getThirdFeedback() {
+		return thirdFeedback;
+	}
+
+	public void setThirdFeedback(String thirdFeedback) {
+		this.thirdFeedback = thirdFeedback;
 	}
 }

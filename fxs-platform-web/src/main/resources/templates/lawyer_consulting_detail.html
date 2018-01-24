@@ -158,7 +158,13 @@
 									<ul>
 										<li>
 											<span th:text="'第'+ ${iterState.count} + '次追问: '"></span>
-											<span th:text="${inquiry}"></span>
+											<span th:text="${inquiry[0]}"></span>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button th:if="${inquiry[1] eq null}"
+											        th:id="${iterState.count}" class="lawyerAnswer btn btn-law btn-sm" 
+											        data-toggle="modal" data-target="#addAnswerModal">回复</button>
+											<span th:text="'我的回复:'" th:if="${inquiry[1] ne null}"></span>
+											<span th:text="${inquiry[1]}" th:if="${inquiry[1] ne null}"></span>
 										</li>
 									</ul>
 								</div>
@@ -216,7 +222,6 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="myLargeModalLabel">加入竞标</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
@@ -233,6 +238,30 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-law" id="addFeedback">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="addAnswerModal" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label>律师意见:</label>
+							<input type="text" class="form-control" id="lawyerAnswer" />
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-law" id="addAnswer">保存</button>
 				</div>
 			</div>
 		</div>
@@ -255,6 +284,42 @@
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {
+			var detailedInquiryId;
+			$(".lawyerAnswer").on("click", function(e) {
+				e.preventDefault()
+				detailedInquiryId = $(this).attr("id");
+			})
+			$("#addAnswer").on("click", function() {
+				$.ajax({
+					type : 'PUT',
+					url : '/user/case/addDetailedInquiry/' + [[${caseDetailInfo.id}]],
+					data : JSON.stringify(
+								{
+									"detailedInquirys": $("#lawyerAnswer").val(),
+									"detailedInquirysIndex": detailedInquiryId
+								}
+							),
+					contentType : "application/json; charset=utf-8",
+					success : function(res) {
+						$("#addAnswerModal").modal("hide")
+						$("#lawyerAnswer").val("")
+						if (res.data == 0) {
+							$("#modalContent").empty().append("反馈信息添加成功")
+						} else if (res.data == -1) {
+							$("#modalContent").empty().append("反馈信息添加失败")
+						}
+						
+						$("#notificationModal").modal("show")
+					},
+					error : function(error) {
+						$("#addAnswerModal").modal("hide")
+						$("#lawyerAnswer").val("")
+						$("#modalContent").empty().append("信息添加失败")
+						$("#notificationModal").modal("show")
+					}
+				});
+			})
+			
 			$("#addFeedback").on("click", function() {
 				$.ajax({
 					type : 'PUT',

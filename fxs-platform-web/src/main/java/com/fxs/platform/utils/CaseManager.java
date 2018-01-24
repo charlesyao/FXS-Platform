@@ -233,19 +233,29 @@ public class CaseManager {
 			caseDto.setDisableFeedback(Boolean.FALSE);
 		}
 		
-		List<String> detailedInquiries = new ArrayList<String>();
+		List<String[]> detailedInquiries = new ArrayList<String[]>();
 		
 		if (! ObjectUtils.isEmpty(detailedInquiry)) {
+			
 			if (! ObjectUtils.isEmpty(detailedInquiry.getFirstComments())) {
-				detailedInquiries.add(detailedInquiry.getFirstComments());
+				String[] detaiedInquiryArr = new String[2];
+				detaiedInquiryArr[0] = detailedInquiry.getFirstComments();
+				detaiedInquiryArr[1] = detailedInquiry.getFirstFeedback();
+				detailedInquiries.add(detaiedInquiryArr);
 			}
 			
 			if (! ObjectUtils.isEmpty(detailedInquiry.getSecondComments())) {
-				detailedInquiries.add(detailedInquiry.getSecondComments());
+				String[] detaiedInquiryArr = new String[2];
+				detaiedInquiryArr[0] = detailedInquiry.getSecondComments();
+				detaiedInquiryArr[1] = detailedInquiry.getSecondFeedback();
+				detailedInquiries.add(detaiedInquiryArr);
 			}
 			
 			if (! ObjectUtils.isEmpty(detailedInquiry.getThirdComments())) {
-				detailedInquiries.add(detailedInquiry.getThirdComments());
+				String[] detaiedInquiryArr = new String[2];
+				detaiedInquiryArr[0] = detailedInquiry.getThirdComments();
+				detaiedInquiryArr[1] = detailedInquiry.getThirdFeedback();
+				detailedInquiries.add(detaiedInquiryArr);
 			}
 			
 		}

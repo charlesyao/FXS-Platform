@@ -294,7 +294,7 @@ public class CasesController {
 	@PutMapping("/user/case/addDetailedInquiry/{caseId}")
 	@ResponseBody
 	public ResponseMessage<Integer> addDetailedInquiry(@PathVariable String caseId, @Valid @RequestBody Cases cases) {
-		DetailedInquiry di = detailedInquiryService.save(caseId, cases.getDetailedInquirys());
+		DetailedInquiry di = detailedInquiryService.save(caseId, cases);
 		
 		if (ObjectUtils.isEmpty(di)) {
 			return Result.success(ResponseCodeEnum.ERROR.getCode());

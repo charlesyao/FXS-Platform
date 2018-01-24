@@ -45,6 +45,9 @@ public class Cases {
 	@Transient
 	private String detailedInquirys;
 	
+	@Transient
+	private String detailedInquirysIndex;
+	
 	private String createAt = DateUtil.getCurrentDate();
 	
 	private String updateAt = DateUtil.getCurrentDate();
@@ -125,6 +128,14 @@ public class Cases {
 
 	public void setDetailedInquirys(String detailedInquirys) {
 		this.detailedInquirys = detailedInquirys;
+	}
+
+	public String getDetailedInquirysIndex() {
+		return detailedInquirysIndex;
+	}
+
+	public void setDetailedInquirysIndex(String detailedInquirysIndex) {
+		this.detailedInquirysIndex = detailedInquirysIndex;
 	}
 
 	public String getIsRead() {
