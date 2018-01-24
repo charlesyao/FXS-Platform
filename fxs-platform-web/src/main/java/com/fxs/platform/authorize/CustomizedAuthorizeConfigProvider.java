@@ -26,6 +26,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/invalid-session",
 					"/autosave/**", 
 					"/lawyer/signIn",
+					"/signOut",
 					"/user/signIn",
 					"/user/dashboard",
 					"/user/register",

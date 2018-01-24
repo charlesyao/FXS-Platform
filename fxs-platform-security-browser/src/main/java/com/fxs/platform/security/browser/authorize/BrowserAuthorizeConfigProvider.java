@@ -19,7 +19,16 @@ public class BrowserAuthorizeConfigProvider implements AuthorizeConfigProvider {
 	@Override
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		config.antMatchers(HttpMethod.GET, 
-			"/**/*.*").permitAll();
+				"/**/*.js", 
+				"/**/*.css", 
+				"/**/*.jpg", 
+				"/**/*.png", 
+				"/**/*.gif",
+				"/**/*.woff",
+				"/**/*.woff2",
+				"/**/*.ttf",
+				"/**/*.svg",
+				"/**/*.eot").permitAll();
 		return false;
 	}
 }
