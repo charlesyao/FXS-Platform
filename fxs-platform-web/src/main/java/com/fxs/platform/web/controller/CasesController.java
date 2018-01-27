@@ -1,5 +1,6 @@
 package com.fxs.platform.web.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -205,7 +206,8 @@ public class CasesController {
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
 	    
-    	//如果过滤条件中有‘最近几天’，则重新封装查询条件，因为当前的queryCondition无法实现
+    	//针对律师咨询池添加过滤条件, 过滤出小于提交电话咨询时指定的期望日期的数据
+	     condition.setResearvationDatetime(LocalDateTime.now());
 	     Page<ReservationDto> reserrvation = casesService.findAllReservationForLawyer(condition, pageable);
 	    
 	    PageWrapper<ReservationDto> pageWrapper = new PageWrapper<ReservationDto>(reserrvation, condition.getRequestFrom());

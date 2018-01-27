@@ -1,5 +1,6 @@
 package com.fxs.platform.repository.condition;
 
+import java.time.LocalDateTime;
 
 /**
  *案件查找条件封装 
@@ -16,6 +17,16 @@ public class ReservationCondition {
 	private String requestFrom;
 
 	private String createAt;
+	
+	private LocalDateTime researvationDatetime;
+
+	public LocalDateTime getResearvationDatetime() {
+		return researvationDatetime;
+	}
+
+	public void setResearvationDatetime(LocalDateTime researvationDatetime) {
+		this.researvationDatetime = researvationDatetime;
+	}
 
 	public String getIsRead() {
 		return isRead;

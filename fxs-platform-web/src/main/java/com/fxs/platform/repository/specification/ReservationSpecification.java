@@ -15,5 +15,6 @@ public class ReservationSpecification extends FxsSpecification<Reservation, Rese
 	protected void addCondition(QueryWraper<Reservation> queryWraper) {
 		addEqualsCondition(queryWraper, "isRead");
 		addInCondition(queryWraper, "status");
+		addLessThanCondition(queryWraper, "researvationDatetime");
 	}
 }
