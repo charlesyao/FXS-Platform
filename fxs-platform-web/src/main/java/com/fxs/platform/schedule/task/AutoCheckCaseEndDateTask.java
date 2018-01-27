@@ -1,6 +1,9 @@
 package com.fxs.platform.schedule.task;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,10 @@ import com.fxs.platform.domain.Cases;
 import com.fxs.platform.domain.Reservation;
 import com.fxs.platform.repository.CasesRepository;
 import com.fxs.platform.repository.ReservationRepository;
+import com.fxs.platform.repository.condition.CasesCondition;
+import com.fxs.platform.repository.condition.ReservationCondition;
+import com.fxs.platform.repository.specification.CaseSpecification;
+import com.fxs.platform.repository.specification.ReservationSpecification;
 import com.fxs.platform.utils.CaseStatus;
 
 /**
@@ -20,6 +27,7 @@ import com.fxs.platform.utils.CaseStatus;
  *
  */
 @Component
+@Transactional
 public class AutoCheckCaseEndDateTask {
 	static final Logger logger = LoggerFactory.getLogger(AutoCheckCaseEndDateTask.class);
 
@@ -40,7 +48,14 @@ public class AutoCheckCaseEndDateTask {
 
 	@Async
 	private void checkCase(CasesRepository casesRepository) {
-		List<Cases> caseList = casesRepository.findByStatus();
+		CasesCondition condition = new CasesCondition();
+		String[] status = {"0", "1", "2", "3", "4"};
+		condition.setStatus(status);
+		condition.setExpiredDate(LocalDateTime.now());
+		
+		List<Cases> caseList = casesRepository.findAll(new CaseSpecification(condition));
+		
+		//List<Cases> caseList1 = casesRepository.findByStatus();
 
 		for (Cases cases : caseList) {
 			casesRepository.updateStatus(CaseStatus.END.getStatus(), cases.getId());
@@ -49,7 +64,15 @@ public class AutoCheckCaseEndDateTask {
 
 	@Async
 	private void checkReservation(ReservationRepository reservationRepository) {
-		List<Reservation> reservationList = reservationRepository.findByStatus();
+		ReservationCondition condition = new ReservationCondition();
+		String[] status = {"0", "1", "2", "3", "4"};
+		condition.setStatus(status);
+		condition.setResearvationDatetime(LocalDateTime.now());
+		
+		List<Reservation> reservationList = reservationRepository.findAll(new ReservationSpecification(condition));
+				
+				
+		//List<Reservation> reservationList = reservationRepository.findByStatus();
 		for (Reservation reservation : reservationList) {
 			reservationRepository.updateStatus(CaseStatus.END.getStatus(), reservation.getId());
 		}
