@@ -139,6 +139,8 @@ public class CasesController {
 		String target = "";
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
+	    
+	    //针对律师咨询池添加过滤条件, 过滤出小于提交电话咨询时指定的期望日期的数据
 	    condition.setExpiredDate(LocalDateTime.now());
 	    Page<CasesDto> cases = null;
 	    if(!ObjectUtils.isEmpty(condition.getFromNav()) && condition.getFromNav().equals(SystemConstants.FROM_NAV)) {
