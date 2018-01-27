@@ -101,7 +101,7 @@
 					url : '/public/case/reservation',
 					data : JSON.stringify({
 						"contactPhone" : $("#contactPhone").val(),
-						"researvationDatetime" : $("#researvationDatetime").val()
+						"researvationDatetime" : stringToDate($("#researvationDatetime").val())
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
@@ -121,6 +121,11 @@
 					}
 				});
 			})
+			
+			function stringToDate (fDate) {
+			    var fullDate = fDate.split("-");  
+			    return new Date(fullDate[0], fullDate[1]-1, fullDate[2], 0, 0, 0);  
+			}
 		})
 	</script>
 </body>

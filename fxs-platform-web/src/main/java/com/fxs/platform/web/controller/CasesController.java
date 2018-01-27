@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -84,7 +85,7 @@ public class CasesController {
 	 * @param consultation
 	 * @return
 	 */
-	@PostMapping("/public/case/reservation")
+	@PostMapping(value="/public/case/reservation", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseMessage<String> create(@Valid @RequestBody Reservation reservation) {
 		String target = null;
