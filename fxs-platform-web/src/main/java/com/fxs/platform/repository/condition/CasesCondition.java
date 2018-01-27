@@ -1,5 +1,6 @@
 package com.fxs.platform.repository.condition;
 
+import java.time.LocalDateTime;
 
 /**
  *案件查找条件封装 
@@ -28,6 +29,16 @@ public class CasesCondition {
 	private int feedbackCount = 11;
 	
 	private String createAt;
+	
+	private LocalDateTime expiredDate;
+
+	public LocalDateTime getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(LocalDateTime expiredDate) {
+		this.expiredDate = expiredDate;
+	}
 
 	public int getFeedbackCount() {
 		return feedbackCount;

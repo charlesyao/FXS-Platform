@@ -139,7 +139,7 @@ public class CasesController {
 		String target = "";
 		Sort sort = new Sort(Sort.Direction.DESC, "id");
 	    Pageable pageable = new PageRequest(page, size, sort);
-	    
+	    condition.setExpiredDate(LocalDateTime.now());
 	    Page<CasesDto> cases = null;
 	    if(!ObjectUtils.isEmpty(condition.getFromNav()) && condition.getFromNav().equals(SystemConstants.FROM_NAV)) {
 	    	//根据lawyerId和status在case_feedback_info中找到所有的caseId

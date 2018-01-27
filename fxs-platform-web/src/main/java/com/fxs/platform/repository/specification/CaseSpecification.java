@@ -18,6 +18,7 @@ public class CaseSpecification extends FxsSpecification<Cases, CasesCondition> {
 		addEqualsCondition(queryWraper, "caseType");
 		addEqualsCondition(queryWraper, "userId");
 		addEqualsCondition(queryWraper, "isRead");
+		addLessThanCondition(queryWraper, "expiredDate");
 		
 		addLessThanCondition(queryWraper, "feedbackCount");
 		addInCondition(queryWraper, "status");
