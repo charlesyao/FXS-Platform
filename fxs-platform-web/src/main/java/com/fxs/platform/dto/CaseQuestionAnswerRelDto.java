@@ -1,5 +1,9 @@
 package com.fxs.platform.dto;
 
+import java.util.List;
+
+import com.fxs.platform.domain.Answer;
+
 /**
  * 案件-问题-答案关联关系封装类
  *
@@ -10,16 +14,28 @@ public class CaseQuestionAnswerRelDto {
 
 	private String questionId;
 
+	private String questionType;
+	
 	private String questionDesc;
 
 	private String answerId;
 
 	private String answerDesc;
 
+	private List<Answer> answers;
+	
 	private String createAt;
 	
 	private String updateAt;
 	
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
 	public String getCreateAt() {
 		return createAt;
 	}
@@ -50,6 +66,14 @@ public class CaseQuestionAnswerRelDto {
 
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
+	}
+	
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
 	}
 
 	public String getQuestionDesc() {

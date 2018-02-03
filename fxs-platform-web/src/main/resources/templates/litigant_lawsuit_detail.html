@@ -55,8 +55,18 @@
 															<div class="col-sm-12">
 																	<h6>案件明细</h6>
 																	<ul class="writeInfoText ulCell myCell mb-2" th:each="qa : ${caseDetailInfo.qaMapping}">
-														                <li>问题: <span th:text="${qa.questionDesc}"></span></li>
-																		<li>答案: <span th:text="${qa.answerDesc}"></span></li>
+													                	<li th:if="${qa.answers eq null}">
+													                		<span>问题:</span><span th:text="${qa.questionDesc}"></span>
+													                		<br />
+													                		<span>答案:</span><span th:text="${qa.answerDesc}"></span>
+													                	</li>
+													                	<li th:if="${qa.answers ne null}">
+													                		<span>问题:</span><span th:text="${qa.questionDesc}"></span>
+													                		<br />
+													                		<span th:each="multiQA,iterState : ${qa.answers}">
+													                			<span th:text="'答案' + ${iterState.count} + ':'"></span><span th:text="${multiQA.description}"></span><br />
+													                		</span>
+													                	</li>
 														            </ul>
 															</div>
 														</div>

@@ -1,8 +1,11 @@
 package com.fxs.platform.dto;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.util.ObjectUtils;
+
+import com.fxs.platform.domain.Answer;
 
 /**
  * 案件所有主要信息封装类，如想获得更多信息，可进一步扩展此类
@@ -41,6 +44,8 @@ public class CasesDto {
 
 	// List of QA mapping
 	private List<CaseQuestionAnswerRelDto> qaMapping;
+	
+	private List<Map<String, List<Answer>>> multiAnswerQuestion;
 
 	private List<CaseFeedbackInfoDto> caseFeedbackInfo;
 
@@ -52,6 +57,14 @@ public class CasesDto {
 	
 	private String contactPhone;
 	
+	public List<Map<String, List<Answer>>> getMultiAnswerQuestion() {
+		return multiAnswerQuestion;
+	}
+
+	public void setMultiAnswerQuestion(List<Map<String, List<Answer>>> multiAnswerQuestion) {
+		this.multiAnswerQuestion = multiAnswerQuestion;
+	}
+
 	public String getContactPhone() {
 		return contactPhone;
 	}

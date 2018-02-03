@@ -1,12 +1,15 @@
 package com.fxs.platform.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -68,6 +71,7 @@ public class CaseManager {
 
 					rel.setQuestionId(String.valueOf(question.getId()));
 					rel.setQuestionDesc(question.getDescription());
+					rel.setQuestionType(question.getQuestionType());
 					
 					rel.setCaseId(cases.getId());
 					
@@ -205,6 +209,72 @@ public class CaseManager {
 		//获取所有当前案件相关的问题以及问题选择的选项
 		List<CaseQuestionAnswerRel> rels = caseQuestionAnswerRelRepository.findAll(caseDto.getId());
 		
+		//针对复选答案的问题数据结构进行重组
+		List<CaseQuestionAnswerRel> newRels = new ArrayList<CaseQuestionAnswerRel>();
+		List<Map<String, List<Answer>>> multiAnswerQuestion = new ArrayList<Map<String, List<Answer>>>();
+		Map<String, List<Answer>> multiAnswerMap = new HashMap<>();
+		List<Answer> answerList = new ArrayList<Answer>();
+		Answer answer = new Answer();
+		Question question = new Question();
+		
+		for (int i = 0; i < rels.size(); i ++) {
+			if ("1".equals(rels.get(i).getQuestionType())) {   
+				newRels.add(rels.get(i));
+				
+				if (multiAnswerMap.containsKey(rels.get(i).getQuestionId())) {
+					answerList = multiAnswerMap.get(rels.get(i).getQuestionId());
+					
+					answer = new Answer();
+					question = new Question();
+					
+					answer.setId(rels.get(i).getAnswerId());
+					answer.setDescription(rels.get(i).getAnswerDesc());
+					
+					question.setId(rels.get(i).getQuestionId());
+					question.setDescription(rels.get(i).getQuestionDesc());
+					question.setQuestionType(rels.get(i).getQuestionType());
+					
+					answer.setQuestion(question);
+					
+					answerList.add(answer);
+					
+					
+				} else {
+					multiAnswerMap.put(rels.get(i).getQuestionId(), null);
+					answer = new Answer();
+					question = new Question();
+					answerList = new ArrayList<Answer>();
+					
+					answer.setId(rels.get(i).getAnswerId());
+					answer.setDescription(rels.get(i).getAnswerDesc());
+					
+					question.setId(rels.get(i).getQuestionId());
+					question.setDescription(rels.get(i).getQuestionDesc());
+					question.setQuestionType(rels.get(i).getQuestionType());
+					
+					answer.setQuestion(question);
+					
+					answerList.add(answer);
+					
+				}
+				
+				multiAnswerMap.put(rels.get(i).getQuestionId(), answerList);
+            }
+		}
+		
+		multiAnswerQuestion.add(multiAnswerMap);
+		
+		for (List<Answer> value : multiAnswerMap.values()) { 
+			CaseQuestionAnswerRel newRel = new CaseQuestionAnswerRel();
+			newRel.setQuestionDesc(value.get(0).getQuestion().getDescription());
+			newRel.setQuestionType(value.get(0).getQuestion().getQuestionType());
+			newRel.setAnswers(value);
+			
+			rels.add(newRel);
+		}
+		
+		rels.removeAll(newRels);
+		
 		//获取当事人对当前案件添加的追问信息
 		DetailedInquiry detailedInquiry = detailedInquiryRepository.findByCaseId(caseDto.getId());
 		
@@ -216,6 +286,7 @@ public class CaseManager {
 			caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId());
 		}
 		
+		caseDto.setMultiAnswerQuestion(multiAnswerQuestion);
 		caseDto.setQaMapping(QueryResultConverter.convert(rels, CaseQuestionAnswerRelDto.class));
 		caseDto.setCaseFeedbackInfo(QueryResultConverter.convert(caseFeedbackInfo, CaseFeedbackInfoDto.class));
 		

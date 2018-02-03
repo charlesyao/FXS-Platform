@@ -3,9 +3,11 @@ package com.fxs.platform.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.fxs.platform.utils.DateUtil;
 
@@ -14,7 +16,7 @@ import com.fxs.platform.utils.DateUtil;
  *
  */
 @Entity
-public class CaseQuestionAnswerRel implements Serializable {
+public class CaseQuestionAnswerRel implements Serializable, Comparable<CaseQuestionAnswerRel> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,16 +26,29 @@ public class CaseQuestionAnswerRel implements Serializable {
 
 	private String questionId;
 
+	private String questionType;
+
 	private String questionDesc;
 
 	private String answerId;
 
 	private String answerDesc;
 
+	@Transient
+	private List<Answer> answers;
+	
 	private LocalDateTime createAt = LocalDateTime.now();
 
-	private LocalDateTime updateAt =  LocalDateTime.now();
-	
+	private LocalDateTime updateAt = LocalDateTime.now();
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
 	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
@@ -74,6 +89,14 @@ public class CaseQuestionAnswerRel implements Serializable {
 		this.questionId = questionId;
 	}
 
+	public String getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+
 	public String getQuestionDesc() {
 		return questionDesc;
 	}
@@ -98,4 +121,11 @@ public class CaseQuestionAnswerRel implements Serializable {
 		this.answerDesc = answerDesc;
 	}
 
+	public int compareTo(CaseQuestionAnswerRel arg) {
+		if ("1".equals(arg.getQuestionType())) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 }
