@@ -39,7 +39,7 @@
 					<a class="nav-link" th:href="@{/lawyer/case_pool(requestFrom='REQUEST_FROM_LAWYER_USER_CENTER')}">咨询池</a>
 				</li>
 				<li class="nav-item" sec:authorize="isAnonymous()">
-					<a class="nav-link" href="#">关于我们</a>
+					<a class="nav-link" th:href="@{/user/companyIntro}">公司简介</a>
 				</li>
 				<!-- 
 				<li class="nav-item" sec:authorize="isAnonymous()">
@@ -55,11 +55,11 @@
 					<a class="nav-link" th:href="@{/}">首页</a>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">法律咨询</a>
+					<a href="#" class="dropdown-toggle nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">免费咨询</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/public/case/consulting/free}">免费法律咨询</a>
+						<a class="dropdown-item" th:href="@{/public/case/consulting/free}">免费线上法律咨询</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/public/case/consulting/phone}">电话咨询</a>
+						<a class="dropdown-item" th:href="@{/public/case/consulting/phone}">免费电话咨询</a>
 					</div>
 				</li>
 				<li class="dropdown">

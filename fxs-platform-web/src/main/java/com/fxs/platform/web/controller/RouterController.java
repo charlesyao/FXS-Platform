@@ -102,6 +102,11 @@ public class RouterController {
 		return "userRegister";
 	}
 
+	@GetMapping("/user/companyIntro")
+	public String companyIntro() {
+		return "companyIntro";
+	}
+
 	@GetMapping("/lawyer/signIn")
 	public String lawyerSignIn() {
 		return "lawyerSignIn";

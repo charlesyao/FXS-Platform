@@ -172,6 +172,12 @@ h4.gray {
     border-radius: 5px;
     border: 1px solid #fff;
 }
+.introBox{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+}
 .signupBox .form-group{
     margin-bottom: .3rem;
 }

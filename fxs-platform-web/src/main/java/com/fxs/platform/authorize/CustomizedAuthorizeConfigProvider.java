@@ -30,6 +30,7 @@ public class CustomizedAuthorizeConfigProvider implements AuthorizeConfigProvide
 					"/user/signIn",
 					"/user/dashboard",
 					"/user/register",
+					"/user/companyIntro",
 					"/user",
 					"/disputeInfo/**",
 					"/public/**")
