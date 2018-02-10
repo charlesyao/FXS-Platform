@@ -17,7 +17,7 @@
 					</li>
 				</ol>
 				<h1 class="blue">
-					<span>案件</span>
+					<span>案件编号</span>
 					<span th:text="${caseDetailInfo.id}"></span>
 				</h1>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
@@ -29,13 +29,11 @@
 										<tbody>
 											<tr class="listTitle">
 												<td colspan="2">
-													<span>案件编号</span>
-													<span th:text="${caseDetailInfo.id}"></span>
 												</td>
 											</tr>
 											<tr>
 												<td colspan="2">
-													<span>竞标发布时间: </span>
+													<span>委托发布时间: </span>
 													<span th:text="${caseDetailInfo.createAt}"></span>
 												</td>
 											</tr>
@@ -47,7 +45,7 @@
 											</tr>
 											<tr>
 												<td colspan="2">
-													<span>加入竞标人数： </span>
+													<span>加入委托人数： </span>
 													<span th:text="较少"></span>
 												</td>
 											</tr>
@@ -60,9 +58,9 @@
 									<table class="table tableBox">
 										<tbody>
 											<tr>
-												<td>案件类型： 劳动纠纷
-													<span>案件类型： </span>
-													<span th:text="${caseDetailInfo.parentType}"></span>
+												<td>案件类型：<span th:text="${caseDetailInfo.parentType}"></span>
+													<span>下一级案件类型： </span>
+													<span th:text="${caseDetailInfo.subType}"></span>
 												</td>
 												<td>
 													<span>案件阶段： </span>
@@ -74,16 +72,8 @@
 													<span>当事人角色：  </span>
 													<span th:text="原告"></span>
 												</td>
-												<td>
-													<span>对法院判决态度： </span>
-													<span th:text="'-'"></span>
-												</td>
 											</tr>
 											<tr>
-												<td>
-													<span>您是代表谁找律师: </span>
-													<span th:text="本人"></span>
-												</td>
 												<td>
 													<span>起诉地点：</span>
 													 <span th:text="${caseDetailInfo.location}"></span>
@@ -135,24 +125,6 @@
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
-									<h4>证据材料</h4>
-								</div>
-								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}">
-									<ul>
-										<li><span th:text="暂无信息"></span></li>
-									</ul>
-								</div>
-								<div class="row" 
-									th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}"
-									th:each="qaMapping : ${caseDetailInfo.qaMapping}">
-									<ul>
-										<li>问题：<span th:text="${qaMapping.questionDesc}"></span></li>
-										<li>问题：<span th:text="${qaMapping.answerDesc}"></span></li>
-									</ul>
-								</div>
-							</ul>
-							<ul class="writeInfoText ulCell myCell caseBox">
-								<div class="row">
 									<h4>当事人的追问信息:</h4>
 								</div>
 								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">
@@ -199,25 +171,13 @@
 									</ul>
 								</div>
 							</ul>
-							<ul class="writeInfoText ulCell myCell caseBox">
-								<div class="row">
-									<h4>已采取的行动与结果</h4>
-								</div>
-								<div class="row">
-									<ul>
-										<li>
-											<span th:text="无"></span>
-										</li>
-									</ul>
-								</div>
-							</ul>
 							<ul class="lawyer2button">
 								<div class="row">
 									<div class="col-md-12 col-sm-12 btnNext btnSearch caseTwoBtn">
 										<button 
 											type="button" class="btn btn-law btn-lg"
 											th:attr="disabled=${caseDetailInfo.disableFeedback} ? 'disabled' : 'false'"
-											data-target="#addFeedbackModal" data-toggle="modal">加入竞标</button>
+											data-target="#addFeedbackModal" data-toggle="modal">加入投标</button>
 									</div>
 								</div>
 							</ul>

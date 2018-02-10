@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8090
   session:
     timeout: 1800
 spring:
@@ -10,9 +10,9 @@ spring:
     store-type: none
   datasource:
     username: root
-    password: root
+    password: Root,123
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/fxs-platform?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=CTT
+    url: jdbc:mysql://47.96.187.165:3306/fxs-platform?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=CTT
     tomcat: 
       max-active: 100
       min-idle: 10
@@ -44,7 +44,7 @@ fxs:
     browser:
       sign-in-page: /user/signIn
       sign-in-response-type: REDIRECT
-      sing-in-successUrl: /user/dashboard
+      sing-in-successUrl: /
       remember-me-seconds: 29400
       sign-out-url: /user/signIn\
       acces-forbidden-url: /accessForbidden

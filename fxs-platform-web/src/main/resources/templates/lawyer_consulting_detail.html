@@ -17,7 +17,7 @@
 					</li>
 				</ol>
 				<h1 class="blue">
-					<span>案件</span>
+					<span>案件编号</span>
 					<span th:text="${caseDetailInfo.id}"></span>
 				</h1>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
@@ -35,20 +35,8 @@
 											</tr>
 											<tr>
 												<td colspan="2">
-													<span>竞标发布时间: </span>
+													<span>咨询发布时间: </span>
 													<span th:text="${caseDetailInfo.createAt}"></span>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<span>法律意见提交截止时间：</span>
-													<span th:text="${caseDetailInfo.createAt}"></span>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<span>加入竞标人数： </span>
-													<span th:text="较少"></span>
 												</td>
 											</tr>
 										</tbody>
@@ -60,8 +48,7 @@
 									<table class="table tableBox">
 										<tbody>
 											<tr>
-												<td>案件类型： 劳动纠纷
-													<span>案件类型： </span>
+												<td>案件咨询类型：
 													<span th:text="${caseDetailInfo.parentType}"></span>
 												</td>
 												<td>
@@ -95,7 +82,7 @@
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
-									<h4>案件事实</h4>
+									<h4>咨询内容</h4>
 								</div>
 								<div class="row" th:if="${#lists.isEmpty(caseDetailInfo.qaMapping)}">
 									<ul>
@@ -113,7 +100,7 @@
 							</ul>
 							<ul class="writeInfoText ulCell myCell caseBox">
 								<div class="row">
-									<h4>当事人的期望与理由</h4>
+									<h4>当事人的描述情况</h4>
 								</div>
 								<div class="row">
 									<ul>
