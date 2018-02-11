@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: header-css"></head>
+<body class="loginBGWhite">
+	<div class="img-responsive">
+		<div class="topBar col-md-12" style="background-image: none">
+			<div th:replace="fragments/header :: header"></div>
+		</div>
+		<div class="container">
+			<div class="row loginWapper d-flex align-items-center"
+				style="height: 100%">
+					<div class="introBox">
+                        公司简介：<br/>
+                        申小法（www.yingle.com）隶属于上海智法网络科技有限公司，是国内第一家人工智能法律服务平台，我们的宗旨就是法律就在您的身边，每个人都可以拥有一个私人法律顾问。
+                    </div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
