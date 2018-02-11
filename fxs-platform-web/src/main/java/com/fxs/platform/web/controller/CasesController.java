@@ -125,6 +125,28 @@ public class CasesController {
 		return Result.success(target);
 	}
 
+	@GetMapping("/admin/cases")
+	public String queryForAdmin(CasesCondition condition,
+			ModelMap map,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "5") Integer size) {
+		
+		Sort sort = new Sort(Sort.Direction.DESC, "id");
+	    Pageable pageable = new PageRequest(page, size, sort);
+	    
+	    Page<CasesDto> cases = null;
+	    condition.setCaseType("1");
+	    condition.setStatus(new String[] {"4"});
+	    cases = casesService.query(condition, pageable);
+	    
+	    if(!ObjectUtils.isEmpty(cases)) {
+	    	PageWrapper<CasesDto> pageWrapper = new PageWrapper<CasesDto>(cases, condition.getRequestFrom());
+		    map.addAttribute("pageableData", pageWrapper.getContent());
+	        map.addAttribute("page", pageWrapper);
+	    }
+	    
+	    return "admin_cases_list";
+	}
 	/**
 	 * 根据不同类型获取案件 
 	 * 
@@ -272,6 +294,8 @@ public class CasesController {
 				//lawsuit
 				target = "lawyer_lawsuit_detail";
 			}
+		} else {
+			target = "admin_case_detail";
 		}
 		return target;
 	}
@@ -287,6 +311,19 @@ public class CasesController {
 	@ResponseBody
 	public ResponseMessage<Cases> update(@PathVariable String caseId, @Valid @RequestBody CaseFeedbackInfo cases) {
 		return Result.success(casesService.update(caseId, cases));
+	}
+	
+	/**
+	 * 更新case信息
+	 * 
+	 * @param caseId
+	 * @param cases
+	 * @return
+	 */
+	@PostMapping("/admin/approve/{feedbackId}")
+	@ResponseBody
+	public void review(@PathVariable String feedbackId, @Valid @RequestBody CaseFeedbackInfo cases) {
+		casesService.review(cases, feedbackId);
 	}
 	
 	/**

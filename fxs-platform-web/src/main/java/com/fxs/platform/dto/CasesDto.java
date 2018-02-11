@@ -1,5 +1,6 @@
 package com.fxs.platform.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +31,11 @@ public class CasesDto {
 	// 免费法律咨询额外信息
 	private String comments;
 
-	private String createAt;
+	private LocalDateTime createAt;
 	
-	private String updateAt;
+	private LocalDateTime updateAt;
 	
-	private String expiredDate;
+	private LocalDateTime expiredDate;
 
 	private String userId;
 
@@ -137,14 +138,6 @@ public class CasesDto {
 		this.qaMapping = qaMapping;
 	}
 
-	public String getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(String createAt) {
-		this.createAt = createAt;
-	}
-
 	public List<String[]> getDetailedInquiries() {
 		return detailedInquiries;
 	}
@@ -209,14 +202,6 @@ public class CasesDto {
 		this.disableFeedback = disableFeedback;
 	}
 
-	public String getExpiredDate() {
-		return expiredDate;
-	}
-
-	public void setExpiredDate(String expiredDate) {
-		this.expiredDate = expiredDate;
-	}
-
 	public String getAcceptedLawyerFeedback() {
 		return acceptedLawyerFeedback;
 	}
@@ -225,11 +210,27 @@ public class CasesDto {
 		this.acceptedLawyerFeedback = acceptedLawyerFeedback;
 	}
 
-	public String getUpdateAt() {
+	public LocalDateTime getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(LocalDateTime createAt) {
+		this.createAt = createAt;
+	}
+
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(String updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	public LocalDateTime getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(LocalDateTime expiredDate) {
+		this.expiredDate = expiredDate;
 	}
 }

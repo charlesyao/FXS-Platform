@@ -29,6 +29,8 @@ public interface CasesService {
 	
 	Cases update(String caseId, CaseFeedbackInfo cases);
 	
+	void review(CaseFeedbackInfo cases, String feedbackId);
+	
 	void updateStatus(String statusCode, String caseId);
 
 	//我的免费咨询和我的法律咨询

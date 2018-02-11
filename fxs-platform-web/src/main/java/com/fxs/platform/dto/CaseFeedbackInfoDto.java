@@ -1,5 +1,7 @@
 package com.fxs.platform.dto;
 
+import java.time.LocalDateTime;
+
 /**
  *案件反馈信息的封装类 
  *
@@ -22,23 +24,33 @@ public class CaseFeedbackInfoDto {
 	
 	private String status;
 	
-	private String createAt;
+	private LocalDateTime createAt;
 	
-	private String updateAt;
+	private LocalDateTime updateAt;
+	
+	private String approvedBy;
+	
+	public String getApprovedBy() {
+		return approvedBy;
+	}
 
-	public String getCreateAt() {
+	public void setApprovedBy(String approvedBy) {
+		this.approvedBy = approvedBy;
+	}
+
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(String createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
-	public String getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(String updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 

@@ -154,6 +154,11 @@ public class CasesServiceImpl implements CasesService {
 		
 		return null;
 	}
+	
+	@Override
+	public void review(CaseFeedbackInfo cases, String feedbackId) {
+		caseFeedbackInfoRepository.updateStatus(cases.getStatus(), cases.getApprovedBy(), feedbackId);
+	}
 
 	@Override
 	public Page<Reservation> findAllReservation(Pageable pageable) {

@@ -33,12 +33,22 @@ public class CaseFeedbackInfo {
 	
 	private String status;
 
+	private String approvedBy;
+	
 	private LocalDateTime createAt = LocalDateTime.now();
 
 	private LocalDateTime updateAt =  LocalDateTime.now();
 	
 	@Transient
 	private String acceptedLawyerFeedback;
+	
+	public String getApprovedBy() {
+		return approvedBy;
+	}
+
+	public void setApprovedBy(String approvedBy) {
+		this.approvedBy = approvedBy;
+	}
 
 	public String getStatus() {
 		return status;

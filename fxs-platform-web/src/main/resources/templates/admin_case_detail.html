@@ -9,14 +9,10 @@
 	<div class="mainPart">
 		<div class="container">
 			<div class="containerWapper">
-				<ol class="breadcrumb">
-					<li><a href="#">个人中心</a></li>
-					<li class="active">我的竞标案件</li>
-				</ol>
 				<h1 class="blue">诉讼案件详情</h1>
 				<section class="col-md-12 col-sm-12 writeInfo space20">
 					<div class="row">
-						<div class="col-md-10 col-sm-10 mybox">
+						<div class="col-md-12 col-sm-12 mybox">
 							<ul class="writeInfoText ulCell myCell mb-2">
 								<div id="accordion">
 									<div class="card">
@@ -75,7 +71,7 @@
 														<div class="row">
 															<div class="col-sm-12">
 																<h6>追问详情</h6>
-																<span th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">您对此案件还没有追问信息</span>
+																<span th:if="${#lists.isEmpty(caseDetailInfo.detailedInquiries)}">当事人对此案件还没有追问信息</span>
 																<ul th:if="${not #lists.isEmpty(caseDetailInfo.detailedInquiries)}"
 																	th:each="inquiry,iterState : ${caseDetailInfo.detailedInquiries}">
 																	<li>
@@ -128,16 +124,21 @@
 																	</li>
 																	<li>
 																		<span>回复日期:</span> 
-																		<span th:text="${feedbackInfo.createAt}"></span>
+																		<span th:text="2018-1-12"></span>
 																	</li>
 																</ul>
 															</div>
-															<div class="col-sm-2">
-																<button type="button" class="btn btn-law pull-right"
-																	th:attr="disabled=(${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
+															<div class="col-sm-1" th:if="${feedbackInfo.status eq '2' or feedbackInfo.status eq '4'}">
+																<button type="button" class="btn btn-law pull-right approved"
+																	th:attr="disabled=(${feedbackInfo.approvedBy ne null}) ? 'disabled' : 'false'"
 																	th:id="${feedbackInfo.id}"
-																	th:text="(${caseDetailInfo.acceptedLawyerFeedback} == ${feedbackInfo.id}) ? '已采纳' : '采纳'"
-																	></button>
+																	th:text="${feedbackInfo.status eq '2'} ? '已同意' : '同意'"></button>
+															</div>
+															<div class="col-sm-1" th:if="${feedbackInfo.status eq '3' or feedbackInfo.status eq '4'}">
+																	<button type="button" class="btn btn-law pull-right rejected"
+																	th:attr="disabled=(${feedbackInfo.approvedBy ne null}) ? 'disabled' : 'false'"
+																	th:id="${feedbackInfo.id}"
+																	th:text="${feedbackInfo.status eq '3'} ? '已拒绝' : '拒绝'"></button>
 															</div>
 														</div>
 													</ul>
@@ -146,32 +147,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="row mybox">
-									<div class="col-md-12 btnSearch solutionTwoBtn">
-										<button
-											th:attr="disabled=(${#lists.size(caseDetailInfo.detailedInquiries) eq 3} or ${caseDetailInfo.status eq '5'} or ${caseDetailInfo.acceptedLawyerFeedback ne null}) ? 'disabled' : 'false'"
-											type="button" class="btn btn-law btn-lg"
-											data-toggle="modal" data-target="#addDetailedInquiry">追问</button>
-										&nbsp;&nbsp;
-										<button th:attr="disabled=${caseDetailInfo.status eq '5'} ? 'disabled' : 'false'"
-											    type="button" class="btn btn-law btn-lg" 
-											    id="resolveDispute">解决纠纷</button>
-									</div>
-								</div>
 							</ul>
-						</div>
-						<div class="col-md-2 col-sm-2">
-							<div class="writeInfoRight ulCell">
-								<ul class="writeInfoRightTitle">
-									<li>电话咨询</li>
-								</ul>
-								<ul class="writeInfoRightItem">
-									<li>立即响应</li>
-									<li>专业</li>
-									<li>高性价比</li>
-									<li>服务细节到位</li>
-								</ul>
-							</div>
 						</div>
 					</div>
 				</section>
@@ -222,13 +198,13 @@
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(function() {
-			$("#lawyerFeedbacks").on("click", "button", function() {
-				console.log($(this).attr("id"))
+			$(".approved").on("click", function() {
 				$.ajax({
-					type : 'PUT',
-					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
+					type : 'POST',
+					url : '/admin/approve/' + $(this).attr("id"),
 					data : JSON.stringify({
-						"acceptedLawyerFeedback": $(this).attr("id")
+						"status": "2",
+						"approvedBy": "admin"
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
@@ -241,12 +217,13 @@
 					}
 				});
 			})
-			$("#resolveDispute").on("click", function() {
+			$(".rejected").on("click", function() {
 				$.ajax({
-					type : 'PUT',
-					url : '/user/case/update/' + [[${caseDetailInfo.id}]],
+					type : 'POST',
+					url : '/admin/approve/' + $(this).attr("id"),
 					data : JSON.stringify({
-						"status": "5"
+						"status": "3",
+						"approvedBy": "admin"
 					}),
 					contentType : "application/json; charset=utf-8",
 					success : function(data) {
@@ -255,32 +232,6 @@
 					},
 					error : function(error) {
 						$("#modalContent").empty().append("更新失败")
-						$("#notificationModal").modal("show")
-					}
-				});
-			})
-			
-			$("#saveDetailedInquiry").on("click", function() {
-				$.ajax({
-					type : 'PUT',
-					url : '/user/case/addDetailedInquiry/' + [[${caseDetailInfo.id}]],
-					data : JSON.stringify({"detailedInquirys": $("#detailedInquiryContent").val()}),
-					contentType : "application/json; charset=utf-8",
-					success : function(res) {
-						$("#addDetailedInquiry").modal("hide")
-						$("#detailedInquiryContent").val("")
-						if (res.data == 0) {
-							$("#modalContent").empty().append("追问信息添加成功")
-						} else if (res.data == -1) {
-							$("#modalContent").empty().append("追问次数已经达到最大，不能再添加追问信息")
-						}
-						
-						$("#notificationModal").modal("show")
-					},
-					error : function(error) {
-						$("#addDetailedInquiry").modal("hide")
-						$("#detailedInquiryContent").val("")
-						$("#modalContent").empty().append("追问信息添加失败")
 						$("#notificationModal").modal("show")
 					}
 				});

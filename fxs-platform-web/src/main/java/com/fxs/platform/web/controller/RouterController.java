@@ -42,6 +42,7 @@ import com.fxs.platform.utils.CaseType;
 import com.fxs.platform.utils.PageWrapper;
 import com.fxs.platform.utils.SessionVariableManager;
 import com.fxs.platform.utils.SystemConstants;
+import com.fxs.platform.utils.UserManager;
 
 @Controller
 @SessionAttributes("roles")
@@ -73,6 +74,14 @@ public class RouterController {
 
 	@GetMapping("/")
 	public String index(ModelMap map) throws Exception {
+		
+		if (UserManager.isAdmin(UserManager.getRoles())) {
+			return "admin_dashboard";
+		}
+		if (UserManager.isLawyer(UserManager.getRoles())) {
+			return "lawyer_dashboard";
+		}
+
 		return "index";
 	}
 	

@@ -4,10 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import com.fxs.platform.utils.DateUtil;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 /**

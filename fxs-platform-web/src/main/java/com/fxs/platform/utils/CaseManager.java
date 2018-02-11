@@ -1,7 +1,6 @@
 package com.fxs.platform.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.ListUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -282,8 +280,10 @@ public class CaseManager {
 		List<CaseFeedbackInfo> caseFeedbackInfo;
 		if (userRole.equals("lawyer")) {
 			caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId(), UserManager.getSessionUser(session));
-		} else {
+		} else if (userRole.equals("admin")){
 			caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseIdAndLawyerId(cases.getId());
+		} else {
+			caseFeedbackInfo = caseFeedbackInfoRepository.findByCaseId(cases.getId());
 		}
 		
 		caseDto.setMultiAnswerQuestion(multiAnswerQuestion);
