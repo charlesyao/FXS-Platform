@@ -70,39 +70,49 @@
 									</label>
 								</div>
 
-								<div class="row">
-									<div class="col-md-12 col-sm-12 btnNext btnSearch mycasebtnSearch">
-										<button type="button" class="btn btn-law btn-lg" id="searchConsultingWithFilter">查询</button>
-									</div>
+								<div class="text-center">
+										<button type="button" class="btn btn-law" id="searchConsultingWithFilter">查询</button>
 								</div>
 							</ul>
 							<div id="consultingBlock" th:fragment="consultingBlock-fragment">
+							<!-- 
 								<a th:if="${not #lists.isEmpty(pageableData)}"
 									th:each="freeConsulting : ${pageableData}"
 									th:attr="href=(${freeConsulting.contactPhone eq null}) ? '/user/case/lawyer/consulting/viewDetail/' + ${freeConsulting.id} : '#'">
-									<ul class="writeInfoText ulCell myCell mb-2">
-										<li>
-											<span>案件编号 :</span>
-											<span th:text="${freeConsulting.id}"></span>
-										</li>
-										<li th:if="${freeConsulting.location ne null}">
-											<span>起诉地点 :</span>
-											<span th:text="${freeConsulting.location}"></span>
-										</li>
-										<li th:if="${freeConsulting.contactPhone ne null}">
-											<span>当事人联系方式 :</span>
-											<span th:text="${freeConsulting.contactPhone}"></span>
-										</li>
-										<li>
-											<span>案件提交时间 :</span>
-											<span th:text="${freeConsulting.createAt}"></span>
-										</li>
-										<li th:if="${freeConsulting.falltypusType ne null}">
-											<span>案件类型 :</span>
-											<span th:text="${freeConsulting.falltypusType}"></span>
-										</li>
-									</ul>
-								</a>
+							 -->
+								<ul class="writeInfoText ulCell myCell mb-2"
+								    th:if="${not #lists.isEmpty(pageableData)}"
+								    th:each="freeConsulting : ${pageableData}"
+								    >
+									<li>
+										<span>案件编号 :</span>
+										<span th:text="${freeConsulting.id}"></span>
+									</li>
+									<li th:if="${freeConsulting.location ne null}">
+										<span>起诉地点 :</span>
+										<span th:text="${freeConsulting.location}"></span>
+									</li>
+									<li th:if="${freeConsulting.contactPhone ne null}">
+										<span>当事人联系方式 :</span>
+										<span th:text="${freeConsulting.contactPhone}"></span>
+									</li>
+									<li>
+										<span>案件提交时间 :</span>
+										<span th:text="${freeConsulting.createAt}"></span>
+									</li>
+									<li th:if="${freeConsulting.falltypusType ne null}">
+										<span>案件类型 :</span>
+										<span th:text="${freeConsulting.falltypusType}"></span>
+									</li>
+									<div class="clear-fix"></div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 btnNext btnSearch laybtnSearch">
+											<a type="button" class="btn btn-law btn-lg"
+												th:href="@{/user/case/lawyer/consulting/viewDetail/{id}(id=${freeConsulting.id})}">查看详情</a>
+										</div>
+									</div>
+								</ul>
+<!-- 								</a> -->
 								<ul th:if="${#lists.isEmpty(pageableData)}" class="writeInfoText ulCell myCell">未找到相关记录
 								</ul>
 <!-- 								<div th:if="${not #lists.isEmpty(pageableData)}" th:include="fragments/page :: paginationbar" th:remove="tag"></div> -->
