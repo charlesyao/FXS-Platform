@@ -1,5 +1,5 @@
 $(function() {
-	$('.ui-choose').ui_choose();
+
 	var selectedCity = ''
 	var selectedProvince = ''
 	//加载问题-答案
@@ -81,7 +81,7 @@ $(function() {
 	})
 
     $(".deleteQuestionLink").on("click", function(e) {
-        e.preventDefault()
+        e.preventDefault();
         var questionInfoId = $(this).attr("id");
         $.ajax({
             type : 'DELETE',
